@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package ch.fhnw.error404.DerGrosseDalmuti.shared;
+
+/**
+ * @author Jonas
+ *
+ */
+public class Player {
+
+}

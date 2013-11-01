@@ -1,0 +1,25 @@
+package ch.fhnw.error404.DerGrosseDalmuti.shared;
+
+public class Role {
+
+	private boolean multiUse;
+	private int code;
+	public enum ROLE_TYPE{
+		GROSSERDALMUTI, 
+		KLEINERDALMUTI, 
+		KLEINERDIENER, 
+		GROSSERDIENER
+	};	
+	
+
+	
+	Role(){}
+
+
+
+	public static Role setRole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}
