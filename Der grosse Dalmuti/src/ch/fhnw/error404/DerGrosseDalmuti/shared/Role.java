@@ -1,9 +1,12 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
+
+import java.io.Serializable;
+
 /**
  * @author Jonas
  *
  */
-public class Role {
+public class Role implements Serializable{
 
 
 	public enum ROLE_TYPE{
@@ -24,14 +27,6 @@ public class Role {
 			this.multiUse = multiUse;
 		}
 		
-		String getLabel(){return label;}
-		int getCode(){return code;}
-		int getMultiUse(){return multiUse;}
-	}
-
-	
-	Role Role(int code) {
-		return null;
 	}
 		
 	

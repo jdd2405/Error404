@@ -1,12 +1,37 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
+
+import java.io.Serializable;
+
 /**
  * @author Jonas
  *
  */
-public class Card {
+public class Card implements Serializable{
 
-	private String name;
-	private int value;
-	public enum CARD_TYPE{};
+	public enum CARD_TYPE{
+		
+		DALMUTI(1, "Dalmuti"),
+		ERZBISCHOF(2, "Erzbischof"),
+		HOFMARSCHALL(3, "Hofmarschall"),
+		BARONIN(4, "Baronin"),
+		AEBTISSIN(5, "Äbtissin"),
+		RITTER(6, "Ritter"),
+		NAEHERIN(7, "Näherin"),
+		STEINMETZ(8, "Steinmetz"),
+		KOECHIN(9, "Köchin"),
+		SCHAFHIRTIN(10, "Schafhirtin"),
+		BERGMANN(11, "Bergmann"),
+		TAGELOEHNER(12, "Tagelöhner");
+		
+		private int code;
+		private String label;
+		
+		
+		// KONSTRUKTOR mit Parameterübergabe
+		CARD_TYPE(int code, String label){
+			this.code = code;
+			this.label = label;
+		}
+	}
 	
 }
