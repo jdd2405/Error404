@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package ch.fhnw.error404.DerGrosseDalmuti.client;
+
+/**
+ * @author Jonas
+ *
+ */
+public abstract class ABaseView {
+
+}
