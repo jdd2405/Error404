@@ -10,6 +10,9 @@ import java.net.Socket;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Server implements Runnable{
+	
+	boolean endconnection = false;
+	
 	public static void main(String[] args){
 		Server server = new Server();
 		
@@ -25,11 +28,13 @@ public class Server implements Runnable{
 	    	  
 	    	  // create ServerSocket-listener with port 404
 			server = new ServerSocket(5000, 10, null);
+			System.out.println("Server started");
 	    	  
 	    	  while(true){
 	    		  
 	    		  	// Wait for and accept an incoming request
 	    		  	Socket socket = server.accept();
+	    		  	
 				
 	    		  	
 	  				// create inputStream for objects
@@ -39,13 +44,10 @@ public class Server implements Runnable{
 	  				// read object from inputStream
 	  				Object object = ois.readObject();
 	  				
-	  				// Do something with object				
+	  				// Do something with object				 
 	  				Player player = (Player)object;
-	  				System.out.println(player.getName());
+	  				System.out.println(object.getClass().toString() +": "+ player.getName());
 	  				player.setRank(2);
-	  				
-	  				
-	  				
 	  				
 	    		  	// create outputStream for objects
 	  				OutputStream os = socket.getOutputStream();
@@ -61,6 +63,7 @@ public class Server implements Runnable{
 	  			
 
 	    	 }
+	    	
 	         
 
 

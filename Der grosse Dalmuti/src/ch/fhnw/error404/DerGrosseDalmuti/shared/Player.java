@@ -4,7 +4,7 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
-import java.util.List;
+//import java.util.List;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Role.ROLE_TYPE;
 
@@ -14,10 +14,14 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.Role.ROLE_TYPE;
  */
 public class Player implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 790667502899497604L;
 	private String name;
 	private ROLE_TYPE role;
 	private int rank;
-	private List<Card> cards;
+	//private List<Card> cards;
 	
 
 	
@@ -64,10 +68,11 @@ public class Player implements Serializable{
 	public void setRank(int rank){this.rank = rank;}
 	public int getRank(){return rank;}
 	
+	/*
 	public void addCard(Card card){this.cards = cards;}
 	public void newHand(Card card){this.cards = cards;}
 	public void getHand(Card card){this.cards = cards;}
-
+	*/
 	
 }
 
