@@ -1,3 +1,5 @@
+// hallo test
+
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
