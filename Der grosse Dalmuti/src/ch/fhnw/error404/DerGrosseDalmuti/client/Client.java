@@ -27,6 +27,9 @@ public class Client {
 			// create socket
 			socket = new Socket(host, port);
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
+			
+			socket = new Socket(host, port);
+			System.out.println("basmegaszkurvanayadat");
 
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
