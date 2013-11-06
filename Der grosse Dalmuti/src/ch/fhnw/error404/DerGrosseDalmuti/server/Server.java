@@ -9,6 +9,12 @@ import java.net.Socket;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
+/* TO DO's
+ * - Thread for checking for updates.
+ * - Check Model Type with typeOf() (od so...)
+ * - Update (replace) Model Object
+ */
+
 public class Server implements Runnable{
 	
 	boolean endconnection = false;
