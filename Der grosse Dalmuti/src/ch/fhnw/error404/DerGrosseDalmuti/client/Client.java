@@ -1,289 +1,63 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
+
+
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-
-public class Client implements Runnable {
-	private static Client client;
-	private static Thread clientThread;
-	
-	public static void main(String[] args) {
-		
-		client = new Client();
-		clientThread = new Thread(client, "Listener");
-		clientThread.start();
-		
-		Player Jonas = new Player("Jonas");
-		client.sendObject(Jonas);
-		
-		
+public class Client {
+	public static void main(String[] args){
+		Client client = new Client();
+		client.clientSocket();
 	}
 	
-	
-	private void sendObject(Object o){
+	private void clientSocket(){
+		
+		String host = "127.0.0.1";
+		int port = 5000;
+		Player jonas = new Player("Jonas");
+		Object object = jonas;
+		
+		Socket socket = null;
+		
 		try {
-			// Create a new socket, connect immediately to 127.0.0.1:50001
-			Socket socket = new Socket("127.0.0.1", 50001);
-
-			// Create reader and writer for the socket
-			ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-
-		    oos.writeObject(o);
-		    
-		    // Clean up
-		    oos.close();
-		    socket.close();
-
-		} 
-		
-		catch (Exception e) {
-			System.out.println(e.toString());
-			e.printStackTrace();
-		}
-	}
-	
-	
-
-	@Override
-	public void run() {
-
-			try {
-				
-				// Create the server socket, to listen for incoming requests
-				Socket listener = new Socket("127.0.0.1", 50001);
-								
-				FileInputStream fis = new FileInputStream("t.tmp");
-				ObjectInputStream ois = new ObjectInputStream(fis);
-		
-				// read reply
-				Object o = (Object) ois.readObject();
-				System.out.println(o.toString());
-				ois.close();
-				
-			}
 			
-			catch (Exception e){
-				System.out.println(e.toString());
-			}
-	}
-}
+			// create socket
+			socket = new Socket( host, port );
 			
-
-
-/* REMEMBER THIS:
- * 
- * package trySocket;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.Socket;
-
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-
-@SuppressWarnings("serial")
-public class Client2 extends JFrame {
-	private JTextArea txtMessages;
-	private JTextField txtNewMessage;
-	private JButton btnSend;
-
-	public static void main(String[] args) {
-		
-		Client2 c =new Client2();
-		
-		//Send an initial text to say that you want to be connected.
-		String initialText = "I want to be connected!";
-		c.sendMessage(initialText);
-		
-	}
-	
-	public Client2() {
-		super("Simple client");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-
-		txtMessages = new JTextArea();
-		txtMessages.setEnabled(false);
-		txtMessages.setPreferredSize(new java.awt.Dimension(600, 300));
-		this.add(txtMessages, BorderLayout.CENTER);
-
-		Box bottomBox = Box.createHorizontalBox();
-		this.add(bottomBox, BorderLayout.SOUTH);
-
-		txtNewMessage = new JTextField();
-		txtNewMessage.setPreferredSize(new java.awt.Dimension(200, 30));
-		bottomBox.add(txtNewMessage, BorderLayout.CENTER);
-
-		bottomBox.add(Box.createHorizontalGlue());
-
-		btnSend = new JButton("Send");
-		bottomBox.add(btnSend, BorderLayout.SOUTH);
-		btnSend.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				sendMessage();
-			}
-		});
-
-		pack();
-		setVisible(true);
-	}
-	
-	
-
-	private void sendMessage() {
-		try {
-			// Create a new socket, connect immediately to 127.0.0.1:50001
-			Socket s = new Socket("127.0.0.1", 50001);
-
-			// Create reader and writer for the socket
-			BufferedReader r = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			OutputStreamWriter w = new OutputStreamWriter(s.getOutputStream());
-
-			// Send the message from the text box
-			w.write(txtNewMessage.getText() + "\n");
-			w.flush();
-
-			// Read and display the reply
-			String msgIn = r.readLine();
-			txtMessages.setText(txtMessages.getText() + "\n" + msgIn);
-
-			// Clean up
-			r.close();
-			w.close();
-			s.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
+			// create outputStream for objects
+			OutputStream os = socket.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream( os );
+			
+			// write object to outputStream
+			oos.writeObject( object );
+			oos.flush();
+			
+			// create inputStream for objects
+			InputStream is = socket.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream( is );
+			
+			// read object from inputStream
+			Object object2 = ois.readObject();
+			
+			// do something with object
+			Player anyPlayer = (Player)object2;
+			System.out.println(anyPlayer.getRank());
+			
+			// clean up
+			oos.close();
+			ois.close();
+			
 		}
-	}
-	
-	private void sendMessage(String Text) {
-		try {
-			// Create a new socket, connect immediately to 127.0.0.1:50001
-			Socket s = new Socket("127.0.0.1", 50001);
 
-			// Create reader and writer for the socket
-			BufferedReader r = new BufferedReader(new InputStreamReader(s.getInputStream()));
-			OutputStreamWriter w = new OutputStreamWriter(s.getOutputStream());
-
-			// Send the message from the variable "Text"
-			w.write(Text + "\n");
-			w.flush();
-
-			// Read and display the reply
-			String msgIn = r.readLine();
-			txtMessages.setText(txtMessages.getText() + "\n" + msgIn);
-
-			// Clean up
-			r.close();
-			w.close();
-			s.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
+		catch ( Exception e ) {
+		      e.printStackTrace();
 		}
 	}
 }
-
-
-
-package trySocket;
-
-import java.awt.BorderLayout;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-
-@SuppressWarnings("serial")
-public class Server2 extends JFrame implements Runnable {
-	private static Server2 server;
-	private static Thread serverThread;
-
-	private JTextArea txtMessages;
-
-	public static void main(String[] args) {
-		server = new Server2();
-		serverThread = new Thread(server, "Listener");
-		serverThread.start();
-	}
-
-	public Server2() {
-		super("Simple server");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLayout(new BorderLayout());
-
-		txtMessages = new JTextArea();
-		txtMessages.setEnabled(false);
-		txtMessages.setPreferredSize(new java.awt.Dimension(600, 300));
-		this.add(txtMessages, BorderLayout.CENTER);
-
-		pack();
-		setVisible(true);
-	}
-
-	@Override
-	public void run() {
-		try {
-			// Create the server socket, to listen for incoming requests
-			int port = Integer.parseInt("50001");
-			ServerSocket listener = new ServerSocket(port, 10, null);
-
-			while (true) {
-				// Wait for and accept an incoming request
-				Socket s = listener.accept();
-
-				// Create reader and writer for the socket
-				BufferedReader r = new BufferedReader(new InputStreamReader(s.getInputStream()));
-				OutputStreamWriter w = new OutputStreamWriter(s.getOutputStream());
-
-				
-				// read the incoming message; append it to the text area
-				String msgIn = r.readLine().trim();
-				System.out.println(msgIn);
-				txtMessages.setText(txtMessages.getText() + "\n" + msgIn);
-
-				if (msgIn.equals("I want to be connected!")){
-						w.write("Hello. I'm your Server. How can I help you?");
-					
-				}
-				
-				else {
-					// write our confirmation
-					w.write("Hello. I'm your Server. I Received this message from you: '" + msgIn + "'\n");
-				}
-				
-
-				w.flush();
-
-				// Clean up
-				r.close();
-				w.close();
-				s.close();
-				
-			}
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
-	}
-}
-
-
-
- */
-
