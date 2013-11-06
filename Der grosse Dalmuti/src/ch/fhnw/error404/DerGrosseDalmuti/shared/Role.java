@@ -6,10 +6,8 @@ import java.io.Serializable;
  * @author Jonas
  *
  */
-public class Role implements Serializable{
 
-
-	public enum ROLE_TYPE{
+public enum Role implements Serializable{
 		GROSSERDALMUTI(1, "grosser Dalmuti", false), 
 		KLEINERDALMUTI(2, "kleiner Dalmuti", false), 
 		BUERGER(3, "Bürger", true), 
@@ -21,13 +19,17 @@ public class Role implements Serializable{
 		private  boolean multiUse;
 		
 		// Konstruktor mit Parameteruebergabe:
-		ROLE_TYPE(int code, String label, boolean multiUse){
+		Role(int code, String label, boolean multiUse){
 			this.code = code;
 			this.label = label;
 			this.multiUse = multiUse;
 		}
 		
+		public boolean getMultiUse(){return multiUse;}
+		public String getLabel(){return label;}
+		public int getCode(){return code;}
+		
 	}
 		
 	
-}
+

@@ -4,9 +4,9 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
-//import java.util.List;
+import java.util.LinkedList;
 
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Role.ROLE_TYPE;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Role;
 
 /**
  * @author Jonas
@@ -19,30 +19,30 @@ public class Player implements Serializable{
 	 */
 	private static final long serialVersionUID = 790667502899497604L;
 	private String name;
-	private ROLE_TYPE role;
+	private Role role;
 	private int rank;
-	//private List<Card> cards;
+	LinkedList<Card> cards;
 	
 
 	
 	public Player(String name) {
 		this.name = name;
-		this.role = ROLE_TYPE.BUERGER;	
+		this.role = Role.BUERGER;	
 	}
 	
 	public Player(String name, int i) {
 		this.name = name;
 		switch(i){
 		case(1):
-			this.role = ROLE_TYPE.GROSSERDALMUTI;
+			this.role = Role.GROSSERDALMUTI;
 		case(2):
-			this.role = ROLE_TYPE.KLEINERDALMUTI;
+			this.role = Role.KLEINERDALMUTI;
 		case(3):
-			this.role = ROLE_TYPE.BUERGER;
+			this.role = Role.BUERGER;
 		case(4):
-			this.role = ROLE_TYPE.KLEINERDIENER;
+			this.role = Role.KLEINERDIENER;
 		case(5):
-			this.role = ROLE_TYPE.GROSSERDIENER;
+			this.role = Role.GROSSERDIENER;
 		}
 	}
 	
@@ -52,18 +52,18 @@ public class Player implements Serializable{
 	public void setRole(int i){		
 		switch(i){
 		case(1):
-			this.role = ROLE_TYPE.GROSSERDALMUTI;
+			this.role = Role.GROSSERDALMUTI;
 		case(2):
-			this.role = ROLE_TYPE.KLEINERDALMUTI;
+			this.role = Role.KLEINERDALMUTI;
 		case(3):
-			this.role = ROLE_TYPE.BUERGER;
+			this.role = Role.BUERGER;
 		case(4):
-			this.role = ROLE_TYPE.KLEINERDIENER;
+			this.role = Role.KLEINERDIENER;
 		case(5):
-			this.role = ROLE_TYPE.GROSSERDIENER;
+			this.role = Role.GROSSERDIENER;
 		}
 	}
-	public ROLE_TYPE getRole(){return role;}
+	public Role getRole(){return role;}
 	
 	public void setRank(int rank){this.rank = rank;}
 	public int getRank(){return rank;}
@@ -76,4 +76,3 @@ public class Player implements Serializable{
 	
 }
 
-// Fuck Dr Java

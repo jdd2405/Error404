@@ -7,7 +7,12 @@ import java.io.Serializable;
  *
  */
 public class Card implements Serializable{
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1936273490221653249L;
+	private CARD_TYPE cardType;
 	public enum CARD_TYPE{
 		
 		DALMUTI(1, "Dalmuti"),
@@ -23,15 +28,29 @@ public class Card implements Serializable{
 		BERGMANN(11, "Bergmann"),
 		TAGELOEHNER(12, "Tagelöhner");
 		
-		private int code;
+		private int value;
 		private String label;
 		
 		
+		
 		// KONSTRUKTOR mit Parameterübergabe
-		CARD_TYPE(int code, String label){
-			this.code = code;
+		private CARD_TYPE(int code, String label){
+			this.value = code;
 			this.label = label;
 		}
+		
+		public int getValue() {return value;}
+		public String getLabel() {return label;}
+		
 	}
+	
+	public Card(CARD_TYPE cardType){
+		this.cardType = cardType;
+	}
+	
+	public CARD_TYPE getCardType() {return cardType;}
+	
+	
+	
 	
 }

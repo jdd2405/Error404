@@ -26,6 +26,8 @@ public class Client {
 
 		String host = "127.0.0.1";
 		int port = 5000;
+		Object object = new Player("Jonas");
+		
 
 		Socket socket = null;
 
@@ -40,7 +42,7 @@ public class Client {
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			oos.writeObject(new Player ("Jonas"));
+			oos.writeObject(object);
 			oos.flush();
 
 			// create inputStream for objects
@@ -48,11 +50,18 @@ public class Client {
 			ObjectInputStream ois = new ObjectInputStream(is);
 
 			// read object from inputStream
-			Object object2 = ois.readObject();
+			Object objFromServer = ois.readObject();
 
-			// do something with object
-			Player anyPlayer = (Player) object2;
-			System.out.println(anyPlayer.getRank());
+			// check type of Object
+				if (objFromServer instanceof Player){
+					// Do something with Player Object
+					Player player = (Player)objFromServer;
+					System.out.println(player.getName() +"has rank: "+ player.getRank());
+				}
+				if (objFromServer instanceof Deck){
+					// Do something with Player Object
+					// Deck deck = (Deck)objFromServer; 				
+				}
 
 			// clean up
 			oos.close();

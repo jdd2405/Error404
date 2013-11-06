@@ -17,7 +17,9 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Server implements Runnable{
 	
-	boolean endconnection = false;
+	boolean hasAnyModelChanged = false;
+	Object objFromClient = new Object();
+	Object objFromServer = new Object();
 	
 	public static void main(String[] args){
 		Server server = new Server();
@@ -40,28 +42,36 @@ public class Server implements Runnable{
 	    		  
 	    		  	// Wait for and accept an incoming request
 	    		  	Socket socket = server.accept();
-	    		  	
-				
-	    		  	
+
 	  				// create inputStream for objects
 	  				InputStream is = socket.getInputStream();
 	  				ObjectInputStream ois = new ObjectInputStream( is );
-	  			
-	  				// read object from inputStream
-	  				Object object = ois.readObject();
 	  				
-	  				// Do something with object				 
-	  				Player player = (Player)object;
-	  				System.out.println(object.getClass().toString() +": "+ player.getName());
-	  				player.setRank(2);
-	  				
-	    		  	// create outputStream for objects
+	  				// create outputStream for objects
 	  				OutputStream os = socket.getOutputStream();
 	  				ObjectOutputStream oos = new ObjectOutputStream( os );
 	  			
+	  				// read object from inputStream
+	  				objFromClient = ois.readObject();
+	  				
+	  				// check type of Object
+	  				if (objFromClient instanceof Player){
+	  					// Do something with Player Object
+	  					Player player = (Player)objFromClient;
+	  					player.setRank(2); 
+	  					objFromServer = player;
+	  				}
+	  				if (objFromClient instanceof Deck){
+	  					// Do something with Player Object for example:
+	  					// Deck deck = (Deck)objFromClient; 				
+	  				}
+	  				
+	  				
 	  				// write object to outputStream
-	  				oos.writeObject( player );
+	  				
+	  				oos.writeObject( objFromServer );
 	  				oos.flush();
+	  				
 	  				
 	  				// clean up
 	  				ois.close();
