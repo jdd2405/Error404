@@ -85,7 +85,7 @@ public class Server implements Runnable{
 
 	      } 
 		catch (Exception e) {
-	         e.printStackTrace();;
+	         e.printStackTrace();
 		}
 		
 		
