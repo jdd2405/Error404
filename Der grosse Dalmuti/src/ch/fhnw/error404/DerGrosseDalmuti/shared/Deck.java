@@ -63,8 +63,8 @@ public class Deck implements Serializable{
 	}
 	
 	public void pushNotDealtCards(Card e) {notDealtCards.push(e);}
-	public void peekNotDealtCards() {notDealtCards.peek();}
-	public void popNotDealtCards() {notDealtCards.pop();} // remove Card on top of Stack
+	public Card peekNotDealtCards() {return notDealtCards.peek();} // get Card on top of Stack
+	public Card popNotDealtCards() {return notDealtCards.pop();} // remove Card on top of Stack
 	
 	public void addAllPlayedCards(Card e) {allPlayedCards.add(e);}
 	public void removeFirstAllPlayedCards() {allPlayedCards.removeFirst();}

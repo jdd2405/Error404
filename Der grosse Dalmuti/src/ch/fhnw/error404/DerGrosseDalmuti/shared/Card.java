@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Jonas and elias yo
  *
  */
-public class Card implements Serializable{
+public class Card extends Deck implements Serializable{
 	
 	/**
 	 * 
@@ -51,6 +51,11 @@ public class Card implements Serializable{
 	public CARD_TYPE getCardType() {return cardType;}
 	
 	
-	
+	public void main (String args[]) {
+		Card c = new Card(CARD_TYPE.DALMUTI);
+		System.out.println(c.getCardType());  // THIS DOES NOT WORK!!! WHY???
+	}
 	
 }
+
+
