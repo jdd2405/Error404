@@ -18,7 +18,7 @@ public class ClientNr2 {
 
 		String host = "127.0.0.1";
 		int port = 5000;
-		Player thesi = new Player("Theresa"); // There is no difference.
+		Player thesi = new Player("Theresa");
 
 		Socket socket = null;
 
