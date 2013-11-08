@@ -1,9 +1,0 @@
-package ch.fhnw.error404.DerGrosseDalmuti.shared;
-
-public class Deck {
-	
-	private List<Card> currentRound;
-	private List<Card> allPlayedCards;
-	private List<Card>[] playerCards;
-	
-}

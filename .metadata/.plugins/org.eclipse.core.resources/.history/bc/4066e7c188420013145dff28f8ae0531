@@ -1,9 +1,0 @@
-package ch.fhnw.error404.DerGrosseDalmuti.shared;
-
-public class Card {
-
-	private String name;
-	private int value;
-	public enum CARD_TYPE{};
-	
-}

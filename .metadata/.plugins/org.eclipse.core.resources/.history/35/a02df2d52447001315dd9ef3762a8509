@@ -1,0 +1,16 @@
+package ch.fhnw.error404.DerGrosseDalmuti.shared;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Stack;
+/**
+ * @author Jonas
+ *
+ */
+public class Deck implements Serializable{
+	
+	private Stack<Card> currentRound;
+	private List<Card> allPlayedCards;
+	private List<Card>[] playerCards;
+	
+}

@@ -11,7 +11,11 @@
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
-<fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="java.net.UnknownHostException"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="ch.fhnw.error404.DerGrosseDalmuti.shared.Deck"/>
+<fullyQualifiedTypeName name="ch.fhnw.error404.DerGrosseDalmuti.shared.Card"/>
+<fullyQualifiedTypeName name="ch.fhnw.error404.DerGrosseDalmuti.shared.Card.CARD_TYPE"/>
 </qualifiedTypeNameHistroy>
