@@ -21,6 +21,8 @@ public class Server implements Runnable{
 	Object objFromClient = new Object();
 	Object objFromServer = new Object();
 	
+	Game game = new Game(); // create <controler> Game
+	
 	public static void main(String[] args){
 		Server server = new Server();
 		
@@ -34,25 +36,22 @@ public class Server implements Runnable{
 
 	@Override
 	public void run() {
-		ServerSocket server = null;
+		ServerSocket socketServer = null;
 		try {
 	    	  
 	    	  // create ServerSocket-listener with port 404
-			server = new ServerSocket(5000, 10, null);
+			socketServer = new ServerSocket(5000, 10, null);
 			System.out.println("Server started");
 	    	  
 	    	  while(true){
 	    		  
 	    		  	// Wait for and accept an incoming request
-	    		  	Socket socket = server.accept();
+	    		  	Socket socket = socketServer.accept();
+	    		  	
 
 	  				// create inputStream for objects
 	  				InputStream is = socket.getInputStream();
 	  				ObjectInputStream ois = new ObjectInputStream( is );
-	  				
-	  				// create outputStream for objects
-	  				OutputStream os = socket.getOutputStream();
-	  				ObjectOutputStream oos = new ObjectOutputStream( os );
 	  			
 	  				// read object from inputStream
 	  				objFromClient = ois.readObject();
@@ -61,8 +60,8 @@ public class Server implements Runnable{
 	  				if (objFromClient instanceof Player){
 	  					// Do something with Player Object
 	  					Player player = (Player)objFromClient;
-	  					player.setRank(2); 
-	  					objFromServer = player;
+	  					//player.setRank(2);  // only for testing reasons
+	  					//objFromServer = player;
 	  				}
 	  				if (objFromClient instanceof Deck){
 	  					// Do something with Player Object for example:
@@ -70,7 +69,12 @@ public class Server implements Runnable{
 	  				}
 	  				
 	  				
+	  				// create outputStream for objects
+	  				OutputStream os = socket.getOutputStream();
+	  				ObjectOutputStream oos = new ObjectOutputStream( os );
+	  				
 	  				// write object to outputStream
+	  				if(game.getModelHasChanged()==true){} // a possibility to check for updated models. But what's next?
 	  				
 	  				oos.writeObject( objFromServer );
 	  				oos.flush();
