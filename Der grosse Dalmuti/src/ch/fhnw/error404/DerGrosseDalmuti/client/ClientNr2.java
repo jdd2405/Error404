@@ -18,7 +18,7 @@ public class ClientNr2 {
 
 		String host = "127.0.0.1";
 		int port = 5000;
-		Player thesi = new Player("Theresa");
+		Player thesi = new Player("Elias");
 
 		Socket socket = null;
 
@@ -45,7 +45,7 @@ public class ClientNr2 {
 
 			// do something with object
 			Player anotherPlayer = (Player) object2;
-			System.out.println("Rank of "+ anotherPlayer.getName()+ ": " +anotherPlayer.getRank());
+			System.out.println("Rank of "+ anotherPlayer.getName()+ ": " +anotherPlayer.getRank() );
 
 			// clean up
 			oos.close();
