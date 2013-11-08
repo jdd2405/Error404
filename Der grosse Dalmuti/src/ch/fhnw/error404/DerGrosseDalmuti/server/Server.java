@@ -27,8 +27,8 @@ public class Server implements Runnable{
 		Thread serverThread = new Thread(server, "Listener");
 		serverThread.start();
 		
-		Deck deck = new Deck();
-		System.out.println(deck.peekNotDealtCards().getCardType()); // CHECK OUT WHY THIS DOESN'T WORK!
+		//Deck deck = new Deck();
+		//System.out.println(deck.peekNotDealtCards().getCardType()); // CHECK OUT WHY THIS DOESN'T WORK!
 	      
 	}
 
