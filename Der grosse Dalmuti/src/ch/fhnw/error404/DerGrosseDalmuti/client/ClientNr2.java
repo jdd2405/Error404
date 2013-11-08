@@ -19,7 +19,6 @@ public class ClientNr2 {
 		String host = "127.0.0.1";
 		int port = 5000;
 		Player thesi = new Player("Theresa");
-		Object object = thesi;
 
 		Socket socket = null;
 
@@ -34,7 +33,7 @@ public class ClientNr2 {
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			oos.writeObject(object);
+			oos.writeObject(thesi);
 			oos.flush();
 
 			// create inputStream for objects
