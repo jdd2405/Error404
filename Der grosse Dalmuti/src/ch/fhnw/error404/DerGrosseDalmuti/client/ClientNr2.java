@@ -18,7 +18,7 @@ public class ClientNr2 {
 
 		String host = "127.0.0.1";
 		int port = 5000;
-		Player thesi = new Player("Theresa");
+		Player thesi = new Player("Thomas"); // There is a diference.
 
 		Socket socket = null;
 
@@ -50,7 +50,7 @@ public class ClientNr2 {
 			// clean up
 			oos.close();
 			ois.close();
-
+			
 		}
 
 		catch (Exception e) {
