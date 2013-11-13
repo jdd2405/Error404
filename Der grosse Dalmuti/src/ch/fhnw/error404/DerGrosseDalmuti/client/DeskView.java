@@ -21,6 +21,7 @@ import javax.swing.*;
 public class DeskView extends ABaseView {
 	
 	private static final int numberCards = 12;
+	private static final int numberofjohns = 13;
 	
 	private JFrame Frame1;
 	private JButton playCards;
