@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import ch.fhnw.error404.DerGrosseDalmuti.client.Game;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's

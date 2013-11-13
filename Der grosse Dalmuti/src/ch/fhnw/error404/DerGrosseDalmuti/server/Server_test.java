@@ -57,7 +57,7 @@ class Users implements Runnable {
 	public void run() {
 		while (true) {
 		try {
-			Player serverobject = (Player) ois.readObject();
+			Player serverobject = (Player) ois.readObject(); // It is not always a Player-Object that has been sent!
 			for(int i = 0; i<4; i++){
 				if(user[i] != null){
 					user[i].oos.writeObject(serverobject);

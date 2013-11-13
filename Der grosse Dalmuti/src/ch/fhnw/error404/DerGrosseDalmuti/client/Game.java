@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.fhnw.error404.DerGrosseDalmuti.server;
+package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.util.LinkedList;
 

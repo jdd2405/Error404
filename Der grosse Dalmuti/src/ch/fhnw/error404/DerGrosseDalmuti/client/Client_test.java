@@ -1,10 +1,8 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
