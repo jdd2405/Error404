@@ -1,74 +1,75 @@
 package ch.fhnw.error404.DerGrosseDalmuti.server;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.LinkedList;
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
 
 public class Server_test {
-	LinkedList <Player> player;
-	
-	public class ClientHandler implements Runnable{
-		BufferedReader reader;
-		Socket sock;
-		
-		public ClientHandler (Socket clientSocket){
-			try{
-				sock = clientSocket;
-				InputStreamReader isReader = new InputStreamReader(sock.getInputStream());
-				reader= new BufferedReader (isReader);
+	static ServerSocket serverSocket;
+	static Socket socket;
+	static ObjectOutputStream oos;
+	static ObjectInputStream ois;
+	static Users[] user = new Users[4];
+
+	static Player player1 = new Player("Theresa");
+
+	public static void main(String[] args) throws Exception {
+		serverSocket = new ServerSocket(5000);
+		System.out.println("Server started...");
+		while (true) {
+			socket = serverSocket.accept();
+			for (int i = 0; i < 4; i++) {
+
+				System.out.println("Connection from: "+ socket.getInetAddress());
+				oos = new ObjectOutputStream(socket.getOutputStream());
+				ois = new ObjectInputStream(socket.getInputStream());
+				if (user[i] == null) {
+					user[i] = new Users(oos, ois, user);
+					Thread thread = new Thread(user[i]);
+					thread.start();
+					break;
+				}
+
 			}
-			catch (Exception ex) {ex.printStackTrace();}
 		}
-		public void run(){
-			String nachricht;
-			try{
-				while((nachricht = reader.readLine()) != null){
-					System.out.println("gelesen: " + nachricht);
-					esAllenWeitersagen(nachricht);
+
+	}
+}
+
+class Users implements Runnable {
+
+	ObjectOutputStream oos;
+	ObjectInputStream ois;
+	Users[] user = new Users[4];
+
+	public Users(ObjectOutputStream oos, ObjectInputStream ois, Users[] user) {
+		this.oos = oos;
+		this.ois = ois;
+		this.user = user;
+	}
+
+	public void run() {
+		while (true) {
+		try {
+			Player serverobject = (Player) ois.readObject();
+			for(int i = 0; i<4; i++){
+				if(user[i] != null){
+					user[i].oos.writeObject(serverobject);
+					oos.flush();
 				}
 			}
-			catch (Exception ex) {ex.printStackTrace();}
-		}
-	}
-	public static void main(String[] args) {
-		Server_test server = new Server_test();
-		server.los();
-		
-	}
-	
-	public void los(){
+		} 
+		catch (ClassNotFoundException e) {e.printStackTrace();} 
+		catch (IOException e) {e.printStackTrace();}
 
-		
-		try{
-			ServerSocket serverSock = new ServerSocket (5000,10,null);
-			
-			while(true){
-				Socket clientSocket = serverSock.accept();
-				OutputStream os = clientSocket.getOutputStream();
-  				oos = new ObjectOutputStream( os );
-				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
-				clientAusgabeStröme.add(writer);
-				Thread t = new Thread (new ClientHandler(clientSocket));
-				t.start();
-				System.out.println("habe eine Verbindung");
-			}
 		}
-		catch (Exception ex) {ex.printStackTrace();}
+
 	}
-	
-	public void esAllenWeitersagen(String nachricht){
-		Iterator it = clientAusgabeStröme.iterator();
-		while(it.hasNext()){
-			try{
-				PrintWriter writer = (PrintWriter) it.next();
-				writer.println(nachricht);
-				writer.flush();
-			}
-			catch (Exception ex) {ex.printStackTrace();}
-		}
-	}
+
 }
