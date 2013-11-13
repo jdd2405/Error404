@@ -59,9 +59,9 @@ public class Server implements Runnable{
 	  				// check type of Object
 	  				if (objFromClient instanceof Player){
 	  					// Do something with Player Object
-	  					Player player = (Player)objFromClient;
-	  					//player.setRank(2);  // only for testing reasons
-	  					//objFromServer = player;
+						Player player = (Player)objFromClient;
+	  					player.setRank(2);  // only for testing reasons
+	  					objFromServer = player;
 	  				}
 	  				if (objFromClient instanceof Deck){
 	  					// Do something with Player Object for example:
