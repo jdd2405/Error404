@@ -16,6 +16,8 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 
 public class Client {
+	
+	
 	public static void main(String[] args) {
 		Client client = new Client();
 		client.clientSocket();
@@ -24,6 +26,7 @@ public class Client {
 
 	}
 
+	
 	private void clientSocket() {
 
 		String host = "127.0.0.1";
@@ -58,7 +61,7 @@ public class Client {
 				if (objFromServer instanceof Player){
 					// Do something with Player Object
 					Player player = (Player)objFromServer;
-					System.out.println(player.getName() +"has rank: "+ player.getRank());
+					System.out.println(player.getName() +" has rank: "+ player.getRank());
 				}
 				if (objFromServer instanceof Deck){
 					// Do something with Player Object

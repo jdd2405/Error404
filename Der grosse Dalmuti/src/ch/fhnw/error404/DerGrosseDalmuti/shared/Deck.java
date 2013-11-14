@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Stack;
 
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Card.CARD_TYPE;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Card;
 /**
  * @author Jonas
  *
@@ -37,28 +37,22 @@ public class Deck implements Serializable{
 	 */
 	
 	public Deck (){
-		notDealtCards.push(new Card(CARD_TYPE.DALMUTI)); 	/* just pushed one card. 
-															 *  Now we have to create random Card 
-															 *  until the amount of a specific CARD_TYPE 
-															 *  reaches its value
-															 */
-		notDealtCards.push(new Card(CARD_TYPE.ERZBISCHOF));
-		notDealtCards.push(new Card(CARD_TYPE.ERZBISCHOF));
 		
-		notDealtCards.push(new Card(CARD_TYPE.HOFMARSCHALL));
-		notDealtCards.push(new Card(CARD_TYPE.HOFMARSCHALL));
-		notDealtCards.push(new Card(CARD_TYPE.HOFMARSCHALL));
-		
-		notDealtCards.push(new Card(CARD_TYPE.BARONIN));
-		notDealtCards.push(new Card(CARD_TYPE.BARONIN));
-		notDealtCards.push(new Card(CARD_TYPE.BARONIN));
-		notDealtCards.push(new Card(CARD_TYPE.BARONIN));
-		
-		notDealtCards.push(new Card(CARD_TYPE.AEBTISSIN));
-		notDealtCards.push(new Card(CARD_TYPE.AEBTISSIN));
-		notDealtCards.push(new Card(CARD_TYPE.AEBTISSIN));
-		notDealtCards.push(new Card(CARD_TYPE.AEBTISSIN));
-		notDealtCards.push(new Card(CARD_TYPE.AEBTISSIN));
+		// Push cards to LinkedList "nodDealtCards"
+		// The for-loop gets the amount of cards of every card type in this game
+		// For example: there are only 2 cards of the card type "Erzbischof". This is checked by the getValue method.
+		for(int i = 0; i<Card.DALMUTI.getValue(); i++){notDealtCards.push(Card.DALMUTI);}
+		for(int i = 0; i<Card.ERZBISCHOF.getValue(); i++){notDealtCards.push(Card.ERZBISCHOF);}
+		for(int i = 0; i<Card.HOFMARSCHALL.getValue(); i++){notDealtCards.push(Card.HOFMARSCHALL);}
+		for(int i = 0; i<Card.BARONIN.getValue(); i++){notDealtCards.push(Card.BARONIN);}
+		for(int i = 0; i<Card.AEBTISSIN.getValue(); i++){notDealtCards.push(Card.AEBTISSIN);}
+		for(int i = 0; i<Card.RITTER.getValue(); i++){notDealtCards.push(Card.RITTER);}
+		for(int i = 0; i<Card.NAEHERIN.getValue(); i++){notDealtCards.push(Card.NAEHERIN);}
+		for(int i = 0; i<Card.STEINMETZ.getValue(); i++){notDealtCards.push(Card.STEINMETZ);}
+		for(int i = 0; i<Card.KOECHIN.getValue(); i++){notDealtCards.push(Card.KOECHIN);}
+		for(int i = 0; i<Card.SCHAFHIRTIN.getValue(); i++){notDealtCards.push(Card.SCHAFHIRTIN);}
+		for(int i = 0; i<Card.BERGMANN.getValue(); i++){notDealtCards.push(Card.BERGMANN);}
+		for(int i = 0; i<Card.TAGELOEHNER.getValue(); i++){notDealtCards.push(Card.TAGELOEHNER);}
 		
 	}
 	
