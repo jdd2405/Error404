@@ -1,6 +1,0 @@
-CompareTreeView_ShowEquals=true
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<messages>\r\n<message>Merge branch &apos;master&apos; of https\://github.com/jdd2405/Error404.git&\#x0A;</message>\r\n<message>Merge branch &apos;master&apos; of https\://github.com/jdd2405/Error404.git&\#x0A;&\#x0A;Conflicts\:&\#x0A;&\#x09;Der grosse&\#x0A;Dalmuti/src/ch/fhnw/error404/DerGrosseDalmuti/client/ClientNr2.java&\#x0A;</message>\r\n<message>made some changes in the ClientNr2</message>\r\n<message>Server is running now</message>\r\n<message>Need help in Class Card and Deck. Check out for comments.</message>\r\n<message>Defined more methods in the model classes</message>\r\n<message>ran some tests... and updated some models therefore</message>\r\n<message>To Do&apos;s for some classes in the comment</message>\r\n<message>deletet temporary files</message>\r\n<message>another change just for testing reasons</message>\r\n</messages>
-eclipse.preferences.version=1
-resourcehistory_compare_mode=true
-resourcehistory_graph_split=500,500
-resourcehistory_rev_split=700,300
