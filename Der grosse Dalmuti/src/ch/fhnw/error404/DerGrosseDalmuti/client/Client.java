@@ -22,7 +22,7 @@ public class Client {
 		Client client = new Client();
 		client.clientSocket();
 		
-		LoginView lw = new LoginView();
+		new LoginView();
 
 	}
 

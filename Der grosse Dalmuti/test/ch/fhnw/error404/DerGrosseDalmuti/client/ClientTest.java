@@ -1,7 +1,7 @@
 /**
  * 
  */
-package ch.fhnw.error404.DerGrosseDalmuti.testCases;
+package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import static org.junit.Assert.*;
 
