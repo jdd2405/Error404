@@ -2,9 +2,12 @@ package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Card;
+
+
 /**
  * @author Jonas
  *
@@ -14,11 +17,14 @@ public class Deck implements Serializable{
 	/**
 	 * 
 	 */
+	
+	// has to be public to access from every class. 
+	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
-	private Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	private LinkedList<Card> allPlayedCards; // all played cards of this round
-	private LinkedList<Card>[] playerCards; // current hands of players. Position +1 of Array is the value of the card type
-	private LinkedList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
+	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
+	public LinkedList<Card> allPlayedCards; // all played cards of this round
+	public LinkedList<Card>[] playerCards; // current hands of players. Position +1 of Array is the value of the card type
+	public LinkedList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -56,17 +62,14 @@ public class Deck implements Serializable{
 		
 	}
 	
-	public void pushNotDealtCards(Card e) {notDealtCards.push(e);}
-	public Card peekNotDealtCards() {return notDealtCards.peek();} // get Card on top of Stack
-	public Card popNotDealtCards() {return notDealtCards.pop();} // remove Card on top of Stack
-	
-	public void addAllPlayedCards(Card e) {allPlayedCards.add(e);}
-	public void removeFirstAllPlayedCards() {allPlayedCards.removeFirst();}
-	public void removeLastAllPlayedCards() {allPlayedCards.removeLast();}
-	
-	public LinkedList<Card> getNotDealtCards(){return notDealtCards;}	
-	public LinkedList<Card>[] getPlayerCards() {return playerCards;}
-	public LinkedList<Card> getAllPlayedCards() {return allPlayedCards;}
-	public Stack<Card> getCurrentTrick() {return currentTrick;}
+	public void shuffleCards(){
+		// create Iterator to get trough the LinkedList
+		ListIterator<Card> iterator = allPlayedCards.listIterator();
+		while (iterator.hasNext()){
+			// TODO: randomize this!
+			notDealtCards.addFirst(allPlayedCards.removeLast());
+			notDealtCards.addLast(allPlayedCards.removeFirst());
+		}
+	}
 	
 }

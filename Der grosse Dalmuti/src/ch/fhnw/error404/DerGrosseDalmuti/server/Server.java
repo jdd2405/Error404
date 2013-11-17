@@ -7,7 +7,7 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import ch.fhnw.error404.DerGrosseDalmuti.client.Game;
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -22,7 +22,7 @@ public class Server implements Runnable{
 	Object objFromClient = new Object();
 	Object objFromServer = new Object();
 	
-	Game game = new Game(); // create <controler> Game
+	Action game = new Action(); // create <controler> Game
 	
 	public static void main(String[] args){
 		Server server = new Server();
@@ -74,9 +74,7 @@ public class Server implements Runnable{
 	  				OutputStream os = socket.getOutputStream();
 	  				ObjectOutputStream oos = new ObjectOutputStream( os );
 	  				
-	  				// write object to outputStream
-	  				if(game.getModelHasChanged()==true){} // a possibility to check for updated models. But what's next?
-	  				
+	  				// write object to outputStream	  				
 	  				oos.writeObject( objFromServer );
 	  				oos.flush();
 	  				

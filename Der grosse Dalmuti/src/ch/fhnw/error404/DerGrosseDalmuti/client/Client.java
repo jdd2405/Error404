@@ -31,7 +31,7 @@ public class Client {
 
 		String host = "127.0.0.1";
 		int port = 5000;
-		Object object = new Player("Jonas");
+		Object object = new Player("Jonas", 1);
 		
 
 		Socket socket = null;
