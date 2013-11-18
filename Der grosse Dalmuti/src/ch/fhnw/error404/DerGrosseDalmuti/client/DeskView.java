@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.JDialog;
 import javax.swing.*;
 /**
- * @author Elias und Thomas
+ * @author Thomas and Elias
  *
  */
 
