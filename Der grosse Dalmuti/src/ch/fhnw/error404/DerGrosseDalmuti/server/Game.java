@@ -32,8 +32,7 @@ public class Game {
 			Player player = listIterator.next();
 			if(player.hasPassed() == true){
 				passed++;
-				player.setPassed(false);
-				
+				player.setPassed(false);				
 			}
 		}
 		
