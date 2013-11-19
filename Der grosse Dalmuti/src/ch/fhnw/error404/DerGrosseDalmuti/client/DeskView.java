@@ -6,13 +6,9 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JDialog;
 import javax.swing.*;
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
 /**
  * @author Thomas and Elias
  *
@@ -20,8 +16,9 @@ import javax.swing.*;
 
 public class DeskView extends ABaseView {
 	
+	private LoginView loginview;
+	
 	private static final int numberCards = 12;
-	private static final int numberofjohns = 13;
 	
 	private JFrame Frame1;
 	private JButton playCards;
@@ -155,7 +152,7 @@ public class DeskView extends ABaseView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Anzahl, GridSouth);
 		
-		JTextField Spieler4 = new JTextField("Spieler 4");
+		JTextField Spieler4 = new JTextField(Player.Player1.getName());
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 5;
 		GridSouth.gridy = 0;

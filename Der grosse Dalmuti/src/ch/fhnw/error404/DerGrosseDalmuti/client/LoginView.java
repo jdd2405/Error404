@@ -27,6 +27,8 @@ import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
+
 /**
  * @author Elias und Thomas
  *
@@ -38,6 +40,10 @@ public class LoginView extends ABaseView {
 	private JButton Login;
 	private JLabel Label;
 	private JTextField Username;
+	
+	
+		
+	
 		
 	public LoginView(){
 		
@@ -60,7 +66,8 @@ public class LoginView extends ABaseView {
 		Login = new JButton("Login");
 		Login.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				System.out.println(Username.getText());
+				
+				Player.Player1.setName(Username.getText());
 				
 				if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){
 					dispose();
