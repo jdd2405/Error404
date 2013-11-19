@@ -27,6 +27,12 @@ public class DeskView extends ABaseView {
 	private JTextField numberOfCards;
 	private JButton card[];
 	private JDialog errorMsg;
+	private static int countCardsToPlay;
+	
+	JLabel AmountCards = new JLabel(countCardsToPlay+" ");
+	JButton[] cards = new JButton[numberCards];
+	int[] counter = new int[numberCards];
+	
 	
 	public DeskView(){
 		
@@ -128,16 +134,22 @@ public class DeskView extends ABaseView {
 		JPanel PanelSouth = new JPanel(new GridBagLayout());
 		GridBagConstraints GridSouth = new GridBagConstraints();
 		
-		JLabel[] cards = new JLabel[numberCards];
+		
 		for (int i = 0; i < numberCards; i++){
-			cards[i] = new JLabel(icon);
+			cards[i] = new JButton(icon);
+			cards[i].setContentAreaFilled(false);
+			cards[i].setPreferredSize(new Dimension(89,92));
+			cards[i].addActionListener(new ActionListener(){
+				public void actionPerformed(ActionEvent e){
+					calculate();
+				}
+			});
 			GridSouth.gridx = i;
 			GridSouth.gridy = 1;
 			GridSouth.insets = new Insets(5,5,5,5);
 			PanelSouth.add(cards[i], GridSouth);
 		}
 		
-		JTextField AmountCards = new JTextField("bsp. 3");
 		GridSouth.anchor = GridBagConstraints.LINE_START;
 		GridSouth.gridx = 3;
 		GridSouth.gridy = 2;
@@ -176,6 +188,11 @@ public class DeskView extends ABaseView {
 		PanelSouth.add(Button2, GridSouth);
 		
 		JButton Button3 = new JButton("Spiel beenden");
+		Button3.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				Frame1.dispose();		
+			}
+		});
 		Button3.setPreferredSize(new Dimension(170,30));	
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 10;
@@ -188,6 +205,15 @@ public class DeskView extends ABaseView {
 						
 		Frame1.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
 		Frame1.setVisible(true);
+		
+		
 	}
+	
+	public void calculate(){
+		   countCardsToPlay++;
+		   this.AmountCards.setText(" " + countCardsToPlay + " ");
+		} 
+	
+	
 }
 

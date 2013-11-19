@@ -41,10 +41,6 @@ public class LoginView extends ABaseView {
 	private JLabel Label;
 	private JTextField Username;
 	
-	
-		
-	
-		
 	public LoginView(){
 		
 		Frame = new JFrame();
