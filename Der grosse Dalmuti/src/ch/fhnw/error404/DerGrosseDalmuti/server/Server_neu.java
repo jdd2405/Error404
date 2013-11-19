@@ -7,6 +7,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Vector;
 
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
+
 public class Server_neu {
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array

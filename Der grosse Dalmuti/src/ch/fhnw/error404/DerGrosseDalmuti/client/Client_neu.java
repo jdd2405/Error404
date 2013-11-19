@@ -7,6 +7,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
+
 /* TO DO's
  * - Thread for checking for updates.
  * - Check Model Type with typeOf() (od so...)

@@ -26,6 +26,7 @@ public class Player implements Serializable{
 	private int rank; // oh, I have not finished first?
 	private LinkedList<Card> cards; 
 	private boolean passed; // set to false after every trick (engl. "Stich")!
+	Player player1 = new Player("Theresa", 5);
 	
 
 	// constructor
