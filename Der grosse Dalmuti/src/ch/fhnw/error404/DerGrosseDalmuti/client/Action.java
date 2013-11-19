@@ -74,9 +74,10 @@ public class Action {
 			}
 		}
 		
+		
 		// TODO: ActionListener for choosing swapping cards
 		// Wait for Action and then do:
-		if(NOfSwappingCards != 0 && thisPlayer.getCards().get(1).getValue() < thisPlayer.getCards().get(1).getValue()){
+		if(NOfSwappingCards != 0){
 			swapCards.add(thisPlayer.getCards().remove());
 			NOfSwappingCards--;
 		}
