@@ -25,6 +25,7 @@ public class Deck implements Serializable{
 	public LinkedList<Card> allPlayedCards; // all played cards of this round
 	public LinkedList<Card>[] playerCards; // current hands of players. Position +1 of Array is the value of the card type
 	public LinkedList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
+	public LinkedList<Card>[] swappedCards; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -42,7 +43,7 @@ public class Deck implements Serializable{
 	 * public boolean removeFirst()
 	 */
 	
-	public Deck (){
+	public Deck(){
 		
 		// Push cards to LinkedList "nodDealtCards"
 		// The for-loop gets the amount of cards of every card type in this game
@@ -73,3 +74,4 @@ public class Deck implements Serializable{
 	}
 	
 }
+

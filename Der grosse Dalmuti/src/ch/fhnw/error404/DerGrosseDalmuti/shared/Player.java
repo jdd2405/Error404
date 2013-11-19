@@ -24,17 +24,16 @@ public class Player implements Serializable{
 	public static Player Player4 = new Player("",4);
 	
 	
-	
 	private static final long serialVersionUID = 790667502899497604L;
-	public String name; 
-	public int id; // unique identifier
+	private String name; 
+	private int id; // unique identifier
 	private boolean active; // Is it my turn?
-	public Role role; // Wanna be King!
+	private Role role; // Wanna be King!
 	private int rank; // oh, I have not finished first?
-	private LinkedList<Card> cards; 
+	private LinkedList<Card> cards;
 	public boolean passed; // set to false after every trick (engl. "Stich")!
+	//private boolean passed; // set to false after every trick (engl. "Stich")!
 	
-
 	// constructor
 	public Player(String name, int id) {
 		this.name = name;
