@@ -18,13 +18,15 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  */
 
 public class Client_neu {
-	public ArrayList <Object> list;
 	
+
+	protected static ArrayList <Player> list = new ArrayList <Player>(4);
 
 	
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
+
 		Client_neu client = new Client_neu();
 		client.clientSocket();
 		
@@ -47,7 +49,7 @@ public class Client_neu {
 			ObjectOutputStream out = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			out.writeObject(test);
+			out.writeObject(list);
 			out.flush();
 
 			// create inputStream for objects

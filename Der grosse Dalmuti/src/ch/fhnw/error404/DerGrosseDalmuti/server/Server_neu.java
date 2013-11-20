@@ -6,12 +6,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
 
 public class Server_neu {
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array
 	private Vector <ObjectOutputStream> clientManager = new Vector <ObjectOutputStream>();
+	ArrayList <Player> serverlist = new ArrayList <Player>(4);
 	
 	public static void main(String [] args){
 		Server_neu serverObject = new Server_neu();
@@ -53,9 +58,15 @@ public class Server_neu {
 			
 			try{
 				while(true){
-				message = input.readObject();
-				System.out.println(message);
-				sendMessage(clientPort + ": " + message);}
+				serverlist = (ArrayList<Player>) input.readObject();
+				Player player1 = new Player ("thesi",5);
+				serverlist.add(0, player1 );
+				Iterator<Player>iter =serverlist.iterator();
+				while(iter.hasNext()){
+					System.out.println(iter.next().getName());
+				}
+				//System.out.println(serverlist);
+				sendMessage(clientPort + ": " + serverlist);}
 			}
 			catch (ClassNotFoundException | IOException e) {e.printStackTrace();}
 				
