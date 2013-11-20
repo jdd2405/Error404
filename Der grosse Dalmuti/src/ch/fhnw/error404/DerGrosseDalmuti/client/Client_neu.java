@@ -15,7 +15,7 @@ import java.net.Socket;
  */
 
 public class Client_neu {
-	Integer test = new Integer(689);
+	Integer test = new Integer(568);
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
