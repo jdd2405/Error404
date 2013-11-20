@@ -32,7 +32,7 @@ public class Client_neu {
 		try {
 
 			// create socket
-			socket = new Socket("10.207.241.235", 5000);
+			socket = new Socket("127.0.0.1", 5000);
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
