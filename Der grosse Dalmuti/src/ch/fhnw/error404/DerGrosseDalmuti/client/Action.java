@@ -1,8 +1,10 @@
 
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -14,13 +16,18 @@ public class Action {
 	
 	private int myId;
 	
+	
+	/*
+	 * These Collections need to be exchanged via client-server!!!
+	 * -------------------------------------------------------------------------------------->
+	 */
 	protected LinkedList<Player> allPlayers; //TODO add all Players to this LinkedList
+	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
+	public ArrayList<Card>[] swappableCards; // cards ready to swap
+	/*
+	 * <--------------------------------------------------------------------------------------
+	 */
 	
-	protected LinkedList<Object> updatedObject; // possibility to have more than one changed object
-	
-	
-	public void addUpdatedObject(Object o){this.updatedObject.add(o);}
-	public LinkedList<Object> getUpdatedObject(){return updatedObject;}
 	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
@@ -40,8 +47,8 @@ public class Action {
 		return myPlayerIsActive;
 	}
 	
-	// 
-	protected LinkedList<Card> swapCards(){
+	// TODO create ActionListener!!!
+	protected LinkedList<Card> chooseSwappableCards(){
 		
 		LinkedList<Card> swapCards = null;
 		Player thisPlayer = null;
@@ -76,9 +83,12 @@ public class Action {
 		
 		
 		// TODO: ActionListener for choosing swapping cards
+		// TODO Check if chosen Cards are the highest
+		
 		// Wait for Action and then do:
-		if(NOfSwappingCards != 0){
-			swapCards.add(thisPlayer.getCards().remove());
+		while(NOfSwappingCards != 0){
+			// put the chosen card into the Array-index which is the ID of player -1
+			swappableCards[myId-1].add(thisPlayer.getCards().remove());
 			NOfSwappingCards--;
 		}
 		
