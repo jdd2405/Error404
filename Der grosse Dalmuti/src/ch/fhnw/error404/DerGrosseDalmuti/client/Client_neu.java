@@ -1,5 +1,6 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -33,6 +34,7 @@ public class Client_neu {
 
 			// create socket
 			socket = new Socket("127.0.0.1", 5000);
+
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
@@ -79,4 +81,3 @@ public class Client_neu {
 	}
 
 }
-

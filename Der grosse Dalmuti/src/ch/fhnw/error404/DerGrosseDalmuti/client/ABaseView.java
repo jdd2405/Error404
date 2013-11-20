@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JDialog;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
  * @author Jonas, Elias und Thomas
@@ -34,5 +35,6 @@ public abstract class ABaseView extends JFrame{
 	public ABaseView(String title){
 		super(title);
 	}
+
 }
 
