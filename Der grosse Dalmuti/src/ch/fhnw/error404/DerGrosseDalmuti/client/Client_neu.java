@@ -15,7 +15,7 @@ import java.net.Socket;
  */
 
 public class Client_neu {
-	Integer test = new Integer(568);
+	Integer test = new Integer(689);
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
@@ -33,7 +33,7 @@ public class Client_neu {
 		try {
 
 			// create socket
-			socket = new Socket("107.0.0", 5000);
+			socket = new Socket("127.0.0.1", 5000);
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
