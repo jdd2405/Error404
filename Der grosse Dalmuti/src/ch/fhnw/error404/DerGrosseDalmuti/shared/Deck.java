@@ -24,7 +24,7 @@ public class Deck implements Serializable{
 	private static final long serialVersionUID = -4903713809034981834L;
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
-	public ArrayList<Card>[] swappedCards; // cards ready to swap
+	public ArrayList<Card>[] swappableCards; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -63,7 +63,7 @@ public class Deck implements Serializable{
 	}
 	
 	public void dealCards(ArrayList<Player> allPlayers){
-		// shuffle notDealrCards
+		// shuffle notDealtCards
 		Collections.shuffle(notDealtCards);
 		// create Iterator to get trough the LinkedList
 		ListIterator<Card> iterator = notDealtCards.listIterator();
@@ -72,12 +72,12 @@ public class Deck implements Serializable{
 			for(int p=0; p<=allPlayers.size(); p++){
 				Player player = allPlayers.get(p);
 				for(int c=0; c<=notDealtCards.size(); c++){
-					player.setCards(notDealtCards.remove(c));
-				}	
+					player.addCard(notDealtCards.remove(c));
+				}
 			}
-			
 		}
 	}
 	
+
 }
 
