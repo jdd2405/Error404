@@ -73,7 +73,7 @@ public class Player implements Serializable{
 
 
 	public LinkedList<Card> getCards() {return cards;}
-	public void setCards(LinkedList<Card> cards) {this.cards = cards;}
+	public void setCards(Card card) {this.cards.add(card);}
 
 
 	public boolean hasPassed() {return passed;}

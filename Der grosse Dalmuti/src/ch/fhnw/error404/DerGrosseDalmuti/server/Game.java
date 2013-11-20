@@ -1,5 +1,6 @@
 package ch.fhnw.error404.DerGrosseDalmuti.server;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -14,10 +15,10 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Game {
 
 	Deck deck = new Deck(); // create new Deck once!
-	private LinkedList<Player> allPlayers;
+	private ArrayList<Player> allPlayers;
 	private LinkedList<Object> updatedObject; // possibility to have more than one changed object
 
-	public void addUpdatedObject(Object o){this.updatedObject.add(o);}
+	public void addUpdatedObject(Object object){this.updatedObject.add(object);}
 	public LinkedList<Object> getUpdatedObject(){return updatedObject;}
 
 
@@ -36,10 +37,11 @@ public class Game {
 			}
 		}
 		
-		// check if the round
+		// check if everyone else has passed
 		if(passed == allPlayers.size()-1){
-			// take cards from the table and put them in LinkedList allPlayedCards
-			deck.allPlayedCards.push(deck.currentTrick.pop());
+			// take cards from the table and put them in notDealtCards
+			deck.notDealtCards.addAll(deck.currentTrick);
+			deck.currentTrick.clear();
 		}
 	}
 
