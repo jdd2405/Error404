@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
  * - Thread for checking for updates.
@@ -15,12 +18,16 @@ import java.net.Socket;
  */
 
 public class Client_neu {
-	Integer test = new Integer(568);
+	public ArrayList <Object> list;
+	
+
+	
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
 		Client_neu client = new Client_neu();
 		client.clientSocket();
+		
 
 		// LoginView lw = new LoginView();
 
