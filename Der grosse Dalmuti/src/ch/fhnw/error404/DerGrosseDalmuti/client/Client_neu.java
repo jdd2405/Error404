@@ -6,8 +6,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import java.util.ArrayList;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -17,12 +17,18 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  */
 
 public class Client_neu {
-	Integer test = new Integer(568);
+	
+
+	protected static ArrayList <Player> list = new ArrayList <Player>(4);
+
+	
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
+
 		Client_neu client = new Client_neu();
 		client.clientSocket();
+		
 
 		// LoginView lw = new LoginView();
 
@@ -35,14 +41,14 @@ public class Client_neu {
 		try {
 
 			// create socket
-			socket = new Socket("107.0.0", 5000);
+			socket = new Socket("127.0.0.1", 5000);
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			out.writeObject(test);
+			out.writeObject(list);
 			out.flush();
 
 			// create inputStream for objects

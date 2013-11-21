@@ -1,7 +1,8 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 import java.util.Stack;
 
@@ -22,10 +23,8 @@ public class Deck implements Serializable{
 	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	public LinkedList<Card> allPlayedCards; // all played cards of this round
-	public LinkedList<Card>[] playerCards; // current hands of players. Position +1 of Array is the value of the card type
-	public LinkedList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
-	public LinkedList<Card>[] swappedCards; // cards ready to swap
+	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
+	public ArrayList<Card>[] swappableCards; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -48,30 +47,37 @@ public class Deck implements Serializable{
 		// Push cards to LinkedList "nodDealtCards"
 		// The for-loop gets the amount of cards of every card type in this game
 		// For example: there are only 2 cards of the card type "Erzbischof". This is checked by the getValue method.
-		for(int i = 0; i<Card.DALMUTI.getValue(); i++){notDealtCards.push(Card.DALMUTI);}
-		for(int i = 0; i<Card.ERZBISCHOF.getValue(); i++){notDealtCards.push(Card.ERZBISCHOF);}
-		for(int i = 0; i<Card.HOFMARSCHALL.getValue(); i++){notDealtCards.push(Card.HOFMARSCHALL);}
-		for(int i = 0; i<Card.BARONIN.getValue(); i++){notDealtCards.push(Card.BARONIN);}
-		for(int i = 0; i<Card.AEBTISSIN.getValue(); i++){notDealtCards.push(Card.AEBTISSIN);}
-		for(int i = 0; i<Card.RITTER.getValue(); i++){notDealtCards.push(Card.RITTER);}
-		for(int i = 0; i<Card.NAEHERIN.getValue(); i++){notDealtCards.push(Card.NAEHERIN);}
-		for(int i = 0; i<Card.STEINMETZ.getValue(); i++){notDealtCards.push(Card.STEINMETZ);}
-		for(int i = 0; i<Card.KOECHIN.getValue(); i++){notDealtCards.push(Card.KOECHIN);}
-		for(int i = 0; i<Card.SCHAFHIRTIN.getValue(); i++){notDealtCards.push(Card.SCHAFHIRTIN);}
-		for(int i = 0; i<Card.BERGMANN.getValue(); i++){notDealtCards.push(Card.BERGMANN);}
-		for(int i = 0; i<Card.TAGELOEHNER.getValue(); i++){notDealtCards.push(Card.TAGELOEHNER);}
+		for(int i = 0; i<Card.DALMUTI.getValue(); i++){notDealtCards.add(Card.DALMUTI);}
+		for(int i = 0; i<Card.ERZBISCHOF.getValue(); i++){notDealtCards.add(Card.ERZBISCHOF);}
+		for(int i = 0; i<Card.HOFMARSCHALL.getValue(); i++){notDealtCards.add(Card.HOFMARSCHALL);}
+		for(int i = 0; i<Card.BARONIN.getValue(); i++){notDealtCards.add(Card.BARONIN);}
+		for(int i = 0; i<Card.AEBTISSIN.getValue(); i++){notDealtCards.add(Card.AEBTISSIN);}
+		for(int i = 0; i<Card.RITTER.getValue(); i++){notDealtCards.add(Card.RITTER);}
+		for(int i = 0; i<Card.NAEHERIN.getValue(); i++){notDealtCards.add(Card.NAEHERIN);}
+		for(int i = 0; i<Card.STEINMETZ.getValue(); i++){notDealtCards.add(Card.STEINMETZ);}
+		for(int i = 0; i<Card.KOECHIN.getValue(); i++){notDealtCards.add(Card.KOECHIN);}
+		for(int i = 0; i<Card.SCHAFHIRTIN.getValue(); i++){notDealtCards.add(Card.SCHAFHIRTIN);}
+		for(int i = 0; i<Card.BERGMANN.getValue(); i++){notDealtCards.add(Card.BERGMANN);}
+		for(int i = 0; i<Card.TAGELOEHNER.getValue(); i++){notDealtCards.add(Card.TAGELOEHNER);}
 		
 	}
 	
-	public void shuffleCards(){
+	public void dealCards(ArrayList<Player> allPlayers){
+		// shuffle notDealtCards
+		Collections.shuffle(notDealtCards);
 		// create Iterator to get trough the LinkedList
-		ListIterator<Card> iterator = allPlayedCards.listIterator();
+		ListIterator<Card> iterator = notDealtCards.listIterator();
 		while (iterator.hasNext()){
-			// TODO: randomize this!
-			notDealtCards.addFirst(allPlayedCards.removeLast());
-			notDealtCards.addLast(allPlayedCards.removeFirst());
+			// TODO: give Cards to Players
+			for(int p=0; p<=allPlayers.size(); p++){
+				Player player = allPlayers.get(p);
+				for(int c=0; c<=notDealtCards.size(); c++){
+					player.addCard(notDealtCards.remove(c));
+				}
+			}
 		}
 	}
 	
+
 }
 
