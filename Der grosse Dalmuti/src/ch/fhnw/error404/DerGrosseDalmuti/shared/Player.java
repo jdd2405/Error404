@@ -4,7 +4,7 @@
 package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Role;
 
@@ -30,7 +30,7 @@ public class Player implements Serializable{
 	private boolean active; // Is it my turn?
 	private Role role; // Wanna be King!
 	private int rank; // oh, I have not finished first?
-	private LinkedList<Card> cards;
+	private ArrayList<Card> cards;
 	public boolean passed; // set to false after every trick (engl. "Stich")!
 	//private boolean passed; // set to false after every trick (engl. "Stich")!
 	
@@ -72,7 +72,7 @@ public class Player implements Serializable{
 	public int getRank(){return rank;}
 
 
-	public LinkedList<Card> getCards() {return cards;}
+	public ArrayList<Card> getCards() {return cards;}
 	public void addCard(Card card) {this.cards.add(card);}
 
 
