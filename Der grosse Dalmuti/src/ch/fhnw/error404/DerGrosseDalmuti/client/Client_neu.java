@@ -1,15 +1,19 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.Iterator;
 
+=======
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import java.util.ArrayList;
+>>>>>>> branch 'master' of https://github.com/jdd2405/Error404.git
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -99,3 +103,4 @@ public class Client_neu implements Runnable {
 		}
 
 }
+

@@ -24,7 +24,7 @@ public class Deck implements Serializable{
 	private static final long serialVersionUID = -4903713809034981834L;
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
-	public ArrayList<Card>[] swappableCards; // cards ready to swap
+	public ArrayList<Card>[] swappedCards; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -76,6 +76,10 @@ public class Deck implements Serializable{
 				}
 			}
 		}
+	}
+	
+	protected void addSwappedCards(Player player){
+		player.getCards().addAll(swappedCards[player.getRole().getCode()-1]);
 	}
 	
 

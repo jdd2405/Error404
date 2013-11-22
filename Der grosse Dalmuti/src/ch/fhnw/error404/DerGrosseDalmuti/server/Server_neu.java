@@ -1,6 +1,5 @@
 package ch.fhnw.error404.DerGrosseDalmuti.server;
 
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -9,8 +8,10 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Vector;
-
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
+
 
 public class Server_neu {
 	
@@ -89,4 +90,5 @@ public class Server_neu {
 	}
 
 }
+
 
