@@ -17,13 +17,7 @@ public class Player implements Serializable{
 	/**
 	 * 
 	 */
-	
-	public static Player Player1 = new Player("",1); // Erstellung der Players für den Zugriff vom GUI
-	public static Player Player2 = new Player("",2);
-	public static Player Player3 = new Player("",3);
-	public static Player Player4 = new Player("",4);
-	
-	
+		
 	private static final long serialVersionUID = 790667502899497604L;
 	private String name; 
 	private int id; // unique identifier
