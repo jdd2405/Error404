@@ -8,8 +8,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+
 import java.util.ArrayList;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -30,9 +33,12 @@ public class Client_neu implements Runnable {
 	public static void main(String[] args) {
 		
 	
-		Client_neu client = new Client_neu();
-		client.clientSocket();
+		//Client_neu client = new Client_neu();
+		//client.clientSocket();
+		
+		
 		new LoginView();
+		
 		
 		
 

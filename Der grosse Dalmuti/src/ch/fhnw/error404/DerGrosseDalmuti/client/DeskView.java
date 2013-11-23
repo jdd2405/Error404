@@ -1,19 +1,19 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.awt.*;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.*;
+
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
+import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
 /**
  * @author Thomas and Elias
  *
  */
 
-public class DeskView extends ABaseView {
-	
-	private LoginView loginview;
+public class DeskView extends LoginView {
 	
 	private static final int numberCards = 12;
 	
@@ -31,7 +31,7 @@ public class DeskView extends ABaseView {
 	int[] counter = new int[numberCards];
 	
 	
-	public DeskView(){
+	public DeskView() {
 		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png");
 		
@@ -161,7 +161,7 @@ public class DeskView extends ABaseView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Anzahl, GridSouth);
 		
-		JTextField Spieler4 = new JTextField(Player1.getName());
+		JTextField Spieler4 = new JTextField((allPlayers.get(0)).getName()); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 5;
 		GridSouth.gridy = 0;

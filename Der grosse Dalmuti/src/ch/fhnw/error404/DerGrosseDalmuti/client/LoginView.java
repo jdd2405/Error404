@@ -33,7 +33,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
  * @author Elias und Thomas
  *
  */
-public class LoginView extends ABaseView {
+public class LoginView extends Action {
 	
 	private JFrame Frame;
 	private JPanel Panel;
@@ -63,12 +63,13 @@ public class LoginView extends ABaseView {
 		Login.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
-				player.setName(Username.getText());
-				
 				if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){
+					newPlayer(Username.getText());
 					dispose();
+					System.out.println((allPlayers.get(0)).getName());
 					new DeskView();
 					Frame.setVisible(false);
+					
 				}
 				else{
 					new LoginError();

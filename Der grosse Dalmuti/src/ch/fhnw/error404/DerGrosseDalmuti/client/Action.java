@@ -1,9 +1,12 @@
 
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Stack;
+
+import javax.swing.JFrame;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -11,7 +14,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * @author Jonas
  *
  */
-public class Action {
+public class Action extends JFrame {
 	
 	private int myId;
 
@@ -20,9 +23,10 @@ public class Action {
 	 * These Collections need to be exchanged via client-server!!!
 	 * -------------------------------------------------------------------------------------->
 	 */
-	protected ArrayList<Player> allPlayers; //TODO add all Players to this LinkedList
+	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this LinkedList
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card>[] swappableCards; // cards ready to swap
+	
 	/*
 	 * <--------------------------------------------------------------------------------------
 	 */
@@ -34,9 +38,6 @@ public class Action {
 		allPlayers.add(player);
 		myId = player.getId();
 	}
-	
-	//Player Player1 = new Player("jonas", 1);
-	
 	
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
@@ -79,7 +80,4 @@ public class Action {
 			// return List of swappable Cards
 			return swappableCards;
 		}
-	
-	
-	
 }
