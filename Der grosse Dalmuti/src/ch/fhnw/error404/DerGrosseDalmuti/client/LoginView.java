@@ -27,7 +27,7 @@ import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 
 /**
  * @author Elias und Thomas
@@ -63,7 +63,7 @@ public class LoginView extends ABaseView {
 		Login.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
-				Player.Player1.setName(Username.getText());
+				player.setName(Username.getText());
 				
 				if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){
 					dispose();

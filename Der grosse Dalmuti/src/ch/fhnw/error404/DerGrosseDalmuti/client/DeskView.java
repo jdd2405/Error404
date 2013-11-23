@@ -1,14 +1,11 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.awt.*;
-
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
-
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 /**
  * @author Thomas and Elias
  *
@@ -164,7 +161,7 @@ public class DeskView extends ABaseView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Anzahl, GridSouth);
 		
-		JTextField Spieler4 = new JTextField(Player.Player1.getName());
+		JTextField Spieler4 = new JTextField(Player1.getName());
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 5;
 		GridSouth.gridy = 0;

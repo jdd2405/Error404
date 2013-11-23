@@ -14,8 +14,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action {
 	
 	private int myId;
-	
-	
+
 	
 	/*
 	 * These Collections need to be exchanged via client-server!!!
@@ -35,6 +34,9 @@ public class Action {
 		allPlayers.add(player);
 		myId = player.getId();
 	}
+	
+	//Player Player1 = new Player("jonas", 1);
+	
 	
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){

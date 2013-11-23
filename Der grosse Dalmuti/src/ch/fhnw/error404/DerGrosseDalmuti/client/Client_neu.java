@@ -29,9 +29,10 @@ public class Client_neu implements Runnable {
 
 	public static void main(String[] args) {
 		
+	
 		Client_neu client = new Client_neu();
 		client.clientSocket();
-		//new LoginView();
+		new LoginView();
 		
 		
 
