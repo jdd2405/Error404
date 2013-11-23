@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
 /**
  * @author Thomas and Elias
  * the following GUI is created on the base of Gridlayout
@@ -26,10 +24,11 @@ public class DeskView extends LoginView {
 	private JButton card[];
 	private JDialog errorMsg;
 	private static int countCardsToPlay;
+	private int a;
 	
 	// objects used to count on GUI (testing phase)
 	JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
-	JButton[] cards = new JButton[numberCards];
+	testclass[] cards = new testclass[numberCards];
 	int[] counter = new int[numberCards];
 	
 	
@@ -135,7 +134,7 @@ public class DeskView extends LoginView {
 		
 		
 		for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
-			cards[i] = new JButton(icon);
+			cards[i] = new testclass(icon, i);
 			cards[i].setContentAreaFilled(false);
 			cards[i].setPreferredSize(new Dimension(89,92));
 			cards[i].addActionListener(new ActionListener(){
@@ -162,6 +161,8 @@ public class DeskView extends LoginView {
 		GridSouth.gridy = 2;
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Anzahl, GridSouth);
+		
+		newPlayer("basmeg");
 		
 		JTextField Spieler4 = new JTextField((allPlayers.get(0)).getName()); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
 		GridSouth.gridwidth = 2;
@@ -209,8 +210,14 @@ public class DeskView extends LoginView {
 	}
 	
 	public void calculate(){ // calculates the cards selected and sums them up (testing phase)
-		   countCardsToPlay++;
+		   
+		if(a == a){
+			countCardsToPlay++;
 		   this.AmountCards.setText(" " + countCardsToPlay + " ");
+		   }
+		   else{
+			   countCardsToPlay = 0;
+		   }
 		} 
 	
 	
