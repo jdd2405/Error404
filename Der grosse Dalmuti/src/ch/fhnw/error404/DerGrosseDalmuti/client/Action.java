@@ -23,7 +23,7 @@ public class Action extends JFrame {
 	 * These Collections need to be exchanged via client-server!!!
 	 * -------------------------------------------------------------------------------------->
 	 */
-	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this LinkedList
+	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this created LinkedList
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card>[] swappableCards; // cards ready to swap
 	
