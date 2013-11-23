@@ -81,20 +81,6 @@ public class Game {
 		}
 	}
 	
-	public void swapCards(){
-		
-		
-		// take Card(s) from the Array and give it/them to the new owner
-		// remember to put the Cards in the Array-index of the new owner
-				
-		ListIterator<Player> listIterator = allPlayers.listIterator();
-				
-		while(listIterator.hasNext()) {
-			Player player = listIterator.next();
-			
-			// TODO Continue this work...
-			
-		}
-
-	}
+	
+	
 }

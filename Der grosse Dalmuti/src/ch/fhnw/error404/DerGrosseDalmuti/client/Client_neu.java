@@ -6,8 +6,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+<<<<<<< HEAD
+import java.util.ArrayList;
+import java.util.Iterator;
+
+=======
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import java.util.ArrayList;
+>>>>>>> branch 'master' of https://github.com/jdd2405/Error404.git
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -16,18 +22,21 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * - Update (replace) Model Object
  */
 
-public class Client_neu {
+public class Client_neu implements Runnable {
 	
-
-	protected static ArrayList <Player> list = new ArrayList <Player>(4);
+	ArrayList <Player> clientlist = new ArrayList <Player>(4);
+	Player playertest = new Player("thesi", 5);
+	
 
 	
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
-
+		
 		Client_neu client = new Client_neu();
 		client.clientSocket();
+		//new LoginView();
+		
 		
 
 		// LoginView lw = new LoginView();
@@ -46,9 +55,10 @@ public class Client_neu {
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
+			clientlist.add(0, playertest);
 
 			// write object to outputStream
-			out.writeObject(list);
+			out.writeObject(clientlist);
 			out.flush();
 
 			// create inputStream for objects
@@ -58,7 +68,7 @@ public class Client_neu {
 		catch (Exception e) {
 			e.printStackTrace();}
 		
-		Thread inputThread = new Thread (new InputMessages());
+		Thread inputThread = new Thread ();
 		inputThread.start();
 
 		// read object from inputStream
@@ -74,18 +84,23 @@ public class Client_neu {
 
 	}
 	
-	public class InputMessages implements Runnable {
 		public void run(){
-			Object message = null;
+			Object message;
 
 				try {
-					while((message = in.readObject()) != null){
-					System.out.println(message);}
+					while((message =  in.readObject()) != null){
+						for(int i =0; i<4;i++){
+						clientlist.add(i, (Player) message);
+						}
+					}
+					Iterator<Player>iter =clientlist.iterator();
+					while(iter.hasNext()){
+						System.out.println(iter.next().getName());}
+
+					//System.out.println(clientlist);}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();}
 		}
-		
-	}
 
 }
 

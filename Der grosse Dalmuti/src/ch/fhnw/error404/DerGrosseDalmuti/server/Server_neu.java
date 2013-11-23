@@ -17,7 +17,8 @@ public class Server_neu {
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array
 	private Vector <ObjectOutputStream> clientManager = new Vector <ObjectOutputStream>();
-	ArrayList <Player> serverlist = new ArrayList <Player>(4);
+	ArrayList <Object> serverlist = new ArrayList <Object>(4);
+	
 	
 	public static void main(String [] args){
 		Server_neu serverObject = new Server_neu();
@@ -39,8 +40,9 @@ public class Server_neu {
 		}
 		catch (IOException e){e.printStackTrace();}
 	}
-	
+
 	public class ChatThread implements Runnable{
+	
 		private Socket client;
 		private int clientPort;
 		private ObjectInputStream input;
@@ -59,16 +61,16 @@ public class Server_neu {
 			
 			try{
 				while(true){
-				serverlist = (ArrayList<Player>) input.readObject();
-				Player player1 = new Player ("thesi",5);
-				serverlist.add(0, player1 );
-				Iterator<Player>iter =serverlist.iterator();
-				while(iter.hasNext()){
-					System.out.println(iter.next().getName());
+					//message = (Object) input.readObject();
+					serverlist =  (ArrayList<Object>) input.readObject();
 				}
+				//Iterator<Object>iter =serverlist.iterator();
+				//while(iter.hasNext()){
+				//	System.out.println(((Player) iter.next()).getName());
+				//}
 				//System.out.println(serverlist);
 				sendMessage(clientPort + ": " + serverlist);}
-			}
+			
 			catch (ClassNotFoundException | IOException e) {e.printStackTrace();}
 				
 				//in.close();
