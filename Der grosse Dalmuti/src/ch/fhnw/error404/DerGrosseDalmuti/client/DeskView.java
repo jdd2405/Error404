@@ -14,33 +14,15 @@ import javax.swing.*;
 
 public class DeskView extends LoginView {
 	
-	private static final int numberCards = 12;
-	
-	private JFrame Frame1;
-	private JButton playCards;
-	private JButton pass;
-	private JButton quit;
-	private JTextField numberOfCards;
-	private JButton card[];
-	private JDialog errorMsg;
-	private static int countCardsToPlay;
-	private int a;
-	
-	// objects used to count on GUI (testing phase)
-	JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
-	testclass[] cards = new testclass[numberCards];
-	int[] counter = new int[numberCards];
-	
-	
 	public DeskView() {
 		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png"); // for test reasons
 		
-		Frame1 = new JFrame();
-		Frame1.setTitle("Der Grosse Dalmuti");
-		Frame1.setSize(1600,900);
-		Frame1.setLocationRelativeTo(null);
-		Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		deskView = new JFrame();
+		deskView.setTitle("Der Grosse Dalmuti");
+		deskView.setSize(1600,900);
+		deskView.setLocationRelativeTo(null);
+		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//NORTH Panel
 		JPanel Panel = new JPanel(new GridBagLayout());
@@ -61,8 +43,8 @@ public class DeskView extends LoginView {
 		
 		Panel.setBackground(Color.BLUE);
 		
-		Frame1.getContentPane().add(Panel, BorderLayout.NORTH);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(Panel, BorderLayout.NORTH);
+		deskView.setVisible(true);
 		
 		//EAST Panel
 		JPanel PanelEast = new JPanel(new GridBagLayout());
@@ -84,8 +66,8 @@ public class DeskView extends LoginView {
 		
 		PanelEast.setBackground(Color.GREEN);
 		
-		Frame1.getContentPane().add(PanelEast, BorderLayout.EAST);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelEast, BorderLayout.EAST);
+		deskView.setVisible(true);
 		
 		
 		//WEST Panel
@@ -108,8 +90,8 @@ public class DeskView extends LoginView {
 				
 		PanelWest.setBackground(Color.RED);
 				
-		Frame1.getContentPane().add(PanelWest, BorderLayout.WEST);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelWest, BorderLayout.WEST);
+		deskView.setVisible(true);
 		
 		//CENTER Panel
 		JPanel PanelCenter = new JPanel(new GridBagLayout());
@@ -125,8 +107,8 @@ public class DeskView extends LoginView {
 						
 		PanelCenter.setBackground(Color.YELLOW);
 						
-		Frame1.getContentPane().add(PanelCenter, BorderLayout.CENTER);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelCenter, BorderLayout.CENTER);
+		deskView.setVisible(true);
 		
 		//SOUTH Panel
 		JPanel PanelSouth = new JPanel(new GridBagLayout());
@@ -137,11 +119,7 @@ public class DeskView extends LoginView {
 			cards[i] = new testclass(icon, i);
 			cards[i].setContentAreaFilled(false);
 			cards[i].setPreferredSize(new Dimension(89,92));
-			cards[i].addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					calculate();
-				}
-			});
+			cards[i].addActionListener(DisplayCards);
 			GridSouth.gridx = i;
 			GridSouth.gridy = 1;
 			GridSouth.insets = new Insets(5,5,5,5);
@@ -188,11 +166,7 @@ public class DeskView extends LoginView {
 		PanelSouth.add(Button2, GridSouth);
 		
 		JButton Button3 = new JButton("Spiel beenden"); // closes game
-		Button3.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Frame1.dispose();		
-			}
-		});
+		Button3.addActionListener(CloseGame);
 		Button3.setPreferredSize(new Dimension(170,30));	
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 10;
@@ -203,22 +177,12 @@ public class DeskView extends LoginView {
 		
 		PanelSouth.setBackground(Color.PINK);
 						
-		Frame1.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
+		deskView.setVisible(true);
 		
 		
 	}
 	
-	public void calculate(){ // calculates the cards selected and sums them up (testing phase)
-		   
-		if(a == a){
-			countCardsToPlay++;
-		   this.AmountCards.setText(" " + countCardsToPlay + " ");
-		   }
-		   else{
-			   countCardsToPlay = 0;
-		   }
-		} 
 	
 	
 }

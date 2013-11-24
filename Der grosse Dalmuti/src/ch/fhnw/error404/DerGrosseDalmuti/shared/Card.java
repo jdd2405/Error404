@@ -3,7 +3,7 @@ package ch.fhnw.error404.DerGrosseDalmuti.shared;
 import java.io.Serializable;
 
 /**
- * @author Jonas and elias yo
+ * @author Jonas
  *
  */
 public enum Card implements Serializable{

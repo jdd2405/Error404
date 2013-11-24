@@ -29,6 +29,11 @@ public class LoginView extends JFrame {
 		Frame.setSize(800, 600);
 		Frame.setLocationRelativeTo(null);
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginview = new JFrame();
+		loginview.setTitle("Login");
+		loginview.setSize(800, 600);
+		loginview.setLocationRelativeTo(null);
+		loginview.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Panel = new JPanel();
 		Panel.setBorder(new EmptyBorder(200,300,200,300));
@@ -40,39 +45,19 @@ public class LoginView extends JFrame {
 		Label.setFont(new Font("Arial", Font.BOLD, 48));	
 	
 		Login = new JButton("Login");
-		Login.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				
-				if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
-					newPlayer(Username.getText()); // creates new player object in action class using the typed name at the login
-					dispose();
-					System.out.println((allPlayers.get(0)).getName()); // for test reasons
-					new DeskView(); // opens the deskview GUI
-					Frame.setVisible(false); // closes the Loginview
-					
-				}
-				else{
-					new LoginError();
-				}
-			}
-		});
-		Frame.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
+		Login.addActionListener(LoginListener);
 		
+		loginview.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
 		
 		Username = new JTextField("Username", 10);
-		Username.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				Username.setText(""); // Sets the Username on click to empty if the username is "Username"
-			}
-		});	
-		
+		Username.addMouseListener(ClearOnClick);
 			
 		Panel.add(Username);
 		Panel.add(Login);
 			
-		Frame.add(Panel);
-		Frame.add(Label, BorderLayout.NORTH);
-		Frame.setVisible(true);
+		loginview.add(Panel);
+		loginview.add(Label, BorderLayout.NORTH);
+		loginview.setVisible(true);
 		
 	}
 	
