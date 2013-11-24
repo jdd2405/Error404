@@ -24,14 +24,12 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action extends JFrame implements ActionListener {
 	
 	private int myId;
-	
 	// public so that it can be accessed from the GUI
-	public JFrame Frame; 
-	public JTextField Username; 
-	public JButton card[];
-	public JFrame Frame1; 
-	public static final int numberCards = 12;
-	public static int countCardsToPlay;
+	public JFrame loginview;
+	public JFrame deskView;
+	public JTextField Username;
+	public final int numberCards = 12;
+	public int countCardsToPlay;
 	public int a;
 	
 	// objects used to count on GUI (testing phase)
@@ -81,7 +79,7 @@ public class Action extends JFrame implements ActionListener {
 				dispose();
 				System.out.println((allPlayers.get(0)).getName()); // for test reasons
 				new DeskView(); // opens the deskview GUI
-				Frame.setVisible(false); // closes the Loginview
+				loginview.setVisible(false); // closes the Loginview
 				
 			}
 			else{
@@ -107,7 +105,7 @@ public class Action extends JFrame implements ActionListener {
 	// Close Game
 	ActionListener CloseGame = new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			Frame1.dispose();		
+			deskView.dispose();		
 		}
 	};
 	
@@ -142,9 +140,8 @@ public class Action extends JFrame implements ActionListener {
 		return swappableCards;
 	}
 
-		@Override
+	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 			
 	}	
 		

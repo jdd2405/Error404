@@ -18,11 +18,11 @@ public class DeskView extends LoginView {
 		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png"); // for test reasons
 		
-		Frame1 = new JFrame();
-		Frame1.setTitle("Der Grosse Dalmuti");
-		Frame1.setSize(1600,900);
-		Frame1.setLocationRelativeTo(null);
-		Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		deskView = new JFrame();
+		deskView.setTitle("Der Grosse Dalmuti");
+		deskView.setSize(1600,900);
+		deskView.setLocationRelativeTo(null);
+		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//NORTH Panel
 		JPanel Panel = new JPanel(new GridBagLayout());
@@ -43,8 +43,8 @@ public class DeskView extends LoginView {
 		
 		Panel.setBackground(Color.BLUE);
 		
-		Frame1.getContentPane().add(Panel, BorderLayout.NORTH);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(Panel, BorderLayout.NORTH);
+		deskView.setVisible(true);
 		
 		//EAST Panel
 		JPanel PanelEast = new JPanel(new GridBagLayout());
@@ -66,8 +66,8 @@ public class DeskView extends LoginView {
 		
 		PanelEast.setBackground(Color.GREEN);
 		
-		Frame1.getContentPane().add(PanelEast, BorderLayout.EAST);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelEast, BorderLayout.EAST);
+		deskView.setVisible(true);
 		
 		
 		//WEST Panel
@@ -90,8 +90,8 @@ public class DeskView extends LoginView {
 				
 		PanelWest.setBackground(Color.RED);
 				
-		Frame1.getContentPane().add(PanelWest, BorderLayout.WEST);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelWest, BorderLayout.WEST);
+		deskView.setVisible(true);
 		
 		//CENTER Panel
 		JPanel PanelCenter = new JPanel(new GridBagLayout());
@@ -107,8 +107,8 @@ public class DeskView extends LoginView {
 						
 		PanelCenter.setBackground(Color.YELLOW);
 						
-		Frame1.getContentPane().add(PanelCenter, BorderLayout.CENTER);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelCenter, BorderLayout.CENTER);
+		deskView.setVisible(true);
 		
 		//SOUTH Panel
 		JPanel PanelSouth = new JPanel(new GridBagLayout());
@@ -177,8 +177,8 @@ public class DeskView extends LoginView {
 		
 		PanelSouth.setBackground(Color.PINK);
 						
-		Frame1.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
-		Frame1.setVisible(true);
+		deskView.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
+		deskView.setVisible(true);
 		
 		
 	}

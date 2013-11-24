@@ -41,11 +41,11 @@ public class LoginView extends Action {
 	
 	public LoginView(){
 		
-		Frame = new JFrame();
-		Frame.setTitle("Login");
-		Frame.setSize(800, 600);
-		Frame.setLocationRelativeTo(null);
-		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginview = new JFrame();
+		loginview.setTitle("Login");
+		loginview.setSize(800, 600);
+		loginview.setLocationRelativeTo(null);
+		loginview.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Panel = new JPanel();
 		Panel.setBorder(new EmptyBorder(200,300,200,300));
@@ -59,7 +59,7 @@ public class LoginView extends Action {
 		Login = new JButton("Login");
 		Login.addActionListener(LoginListener);
 		
-		Frame.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
+		loginview.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
 		
 		Username = new JTextField("Username", 10);
 		Username.addMouseListener(ClearOnClick);
@@ -67,9 +67,9 @@ public class LoginView extends Action {
 		Panel.add(Username);
 		Panel.add(Login);
 			
-		Frame.add(Panel);
-		Frame.add(Label, BorderLayout.NORTH);
-		Frame.setVisible(true);
+		loginview.add(Panel);
+		loginview.add(Label, BorderLayout.NORTH);
+		loginview.setVisible(true);
 		
 	}
 	
