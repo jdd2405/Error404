@@ -14,24 +14,6 @@ import javax.swing.*;
 
 public class DeskView extends LoginView {
 	
-	private static final int numberCards = 12;
-	
-	private JFrame Frame1;
-	private JButton playCards;
-	private JButton pass;
-	private JButton quit;
-	private JTextField numberOfCards;
-	private JButton card[];
-	private JDialog errorMsg;
-	private static int countCardsToPlay;
-	private int a;
-	
-	// objects used to count on GUI (testing phase)
-	JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
-	testclass[] cards = new testclass[numberCards];
-	int[] counter = new int[numberCards];
-	
-	
 	public DeskView() {
 		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png"); // for test reasons
@@ -137,11 +119,7 @@ public class DeskView extends LoginView {
 			cards[i] = new testclass(icon, i);
 			cards[i].setContentAreaFilled(false);
 			cards[i].setPreferredSize(new Dimension(89,92));
-			cards[i].addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					calculate();
-				}
-			});
+			cards[i].addActionListener(DisplayCards);
 			GridSouth.gridx = i;
 			GridSouth.gridy = 1;
 			GridSouth.insets = new Insets(5,5,5,5);
@@ -188,11 +166,7 @@ public class DeskView extends LoginView {
 		PanelSouth.add(Button2, GridSouth);
 		
 		JButton Button3 = new JButton("Spiel beenden"); // closes game
-		Button3.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				Frame1.dispose();		
-			}
-		});
+		Button3.addActionListener(CloseGame);
 		Button3.setPreferredSize(new Dimension(170,30));	
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 10;
@@ -209,16 +183,6 @@ public class DeskView extends LoginView {
 		
 	}
 	
-	public void calculate(){ // calculates the cards selected and sums them up (testing phase)
-		   
-		if(a == a){
-			countCardsToPlay++;
-		   this.AmountCards.setText(" " + countCardsToPlay + " ");
-		   }
-		   else{
-			   countCardsToPlay = 0;
-		   }
-		} 
 	
 	
 }

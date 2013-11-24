@@ -35,11 +35,9 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
  */
 public class LoginView extends Action {
 	
-	private JFrame Frame;
 	private JPanel Panel;
 	private JButton Login;
 	private JLabel Label;
-	private JTextField Username;
 	
 	public LoginView(){
 		
@@ -59,32 +57,12 @@ public class LoginView extends Action {
 		Label.setFont(new Font("Arial", Font.BOLD, 48));	
 	
 		Login = new JButton("Login");
-		Login.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				
-				if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
-					newPlayer(Username.getText()); // creates new player object in action class using the typed name at the login
-					dispose();
-					System.out.println((allPlayers.get(0)).getName()); // for test reasons
-					new DeskView(); // opens the deskview GUI
-					Frame.setVisible(false); // closes the Loginview
-					
-				}
-				else{
-					new LoginError();
-				}
-			}
-		});
+		Login.addActionListener(LoginListener);
+		
 		Frame.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
 		
-		
 		Username = new JTextField("Username", 10);
-		Username.addMouseListener(new MouseAdapter(){
-			public void mouseClicked(MouseEvent e){
-				Username.setText(""); // Sets the Username on click to empty if the username is "Username"
-			}
-		});	
-		
+		Username.addMouseListener(ClearOnClick);
 			
 		Panel.add(Username);
 		Panel.add(Login);
@@ -94,4 +72,5 @@ public class LoginView extends Action {
 		Frame.setVisible(true);
 		
 	}
+	
 }
