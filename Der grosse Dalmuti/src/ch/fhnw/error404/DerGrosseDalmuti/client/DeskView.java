@@ -53,7 +53,7 @@ public class DeskView extends LoginView {
 		Grid.insets = new Insets(5,5,5,5);
 		Panel.add(Label1, Grid);
 		
-		JTextField Spieler2 = new JTextField("Spieler 2");
+		JTextField Spieler2 = new JTextField("Player 1");
 		Grid.gridx = 0;
 		Grid.gridy = 1;
 		Grid.insets = new Insets(5,5,5,5);

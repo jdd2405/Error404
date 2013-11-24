@@ -25,8 +25,9 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * @author Jonas, Elias und Thomas
  *
  */
-public abstract class ABaseView extends JFrame{
+public abstract class ABaseView extends JFrame {
 	private BorderLayout one;
+	Action action = new Action();
 	
 	public ABaseView() throws HeadlessException {
 		super();

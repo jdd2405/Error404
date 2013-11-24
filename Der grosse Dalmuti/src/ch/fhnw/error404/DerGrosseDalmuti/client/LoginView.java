@@ -3,28 +3,10 @@
  */
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.KeyListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
+import java.awt.*;
+import java.awt.event.*;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JDialog;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
@@ -33,9 +15,8 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
  * @author Elias und Thomas
  *
  */
-public class LoginView extends Action {
+public class LoginView extends JFrame {
 	
-	private JFrame Frame;
 	private JPanel Panel;
 	private JButton Login;
 	private JLabel Label;
@@ -43,7 +24,7 @@ public class LoginView extends Action {
 	
 	public LoginView(){
 		
-		Frame = new JFrame();
+		JFrame Frame = new JFrame();
 		Frame.setTitle("Login");
 		Frame.setSize(800, 600);
 		Frame.setLocationRelativeTo(null);
@@ -94,4 +75,29 @@ public class LoginView extends Action {
 		Frame.setVisible(true);
 		
 	}
+	
+	void reset() {
+        // if needed
+    }
+    
+    String getUserInput() {
+        return Username.getText();
+    }
+    
+    void setTotal(String newTotal) {
+    	Username.setText(newTotal);
+    }
+    
+    
+    void addListener(ActionListener listener) {
+        Login.addActionListener(listener);
+    }
+    
+    void addClearListener(ActionListener cal) {
+        // for good reasons
+    }
+    
+    void showError(String string) {
+    	new LoginError();
+    }
 }
