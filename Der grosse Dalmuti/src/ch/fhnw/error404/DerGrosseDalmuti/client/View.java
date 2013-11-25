@@ -58,8 +58,8 @@ public class View extends JFrame{
         JOptionPane.showMessageDialog(this, errMessage);
     }
     
-    void addShowListener(ActionListener addShowAL) {
-        btnLogin.addActionListener(addShowAL);
+    void addShowIdListener(ActionListener addShowIdAL) {
+        btnLogin.addActionListener(addShowIdAL);
     }
     
     void addClearListener(ActionListener addClearAL) {

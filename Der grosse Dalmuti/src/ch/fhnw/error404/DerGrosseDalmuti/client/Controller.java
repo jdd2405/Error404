@@ -28,7 +28,7 @@ public class Controller extends Client{
         this.view  = view;
         
         //... Add listeners to the view.
-        view.addShowListener(new MultiplyListener());
+        view.addShowIdListener(new ShowIdListener());
         view.addClearListener(new ClearListener());
     }
     
@@ -41,7 +41,7 @@ public class Controller extends Client{
      *  4. Tell the View to display the result.
      * If there was an error, tell the View to display it.
      */
-    class MultiplyListener implements ActionListener {
+    class ShowIdListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String userInput = "";
             try {

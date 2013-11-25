@@ -30,7 +30,7 @@ public class Client {
 		Client client = new Client();
 		client.clientSocket();
 
-		Player      player      = new Player("Jonas", 1);
+		Player      player      = new Player();
 		View       view       = new View(player);
 		Controller controller = new Controller(player, view);
 
