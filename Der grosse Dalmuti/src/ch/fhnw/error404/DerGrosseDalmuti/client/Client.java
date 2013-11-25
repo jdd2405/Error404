@@ -16,27 +16,35 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 
 public class Client {
-	
-	
+
+
+
+
+
+	// Have a look at http://www.leepoint.net/notes-java/GUI/structure/40mvc.html
+	//... Create model, view, and controller.  They are
+	//    created once here and passed to the parts that
+	//    need them so there is only one copy of each.
 	public static void main(String[] args) {
+
 		Client client = new Client();
 		client.clientSocket();
-	
-		
-		// Have a look at http://www.leepoint.net/notes-java/GUI/structure/40mvc.html
-		LoginView loginView = new LoginView();
-		DeskView deskView = new DeskView();
-        Action action = new Action(loginView, deskView);
 
+		Player      player      = new Player("Jonas", 1);
+		View       view       = new View(player);
+		Controller controller = new Controller(player, view);
+
+		view.setVisible(true);
 	}
 
-	
+
+
 	private void clientSocket() {
 
 		String host = "127.0.0.1";
 		int port = 5000;
 		Object object = new Player("Jonas", 1);
-		
+
 
 		Socket socket = null;
 
@@ -62,15 +70,15 @@ public class Client {
 			Object objFromServer = ois.readObject();
 
 			// check type of Object
-				if (objFromServer instanceof Player){
-					// Do something with Player Object
-					Player player = (Player)objFromServer;
-					System.out.println(player.getName() +" has rank: "+ player.getRank());
-				}
-				if (objFromServer instanceof Deck){
-					// Do something with Player Object
-					// Deck deck = (Deck)objFromServer; 				
-				}
+			if (objFromServer instanceof Player){
+				// Do something with Player Object
+				Player player = (Player)objFromServer;
+				System.out.println(player.getName() +" has rank: "+ player.getRank());
+			}
+			if (objFromServer instanceof Deck){
+				// Do something with Player Object
+				// Deck deck = (Deck)objFromServer; 				
+			}
 
 			// clean up
 			oos.close();
