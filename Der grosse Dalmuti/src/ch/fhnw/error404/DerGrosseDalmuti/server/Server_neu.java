@@ -5,20 +5,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
-import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
-import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
-import ch.fhnw.error404.DerGrosseDalmuti.shared.Player;
-
 
 public class Server_neu {
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array
 	private Vector <ObjectOutputStream> clientManager = new Vector <ObjectOutputStream>();
-	ArrayList <Object> serverlist = new ArrayList <Object>(4);
-	
 	
 	public static void main(String [] args){
 		Server_neu serverObject = new Server_neu();
@@ -40,9 +32,8 @@ public class Server_neu {
 		}
 		catch (IOException e){e.printStackTrace();}
 	}
-
-	public class ChatThread implements Runnable{
 	
+	public class ChatThread implements Runnable{
 		private Socket client;
 		private int clientPort;
 		private ObjectInputStream input;
@@ -61,16 +52,10 @@ public class Server_neu {
 			
 			try{
 				while(true){
-					//message = (Object) input.readObject();
-					serverlist =  (ArrayList<Object>) input.readObject();
-				}
-				//Iterator<Object>iter =serverlist.iterator();
-				//while(iter.hasNext()){
-				//	System.out.println(((Player) iter.next()).getName());
-				//}
-				//System.out.println(serverlist);
-				sendMessage(clientPort + ": " + serverlist);}
-			
+				message = input.readObject();
+				System.out.println(message);
+				sendMessage(clientPort + ": " + message);}
+			}
 			catch (ClassNotFoundException | IOException e) {e.printStackTrace();}
 				
 				//in.close();
@@ -88,6 +73,5 @@ public class Server_neu {
 			}
 		}
 	}
+
 }
-
-
