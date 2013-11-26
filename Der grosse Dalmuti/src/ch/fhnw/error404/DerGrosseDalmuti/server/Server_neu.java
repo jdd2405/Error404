@@ -3,14 +3,19 @@ package ch.fhnw.error404.DerGrosseDalmuti.server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Vector;
 
-public class Server_neu {
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
+
+public class Server_neu implements Serializable{
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array
 	private Vector <ObjectOutputStream> clientManager = new Vector <ObjectOutputStream>();
+	
 	
 	public static void main(String [] args){
 		Server_neu serverObject = new Server_neu();
@@ -20,6 +25,7 @@ public class Server_neu {
 	public void startServer(){
 		try{
 			ServerSocket server = new ServerSocket(5000);
+			System.out.println("Server ist gestartet");
 
 			while (true){
 				Socket client = server.accept();
@@ -48,13 +54,14 @@ public class Server_neu {
 		}
 		
 		public void run(){
-			Object message;
+			Integer [] message;
 			
 			try{
-				while(true){
-				message = input.readObject();
-				System.out.println(message);
-				sendMessage(clientPort + ": " + message);}
+				message = (Integer[]) input.readObject();
+				for(int i =0; i <4; i++){
+				System.out.println(message[i]);
+				}
+				sendMessage(message);
 			}
 			catch (ClassNotFoundException | IOException e) {e.printStackTrace();}
 				
@@ -62,11 +69,11 @@ public class Server_neu {
 				//out.close();
 		}
 
-		private void sendMessage(Object message){
+		private void sendMessage(Integer[] message2){
 			synchronized (clientManager){
 				for (ObjectOutputStream output : clientManager){
 					try {
-						output.writeObject(message);
+						output.writeObject(message2);
 						output.flush();
 					} catch (IOException e) {e.printStackTrace();}	
 				}

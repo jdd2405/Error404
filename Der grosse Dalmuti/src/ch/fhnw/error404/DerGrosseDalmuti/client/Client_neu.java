@@ -5,19 +5,21 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-/* TO DO's
- * - Thread for checking for updates.
- * - Check Model Type with typeOf() (od so...)
- * - Update (replace) Model Object
- */
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-public class Client_neu {
-	Integer test = new Integer(568);
+
+public class Client_neu implements Serializable{
+
 	ObjectInputStream in;
-
+	Integer [] clientlist= {2,4,6,8};
+		
 	public static void main(String[] args) {
+
 		
 		//Client_neu client = new Client_neu();
 		//client.clientSocket();
@@ -25,9 +27,11 @@ public class Client_neu {
 		new LoginView();
 
 		Client_neu client = new Client_neu();
+		
+		
 		client.clientSocket();
-
-
+		
+		//new LoginView();
 
 	}
 
@@ -45,7 +49,8 @@ public class Client_neu {
 			ObjectOutputStream out = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			out.writeObject(test);
+			//clientlist.add(test);
+			out.writeObject(clientlist);
 			out.flush();
 
 			// create inputStream for objects
@@ -62,11 +67,17 @@ public class Client_neu {
 	
 	public class InputMessages implements Runnable {
 		public void run(){
-			Object message = null;
+			Integer [] message;
 
 				try {
-					while((message = in.readObject()) != null){
-					System.out.println(message);}
+					while(true){
+						message = (Integer[]) in.readObject();
+						clientlist = message;
+						for(int i = 0; i<4; i++){
+							System.out.println(message[i]);
+							System.out.println(clientlist [i]);
+						}
+					}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();}
 		}
