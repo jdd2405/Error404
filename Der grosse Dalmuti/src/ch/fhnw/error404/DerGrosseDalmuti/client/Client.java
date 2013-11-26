@@ -30,11 +30,15 @@ public class Client {
 		Client client = new Client();
 		client.clientSocket();
 
-		Player      player      = new Player("Jonas", 1);
+		/*Player      player      = new Player("Jonas", 1);
 		View       view       = new View(player);
-		Controller controller = new Controller(player, view);
+		Controller controller = new Controller(player, view);*/
 
-		view.setVisible(true);
+		LoginView loginView = new LoginView();
+		//DeskView deskView = new DeskView();
+		Action action = new Action(loginView);
+		
+		//view.setVisible(true);
 	}
 
 
