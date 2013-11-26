@@ -15,7 +15,7 @@ import javax.swing.*;
  * JLabels, JTextField or JButtons are created and Located in the Grid
  */
 
-public class DeskView extends LoginView {
+public class DeskView extends JFrame {
 	
 		private JFrame deskView;
 		private JTextField Username;
@@ -189,19 +189,21 @@ public class DeskView extends LoginView {
 		GridSouth.gridx = 10;
 		GridSouth.gridy = 2;
 		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(Button3, GridSouth);
+		PanelSouth.add(closeGame, GridSouth);
 		
 		PanelSouth.setBackground(Color.PINK);
 						
 		deskView.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
 		deskView.setVisible(true);
 		
-		
 	}
 	
     void addCloseGame(ActionListener listener) {
-        closeGame.addCloseGame(listener);
+        closeGame.addActionListener(listener);
     }
-
+    void closeWindow(){
+        deskView.dispose();
+        deskView.setVisible(false);
+    }
 }
 
