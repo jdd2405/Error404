@@ -6,14 +6,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
-
-import java.util.ArrayList;
-
-import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
  * - Thread for checking for updates.
@@ -21,24 +13,21 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * - Update (replace) Model Object
  */
 
-public class Client_neu implements Runnable {
-	
-	ArrayList <Player> clientlist = new ArrayList <Player>(4);
-	Player playertest = new Player("thesi", 5);
-	
-
-	
+public class Client_neu {
+	Integer test = new Integer(568);
 	ObjectInputStream in;
 
 	public static void main(String[] args) {
 		
-	
 		//Client_neu client = new Client_neu();
 		//client.clientSocket();
 		
 		new LoginView();
-		
-		// LoginView lw = new LoginView();
+
+		Client_neu client = new Client_neu();
+		client.clientSocket();
+
+
 
 	}
 
@@ -54,10 +43,9 @@ public class Client_neu implements Runnable {
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
 			ObjectOutputStream out = new ObjectOutputStream(os);
-			clientlist.add(0, playertest);
 
 			// write object to outputStream
-			out.writeObject(clientlist);
+			out.writeObject(test);
 			out.flush();
 
 			// create inputStream for objects
@@ -67,39 +55,22 @@ public class Client_neu implements Runnable {
 		catch (Exception e) {
 			e.printStackTrace();}
 		
-		Thread inputThread = new Thread ();
+		Thread inputThread = new Thread (new InputMessages());
 		inputThread.start();
-
-		// read object from inputStream
-		// Object objFromServer = in.readObject();
-		// String ausgabe = objFromServer.toString();
-
-		// check type of Object
-		// if (objFromServer instanceof Integer){
-		// Do something with Player Object
-		// int player = (int)objFromServer;
-		// System.out.println("test: " + player);
-		// }
 
 	}
 	
+	public class InputMessages implements Runnable {
 		public void run(){
-			Object message;
+			Object message = null;
 
 				try {
-					while((message =  in.readObject()) != null){
-						for(int i =0; i<4;i++){
-						clientlist.add(i, (Player) message);
-						}
-					}
-					Iterator<Player>iter =clientlist.iterator();
-					while(iter.hasNext()){
-						System.out.println(iter.next().getName());}
-
-					//System.out.println(clientlist);}
+					while((message = in.readObject()) != null){
+					System.out.println(message);}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();}
 		}
+		
+	}
 
 }
-

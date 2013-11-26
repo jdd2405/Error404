@@ -6,6 +6,9 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
@@ -18,23 +21,27 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Server implements Runnable{
 	
-	boolean hasAnyModelChanged = false;
 	Object objFromClient = new Object();
 	Object objFromServer = new Object();
 	
-	Action game = new Action(); // create <controler> Game
+	Game game;
+	
+	
 	
 	public static void main(String[] args){
 		Server server = new Server();
 		
 		Thread serverThread = new Thread(server, "Listener");
 		serverThread.start();
-		
-		//Deck deck = new Deck();
-		//System.out.println(deck.peekNotDealtCards().getCardType()); // CHECK OUT WHY THIS DOESN'T WORK!
-	      
 	}
-
+	
+	
+	// Constructor
+	public Server() {
+		game = new Game();
+	}
+	
+	
 	@Override
 	public void run() {
 		ServerSocket socketServer = null;

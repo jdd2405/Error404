@@ -1,55 +1,64 @@
 
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Stack;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
  * @author Jonas, Elias und Thomas
  *
  */
-public class Action extends JFrame implements ActionListener {
+public class Action extends Client implements ActionListener {
 	
 	private int myId;
-	// public so that it can be accessed from the GUI
-	public JFrame loginview;
-	public JFrame deskView;
-	public JTextField Username;
-	public final int numberCards = 12;
-	public int countCardsToPlay;
-	public int a;
+	private LoginView loginView;
+	private DeskView  deskView;
 	
-	// objects used to count on GUI (testing phase)
-	JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
-	testclass[] cards = new testclass[numberCards];
-	int[] counter = new int[numberCards];
-
-	
-	/*
-	 * These Collections need to be exchanged via client-server!!!
-	 * -------------------------------------------------------------------------------------->
-	 */
 	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this created LinkedList
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card>[] swappableCards; // cards ready to swap
+
+	public Action(LoginView loginView, DeskView deskView) {
+		this.loginView = loginView;
+		this.deskView = deskView;
+
+		//... Add listeners to the view.
+		loginView.addLoginListener(new LoginListener());
+		loginView.addClearOnClick(new ClearOnClick());
+		
+		deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
+	}
 	
-	/*
-	 * <--------------------------------------------------------------------------------------
-	 */
-	
+	public Action(LoginView loginView) {
+		this.loginView = loginView;
+
+		//... Add listeners to the view.
+		loginView.addLoginListener(new LoginListener());
+		loginView.addClearOnClick(new ClearOnClick());
+	}
+
+
+	// inner class Listener
+	class Listener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String userInput = "";
+			try {
+				userInput = loginView.getUserInput();
+				newPlayer(userInput);
+
+			} catch (NumberFormatException nfex) {
+				loginView.showError("Bad input: '" + userInput + "'");
+			}
+		}
+	} // end inner class MultiplyListener
+
 	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
@@ -57,7 +66,7 @@ public class Action extends JFrame implements ActionListener {
 		allPlayers.add(player);
 		myId = player.getId();
 	}
-	
+
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
 		boolean IsMyPlayerActive = false;
@@ -69,17 +78,17 @@ public class Action extends JFrame implements ActionListener {
 		}
 		return IsMyPlayerActive;
 	}
-	
+
 	// ActionListeners of GUI!!!
 	// ActionListener for the Login Button
-	ActionListener LoginListener = new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-			if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
-				newPlayer(Username.getText()); // creates new player object in action class using the typed name at the login
-				dispose();
+	class LoginListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){	
+			if ((loginView.getUserInput()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
+				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
+				loginView.dispose();
 				System.out.println((allPlayers.get(0)).getName()); // for test reasons
 				new DeskView(); // opens the deskview GUI
-				loginview.setVisible(false); // closes the Loginview
+				loginView.setVisible(false); // closes the Loginview
 				
 			}
 			else{
@@ -89,18 +98,30 @@ public class Action extends JFrame implements ActionListener {
 	};
 	
 	// Clear Loginfield on click
-	MouseListener ClearOnClick = new MouseAdapter(){
+	class ClearOnClick implements MouseListener{
 		public void mouseClicked(MouseEvent e){
-			Username.setText(""); // Sets the Username on click to empty if the username is "Username"
+			loginView.setUserInput(""); // Sets the Username on click to empty if the username is "Username"
 		}
-	};	
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}		
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}	
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+	}	
 	
 	// Counts cards of the player on click
-	ActionListener DisplayCards = new ActionListener(){
+	class DisplayAmountOfCardsToPlay implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			calculate();
+			deskView.calculate();
 		}
-	};
+	}
 	
 	// Close Game
 	ActionListener CloseGame = new ActionListener(){
@@ -109,50 +130,33 @@ public class Action extends JFrame implements ActionListener {
 		}
 	};
 	
-	
-	
-	
 	// returns a List of swappable Cards for a specific Player
 	public ArrayList<Card> getSwappableCards(Player player){
-			
-			// initialize List of Cards
+
+		// initialize List of Cards
 		ArrayList<Card> swappableCards = new ArrayList<Card>();
-			
-			
-			
+
 		if(player.getRole().hasToBeHighest() == true) {
-				
+
 			for(int i=0; i <=player.getRole().getNOfSwappableCards(); i++){
-					
-					// initialize listIterator
+
+				// initialize listIterator
 				ListIterator<Card> listIterator = player.getCards().listIterator();
-					
+
 				while(listIterator.hasNext()){
-						
-						// <========= DO YOUR WORK! CONTINUE HERE!
-						
+
+					// <========= DO YOUR WORK! CONTINUE HERE!
+
 				}	
 			}
-				
-		}
-			
-			// return List of swappable Cards
-		return swappableCards;
-	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-			
+		}
+
+		// return List of swappable Cards
+		return swappableCards;
 	}	
-		
-	public void calculate(){ // calculates the cards selected and sums them up (testing phase)
-			   
-		if(a == a){
-			countCardsToPlay++;
-			this.AmountCards.setText(" " + countCardsToPlay + " ");
-		}
-		else{
-			countCardsToPlay = 0;
-		}
-	} 
+			
+	@Override
+	public void actionPerformed(ActionEvent e) {	
+	}	
 }
