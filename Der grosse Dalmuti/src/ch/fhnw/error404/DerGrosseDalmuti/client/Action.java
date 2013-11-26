@@ -34,6 +34,7 @@ public class Action extends Client implements ActionListener {
 		loginView.addClearOnClick(new ClearOnClick());
 		
 		deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
+		deskView.addCloseGame(new CloseGame());
 	}
 	
 	public Action(LoginView loginView) {
@@ -124,7 +125,7 @@ public class Action extends Client implements ActionListener {
 	}
 	
 	// Close Game
-	ActionListener CloseGame = new ActionListener(){
+	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			deskView.dispose();		
 		}
