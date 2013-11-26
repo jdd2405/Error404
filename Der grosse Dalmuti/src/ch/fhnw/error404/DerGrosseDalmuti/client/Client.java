@@ -25,9 +25,8 @@ public class Client {
 		
 		// Have a look at http://www.leepoint.net/notes-java/GUI/structure/40mvc.html
 		LoginView loginView = new LoginView();
-		DeskView deskView = new DeskView();
-        Action action = new Action(loginView, deskView);
-   
+        Action action = new Action(loginView);
+		
 	}
 
 	

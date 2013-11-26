@@ -1,4 +1,3 @@
-
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * @author Jonas, Elias und Thomas
  *
  */
-public class Action extends Client {
+public class Action extends Client implements ActionListener {
 	
 	private int myId;
 	private LoginView loginView;
@@ -27,6 +26,7 @@ public class Action extends Client {
 
 	public Action(DeskView deskView) {
 		this.deskView = deskView;
+		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
 	}
@@ -37,9 +37,6 @@ public class Action extends Client {
 		//... Add listeners to the view.
 		loginView.addLoginListener(new LoginListener());
 		loginView.addClearOnClick(new ClearOnClick());
-
-		//... Add listeners to the view.
-		loginView.addListener(new Listener());
 	}
 
 
@@ -57,11 +54,7 @@ public class Action extends Client {
 		}
 	} // end inner class MultiplyListener
 
-
-
-
-
-
+	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
 		Player player = new Player(name, allPlayers.size()+1);
@@ -83,23 +76,14 @@ public class Action extends Client {
 
 	// ActionListeners of GUI!!!
 	// ActionListener for the Login Button
-
 	class LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){	
 			if ((loginView.getUserInput()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
 				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
 				loginView.closeWindow();
-
-	ActionListener LoginListener = new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-			if ((Username.getText()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
-				newPlayer(Username.getText()); // creates new player object in action class using the typed name at the login
-				dispose();
 				System.out.println((allPlayers.get(0)).getName()); // for test reasons
 				DeskView deskView = new DeskView();
 				new Action(deskView);
-				new DeskView(); // opens the deskview GUI
-				loginview.setVisible(false); // closes the Loginview
 			}
 			else{
 				new LoginError();
@@ -108,37 +92,43 @@ public class Action extends Client {
 	};
 	
 	// Clear Loginfield on click
-	MouseListener ClearOnClick = new MouseAdapter(){
+	class ClearOnClick implements MouseListener{
 		public void mouseClicked(MouseEvent e){
-			Username.setText(""); // Sets the Username on click to empty if the username is "Username"
+			loginView.setUserInput(""); // Sets the Username on click to empty if the username is "Username"
 		}
-	};	
+		@Override
+		public void mouseEntered(MouseEvent e) {
+		}
+		@Override
+		public void mouseExited(MouseEvent e) {
+		}		
+		@Override
+		public void mousePressed(MouseEvent e) {
+		}	
+		@Override
+		public void mouseReleased(MouseEvent e) {
+		}
+	}	
 	
 	// Counts cards of the player on click
-	ActionListener DisplayCards = new ActionListener(){
+	class DisplayAmountOfCardsToPlay implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-
+			
 		}
-	};
+	}
 	
 	// Close Game
-
 	class CloseGame extends LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			deskView.closeWindow();		
 		}
 	}
 	
-	
-	
-
 	// returns a List of swappable Cards for a specific Player
 	public ArrayList<Card> getSwappableCards(Player player){
 
 		// initialize List of Cards
 		ArrayList<Card> swappableCards = new ArrayList<Card>();
-
-
 
 		if(player.getRole().hasToBeHighest() == true) {
 
@@ -160,9 +150,8 @@ public class Action extends Client {
 		return swappableCards;
 	}	
 			
-
 	@Override
-	public void actionPerformed(ActionEvent e) {
-			
+	public void actionPerformed(ActionEvent e) {	
 	}	
 }
+
