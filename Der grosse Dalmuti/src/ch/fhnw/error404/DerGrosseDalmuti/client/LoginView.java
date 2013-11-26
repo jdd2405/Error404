@@ -50,7 +50,6 @@ public class LoginView extends JFrame {
 		loginview.getRootPane().setDefaultButton(login); // when enter key pressed -> login button is activatd
 		
 		username = new JTextField("Username", 10);
-		//Username.addMouseListener(ClearOnClick);
 			
 		panel.add(username);
 		panel.add(login);

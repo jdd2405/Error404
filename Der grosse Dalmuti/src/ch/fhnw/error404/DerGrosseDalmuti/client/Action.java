@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
@@ -33,7 +34,7 @@ public class Action extends Client implements ActionListener {
 		loginView.addLoginListener(new LoginListener());
 		loginView.addClearOnClick(new ClearOnClick());
 		
-		deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
+		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 	}
 	
 	public Action(LoginView loginView) {

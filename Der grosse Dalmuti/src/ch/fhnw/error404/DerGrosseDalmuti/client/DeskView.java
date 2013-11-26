@@ -3,7 +3,10 @@ package ch.fhnw.error404.DerGrosseDalmuti.client;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
+
 import javax.swing.*;
 
 /**
@@ -19,13 +22,14 @@ public class DeskView extends LoginView {
 		private final int numberCards = 12;
 		private int countCardsToPlay;
 		private int a;
+		private JButton closeGame;
 		
 		// objects used to count on GUI (testing phase)
 		JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
 		testclass[] cards = new testclass[numberCards];
 		int[] counter = new int[numberCards];
 		
-		void DisplayCard(int NOfCard, Card card, ActionListener listener){
+		/*void DisplayCard(int NOfCard, Card card, ActionListener listener){
 			for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
 				cards[i] = new testclass(icon, i);
 				cards[i].setContentAreaFilled(false);
@@ -36,7 +40,7 @@ public class DeskView extends LoginView {
 				GridSouth.insets = new Insets(5,5,5,5);
 				PanelSouth.add(cards[i], GridSouth);
 			}
-		}
+		}*/
 
 		
 	
@@ -156,7 +160,7 @@ public class DeskView extends LoginView {
 		
 		//newPlayer("basmeg");
 		
-		JTextField Spieler4 = new JTextField((allPlayers.get(0)).getName()); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
+		JTextField Spieler4 = new JTextField(/*(getPlayer().get(0)).getName()*/); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 5;
 		GridSouth.gridy = 0;
@@ -179,15 +183,13 @@ public class DeskView extends LoginView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Button2, GridSouth);
 		
-		JButton Button3 = new JButton("Spiel beenden"); // closes game
-		Button3.addActionListener(CloseGame);
-		Button3.setPreferredSize(new Dimension(170,30));	
+		closeGame = new JButton("Spiel beenden"); // closes game
+		closeGame.setPreferredSize(new Dimension(170,30));	
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 10;
 		GridSouth.gridy = 2;
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Button3, GridSouth);
-		
 		
 		PanelSouth.setBackground(Color.PINK);
 						
@@ -197,21 +199,9 @@ public class DeskView extends LoginView {
 		
 	}
 	
-	 void addAmountOfCardsToPlay(ActionListener listener) {
-	        login.addActionListener(listener);
-	    }
-	
-	public void calculate(){ // calculates the cards selected and sums them up (testing phase)
-		   
-		if(a == a){
-			countCardsToPlay++;
-			this.AmountCards.setText(" " + countCardsToPlay + " ");
-		}
-		else{
-			countCardsToPlay = 0;
-		}
-	} 
-	
-	
+    void addCloseGame(ActionListener listener) {
+        closeGame.addCloseGame(listener);
+    }
+
 }
 
