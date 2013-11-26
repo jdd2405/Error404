@@ -36,13 +36,8 @@ public class Client_neu implements Runnable {
 		//Client_neu client = new Client_neu();
 		//client.clientSocket();
 		
-		
 		new LoginView();
 		
-		
-		
-		
-
 		// LoginView lw = new LoginView();
 
 	}
