@@ -8,7 +8,10 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+
+
+
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -16,22 +19,30 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Client_neu implements Serializable{
 
 	ObjectInputStream in;
-	Integer [] clientlist= {2,4,6,8};
+	ObjectOutputStream out;
+	private ArrayList <Player> clientlist = new ArrayList <Player>(4);
+	
+	
+	
+    public void SetArray( ArrayList <Player> clientlist ){  // Setter
+        this.clientlist = clientlist;
+        //änderungen an server schicken
+        try {
+			out.writeObject(clientlist);
+		} catch (IOException e) {e.printStackTrace();}
+    }
+    
+	public ArrayList <Player> GetArray(){  // Getter
+	        return clientlist;
+	}
+
 		
 	public static void main(String[] args) {
-
-		
-		//Client_neu client = new Client_neu();
-		//client.clientSocket();
-		
-		new LoginView();
-
 		Client_neu client = new Client_neu();
-		
-		
+		//new LoginView();
 		client.clientSocket();
 		
-		//new LoginView();
+		
 
 	}
 
@@ -46,12 +57,7 @@ public class Client_neu implements Serializable{
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
-			ObjectOutputStream out = new ObjectOutputStream(os);
-
-			// write object to outputStream
-			//clientlist.add(test);
-			out.writeObject(clientlist);
-			out.flush();
+			out = new ObjectOutputStream(os);
 
 			// create inputStream for objects
 			InputStream is = socket.getInputStream();
@@ -67,16 +73,19 @@ public class Client_neu implements Serializable{
 	
 	public class InputMessages implements Runnable {
 		public void run(){
-			Integer [] message;
+			ArrayList<Player> message;
 
 				try {
 					while(true){
-						message = (Integer[]) in.readObject();
+						message = (ArrayList<Player>) in.readObject();
 						clientlist = message;
+						if(message.isEmpty() != true){
 						for(int i = 0; i<4; i++){
-							System.out.println(message[i]);
-							System.out.println(clientlist [i]);
+							System.out.println(message.get(i));
+							//System.out.println(clientlist [i]);
 						}
+						}
+						else {System.out.println("keine Player bisher");};
 					}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();}

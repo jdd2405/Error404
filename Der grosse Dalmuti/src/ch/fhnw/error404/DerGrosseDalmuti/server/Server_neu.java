@@ -15,7 +15,7 @@ public class Server_neu implements Serializable{
 	
 	//speichert die outputstreams der clients / Vector ist ein dynamisches Array
 	private Vector <ObjectOutputStream> clientManager = new Vector <ObjectOutputStream>();
-	
+	ArrayList <Player> serverlist= new ArrayList <Player>(4);
 	
 	public static void main(String [] args){
 		Server_neu serverObject = new Server_neu();
@@ -31,6 +31,8 @@ public class Server_neu implements Serializable{
 				Socket client = server.accept();
 				ObjectOutputStream output = new ObjectOutputStream(client.getOutputStream());
 				clientManager.add(output);
+				output.writeObject(serverlist);
+				output.flush();
 				Thread t = new Thread(new ChatThread (client));
 				t.start();
 				System.out.println("habe eine Verbindung");
@@ -54,12 +56,14 @@ public class Server_neu implements Serializable{
 		}
 		
 		public void run(){
-			Integer [] message;
+			ArrayList <Player> message;
 			
 			try{
-				message = (Integer[]) input.readObject();
+				message = (ArrayList<Player>) input.readObject();
+				serverlist = message;
 				for(int i =0; i <4; i++){
-				System.out.println(message[i]);
+				System.out.println(message.get(i));
+				//System.out.println(serverlist[i]);
 				}
 				sendMessage(message);
 			}
@@ -69,7 +73,7 @@ public class Server_neu implements Serializable{
 				//out.close();
 		}
 
-		private void sendMessage(Integer[] message2){
+		private void sendMessage(ArrayList<Player> message2){
 			synchronized (clientManager){
 				for (ObjectOutputStream output : clientManager){
 					try {
