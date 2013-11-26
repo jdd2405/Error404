@@ -3,6 +3,9 @@ package ch.fhnw.error404.DerGrosseDalmuti.client;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 import javax.swing.*;
 
@@ -13,6 +16,33 @@ import javax.swing.*;
  */
 
 public class DeskView extends LoginView {
+	
+		private JFrame deskView;
+		private JTextField Username;
+		private final int numberCards = 12;
+		private int countCardsToPlay;
+		private int a;
+		private JButton closeGame;
+		
+		// objects used to count on GUI (testing phase)
+		JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
+		testclass[] cards = new testclass[numberCards];
+		int[] counter = new int[numberCards];
+		
+		/*void DisplayCard(int NOfCard, Card card, ActionListener listener){
+			for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
+				cards[i] = new testclass(icon, i);
+				cards[i].setContentAreaFilled(false);
+				cards[i].setPreferredSize(new Dimension(89,92));
+				cards[i].addActionListener(DisplayCards);
+				GridSouth.gridx = i;
+				GridSouth.gridy = 1;
+				GridSouth.insets = new Insets(5,5,5,5);
+				PanelSouth.add(cards[i], GridSouth);
+			}
+		}*/
+
+		
 	
 	public DeskView() {
 		
@@ -114,18 +144,6 @@ public class DeskView extends LoginView {
 		JPanel PanelSouth = new JPanel(new GridBagLayout());
 		GridBagConstraints GridSouth = new GridBagConstraints();
 		
-		
-		for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
-			cards[i] = new testclass(icon, i);
-			cards[i].setContentAreaFilled(false);
-			cards[i].setPreferredSize(new Dimension(89,92));
-			cards[i].addActionListener(DisplayCards);
-			GridSouth.gridx = i;
-			GridSouth.gridy = 1;
-			GridSouth.insets = new Insets(5,5,5,5);
-			PanelSouth.add(cards[i], GridSouth);
-		}
-		
 		GridSouth.anchor = GridBagConstraints.LINE_START;
 		GridSouth.gridx = 3;
 		GridSouth.gridy = 2;
@@ -140,9 +158,9 @@ public class DeskView extends LoginView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Anzahl, GridSouth);
 		
-		newPlayer("basmeg");
+		//newPlayer("basmeg");
 		
-		JTextField Spieler4 = new JTextField((allPlayers.get(0)).getName()); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
+		JTextField Spieler4 = new JTextField(/*(getPlayer().get(0)).getName()*/); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 5;
 		GridSouth.gridy = 0;
@@ -165,15 +183,13 @@ public class DeskView extends LoginView {
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Button2, GridSouth);
 		
-		JButton Button3 = new JButton("Spiel beenden"); // closes game
-		Button3.addActionListener(CloseGame);
-		Button3.setPreferredSize(new Dimension(170,30));	
+		closeGame = new JButton("Spiel beenden"); // closes game
+		closeGame.setPreferredSize(new Dimension(170,30));	
 		GridSouth.gridwidth = 2;
 		GridSouth.gridx = 10;
 		GridSouth.gridy = 2;
 		GridSouth.insets = new Insets(5,5,5,5);
 		PanelSouth.add(Button3, GridSouth);
-		
 		
 		PanelSouth.setBackground(Color.PINK);
 						
@@ -183,7 +199,9 @@ public class DeskView extends LoginView {
 		
 	}
 	
-	
-	
+    void addCloseGame(ActionListener listener) {
+        closeGame.addCloseGame(listener);
+    }
+
 }
 

@@ -19,14 +19,19 @@ public class Client_neu implements Serializable{
 	Integer [] clientlist= {2,4,6,8};
 		
 	public static void main(String[] args) {
+
 		
+		//Client_neu client = new Client_neu();
+		//client.clientSocket();
+		
+		new LoginView();
+
 		Client_neu client = new Client_neu();
 		
 		
 		client.clientSocket();
 		
 		//new LoginView();
-		
 
 	}
 
