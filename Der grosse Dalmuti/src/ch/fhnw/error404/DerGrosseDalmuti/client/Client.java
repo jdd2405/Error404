@@ -27,15 +27,14 @@ public class Client {
 	//    need them so there is only one copy of each.
 	public static void main(String[] args) {
 
-		Client client = new Client();
-		client.clientSocket();
+		//Client client = new Client();
+		//client.clientSocket();
 
 		/*Player      player      = new Player("Jonas", 1);
 		View       view       = new View(player);
 		Controller controller = new Controller(player, view);*/
 
 		LoginView loginView = new LoginView();
-		//DeskView deskView = new DeskView();
 		Action action = new Action(loginView);
 		
 		//view.setVisible(true);

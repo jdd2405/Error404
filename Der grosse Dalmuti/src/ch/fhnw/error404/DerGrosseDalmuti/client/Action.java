@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
@@ -25,13 +26,8 @@ public class Action extends Client implements ActionListener {
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public ArrayList<Card>[] swappableCards; // cards ready to swap
 
-	public Action(LoginView loginView, DeskView deskView) {
-		this.loginView = loginView;
+	public Action(DeskView deskView) {
 		this.deskView = deskView;
-
-		//... Add listeners to the view.
-		loginView.addLoginListener(new LoginListener());
-		loginView.addClearOnClick(new ClearOnClick());
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
@@ -86,11 +82,10 @@ public class Action extends Client implements ActionListener {
 		public void actionPerformed(ActionEvent e){	
 			if ((loginView.getUserInput()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
 				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
-				loginView.dispose();
+				loginView.closeWindow();
 				System.out.println((allPlayers.get(0)).getName()); // for test reasons
-				new DeskView(); // opens the deskview GUI
-				loginView.setVisible(false); // closes the Loginview
-				
+				DeskView deskView = new DeskView();
+				new Action(deskView);
 			}
 			else{
 				new LoginError();
@@ -120,16 +115,16 @@ public class Action extends Client implements ActionListener {
 	// Counts cards of the player on click
 	class DisplayAmountOfCardsToPlay implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			deskView.calculate();
+			
 		}
 	}
 	
 	// Close Game
-	class CloseGame implements ActionListener{
+	class CloseGame extends LoginListener implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			deskView.dispose();		
+			deskView.closeWindow();		
 		}
-	};
+	}
 	
 	// returns a List of swappable Cards for a specific Player
 	public ArrayList<Card> getSwappableCards(Player player){

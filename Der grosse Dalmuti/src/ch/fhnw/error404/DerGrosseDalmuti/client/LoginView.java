@@ -17,7 +17,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
  */
 public class LoginView extends JFrame {
 	
-	private JFrame loginview;
+	private JFrame loginView;
 	private JPanel panel;
 	private JButton login;
 	private JLabel label;
@@ -30,11 +30,11 @@ public class LoginView extends JFrame {
 		Frame.setSize(800, 600);
 		Frame.setLocationRelativeTo(null);
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loginview = new JFrame();
-		loginview.setTitle("Login");
-		loginview.setSize(800, 600);
-		loginview.setLocationRelativeTo(null);
-		loginview.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginView = new JFrame();
+		loginView.setTitle("Login");
+		loginView.setSize(800, 600);
+		loginView.setLocationRelativeTo(null);
+		loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		panel = new JPanel();
 		panel.setBorder(new EmptyBorder(200,300,200,300));
@@ -47,16 +47,16 @@ public class LoginView extends JFrame {
 	
 		login = new JButton("Login");
 		
-		loginview.getRootPane().setDefaultButton(login); // when enter key pressed -> login button is activatd
+		loginView.getRootPane().setDefaultButton(login); // when enter key pressed -> login button is activatd
 		
 		username = new JTextField("Username", 10);
 			
 		panel.add(username);
 		panel.add(login);
 			
-		loginview.add(panel);
-		loginview.add(label, BorderLayout.NORTH);
-		loginview.setVisible(true);
+		loginView.add(panel);
+		loginView.add(label, BorderLayout.NORTH);
+		loginView.setVisible(true);
 		
 	}
 	
@@ -86,5 +86,10 @@ public class LoginView extends JFrame {
     
     void showError(String string) {
     	new LoginError();
+    }
+    
+    void closeWindow(){
+        loginView.dispose();
+        loginView.setVisible(false);
     }
 }
