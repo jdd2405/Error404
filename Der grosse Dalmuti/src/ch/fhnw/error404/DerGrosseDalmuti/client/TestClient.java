@@ -18,7 +18,15 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Client {
 
-	
+	public static ArrayList<Player> allPlayers;;
+	public static Deck deck;;
+
+
+
+	// Have a look at http://www.leepoint.net/notes-java/GUI/structure/40mvc.html
+	//... Create model, view, and controller.  They are
+	//    created once here and passed to the parts that
+	//    need them so there is only one copy of each.
 	public static void main(String[] args) {
 
 		Client client = new Client();
@@ -26,17 +34,28 @@ public class Client {
 		
 		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
 
-		LoginView loginView = new LoginView();
-        Action action = new Action(loginView);
-        
+		TestLoginView      loginView       = new TestLoginView();
+		TestDeskView deskView = new TestDeskView();
+		TestAction actionController = new TestAction(deskView);
+
+		loginView.setVisible(true);
+	}
+
+	
+	public Client(){
+		
+		// For testing purpose
+		allPlayers = new ArrayList<Player>();
+		allPlayers.add(new Player("Thomas", 1));
+		allPlayers.add(new Player("Theresa", 2));
+		allPlayers.add(new Player("Elias", 3));
+		
+		//deck = new Deck();
 	}
 
 
-
-
 	
 
-	
 	private void clientSocket() {
 
 		String host = "127.0.0.1";
@@ -76,7 +95,6 @@ public class Client {
 				// Do something with Player Object
 				// Deck deck = (Deck)objFromServer; 				
 			}
-
 
 			// clean up
 			oos.close();

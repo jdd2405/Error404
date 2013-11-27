@@ -5,24 +5,44 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
 
-/* TO DO's
- * - Thread for checking for updates.
- * - Check Model Type with typeOf() (od so...)
- * - Update (replace) Model Object
- */
 
-public class Client_neu {
-	Integer test = new Integer(568);
+
+
+
+import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
+
+
+public class Client_neu implements Serializable{
+
 	ObjectInputStream in;
+	ObjectOutputStream out;
+	private ArrayList <Player> clientlist = new ArrayList <Player>(4);
+	
+	
+	
+    public void SetArray( ArrayList <Player> clientlist ){  // Setter
+        this.clientlist = clientlist;
+        //änderungen an server schicken
+        try {
+			out.writeObject(clientlist);
+		} catch (IOException e) {e.printStackTrace();}
+    }
+    
+	public ArrayList <Player> GetArray(){  // Getter
+	        return clientlist;
+	}
 
+		
 	public static void main(String[] args) {
-		//new LoginView();
 		Client_neu client = new Client_neu();
+		//new LoginView();
 		client.clientSocket();
-
-		// LoginView lw = new LoginView();
+		
+		
 
 	}
 
@@ -37,11 +57,7 @@ public class Client_neu {
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();
-			ObjectOutputStream out = new ObjectOutputStream(os);
-
-			// write object to outputStream
-			out.writeObject(test);
-			out.flush();
+			out = new ObjectOutputStream(os);
 
 			// create inputStream for objects
 			InputStream is = socket.getInputStream();
@@ -57,11 +73,20 @@ public class Client_neu {
 	
 	public class InputMessages implements Runnable {
 		public void run(){
-			Object message = null;
+			ArrayList<Player> message;
 
 				try {
-					while((message = in.readObject()) != null){
-					System.out.println(message);}
+					while(true){
+						message = (ArrayList<Player>) in.readObject();
+						clientlist = message;
+						if(message.isEmpty() != true){
+						for(int i = 0; i<4; i++){
+							System.out.println(message.get(i));
+							//System.out.println(clientlist [i]);
+						}
+						}
+						else {System.out.println("keine Player bisher");};
+					}
 				} catch (ClassNotFoundException | IOException e) {
 					e.printStackTrace();}
 		}

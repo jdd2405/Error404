@@ -29,9 +29,6 @@ public class Player implements Serializable{
 	//private boolean passed; // set to false after every trick (engl. "Stich")!
 	
 	// constructor
-	
-	public Player() {}
-	
 	public Player(String name, int id) {
 		this.name = name;
 		this.role = Role.BUERGER;

@@ -17,10 +17,11 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
  */
 public class LoginView extends JFrame {
 	
-	private JPanel Panel;
-	private JButton Login;
-	private JLabel Label;
-	private JTextField Username;
+	private JFrame loginView;
+	private JPanel panel;
+	private JButton login;
+	private JLabel label;
+	public JTextField username;
 	
 	public LoginView(){
 		
@@ -29,35 +30,33 @@ public class LoginView extends JFrame {
 		Frame.setSize(800, 600);
 		Frame.setLocationRelativeTo(null);
 		Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		loginview = new JFrame();
-		loginview.setTitle("Login");
-		loginview.setSize(800, 600);
-		loginview.setLocationRelativeTo(null);
-		loginview.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		loginView = new JFrame();
+		loginView.setTitle("Login");
+		loginView.setSize(800, 600);
+		loginView.setLocationRelativeTo(null);
+		loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Panel = new JPanel();
-		Panel.setBorder(new EmptyBorder(200,300,200,300));
-		Panel.setLayout(new GridLayout(3,1));
+		panel = new JPanel();
+		panel.setBorder(new EmptyBorder(200,300,200,300));
+		panel.setLayout(new GridLayout(3,1));
 		
-		Label = new JLabel();
-		Label.setText("Der Grosse Dalmuti");
-		Label.setHorizontalAlignment(SwingConstants.CENTER);
-		Label.setFont(new Font("Arial", Font.BOLD, 48));	
+		label = new JLabel();
+		label.setText("Der Grosse Dalmuti");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Arial", Font.BOLD, 48));	
 	
-		Login = new JButton("Login");
-		Login.addActionListener(LoginListener);
+		login = new JButton("Login");
 		
-		loginview.getRootPane().setDefaultButton(Login); // when enter key pressed -> login button is activatd
+		loginView.getRootPane().setDefaultButton(login); // when enter key pressed -> login button is activatd
 		
-		Username = new JTextField("Username", 10);
-		Username.addMouseListener(ClearOnClick);
+		username = new JTextField("Username", 10);
 			
-		Panel.add(Username);
-		Panel.add(Login);
+		panel.add(username);
+		panel.add(login);
 			
-		loginview.add(Panel);
-		loginview.add(Label, BorderLayout.NORTH);
-		loginview.setVisible(true);
+		loginView.add(panel);
+		loginView.add(label, BorderLayout.NORTH);
+		loginView.setVisible(true);
 		
 	}
 	
@@ -66,16 +65,19 @@ public class LoginView extends JFrame {
     }
     
     String getUserInput() {
-        return Username.getText();
+        return username.getText();
     }
     
-    void setTotal(String newTotal) {
-    	Username.setText(newTotal);
+    void setUserInput(String string){
+    	username.setText(string);
     }
     
+    void addLoginListener(ActionListener listener) {
+        login.addActionListener(listener);
+    }
     
-    void addListener(ActionListener listener) {
-        Login.addActionListener(listener);
+    void addClearOnClick(MouseListener listener){
+    	username.addMouseListener(listener);
     }
     
     void addClearListener(ActionListener cal) {
@@ -84,5 +86,10 @@ public class LoginView extends JFrame {
     
     void showError(String string) {
     	new LoginError();
+    }
+    
+    void closeWindow(){
+        loginView.dispose();
+        loginView.setVisible(false);
     }
 }
