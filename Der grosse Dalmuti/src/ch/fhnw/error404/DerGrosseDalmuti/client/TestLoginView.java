@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-public class View extends JFrame{
+public class TestLoginView extends JFrame{
 
     
     //... Components
@@ -15,13 +15,11 @@ public class View extends JFrame{
 	private JTextField txtId = new JTextField(5);
     private JButton    btnLogin = new JButton("Login");
     
-    private Player player;
     
     //======================================================= constructor
     /** Constructor */
-    View(Player player) {
+    TestLoginView() {
         //... Set up the logic
-    	this.player = player;
         
         //... Initialize components
         txtId.setText("noch nicht vergeben");
@@ -29,7 +27,7 @@ public class View extends JFrame{
         //... Layout the components.      
         JPanel content = new JPanel();
         content.setLayout(new FlowLayout());
-        content.add(new JLabel("Input"));
+        content.add(new JLabel("Benutzername"));
         content.add(txtName);
         content.add(btnLogin);
         content.add(new JLabel("Ihre ID"));
@@ -58,11 +56,11 @@ public class View extends JFrame{
         JOptionPane.showMessageDialog(this, errMessage);
     }
     
-    void addShowIdListener(ActionListener addShowIdAL) {
-        btnLogin.addActionListener(addShowIdAL);
+    void addLoginListener(ActionListener addLoginListener) {
+        btnLogin.addActionListener(addLoginListener);
     }
     
-    void addClearListener(ActionListener addClearAL) {
+    void addClearLoginListener(ActionListener addClearAL) {
         btnLogin.addActionListener(addClearAL);
     }
     

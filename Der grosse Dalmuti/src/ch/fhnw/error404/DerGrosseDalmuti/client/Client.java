@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -17,7 +18,8 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Client {
 
-
+	public static ArrayList<Player> allPlayers;;
+	public static Deck deck;;
 
 
 
@@ -29,21 +31,35 @@ public class Client {
 
 		Client client = new Client();
 		client.clientSocket();
+		
+		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
 
-		Player      player      = new Player();
-		View       view       = new View(player);
-		Controller controller = new Controller(player, view);
+		TestLoginView      loginView       = new TestLoginView();
+		TestDeskView deskView = new TestDeskView();
+		TestAction actionController = new TestAction(deskView);
 
-		view.setVisible(true);
+		loginView.setVisible(true);
+	}
+
+	
+	public Client(){
+		
+		// For testing purpose
+		allPlayers = new ArrayList<Player>();
+		allPlayers.add(new Player("Thomas", 1));
+		allPlayers.add(new Player("Theresa", 2));
+		allPlayers.add(new Player("Elias", 3));
+		
+		//deck = new Deck();
 	}
 
 
+	
 
 	private void clientSocket() {
 
 		String host = "127.0.0.1";
 		int port = 5000;
-		Object object = new Player("Jonas", 1);
 
 
 		Socket socket = null;
@@ -59,7 +75,7 @@ public class Client {
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			oos.writeObject(object);
+			oos.writeObject(allPlayers);
 			oos.flush();
 
 			// create inputStream for objects
@@ -71,7 +87,7 @@ public class Client {
 
 			// check type of Object
 			if (objFromServer instanceof Player){
-				// Do something with Player Object
+				// Do something with ArrayList Object
 				Player player = (Player)objFromServer;
 				System.out.println(player.getName() +" has rank: "+ player.getRank());
 			}
