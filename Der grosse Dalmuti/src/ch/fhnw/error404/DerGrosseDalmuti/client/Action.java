@@ -41,6 +41,8 @@ public class Action extends Client implements ActionListener {
 		loginView.addLoginListener(new LoginListener());
 		loginView.addClearOnClick(new ClearOnClick());
 	}
+	
+	
 
 
 	// inner class Listener
