@@ -20,8 +20,6 @@ public class Action extends Client implements ActionListener {
 	private LoginView loginView;
 	private DeskView  deskView;
 	
-
-	
 	
 	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this created LinkedList
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
@@ -41,6 +39,8 @@ public class Action extends Client implements ActionListener {
 		loginView.addLoginListener(new LoginListener());
 		loginView.addClearOnClick(new ClearOnClick());
 	}
+	
+	
 
 
 	// inner class Listener
@@ -85,14 +85,14 @@ public class Action extends Client implements ActionListener {
 				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
 				loginView.closeWindow();
 				System.out.println((allPlayers.get(0)).getName()); // for test reasons
-				DeskView deskView = new DeskView();
+				deskView = new DeskView();
 				new Action(deskView);
 			}
 			else{
 				new LoginError();
 			}
 		}
-	};
+	}
 	
 	// Clear Loginfield on click
 	class ClearOnClick implements MouseListener{
@@ -121,7 +121,7 @@ public class Action extends Client implements ActionListener {
 	}
 	
 	// Close Game
-	class CloseGame extends LoginListener implements ActionListener{
+	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			deskView.closeWindow();		
 		}
