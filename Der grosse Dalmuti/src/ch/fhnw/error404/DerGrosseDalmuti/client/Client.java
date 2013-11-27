@@ -17,7 +17,8 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 
 public class Client {
-
+	
+	Object object;
 	
 	public static void main(String[] args) {
 
@@ -56,7 +57,7 @@ public class Client {
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 
 			// write object to outputStream
-			oos.writeObject(allPlayers);
+			oos.writeObject(object);
 			oos.flush();
 
 			// create inputStream for objects
