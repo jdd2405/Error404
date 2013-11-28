@@ -8,6 +8,10 @@ import java.io.Serializable;
  */
 public class Card implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 140328283554900821L;
 	private CARD_TYPE cardType;
 	public Card() {};
 	public Card(CARD_TYPE cardType){
