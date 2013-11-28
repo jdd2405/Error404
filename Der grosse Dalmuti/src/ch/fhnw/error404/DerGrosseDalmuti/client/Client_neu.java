@@ -16,7 +16,7 @@ public class Client_neu implements Serializable {
 	ObjectInputStream in;
 	ObjectOutputStream out;
 	private ArrayList<Player> clientlist = new ArrayList<Player>(4);
-	
+
 
 	public static void main(String[] args) {
 		Client_neu client = new Client_neu();
