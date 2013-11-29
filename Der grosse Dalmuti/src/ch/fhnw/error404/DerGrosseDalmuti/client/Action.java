@@ -20,7 +20,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action extends Client implements ActionListener {
 	
 	static protected int myId;
-	static private Object[] allPlayers = new Object[4];
+	public static Player[] allPlayers = new Player[4];
 	private LoginView loginView;
 	private DeskView  deskView;
 
@@ -58,9 +58,9 @@ public class Action extends Client implements ActionListener {
 	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
-		Player player = new Player(name, allPlayers.length+1);
+		Player player = new Player(name, getAllPlayers().length+1);
 		myId = player.getId();
-		allPlayers[player.getId()] = player;
+		getAllPlayers()[player.getId()] = player;
 		
 	}
 
