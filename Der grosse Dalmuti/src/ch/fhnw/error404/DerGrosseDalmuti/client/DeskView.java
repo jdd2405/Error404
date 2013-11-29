@@ -28,16 +28,20 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridWest;
 		private JTextField spielerWest;
 		private JTextField roleWest;
+		private JTextField cardsInHandWest;
 		
 		private JPanel panelNorth;
 		private GridBagConstraints gridNorth;
 		private JTextField spielerNorth;
 		private JTextField roleNorth;
+		private JLabel labelNorth;
+		private JTextField cardsInHandNorth;
 		
 		private JPanel panelEast;
 		private GridBagConstraints gridEast;
 		private JTextField spielerEast;
 		private JTextField roleEast;
+		private JTextField cardsInHandEast;
 		
 		
 		private JTextField username;
@@ -76,18 +80,13 @@ public class DeskView extends JFrame {
 		panelNorth = new JPanel(new GridBagLayout());
 		gridNorth = new GridBagConstraints();
 		
-		JLabel Label1 = new JLabel(icon);
-		Label1.setPreferredSize(new Dimension(89,92));
+		labelNorth = new JLabel(icon);
+		labelNorth.setPreferredSize(new Dimension(89,92));
 		gridNorth.gridx = 0;
 		gridNorth.gridy = 0;
 		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(Label1, gridNorth);
+		panelNorth.add(labelNorth, gridNorth);
 		
-		spielerNorth = new JTextField("Player 1");
-		gridNorth.gridx = 0;
-		gridNorth.gridy = 1;
-		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(spielerNorth, gridNorth);
 		
 		panelNorth.setBackground(Color.BLUE);
 		
@@ -106,12 +105,6 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		panelEast.add(Label2, gridEast);
 		
-		spielerEast = new JTextField("Player 2");
-		gridEast.gridx = 0;
-		gridEast.gridy = 1;
-		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(spielerEast, gridEast);
-		
 		panelEast.setBackground(Color.GREEN);
 		
 		deskView.getContentPane().add(panelEast, BorderLayout.EAST);
@@ -129,13 +122,7 @@ public class DeskView extends JFrame {
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(Label3, gridWest);
-				
-		spielerWest = new JTextField("Spieler 3");
-		gridWest.gridx = 0;
-		gridWest.gridy = 1;
-		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(spielerWest, gridWest);
-				
+		
 		panelWest.setBackground(Color.RED);
 				
 		deskView.getContentPane().add(panelWest, BorderLayout.WEST);
@@ -236,6 +223,13 @@ public class DeskView extends JFrame {
     }
     
 	void showInWest(Player player){
+		
+    	spielerWest = new JTextField(player.getName());
+    	gridWest.gridx = 0;
+		gridWest.gridy = 1;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(spielerWest, gridWest);
+		
 		if(roleSouth.getText() == "grosser Dalmuti"){
 			roleWest = new JTextField("kleiner Dalmuti");
 		}
@@ -248,39 +242,95 @@ public class DeskView extends JFrame {
 		else if(roleSouth.getText() == "grosser Diener"){
 			roleWest = new JTextField("grosser Dalmuti");
 		}
+		else{
+			roleWest = new JTextField("Bürger");
+		}
+			
+    	gridWest.gridx = 1;
+		gridWest.gridy = 0;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(roleWest, gridWest);
 		
+		cardsInHandWest = new JTextField((player.getCards()).size());
+		gridWest.gridx = 0;
+		gridWest.gridy = 0;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(cardsInHandWest, gridWest);
+	
 	}
 	
     void showInNorth(Player player){
+    	
+    	spielerNorth = new JTextField(player.getName());
+    	gridNorth.gridx = 0;
+		gridNorth.gridy = 1;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(spielerNorth, gridNorth);
+		
     	if(roleSouth.getText() == "grosser Dalmuti"){
-			roleWest = new JTextField("kleiner Diener");
+			roleNorth = new JTextField("kleiner Diener");
 		}
 		else if(roleSouth.getText() == "kleiner Dalmuti"){
-			roleWest = new JTextField("grosser Diener");
+			roleNorth = new JTextField("grosser Diener");
 		}
 		else if(roleSouth.getText() == "kleiner Diener"){
-			roleWest = new JTextField("grosser Dalmuti");
+			roleNorth = new JTextField("grosser Dalmuti");
 		}
 		else if(roleSouth.getText() == "grosser Diener"){
-			roleWest = new JTextField("kleiner Dalmuti");
+			roleNorth = new JTextField("kleiner Dalmuti");
 		}
+		else{
+			roleNorth = new JTextField("Bürger");
+		}
+    	
+    	gridNorth.gridx = 1;
+		gridNorth.gridy = 0;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(roleNorth, gridNorth);
+		
+		cardsInHandNorth = new JTextField((player.getCards()).size());
+		gridNorth.gridx = 0;
+		gridNorth.gridy = 0;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(cardsInHandNorth, gridNorth);
+		   
     	
     }
 
 	void showInEast(Player player){
+		
+		spielerEast = new JTextField(player.getName());
+		gridEast.gridx = 0;
+		gridEast.gridy = 1;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(spielerEast, gridEast);
+		
 		if(roleSouth.getText() == "grosser Dalmuti"){
-			roleWest = new JTextField("grosser Diener");
+			roleEast = new JTextField("grosser Diener");
 		}
 		else if(roleSouth.getText() == "kleiner Dalmuti"){
-			roleWest = new JTextField("grosser Dalmuti");
+			roleEast = new JTextField("grosser Dalmuti");
 		}
 		else if(roleSouth.getText() == "kleiner Diener"){
-			roleWest = new JTextField("kleiner Dalmuti");
+			roleEast = new JTextField("kleiner Dalmuti");
 		}
 		else if(roleSouth.getText() == "grosser Diener"){
-			roleWest = new JTextField("kleiner Diener");
+			roleEast = new JTextField("kleiner Diener");
 		}
-	
+		else{
+			roleEast = new JTextField("Bürger");
+		}
+		
+		gridEast.gridx = 1;
+		gridEast.gridy = 0;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(roleEast, gridEast);
+		
+		cardsInHandEast = new JTextField((player.getCards()).size());
+		gridEast.gridx = 0;
+		gridEast.gridy = 0;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(cardsInHandEast, gridEast);
 	}
 	
 }
