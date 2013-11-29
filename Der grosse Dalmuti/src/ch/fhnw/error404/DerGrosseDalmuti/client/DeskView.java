@@ -18,16 +18,34 @@ import javax.swing.*;
 public class DeskView extends JFrame {
 	
 		private JFrame deskView;
-		private JTextField Username;
-		private final int numberCards = 12;
-		private int countCardsToPlay;
-		private int a;
+		
+		private JPanel panelSouth;
+		private GridBagConstraints gridSouth;
+		private JTextField spielerSouth;
+		private JTextField roleSouth;
+		
+		private JPanel panelWest;
+		private GridBagConstraints gridWest;
+		private JTextField spielerWest;
+		private JTextField roleWest;
+		
+		private JPanel panelNorth;
+		private GridBagConstraints gridNorth;
+		private JTextField spielerNorth;
+		private JTextField roleNorth;
+		
+		private JPanel panelEast;
+		private GridBagConstraints gridEast;
+		private JTextField spielerEast;
+		private JTextField roleEast;
+		
+		
+		private JTextField username;
 		private JButton closeGame;
 		
-		// objects used to count on GUI (testing phase)
-		JLabel AmountCards = new JLabel(countCardsToPlay+" "); 
-		testclass[] cards = new testclass[numberCards];
-		int[] counter = new int[numberCards];
+		
+
+
 		
 		/*void DisplayCard(int NOfCard, Card card, ActionListener listener){
 			for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
@@ -55,72 +73,72 @@ public class DeskView extends JFrame {
 		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//NORTH Panel
-		JPanel Panel = new JPanel(new GridBagLayout());
-		GridBagConstraints Grid = new GridBagConstraints();
+		panelNorth = new JPanel(new GridBagLayout());
+		gridNorth = new GridBagConstraints();
 		
 		JLabel Label1 = new JLabel(icon);
 		Label1.setPreferredSize(new Dimension(89,92));
-		Grid.gridx = 0;
-		Grid.gridy = 0;
-		Grid.insets = new Insets(5,5,5,5);
-		Panel.add(Label1, Grid);
+		gridNorth.gridx = 0;
+		gridNorth.gridy = 0;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(Label1, gridNorth);
 		
-		JTextField Spieler2 = new JTextField("Player 1");
-		Grid.gridx = 0;
-		Grid.gridy = 1;
-		Grid.insets = new Insets(5,5,5,5);
-		Panel.add(Spieler2, Grid);
+		spielerNorth = new JTextField("Player 1");
+		gridNorth.gridx = 0;
+		gridNorth.gridy = 1;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(spielerNorth, gridNorth);
 		
-		Panel.setBackground(Color.BLUE);
+		panelNorth.setBackground(Color.BLUE);
 		
-		deskView.getContentPane().add(Panel, BorderLayout.NORTH);
+		deskView.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		deskView.setVisible(true);
 		
 		//EAST Panel
-		JPanel PanelEast = new JPanel(new GridBagLayout());
-		GridBagConstraints GridEast = new GridBagConstraints();
+		panelEast = new JPanel(new GridBagLayout());
+		gridEast = new GridBagConstraints();
 		
 		JLabel Label2 = new JLabel(icon);
 		Label2.setPreferredSize(new Dimension(89,92));
 		
-		GridEast.gridx = 0;
-		GridEast.gridy = 0;
-		GridEast.insets = new Insets(5,5,5,5);
-		PanelEast.add(Label2, GridEast);
+		gridEast.gridx = 0;
+		gridEast.gridy = 0;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(Label2, gridEast);
 		
-		JTextField Spieler1 = new JTextField("Spieler 1");
-		GridEast.gridx = 0;
-		GridEast.gridy = 1;
-		GridEast.insets = new Insets(5,5,5,5);
-		PanelEast.add(Spieler1, GridEast);
+		spielerEast = new JTextField("Player 2");
+		gridEast.gridx = 0;
+		gridEast.gridy = 1;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(spielerEast, gridEast);
 		
-		PanelEast.setBackground(Color.GREEN);
+		panelEast.setBackground(Color.GREEN);
 		
-		deskView.getContentPane().add(PanelEast, BorderLayout.EAST);
+		deskView.getContentPane().add(panelEast, BorderLayout.EAST);
 		deskView.setVisible(true);
 		
 		
 		//WEST Panel
-		JPanel PanelWest = new JPanel(new GridBagLayout());
-		GridBagConstraints GridWest = new GridBagConstraints();
+		panelWest = new JPanel(new GridBagLayout());
+		gridWest = new GridBagConstraints();
 				
 		JLabel Label3 = new JLabel(icon);
 		Label3.setPreferredSize(new Dimension(89,92));
 				
-		GridWest.gridx = 0;
-		GridWest.gridy = 0;
-		GridWest.insets = new Insets(5,5,5,5);
-		PanelWest.add(Label3, GridWest);
+		gridWest.gridx = 0;
+		gridWest.gridy = 0;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(Label3, gridWest);
 				
-		JTextField Spieler3 = new JTextField("Spieler 3");
-		GridWest.gridx = 0;
-		GridWest.gridy = 1;
-		GridWest.insets = new Insets(5,5,5,5);
-		PanelWest.add(Spieler3, GridWest);
+		spielerWest = new JTextField("Spieler 3");
+		gridWest.gridx = 0;
+		gridWest.gridy = 1;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(spielerWest, gridWest);
 				
-		PanelWest.setBackground(Color.RED);
+		panelWest.setBackground(Color.RED);
 				
-		deskView.getContentPane().add(PanelWest, BorderLayout.WEST);
+		deskView.getContentPane().add(panelWest, BorderLayout.WEST);
 		deskView.setVisible(true);
 		
 		//CENTER Panel
@@ -141,59 +159,52 @@ public class DeskView extends JFrame {
 		deskView.setVisible(true);
 		
 		//SOUTH Panel
-		JPanel PanelSouth = new JPanel(new GridBagLayout());
-		GridBagConstraints GridSouth = new GridBagConstraints();
+		panelSouth = new JPanel(new GridBagLayout());
+		gridSouth = new GridBagConstraints();
 		
-		GridSouth.anchor = GridBagConstraints.LINE_START;
-		GridSouth.gridx = 3;
-		GridSouth.gridy = 2;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(AmountCards, GridSouth);
+		JTextField AmountCards = new JTextField("A");
+		gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 3;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(AmountCards, gridSouth);
 		
 		JLabel Anzahl = new JLabel("Number of chosen cards:");
-		GridSouth.gridwidth = 2;
-		GridSouth.anchor = GridBagConstraints.LINE_END;
-		GridSouth.gridx = 1;
-		GridSouth.gridy = 2;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(Anzahl, GridSouth);
+		gridSouth.gridwidth = 2;
+		gridSouth.anchor = GridBagConstraints.LINE_END;
+		gridSouth.gridx = 1;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(Anzahl, gridSouth);
 		
-		//newPlayer("basmeg");
-		
-		JTextField Spieler4 = new JTextField(/*(getPlayer().get(0)).getName()*/); //funktioniert nur wenn ArrayList public static oder der Server sie wieder zurückschickt?
-		GridSouth.gridwidth = 2;
-		GridSouth.gridx = 5;
-		GridSouth.gridy = 0;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(Spieler4, GridSouth);
 		
 		JButton Button1 = new JButton("Auswahl spielen");
 		Button1.setPreferredSize(new Dimension(170,30));
-		GridSouth.gridwidth = 2;
-		GridSouth.gridx = 4;
-		GridSouth.gridy = 2;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(Button1, GridSouth);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 4;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(Button1, gridSouth);
 		
 		JButton Button2 = new JButton("Passen");
 		Button2.setPreferredSize(new Dimension(170,30));	
-		GridSouth.gridwidth = 2;
-		GridSouth.gridx = 6;
-		GridSouth.gridy = 2;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(Button2, GridSouth);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 6;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(Button2, gridSouth);
 		
 		closeGame = new JButton("Spiel beenden"); // closes game
 		closeGame.setPreferredSize(new Dimension(170,30));	
-		GridSouth.gridwidth = 2;
-		GridSouth.gridx = 10;
-		GridSouth.gridy = 2;
-		GridSouth.insets = new Insets(5,5,5,5);
-		PanelSouth.add(closeGame, GridSouth);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 10;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(closeGame, gridSouth);
 		
-		PanelSouth.setBackground(Color.PINK);
+		panelSouth.setBackground(Color.PINK);
 						
-		deskView.getContentPane().add(PanelSouth, BorderLayout.SOUTH);
+		deskView.getContentPane().add(panelSouth, BorderLayout.SOUTH);
 		deskView.setVisible(true);
 		
 	}
@@ -205,5 +216,72 @@ public class DeskView extends JFrame {
         deskView.dispose();
         deskView.setVisible(false);
     }
+    
+    void showInSouth(Player player){
+    	spielerSouth = new JTextField(player.getName());
+    	gridSouth.gridwidth = 2;
+		gridSouth.gridx = 5;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(spielerSouth, gridSouth);
+		
+		roleSouth = new JTextField((player.getRole()).getLabel());
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 7;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(spielerSouth, gridSouth);
+		
+		
+    }
+    
+	void showInWest(Player player){
+		if(roleSouth.getText() == "grosser Dalmuti"){
+			roleWest = new JTextField("kleiner Dalmuti");
+		}
+		else if(roleSouth.getText() == "kleiner Dalmuti"){
+			roleWest = new JTextField("kleiner Diener");
+		}
+		else if(roleSouth.getText() == "kleiner Diener"){
+			roleWest = new JTextField("grosser Diener");
+		}
+		else if(roleSouth.getText() == "grosser Diener"){
+			roleWest = new JTextField("grosser Dalmuti");
+		}
+		
+	}
+	
+    void showInNorth(Player player){
+    	if(roleSouth.getText() == "grosser Dalmuti"){
+			roleWest = new JTextField("kleiner Diener");
+		}
+		else if(roleSouth.getText() == "kleiner Dalmuti"){
+			roleWest = new JTextField("grosser Diener");
+		}
+		else if(roleSouth.getText() == "kleiner Diener"){
+			roleWest = new JTextField("grosser Dalmuti");
+		}
+		else if(roleSouth.getText() == "grosser Diener"){
+			roleWest = new JTextField("kleiner Dalmuti");
+		}
+    	
+    }
+
+	void showInEast(Player player){
+		if(roleSouth.getText() == "grosser Dalmuti"){
+			roleWest = new JTextField("grosser Diener");
+		}
+		else if(roleSouth.getText() == "kleiner Dalmuti"){
+			roleWest = new JTextField("grosser Dalmuti");
+		}
+		else if(roleSouth.getText() == "kleiner Diener"){
+			roleWest = new JTextField("kleiner Dalmuti");
+		}
+		else if(roleSouth.getText() == "grosser Diener"){
+			roleWest = new JTextField("kleiner Diener");
+		}
+	
+	}
+	
 }
 

@@ -164,5 +164,6 @@ public class Action extends Client implements ActionListener {
 	public void setAllPlayers(ArrayList<Player> allPlayers) {
 		this.allPlayers = allPlayers;
 	}
+	
 }
 
