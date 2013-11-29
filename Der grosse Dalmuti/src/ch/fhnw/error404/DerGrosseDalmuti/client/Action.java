@@ -3,6 +3,7 @@ package ch.fhnw.error404.DerGrosseDalmuti.client;
 import java.util.ArrayList;
 import java.util.ListIterator;
 import java.util.Stack;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,14 +19,11 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  */
 public class Action extends Client implements ActionListener {
 	
-	private int myId;
+	static protected int myId;
+	static private Object[] allPlayers = new Object[4];
 	private LoginView loginView;
 	private DeskView  deskView;
-	
-	
-	protected ArrayList<Player> allPlayers = new ArrayList<Player>(); //TODO add all Players to this created LinkedList
-	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	public ArrayList<Card>[] swappableCards; // cards ready to swap
+
 
 	public Action(DeskView deskView) {
 		this.deskView = deskView;
@@ -39,7 +37,8 @@ public class Action extends Client implements ActionListener {
 
 		//... Add listeners to the view.
 		loginView.addLoginListener(new LoginListener());
-		loginView.addClearOnClick(new ClearOnClick());
+		//loginView.addClearOnClick(new ClearOnClick());
+		loginView.username.addMouseListener(new ClearOnClick());
 	}
 	
 	
@@ -62,18 +61,16 @@ public class Action extends Client implements ActionListener {
 	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
-		Player player = new Player(name, allPlayers.size()+1);
-		allPlayers.add(player);
+		Player player = new Player(name, allPlayers.length+1);
 		myId = player.getId();
+		allPlayers[player.getId()] = player;
+		
 	}
 
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
-		boolean IsMyPlayerActive = false;
-		ListIterator<Player> playerIterator = allPlayers.listIterator();
-		while(playerIterator.hasNext()){
-			if(playerIterator.next().getId() == myId && playerIterator.next().isActive()){
-				IsMyPlayerActive = true;
+		if(allPlayers[myId]).isActive() == true){
+				
 			}
 		}
 		return IsMyPlayerActive;
@@ -98,6 +95,7 @@ public class Action extends Client implements ActionListener {
 	
 	// Clear Loginfield on click
 	class ClearOnClick implements MouseListener{
+		
 		public void mouseClicked(MouseEvent e){
 			loginView.setUserInput(""); // Sets the Username on click to empty if the username is "Username"
 		}
@@ -159,13 +157,6 @@ public class Action extends Client implements ActionListener {
 	public void actionPerformed(ActionEvent e) {	
 	}
 	
-	//bitte nicht löschen, ist für die Verbindung zum Client
-	public ArrayList<Player> getAllPlayers() {
-		return allPlayers;
-	}
-	
-	public void setAllPlayers(ArrayList<Player> allPlayers) {
-		this.allPlayers = allPlayers;
-	}
+
 }
 

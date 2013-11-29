@@ -76,9 +76,6 @@ public class LoginView extends JFrame {
         login.addActionListener(listener);
     }
     
-    void addClearOnClick(MouseListener listener){
-    	username.addMouseListener(listener);
-    }
     
     void addClearListener(ActionListener cal) {
         // for good reasons
