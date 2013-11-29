@@ -43,11 +43,17 @@ public class DeskView extends JFrame {
 		private JTextField roleEast;
 		private JTextField cardsInHandEast;
 		
+		private JPanel panelCenter;
+		private GridBagConstraints gridCenter;
+		private JLabel cardsCenter;
+		private JTextField numberOfCardsCenter;
+		
+		
 		
 		private JTextField username;
 		private JButton closeGame;
 		
-		
+		ImageIcon gDalmuti = new ImageIcon(ImageIcon.class.getResource("\\Error404\\Karten\\karte1.jpg"));
 
 
 		
@@ -70,6 +76,7 @@ public class DeskView extends JFrame {
 		
 		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png"); // for test reasons
 		
+		
 		deskView = new JFrame();
 		deskView.setTitle("Der Grosse Dalmuti");
 		deskView.setSize(1600,900);
@@ -86,7 +93,6 @@ public class DeskView extends JFrame {
 		gridNorth.gridy = 0;
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(labelNorth, gridNorth);
-		
 		
 		panelNorth.setBackground(Color.BLUE);
 		
@@ -129,25 +135,25 @@ public class DeskView extends JFrame {
 		deskView.setVisible(true);
 		
 		//CENTER Panel
-		JPanel PanelCenter = new JPanel(new GridBagLayout());
-		GridBagConstraints GridCenter = new GridBagConstraints();
+		panelCenter = new JPanel(new GridBagLayout());
+		gridCenter = new GridBagConstraints();
+										
+		panelCenter.setBackground(Color.YELLOW);
 						
-		JLabel Label4 = new JLabel(icon);
-		Label4.setPreferredSize(new Dimension(89,92));
-						
-		GridCenter.gridx = 0;
-		GridCenter.gridy = 0;
-		GridCenter.insets = new Insets(5,5,5,5);
-		PanelCenter.add(Label4, GridCenter);
-						
-		PanelCenter.setBackground(Color.YELLOW);
-						
-		deskView.getContentPane().add(PanelCenter, BorderLayout.CENTER);
+		deskView.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		deskView.setVisible(true);
 		
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
+		
+		JButton gDalmi = new JButton(gDalmuti);
+		gDalmi.setContentAreaFilled(false);
+		gDalmi.setPreferredSize(new Dimension(89,92));
+		gridSouth.gridx = 0;
+		gridSouth.gridy = 1;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(gDalmi, gridSouth);
 		
 		JTextField AmountCards = new JTextField("A");
 		gridSouth.anchor = GridBagConstraints.LINE_START;
@@ -195,14 +201,8 @@ public class DeskView extends JFrame {
 		deskView.setVisible(true);
 		
 	}
-	
-    void addCloseGame(ActionListener listener) {
-        closeGame.addActionListener(listener);
-    }
-    void closeWindow(){
-        deskView.dispose();
-        deskView.setVisible(false);
-    }
+
+    //South Methods
     
     void showInSouth(Player player){
     	spielerSouth = new JTextField(player.getName());
@@ -217,10 +217,10 @@ public class DeskView extends JFrame {
 		gridSouth.gridx = 7;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(spielerSouth, gridSouth);
-		
-		
+		panelSouth.add(spielerSouth, gridSouth);	
     }
+    
+    //West Methods
     
 	void showInWest(Player player){
 		
@@ -259,6 +259,8 @@ public class DeskView extends JFrame {
 	
 	}
 	
+	//North Methods
+	
     void showInNorth(Player player){
     	
     	spielerNorth = new JTextField(player.getName());
@@ -296,7 +298,9 @@ public class DeskView extends JFrame {
 		   
     	
     }
-
+    
+    //East Methods
+    
 	void showInEast(Player player){
 		
 		spielerEast = new JTextField(player.getName());
@@ -333,5 +337,36 @@ public class DeskView extends JFrame {
 		panelEast.add(cardsInHandEast, gridEast);
 	}
 	
+	//Center Methods
+	
+    void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
+    	
+    	cardsCenter = new JLabel(cardtype.getLabel());
+    	cardsCenter.setPreferredSize(new Dimension(89,92));		
+		gridCenter.gridx = 0;
+		gridCenter.gridy = 0;
+		gridCenter.insets = new Insets(5,5,5,5);
+		panelCenter.add(cardsCenter, gridCenter);
+		
+		numberOfCardsCenter = new JTextField(numberOfCards);
+		gridCenter.gridx = 0;
+		gridCenter.gridy = 1;
+		gridCenter.insets = new Insets(5,5,5,5);
+		panelCenter.add(cardsCenter, gridCenter);
+		
+		
+    }
+	
+	//Other Methods
+	
+    void addCloseGame(ActionListener listener) {
+        closeGame.addActionListener(listener);
+    }
+    void closeWindow(){
+        deskView.dispose();
+        deskView.setVisible(false);
+    }
+    
+
 }
 

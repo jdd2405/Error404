@@ -29,9 +29,8 @@ public class Client {
 		
 		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
 		
-		JTextField basmeg = new JTextField("kurvetta");
-		
-		System.out.println(basmeg.getText());
+		new DeskView();
+		System.out.println(Card.CARD_TYPE.AEBTISSIN.getLabel());
 
 
 	}
