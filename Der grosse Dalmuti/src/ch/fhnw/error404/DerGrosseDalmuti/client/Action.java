@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
@@ -152,6 +154,15 @@ public class Action extends Client implements ActionListener {
 			
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-	}	
+	}
+	
+	//bitte nicht löschen, ist für die Verbindung zum Client
+	public ArrayList<Player> getAllPlayers() {
+		return allPlayers;
+	}
+	
+	public void setAllPlayers(ArrayList<Player> allPlayers) {
+		this.allPlayers = allPlayers;
+	}
 }
 
