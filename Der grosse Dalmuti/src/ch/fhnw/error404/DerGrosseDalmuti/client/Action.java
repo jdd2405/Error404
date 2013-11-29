@@ -154,7 +154,7 @@ public class Action extends Client implements ActionListener {
 	public void actionPerformed(ActionEvent e) {	
 	}
 	
-<<<<<<< HEAD
+
 	//bitte nicht löschen, ist für die Verbindung zum Client
 	public ArrayList<Player> getAllPlayers() {
 		return allPlayers;
@@ -164,8 +164,5 @@ public class Action extends Client implements ActionListener {
 		this.allPlayers = allPlayers;
 	}
 	
-=======
-
->>>>>>> branch 'master' of https://github.com/jdd2405/Error404.git
 }
 
