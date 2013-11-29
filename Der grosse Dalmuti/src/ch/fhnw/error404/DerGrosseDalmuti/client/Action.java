@@ -41,9 +41,6 @@ public class Action extends Client implements ActionListener {
 		loginView.username.addMouseListener(new ClearOnClick());
 	}
 	
-	
-
-
 	// inner class Listener
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
