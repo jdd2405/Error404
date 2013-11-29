@@ -40,9 +40,6 @@ public class Action extends Client implements ActionListener {
 		loginView.addClearOnClick(new ClearOnClick());
 	}
 	
-	
-
-
 	// inner class Listener
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
