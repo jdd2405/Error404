@@ -60,8 +60,10 @@ public class Deck implements Serializable{
 		for(int i = 0; i<Card.CARD_TYPE.BERGMANN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BERGMANN));}
 		for(int i = 0; i<Card.CARD_TYPE.TAGELOEHNER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.TAGELOEHNER));}
 		
+		
 	}
-	
+
+
 	public void dealCards(ArrayList<Player> allPlayers){
 		// shuffle notDealtCards
 		Collections.shuffle(notDealtCards);
