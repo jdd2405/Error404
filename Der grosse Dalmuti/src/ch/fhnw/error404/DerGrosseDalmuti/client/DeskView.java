@@ -231,22 +231,8 @@ public class DeskView extends JFrame {
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(spielerWest, gridWest);
 		
-		if(roleSouth.getText() == "grosser Dalmuti"){
-			roleWest = new JTextField("kleiner Dalmuti");
-		}
-		else if(roleSouth.getText() == "kleiner Dalmuti"){
-			roleWest = new JTextField("kleiner Diener");
-		}
-		else if(roleSouth.getText() == "kleiner Diener"){
-			roleWest = new JTextField("grosser Diener");
-		}
-		else if(roleSouth.getText() == "grosser Diener"){
-			roleWest = new JTextField("grosser Dalmuti");
-		}
-		else{
-			roleWest = new JTextField("Bürger");
-		}
-			
+
+		roleWest = new JTextField((player.getRole()).getLabel());	
     	gridWest.gridx = 1;
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
@@ -270,22 +256,7 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(spielerNorth, gridNorth);
 		
-    	if(roleSouth.getText() == "grosser Dalmuti"){
-			roleNorth = new JTextField("kleiner Diener");
-		}
-		else if(roleSouth.getText() == "kleiner Dalmuti"){
-			roleNorth = new JTextField("grosser Diener");
-		}
-		else if(roleSouth.getText() == "kleiner Diener"){
-			roleNorth = new JTextField("grosser Dalmuti");
-		}
-		else if(roleSouth.getText() == "grosser Diener"){
-			roleNorth = new JTextField("kleiner Dalmuti");
-		}
-		else{
-			roleNorth = new JTextField("Bürger");
-		}
-    	
+		roleNorth = new JTextField((player.getRole()).getLabel());	
     	gridNorth.gridx = 1;
 		gridNorth.gridy = 0;
 		gridNorth.insets = new Insets(5,5,5,5);
@@ -310,22 +281,7 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		panelEast.add(spielerEast, gridEast);
 		
-		if(roleSouth.getText() == "grosser Dalmuti"){
-			roleEast = new JTextField("grosser Diener");
-		}
-		else if(roleSouth.getText() == "kleiner Dalmuti"){
-			roleEast = new JTextField("grosser Dalmuti");
-		}
-		else if(roleSouth.getText() == "kleiner Diener"){
-			roleEast = new JTextField("kleiner Dalmuti");
-		}
-		else if(roleSouth.getText() == "grosser Diener"){
-			roleEast = new JTextField("kleiner Diener");
-		}
-		else{
-			roleEast = new JTextField("Bürger");
-		}
-		
+		roleEast = new JTextField((player.getRole()).getLabel());	
 		gridEast.gridx = 1;
 		gridEast.gridy = 0;
 		gridEast.insets = new Insets(5,5,5,5);
