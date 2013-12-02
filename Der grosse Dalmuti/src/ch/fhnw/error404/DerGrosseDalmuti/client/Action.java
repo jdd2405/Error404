@@ -13,7 +13,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * @author Jonas, Elias und Thomas
  *
  */
-public class Action extends Client implements ActionListener {
+public class Action implements ActionListener {
 	
 	static protected int myId;
 	public Player[] allPlayers = new Player[4];

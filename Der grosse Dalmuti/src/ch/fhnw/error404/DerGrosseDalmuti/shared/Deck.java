@@ -23,8 +23,8 @@ public class Deck implements Serializable{
 	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
-	public ArrayList<Card>[] swappedCards; // cards ready to swap
+	public ArrayList<Card> notDealtCards = new ArrayList<Card>(); // not dealt cards (de: "nicht ausgeteilte Karten")
+	public Card[] swappedCards = new Card[4]; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
