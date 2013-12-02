@@ -23,6 +23,7 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridSouth;
 		private JTextField spielerSouth;
 		private JTextField roleSouth;
+		private JButton Button2;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -179,7 +180,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(Button1, gridSouth);
 		
-		JButton Button2 = new JButton("Passen");
+		Button2 = new JButton("Passen");
 		Button2.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 6;
@@ -219,9 +220,12 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(spielerSouth, gridSouth);	
     }
+    public JButton getButton2() {return Button2;}
+	public void setButton2(JButton button2) {Button2 = button2;}
     
+	
+	
     //West Methods
-    
 	void showInWest(Player player){
 		
     	spielerWest = new JTextField(player.getName());
