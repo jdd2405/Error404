@@ -17,6 +17,7 @@ public class Action{
 	
 	static protected int myId;
 	public static Player[] allPlayers = new Player[4];
+	public static Deck deck;
 	LoginView loginView;
 	DeskView  deskView;
 
@@ -249,11 +250,11 @@ public class Action{
 	
 	
 	
-	// returns a List of swappable Cards for a specific Player
-	public ArrayList<Card> getSwappableCards(Player player){
+	// returns an Array of swappable Cards-Types for a specific Player
+	public Card.CARD_TYPE[] getSwappableCards(Player player){
 
 		// initialize List of Cards
-		ArrayList<Card> swappableCards = new ArrayList<Card>();
+		Card.CARD_TYPE[] swappableCards = new Card.CARD_TYPE[2];
 
 		if(player.getRole().hasToBeHighest() == true) {
 
@@ -263,10 +264,22 @@ public class Action{
 				ListIterator<Card> listIterator = player.getCards().listIterator();
 
 				while(listIterator.hasNext()){
+					if(swappableCards[1].getValue() > listIterator.next().getCardType().getValue()){
+						if(swappableCards[2].getValue() > listIterator.next().getCardType().getValue()){
+							swappableCards[2]=listIterator.next().getCardType();
+						}
+						else {
+							swappableCards[1]=listIterator.next().getCardType();
+						}
+					}
+					
 
-					// <========= DO YOUR WORK! CONTINUE HERE!
-
-				}	
+				}
+				// if two equal card types in array set one to null
+				// -> if there is only one card type you have at least to of them.
+				if(swappableCards[1].equals(swappableCards[2])){
+					swappableCards[2] = null;
+				}
 			}
 
 		}
@@ -278,8 +291,9 @@ public class Action{
 	
 	// clear table nachdem 3 Player gepasst haben
 	protected void clearTable(){
-		while(Deck.currentTrick.isEmpty()==false){
-		Deck.notDealtCards.add(Deck.currentTrick.pop());}
+		while(!Deck.currentTrick.isEmpty()){ // not empty
+			Deck.notDealtCards.add(Deck.currentTrick.pop());
+		}
 	}
 
 	

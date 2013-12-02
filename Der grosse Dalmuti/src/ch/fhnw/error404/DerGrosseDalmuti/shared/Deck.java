@@ -108,12 +108,12 @@ public class Deck implements Serializable{
 	}
 
 
-	public ArrayList<Card>[] getSwappedCards() {
+	public Card[] getSwappedCards() {
 		return swappedCards;
 	}
 
 
-	public void setSwappedCards(ArrayList<Card>[] swappedCards) {
+	public void setSwappedCards(Card[] swappedCards) {
 		this.swappedCards = swappedCards;
 	}
 	
