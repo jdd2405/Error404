@@ -2,14 +2,10 @@ package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.Stack;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -20,7 +16,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action extends Client implements ActionListener {
 	
 	static protected int myId;
-	public static Player[] allPlayers = new Player[4];
+	public Player[] allPlayers = new Player[4];
 	LoginView loginView;
 	DeskView  deskView;
 
@@ -66,9 +62,11 @@ public class Action extends Client implements ActionListener {
 
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
+		boolean actionsEnabled = false;
 		if(allPlayers[myId].isActive() == true){
-				enableActionListeners();
+				actionsEnabled = true;
 			}
+		return actionsEnabled;
 	}
 
 	private void enableActionListeners() {
@@ -159,11 +157,11 @@ public class Action extends Client implements ActionListener {
 	
 
 	//bitte nicht löschen, ist für die Verbindung zum Client
-	public ArrayList<Player> getAllPlayers() {
+	public Player[] getAllPlayers() {
 		return allPlayers;
 	}
 	
-	public void setAllPlayers(ArrayList<Player> allPlayers) {
+	public void setAllPlayers(Player[] allPlayers) {
 		this.allPlayers = allPlayers;
 	}
 	
