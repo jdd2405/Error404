@@ -59,8 +59,8 @@ public class Game {
 		// check if maxPassed is reached
 		if(passed == allPlayers.size()-1){
 			// take cards from the table and put them in notDealtCards
-			deck.notDealtCards.addAll(deck.currentTrick);
-			deck.currentTrick.clear();
+			Deck.notDealtCards.addAll(Deck.currentTrick);
+			Deck.currentTrick.clear();
 		}
 	}
 	

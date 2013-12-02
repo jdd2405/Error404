@@ -83,7 +83,7 @@ public class Client_neu {
 					}
 					//input für die 3 Variablen im Deck
 					if (message instanceof Stack) {
-						Deck.currentTrick = (Stack<Card>) message;
+						Deck.currentTrick =(Stack<Card>) message;
 						System.out.println(Deck.currentTrick.peek());
 					}
 					if (message instanceof ArrayList) {

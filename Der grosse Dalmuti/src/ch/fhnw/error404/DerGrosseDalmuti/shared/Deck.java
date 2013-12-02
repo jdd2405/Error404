@@ -42,9 +42,6 @@ public class Deck implements Serializable{
 	 * public boolean removeFirst()
 	 */
 	
-	public static void main (String [] args){
-		System.out.println(notDealtCards.size());
-	}
 	
 	public Deck(){
 		
@@ -88,7 +85,6 @@ public class Deck implements Serializable{
 		int i = player.getId();
 		swappedCards[i] = player.getSwappedCard();
 	}
-	
 
 }
 
