@@ -22,8 +22,9 @@ public class Client_neu {
 
 	public static void main(String[] args) {
 		Client_neu client = new Client_neu();
-		//LoginView loginView = new LoginView();
-		//Action action = new Action(loginView);
+		LoginView loginView = new LoginView();
+		DeskView deskView = new DeskView();
+		new Action(loginView, deskView);
 		client.clientSocket();
 		
 
