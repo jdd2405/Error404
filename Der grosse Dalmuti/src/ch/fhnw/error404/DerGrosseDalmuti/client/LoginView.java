@@ -21,7 +21,7 @@ public class LoginView extends JFrame {
 	private JPanel panel;
 	private JButton login;
 	private JLabel label;
-	public JTextField username;
+	private JTextField username;
 	
 	public LoginView(){
 		
@@ -77,10 +77,6 @@ public class LoginView extends JFrame {
     }
     
     
-    void addClearListener(ActionListener cal) {
-        // for good reasons
-    }
-    
     void showError(String string) {
     	new LoginError();
     }
@@ -88,5 +84,9 @@ public class LoginView extends JFrame {
     void closeWindow(){
         loginView.dispose();
         loginView.setVisible(false);
+    }
+    
+    void addClearOnClick(MouseListener listener){
+    	login.addClearOnClick
     }
 }

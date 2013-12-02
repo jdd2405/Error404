@@ -3,6 +3,7 @@ package ch.fhnw.error404.DerGrosseDalmuti.client;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
