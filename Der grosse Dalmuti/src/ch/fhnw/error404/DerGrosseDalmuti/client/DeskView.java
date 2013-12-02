@@ -172,12 +172,12 @@ public class DeskView extends JFrame {
 		
 		
 		auswahlSpielen= new JButton("Auswahl spielen");
-		Button1.setPreferredSize(new Dimension(170,30));
+		auswahlSpielen.setPreferredSize(new Dimension(170,30));
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 4;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(Button1, gridSouth);
+		panelSouth.add(auswahlSpielen, gridSouth);
 		
 		passen = new JButton("Passen");
 		passen.setPreferredSize(new Dimension(170,30));	
@@ -328,7 +328,7 @@ public class DeskView extends JFrame {
     }
     
     void addAuswahlSpielen(ActionListener listener){
-    	
+    	auswahlSpielen.addActionListener(listener);
     }
 
 }
