@@ -16,7 +16,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action{
 	
 	static protected int myId;
-	public Player[] allPlayers = new Player[4];
+	public static Player[] allPlayers = new Player[4];
 	LoginView loginView;
 	DeskView  deskView;
 
@@ -104,13 +104,14 @@ public class Action{
 	// Close Game
 	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			
 			deskView.closeWindow();		
 		}
 	}
 	
 	
 	/*
-	 * GAME LOGIC 
+	 * GAME LOGIC - Methods for running the Game properly
 	 */
 	
 	// create new player based on the login-variables
@@ -129,11 +130,9 @@ public class Action{
 			}
 		return actionsEnabled;
 	}
+	
+	// show all Players in proper position (e
 
-	private void enableActionListeners() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 	
@@ -164,14 +163,6 @@ public class Action{
 	}	
 	
 
-	//bitte nicht löschen, ist für die Verbindung zum Client
-	public Player[] getAllPlayers() {
-		return allPlayers;
-	}
-	
-	public void setAllPlayers(Player[] allPlayers) {
-		this.allPlayers = allPlayers;
-	}
 	
 }
 
