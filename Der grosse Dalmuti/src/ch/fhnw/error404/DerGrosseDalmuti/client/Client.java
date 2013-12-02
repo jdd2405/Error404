@@ -28,8 +28,8 @@ public class Client {
 		client.clientSocket();
 		
 		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
-		
-		new DeskView();
+		LoginView loginView = new LoginView();
+		new Action(loginView);
 		System.out.println(Card.CARD_TYPE.AEBTISSIN.getLabel());
 
 

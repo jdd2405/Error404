@@ -21,8 +21,14 @@ public class Action implements ActionListener {
 	DeskView  deskView;
 
 
-	public Action(DeskView deskView) {
+	public Action(LoginView loginView, DeskView deskView) {
+		this.loginView = loginView;
 		this.deskView = deskView;
+
+		//... Add listeners to the view.
+		loginView.addLoginListener(new LoginListener());
+		//loginView.addClearOnClick(new ClearOnClick());
+		loginView.username.addMouseListener(new ClearOnClick());
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
@@ -30,12 +36,7 @@ public class Action implements ActionListener {
 	}
 	
 	public Action(LoginView loginView) {
-		this.loginView = loginView;
-
-		//... Add listeners to the view.
-		loginView.addLoginListener(new LoginListener());
-		//loginView.addClearOnClick(new ClearOnClick());
-		loginView.username.addMouseListener(new ClearOnClick());
+		
 	}
 	
 
