@@ -35,6 +35,7 @@ public class Action{
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
 		deskView.addPassen(new Passen());
+		deskView.addAuswahlSpielen(new AuswahlSpielen());
 		
 	}
 	
