@@ -76,7 +76,7 @@ public class DeskView extends JFrame {
 	
 	public DeskView() {
 		
-		ImageIcon icon = new ImageIcon("C:\\Users\\Glaimby\\Pictures\\card.png"); // for test reasons
+		ImageIcon icon = new ImageIcon("../../../../../../../card.png"); // for test reasons
 		
 		
 		deskView = new JFrame();

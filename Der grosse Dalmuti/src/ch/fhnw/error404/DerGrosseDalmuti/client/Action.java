@@ -119,8 +119,23 @@ public class Action{
 		Player player = new Player(name, getAllPlayers().length+1);
 		myId = player.getId();
 		allPlayers[myId] = player;
-		
 	}
+	
+	
+	// show all Players in proper position (e
+	void showPlayers(){
+		switch (allPlayers[myId].getRole()){
+		case(GROSSERDALMUTI):
+			for(int i = 0; i<allPlayers.length; i++){
+				
+				deskView.showInWest(allPlayers[i]);
+		}
+		default:
+			break;
+		}
+	}
+	
+	
 
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
@@ -131,8 +146,7 @@ public class Action{
 		return actionsEnabled;
 	}
 	
-	// show all Players in proper position (e
-
+	
 	
 	
 	
