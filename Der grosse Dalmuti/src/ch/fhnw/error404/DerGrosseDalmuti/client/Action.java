@@ -21,8 +21,8 @@ public class Action extends Client implements ActionListener {
 	
 	static protected int myId;
 	public static Player[] allPlayers = new Player[4];
-	private LoginView loginView;
-	private DeskView  deskView;
+	LoginView loginView;
+	DeskView  deskView;
 
 
 	public Action(DeskView deskView) {
@@ -30,6 +30,8 @@ public class Action extends Client implements ActionListener {
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
+		
+		deskView.getButton2().addActionListener(this);
 	}
 	
 	public Action(LoginView loginView) {
@@ -40,6 +42,8 @@ public class Action extends Client implements ActionListener {
 		//loginView.addClearOnClick(new ClearOnClick());
 		loginView.username.addMouseListener(new ClearOnClick());
 	}
+	
+
 	
 	// inner class Listener
 	class Listener implements ActionListener {
@@ -52,6 +56,11 @@ public class Action extends Client implements ActionListener {
 			} catch (NumberFormatException nfex) {
 				loginView.showError("Bad input: '" + userInput + "'");
 			}
+			
+			if (e.getSource() == deskView.getButton2()){
+				
+			}
+				
 		}
 	} // end inner class MultiplyListener
 
@@ -60,17 +69,20 @@ public class Action extends Client implements ActionListener {
 	protected void newPlayer(String name){
 		Player player = new Player(name, getAllPlayers().length+1);
 		myId = player.getId();
-		getAllPlayers()[player.getId()] = player;
+		allPlayers[myId] = player;
 		
 	}
 
 	// check if it is the turn of my Player to enable Actions
 	protected boolean actionsEnabled(){
-		if(allPlayers[myId]).isActive() == true){
-				
+		if(allPlayers[myId].isActive() == true){
+				enableActionListeners();
 			}
-		}
-		return IsMyPlayerActive;
+	}
+
+	private void enableActionListeners() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	// ActionListeners of GUI!!!
@@ -80,7 +92,7 @@ public class Action extends Client implements ActionListener {
 			if ((loginView.getUserInput()).matches("[a-zA-Z0-9]*") == true){ // checks if username is valid
 				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
 				loginView.closeWindow();
-				System.out.println((allPlayers.get(0)).getName()); // for test reasons
+				System.out.println(allPlayers[0].getName()); // for test reasons
 				deskView = new DeskView();
 				new Action(deskView);
 			}
@@ -152,16 +164,6 @@ public class Action extends Client implements ActionListener {
 			
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-	}
-	
-
-	//bitte nicht löschen, ist für die Verbindung zum Client
-	public ArrayList<Player> getAllPlayers() {
-		return allPlayers;
-	}
-	
-	public void setAllPlayers(ArrayList<Player> allPlayers) {
-		this.allPlayers = allPlayers;
 	}
 	
 }

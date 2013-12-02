@@ -53,6 +53,7 @@ public class Card implements Serializable{
 		public String getLabel() {return label;}
 
 	}
+	
 }
 	
 

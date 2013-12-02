@@ -9,14 +9,15 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Vector;
 
+import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-public class Server_neu implements Serializable {
+public class Server_neu{
 
 	// speichert die outputstreams der clients / Vector ist ein dynamisches
 	// Array
 	private Vector<ObjectOutputStream> clientManager = new Vector<ObjectOutputStream>();
-	ArrayList<Player> serverlist = new ArrayList<Player>(4);
+	//ArrayList<Player> serverlist = new ArrayList<Player>(4);
 
 	public static void main(String[] args) {
 		Server_neu serverObject = new Server_neu();
@@ -33,7 +34,7 @@ public class Server_neu implements Serializable {
 				ObjectOutputStream output = new ObjectOutputStream(
 						client.getOutputStream());
 				clientManager.add(output);
-				output.writeObject(serverlist);
+				output.writeObject(Action.allPlayers);
 				output.flush();
 				Thread t = new Thread(new ChatThread(client));
 				t.start();

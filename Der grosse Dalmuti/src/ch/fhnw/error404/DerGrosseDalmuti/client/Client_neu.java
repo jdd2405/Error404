@@ -8,21 +8,24 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-public class Client_neu implements Serializable {
+public class Client_neu {
 
 	ObjectInputStream in;
 	ObjectOutputStream out;
-	private ArrayList<Player> clientlist = new ArrayList<Player>(4);
+
+
 
 
 	public static void main(String[] args) {
 		Client_neu client = new Client_neu();
+		//LoginView loginView = new LoginView();
+		//Action action = new Action(loginView);
 		client.clientSocket();
-		LoginView loginView = new LoginView();
-		Action action = new Action(loginView);
+		
 
 	}
 
@@ -42,6 +45,9 @@ public class Client_neu implements Serializable {
 			// create inputStream for objects
 			InputStream is = socket.getInputStream();
 			in = new ObjectInputStream(is);
+			
+			Outputmethod(Action.allPlayers);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,20 +56,16 @@ public class Client_neu implements Serializable {
 		inputThread.start();
 
 	}
-
-	public ArrayList<Player> getPlayerlist() {
-		return clientlist;
-	}
-
-	public void setPlayerlist(ArrayList<Player> clientlist) {
-		this.clientlist = clientlist;
-		// änderungen an server schicken
+	
+	//OutputMethode zum Server
+	public void Outputmethod(Object object){
 		try {
-			out.writeObject(clientlist);
+			out.writeObject(object);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
+	
 
 	public class InputMessages implements Runnable {
 		public void run() {
@@ -73,18 +75,26 @@ public class Client_neu implements Serializable {
 				while (true) {
 					message = in.readObject();
 					//input ist Arrayliste mit den Playerobjekten
-					if (message instanceof Player) {
-						setPlayerlist((ArrayList<Player>) message);
-						if (clientlist.isEmpty() != true) {
+					if (message instanceof Player[]) {
+						Action.allPlayers = (Player[]) message;
 							for (int i = 0; i < 4; i++) {
-								System.out.println(clientlist.get(i));
+								System.out.println(Action.allPlayers[i]);
 							}
-						}
 					}
-					if (message instanceof Deck) {
-						
-
-						}
+					//input für die 3 Variablen im Deck
+					if (message instanceof Stack) {
+						Deck.currentTrick =(Stack<Card>) message;
+						System.out.println(Deck.currentTrick.peek());
+					}
+					if (message instanceof ArrayList) {
+						Deck.notDealtCards = (ArrayList<Card>) message;
+						System.out.println(Deck.notDealtCards.size());
+					}
+					if (message instanceof Card[]) {
+						Deck.swappedCards = (Card[]) message;
+						System.out.println(Deck.notDealtCards.size());
+					}
+					
 					else {
 						System.out.println("keine Player bisher");
 					}
