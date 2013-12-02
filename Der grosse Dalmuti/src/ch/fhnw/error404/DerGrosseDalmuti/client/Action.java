@@ -27,7 +27,6 @@ public class Action implements ActionListener {
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
 		
-		deskView.getButton2().addActionListener(this);
 	}
 	
 	public Action(LoginView loginView) {
@@ -53,10 +52,6 @@ public class Action implements ActionListener {
 				loginView.showError("Bad input: '" + userInput + "'");
 			}
 			
-			if (e.getSource() == deskView.getButton2()){
-				
-			}
-				
 		}
 	} // end inner class MultiplyListener
 
