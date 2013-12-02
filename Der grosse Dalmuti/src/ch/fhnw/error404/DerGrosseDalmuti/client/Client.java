@@ -24,13 +24,12 @@ public class Client {
 	
 	public static void main(String[] args) {
 
-		Client client = new Client();
-		client.clientSocket();
-		
-		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
+	
 		LoginView loginView = new LoginView();
-		new Action(loginView);
-		System.out.println(Card.CARD_TYPE.AEBTISSIN.getLabel());
+		DeskView deskView = new DeskView();
+		new Action(loginView, deskView);
+		
+
 
 
 	}

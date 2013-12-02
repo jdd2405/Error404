@@ -34,12 +34,6 @@ public class Action{
 		
 	}
 	
-	public Action(LoginView loginView) {
-		
-	}
-	
-
-	
 	// inner class Listener
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -86,8 +80,7 @@ public class Action{
 				newPlayer(loginView.getUserInput()); // creates new player object in action class using the typed name at the login
 				loginView.closeWindow();
 				System.out.println(allPlayers[0].getName()); // for test reasons
-				deskView = new DeskView();
-				new Action(deskView);
+				deskView.setVisible(true);
 			}
 			else{
 				new LoginError();

@@ -55,7 +55,7 @@ public class DeskView extends JFrame {
 		private JTextField username;
 		private JButton closeGame;
 		
-		ImageIcon gDalmuti = new ImageIcon(ImageIcon.class.getResource("\\Error404\\Karten\\karte1.jpg"));
+		//ImageIcon gDalmuti = new ImageIcon(ImageIcon.class.getResource("\\Error404\\Karten\\karte1.jpg"));
 
 
 		
@@ -84,6 +84,7 @@ public class DeskView extends JFrame {
 		deskView.setSize(1600,900);
 		deskView.setLocationRelativeTo(null);
 		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		deskView.setVisible(false);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
@@ -99,7 +100,6 @@ public class DeskView extends JFrame {
 		panelNorth.setBackground(Color.BLUE);
 		
 		deskView.getContentPane().add(panelNorth, BorderLayout.NORTH);
-		deskView.setVisible(true);
 		
 		//EAST Panel
 		panelEast = new JPanel(new GridBagLayout());
@@ -116,7 +116,6 @@ public class DeskView extends JFrame {
 		panelEast.setBackground(Color.GREEN);
 		
 		deskView.getContentPane().add(panelEast, BorderLayout.EAST);
-		deskView.setVisible(true);
 		
 		
 		//WEST Panel
@@ -134,7 +133,6 @@ public class DeskView extends JFrame {
 		panelWest.setBackground(Color.RED);
 				
 		deskView.getContentPane().add(panelWest, BorderLayout.WEST);
-		deskView.setVisible(true);
 		
 		//CENTER Panel
 		panelCenter = new JPanel(new GridBagLayout());
@@ -143,13 +141,12 @@ public class DeskView extends JFrame {
 		panelCenter.setBackground(Color.YELLOW);
 						
 		deskView.getContentPane().add(panelCenter, BorderLayout.CENTER);
-		deskView.setVisible(true);
 		
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		JButton gDalmi = new JButton(gDalmuti);
+		JButton gDalmi = new JButton();
 		gDalmi.setContentAreaFilled(false);
 		gDalmi.setPreferredSize(new Dimension(89,92));
 		gridSouth.gridx = 0;
@@ -200,7 +197,6 @@ public class DeskView extends JFrame {
 		panelSouth.setBackground(Color.PINK);
 						
 		deskView.getContentPane().add(panelSouth, BorderLayout.SOUTH);
-		deskView.setVisible(true);
 		
 	}
 
