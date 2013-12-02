@@ -22,9 +22,9 @@ public class Deck implements Serializable{
 	// has to be public to access from every class. 
 	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
-	public static Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	public static ArrayList<Card> notDealtCards = new ArrayList<Card>(); // not dealt cards (de: "nicht ausgeteilte Karten")
-	public static Card [] swappedCards = new Card [4]; // cards ready to swap
+	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
+	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
+	public ArrayList<Card>[] swappedCards; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -41,7 +41,6 @@ public class Deck implements Serializable{
 	 * public boolean removeLast()
 	 * public boolean removeFirst()
 	 */
-	
 	
 	public Deck(){
 		
@@ -61,8 +60,8 @@ public class Deck implements Serializable{
 		for(int i = 0; i<Card.CARD_TYPE.BERGMANN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BERGMANN));}
 		for(int i = 0; i<Card.CARD_TYPE.TAGELOEHNER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.TAGELOEHNER));}
 		
+		
 	}
-	
 
 
 	public void dealCards(ArrayList<Player> allPlayers){
@@ -85,6 +84,39 @@ public class Deck implements Serializable{
 		int i = player.getId();
 		swappedCards[i] = player.getSwappedCard();
 	}
+
+
+	/* 
+	 * GETTERS AND SETTERS 
+	 */
+	
+	public Stack<Card> getCurrentTrick() {return currentTrick;}
+
+
+	public void setCurrentTrick(Stack<Card> currentTrick) {
+		this.currentTrick = currentTrick;
+	}
+
+
+	public ArrayList<Card> getNotDealtCards() {
+		return notDealtCards;
+	}
+
+
+	public void setNotDealtCards(ArrayList<Card> notDealtCards) {
+		this.notDealtCards = notDealtCards;
+	}
+
+
+	public ArrayList<Card>[] getSwappedCards() {
+		return swappedCards;
+	}
+
+
+	public void setSwappedCards(ArrayList<Card>[] swappedCards) {
+		this.swappedCards = swappedCards;
+	}
+	
 
 }
 
