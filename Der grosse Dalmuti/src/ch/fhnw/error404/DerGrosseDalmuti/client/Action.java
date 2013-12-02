@@ -49,28 +49,7 @@ public class Action{
 		}
 	} // end inner class MultiplyListener
 
-	
-	// create new player based on the login-variables
-	protected void newPlayer(String name){
-		Player player = new Player(name, getAllPlayers().length+1);
-		myId = player.getId();
-		allPlayers[myId] = player;
-		
-	}
 
-	// check if it is the turn of my Player to enable Actions
-	protected boolean actionsEnabled(){
-		boolean actionsEnabled = false;
-		if(allPlayers[myId].isActive() == true){
-				actionsEnabled = true;
-			}
-		return actionsEnabled;
-	}
-
-	private void enableActionListeners() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	// ActionListeners of GUI!!!
 	// ActionListener for the Login Button
@@ -121,6 +100,30 @@ public class Action{
 			deskView.closeWindow();		
 		}
 	}
+	
+	// create new player based on the login-variables
+	protected void newPlayer(String name){
+		Player player = new Player(name, getAllPlayers().length+1);
+		myId = player.getId();
+		allPlayers[myId] = player;
+		
+	}
+
+	// check if it is the turn of my Player to enable Actions
+	protected boolean actionsEnabled(){
+		boolean actionsEnabled = false;
+		if(allPlayers[myId].isActive() == true){
+				actionsEnabled = true;
+			}
+		return actionsEnabled;
+	}
+
+	private void enableActionListeners() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	
 	// returns a List of swappable Cards for a specific Player
 	public ArrayList<Card> getSwappableCards(Player player){
