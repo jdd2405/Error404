@@ -13,7 +13,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  * @author Jonas, Elias und Thomas
  *
  */
-public class Action implements ActionListener {
+public class Action{
 	
 	static protected int myId;
 	public Player[] allPlayers = new Player[4];
@@ -154,10 +154,6 @@ public class Action implements ActionListener {
 		// return List of swappable Cards
 		return swappableCards;
 	}	
-			
-	@Override
-	public void actionPerformed(ActionEvent e) {	
-	}
 	
 
 	//bitte nicht löschen, ist für die Verbindung zum Client
