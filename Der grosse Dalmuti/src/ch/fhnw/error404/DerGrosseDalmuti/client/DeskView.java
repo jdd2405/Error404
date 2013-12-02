@@ -24,7 +24,8 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridSouth;
 		private JTextField spielerSouth;
 		private JTextField roleSouth;
-		private JButton Button2;
+		private JButton passen;
+		private JButton auswahlSpielen;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -170,7 +171,7 @@ public class DeskView extends JFrame {
 		panelSouth.add(Anzahl, gridSouth);
 		
 		
-		JButton Button1 = new JButton("Auswahl spielen");
+		auswahlSpielen= new JButton("Auswahl spielen");
 		Button1.setPreferredSize(new Dimension(170,30));
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 4;
@@ -178,13 +179,13 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(Button1, gridSouth);
 		
-		Button2 = new JButton("Passen");
-		Button2.setPreferredSize(new Dimension(170,30));	
+		passen = new JButton("Passen");
+		passen.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 6;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(Button2, gridSouth);
+		panelSouth.add(passen, gridSouth);
 		
 		closeGame = new JButton("Spiel beenden"); // closes game
 		closeGame.setPreferredSize(new Dimension(170,30));	
@@ -217,9 +218,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(spielerSouth, gridSouth);	
     }
-    public JButton getButton2() {return Button2;}
-	public void setButton2(JButton button2) {Button2 = button2;}
-    
+       
 	
 	
     //West Methods
@@ -324,6 +323,13 @@ public class DeskView extends JFrame {
         deskView.setVisible(false);
     }
     
+    void addPassen(ActionListener listener){
+    	passen.addActionListener(listener);
+    }
+    
+    void addAuswahlSpielen(ActionListener listener){
+    	
+    }
 
 }
 

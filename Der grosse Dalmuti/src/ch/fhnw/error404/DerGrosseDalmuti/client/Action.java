@@ -34,6 +34,7 @@ public class Action{
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
+		deskView.addPassen(new Passen());
 		
 	}
 	
@@ -104,8 +105,31 @@ public class Action{
 	// Close Game
 	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
 			deskView.closeWindow();		
+		}
+	}
+	//spielzug passen Button Aktion
+	class Passen implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			int countPassen=0;
+			for(int i = 0; i<4; i++){
+				if(allPlayers[i].passed == true){
+					countPassen++;}
+			}
+			if(countPassen <= 1){allPlayers[myId].setPassed(true);}
+			else if (countPassen ==2){
+				allPlayers[myId].setPassed(true);
+				clearTable();
+				for(int i = 0; i<4; i++){
+					allPlayers[i].passed = false;}
+			}
+		}
+	}
+	
+	// Auswahl spielen Button Aktion
+	class AuswahlSpielen implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
 		}
 	}
 	
@@ -162,6 +186,12 @@ public class Action{
 		return swappableCards;
 	}	
 	
+	
+	// clear table nachdem 3 Player gepasst haben
+	protected void clearTable(){
+		while(Deck.currentTrick.isEmpty()==false){
+		Deck.notDealtCards.add(Deck.currentTrick.pop());}
+	}
 
 	
 }
