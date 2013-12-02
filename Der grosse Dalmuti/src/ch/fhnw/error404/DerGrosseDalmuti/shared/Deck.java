@@ -83,6 +83,38 @@ public class Deck implements Serializable{
 	protected void addSwappedCards(Player player){
 		player.getCards().addAll(swappedCards[player.getRole().getCode()-1]);
 	}
+
+
+	/* 
+	 * GETTERS AND SETTERS 
+	 */
+	
+	public Stack<Card> getCurrentTrick() {return currentTrick;}
+
+
+	public void setCurrentTrick(Stack<Card> currentTrick) {
+		this.currentTrick = currentTrick;
+	}
+
+
+	public ArrayList<Card> getNotDealtCards() {
+		return notDealtCards;
+	}
+
+
+	public void setNotDealtCards(ArrayList<Card> notDealtCards) {
+		this.notDealtCards = notDealtCards;
+	}
+
+
+	public ArrayList<Card>[] getSwappedCards() {
+		return swappedCards;
+	}
+
+
+	public void setSwappedCards(ArrayList<Card>[] swappedCards) {
+		this.swappedCards = swappedCards;
+	}
 	
 
 }
