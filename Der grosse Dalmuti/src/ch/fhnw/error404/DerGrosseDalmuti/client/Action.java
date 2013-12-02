@@ -16,7 +16,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action{
 	
 	static protected int myId;
-	public Player[] allPlayers = new Player[4];
+	public static Player[] allPlayers = new Player[4];
 	LoginView loginView;
 	DeskView  deskView;
 
