@@ -41,6 +41,8 @@ public class Action extends Client implements ActionListener {
 		loginView.username.addMouseListener(new ClearOnClick());
 	}
 	
+
+	
 	// inner class Listener
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -52,6 +54,11 @@ public class Action extends Client implements ActionListener {
 			} catch (NumberFormatException nfex) {
 				loginView.showError("Bad input: '" + userInput + "'");
 			}
+			
+			if (e.getSource() == DeskView.Button2){
+				
+			}
+				
 		}
 	} // end inner class MultiplyListener
 
@@ -152,16 +159,6 @@ public class Action extends Client implements ActionListener {
 			
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-	}
-	
-
-	//bitte nicht löschen, ist für die Verbindung zum Client
-	public ArrayList<Player> getAllPlayers() {
-		return allPlayers;
-	}
-	
-	public void setAllPlayers(ArrayList<Player> allPlayers) {
-		this.allPlayers = allPlayers;
 	}
 	
 }
