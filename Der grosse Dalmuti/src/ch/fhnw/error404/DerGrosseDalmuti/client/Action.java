@@ -26,6 +26,8 @@ public class Action extends Client implements ActionListener {
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
+		
+		deskView.getButton2().addActionListener(this);
 	}
 	
 	public Action(LoginView loginView) {
@@ -36,6 +38,8 @@ public class Action extends Client implements ActionListener {
 		//loginView.addClearOnClick(new ClearOnClick());
 		loginView.username.addMouseListener(new ClearOnClick());
 	}
+	
+
 	
 	// inner class Listener
 	class Listener implements ActionListener {
@@ -48,6 +52,11 @@ public class Action extends Client implements ActionListener {
 			} catch (NumberFormatException nfex) {
 				loginView.showError("Bad input: '" + userInput + "'");
 			}
+			
+			if (e.getSource() == deskView.getButton2()){
+				
+			}
+				
 		}
 	} // end inner class MultiplyListener
 
