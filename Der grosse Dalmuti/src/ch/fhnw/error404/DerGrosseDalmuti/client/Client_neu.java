@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -15,7 +16,7 @@ public class Client_neu {
 
 	ObjectInputStream in;
 	ObjectOutputStream out;
-	private Player [] clientlist = new Player [4];
+
 
 
 
@@ -66,9 +67,6 @@ public class Client_neu {
 	}
 	
 
-
-	
-
 	public class InputMessages implements Runnable {
 		public void run() {
 			Object message;
@@ -78,16 +76,25 @@ public class Client_neu {
 					message = in.readObject();
 					//input ist Arrayliste mit den Playerobjekten
 					if (message instanceof Player[]) {
-						Action.allPlayers = (Player[]) message;;
+						Action.allPlayers = (Player[]) message;
 							for (int i = 0; i < 4; i++) {
 								System.out.println(Action.allPlayers[i]);
 							}
 					}
-					//if (message instanceof Deck) {
-						//Deck serverDeck = new Deck(message);
-						
-
-					//}
+					//input für die 3 Variablen im Deck
+					if (message instanceof Stack) {
+						Deck.currentTrick = (Stack<Card>) message;
+						System.out.println(Deck.currentTrick.peek());
+					}
+					if (message instanceof ArrayList) {
+						Deck.notDealtCards = (ArrayList<Card>) message;
+						System.out.println(Deck.notDealtCards.size());
+					}
+					if (message instanceof Card[]) {
+						Deck.swappedCards = (Card[]) message;
+						System.out.println(Deck.notDealtCards.size());
+					}
+					
 					else {
 						System.out.println("keine Player bisher");
 					}
