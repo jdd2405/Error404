@@ -14,8 +14,9 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Client_neu {
 
-	ObjectInputStream in;
-	ObjectOutputStream out;
+	static ObjectInputStream in;
+	static ObjectOutputStream out;
+	Deck deck = new Deck();
 
 
 
@@ -59,7 +60,7 @@ public class Client_neu {
 	}
 	
 	//OutputMethode zum Server
-	public void Outputmethod(Object object){
+	public static void Outputmethod(Object object){
 		try {
 			out.writeObject(object);
 		} catch (IOException e) {
@@ -83,23 +84,25 @@ public class Client_neu {
 							}
 					}
 					//input für die 3 Variablen im Deck
-					if (message instanceof Stack) {
-						Deck.currentTrick =(Stack<Card>) message;
-						System.out.println(Deck.currentTrick.peek());
+					if (message instanceof Deck) {
+						Action.deck = (Deck) message;
+						System.out.println("Deck übermittelt");
 					}
+					/*
 					if (message instanceof ArrayList) {
-						Deck.notDealtCards = (ArrayList<Card>) message;
-						System.out.println(Deck.notDealtCards.size());
+						deck.notDealtCards = (ArrayList<Card>) message;
+						System.out.println(deck.notDealtCards.size());
 					}
 					if (message instanceof Card[]) {
-						Deck.swappedCards = (Card[]) message;
-						System.out.println(Deck.notDealtCards.size());
+						deck.swappedCards = (Card[]) message;
+						System.out.println(deck.notDealtCards.size());
 					}
 					
 					else {
 						System.out.println("keine Player bisher");
 					}
-					;
+					*/
+					
 				}
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();

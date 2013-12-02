@@ -18,7 +18,7 @@ import javax.swing.*;
 
 public class DeskView extends JFrame {
 	
-		private JFrame deskView;
+		private JFrame mainFrame;
 		
 		private JPanel panelSouth;
 		private GridBagConstraints gridSouth;
@@ -80,12 +80,11 @@ public class DeskView extends JFrame {
 		ImageIcon icon = new ImageIcon("../../../../../../../card.png"); // for test reasons
 		
 		
-		deskView = new JFrame();
-		deskView.setTitle("Der Grosse Dalmuti");
-		deskView.setSize(1600,900);
-		deskView.setLocationRelativeTo(null);
-		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		deskView.setVisible(false);
+		mainFrame = new JFrame();
+		mainFrame.setTitle("Der Grosse Dalmuti");
+		mainFrame.setSize(1600,900);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
@@ -100,7 +99,7 @@ public class DeskView extends JFrame {
 		
 		panelNorth.setBackground(Color.BLUE);
 		
-		deskView.getContentPane().add(panelNorth, BorderLayout.NORTH);
+		mainFrame.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		
 		//EAST Panel
 		panelEast = new JPanel(new GridBagLayout());
@@ -116,7 +115,7 @@ public class DeskView extends JFrame {
 		
 		panelEast.setBackground(Color.GREEN);
 		
-		deskView.getContentPane().add(panelEast, BorderLayout.EAST);
+		mainFrame.getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		
 		//WEST Panel
@@ -133,7 +132,7 @@ public class DeskView extends JFrame {
 		
 		panelWest.setBackground(Color.RED);
 				
-		deskView.getContentPane().add(panelWest, BorderLayout.WEST);
+		mainFrame.getContentPane().add(panelWest, BorderLayout.WEST);
 		
 		//CENTER Panel
 		panelCenter = new JPanel(new GridBagLayout());
@@ -141,7 +140,7 @@ public class DeskView extends JFrame {
 										
 		panelCenter.setBackground(Color.YELLOW);
 						
-		deskView.getContentPane().add(panelCenter, BorderLayout.CENTER);
+		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
@@ -197,7 +196,7 @@ public class DeskView extends JFrame {
 		
 		panelSouth.setBackground(Color.PINK);
 						
-		deskView.getContentPane().add(panelSouth, BorderLayout.SOUTH);
+		mainFrame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
 		
 	}
 
@@ -319,8 +318,8 @@ public class DeskView extends JFrame {
         closeGame.addActionListener(listener);
     }
     void closeWindow(){
-        deskView.dispose();
-        deskView.setVisible(false);
+        mainFrame.dispose();
+        mainFrame.setVisible(false);
     }
     
     void addPassen(ActionListener listener){

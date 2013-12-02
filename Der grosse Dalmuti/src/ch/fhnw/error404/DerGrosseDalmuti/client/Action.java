@@ -1,6 +1,7 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -142,6 +143,7 @@ public class Action{
 	 */
 	
 	// create new player based on the login-variables
+	// if there are 4 players deal cards
 	protected void newPlayer(String name){
 		int NOfPlayers = 0;
 		for (int i = 0; i < allPlayers.length; i++){
@@ -152,6 +154,24 @@ public class Action{
 		Player player = new Player(name, NOfPlayers+1);
 		myId = player.getId();
 		allPlayers[myId-1] = player; // cause IDs start from 1
+		
+		if(myId==4){
+			// shuffle notDealtCards
+			Collections.shuffle(deck.notDealtCards);
+			// create Iterator to get trough the LinkedList
+			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+			while (iterator.hasNext()){
+				for(int i=0; i<=allPlayers.length; i++){
+					for(int j=0; j<=deck.notDealtCards.size(); j++){
+						allPlayers[i].addCard(deck.notDealtCards.remove(j));
+					}
+				}
+			}
+		}
+		
+		
+		
+		Client_neu.Outputmethod(allPlayers);
 	}
 	
 	
@@ -292,8 +312,8 @@ public class Action{
 	
 	// clear table nachdem 3 Player gepasst haben
 	protected void clearTable(){
-		while(!Deck.currentTrick.isEmpty()){ // not empty
-			Deck.notDealtCards.add(Deck.currentTrick.pop());
+		while(!deck.currentTrick.isEmpty()){ // not empty
+			deck.notDealtCards.add(deck.currentTrick.pop());
 		}
 	}
 
