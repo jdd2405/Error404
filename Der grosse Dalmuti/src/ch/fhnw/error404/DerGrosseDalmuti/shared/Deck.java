@@ -23,7 +23,7 @@ public class Deck implements Serializable{
 	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
 	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
-	public ArrayList<Card> notDealtCards; // not dealt cards (de: "nicht ausgeteilte Karten")
+	public static ArrayList<Card> notDealtCards = new ArrayList<Card>(); // not dealt cards (de: "nicht ausgeteilte Karten")
 	public ArrayList<Card>[] swappedCards; // cards ready to swap
 	
 	/* for Stack use
@@ -41,6 +41,11 @@ public class Deck implements Serializable{
 	 * public boolean removeLast()
 	 * public boolean removeFirst()
 	 */
+	
+	public static void main (String [] args){
+		new Deck();
+		System.out.println(notDealtCards.size());
+	}
 	
 	public Deck(){
 		
@@ -61,6 +66,7 @@ public class Deck implements Serializable{
 		for(int i = 0; i<Card.CARD_TYPE.TAGELOEHNER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.TAGELOEHNER));}
 		
 	}
+	
 
 
 	public void dealCards(ArrayList<Player> allPlayers){
