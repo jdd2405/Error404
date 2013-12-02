@@ -209,7 +209,7 @@ public class Action{
 			}
 		default: 
 			switch(myId){
-			case:(1):
+			case(1):
 				deskView.showInWest(allPlayers[myId+1]);
 				deskView.showInNorth(allPlayers[myId+2]);
 				deskView.showInEast(allPlayers[myId+3]);
