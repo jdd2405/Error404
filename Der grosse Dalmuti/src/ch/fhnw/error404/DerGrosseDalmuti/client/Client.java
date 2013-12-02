@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JTextField;
+
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /* TO DO's
@@ -26,16 +28,12 @@ public class Client {
 		client.clientSocket();
 		
 		System.out.println(Card.CARD_TYPE.AEBTISSIN.getValue());
+		
+		new DeskView();
+		System.out.println(Card.CARD_TYPE.AEBTISSIN.getLabel());
 
-		LoginView loginView = new LoginView();
-        Action action = new Action(loginView);
-        
+
 	}
-
-
-
-
-	
 
 	
 	private void clientSocket() {

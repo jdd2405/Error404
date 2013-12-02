@@ -158,5 +158,14 @@ public class Action extends Client implements ActionListener {
 	}
 	
 
+	//bitte nicht löschen, ist für die Verbindung zum Client
+	public ArrayList<Player> getAllPlayers() {
+		return allPlayers;
+	}
+	
+	public void setAllPlayers(ArrayList<Player> allPlayers) {
+		this.allPlayers = allPlayers;
+	}
+	
 }
 

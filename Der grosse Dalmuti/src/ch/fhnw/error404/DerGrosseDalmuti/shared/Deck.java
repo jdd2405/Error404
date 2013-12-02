@@ -81,7 +81,8 @@ public class Deck implements Serializable{
 	}
 	
 	protected void addSwappedCards(Player player){
-		player.getCards().addAll(swappedCards[player.getRole().getCode()-1]);
+		int i = player.getId();
+		swappedCards[i] = player.getSwappedCard();
 	}
 
 
