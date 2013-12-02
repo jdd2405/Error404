@@ -22,9 +22,9 @@ public class Deck implements Serializable{
 	// has to be public to access from every class. 
 	// Does not make sense to create public push-, add-, remove-, and do on methods.
 	private static final long serialVersionUID = -4903713809034981834L;
-	public Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
+	public static Stack<Card> currentTrick;	// currently on the table (de: "Karten in diesem Stich")
 	public static ArrayList<Card> notDealtCards = new ArrayList<Card>(); // not dealt cards (de: "nicht ausgeteilte Karten")
-	public ArrayList<Card>[] swappedCards; // cards ready to swap
+	public static Card [] swappedCards = new Card [4]; // cards ready to swap
 	
 	/* for Stack use
 	 * public boolean empty( )
@@ -43,7 +43,6 @@ public class Deck implements Serializable{
 	 */
 	
 	public static void main (String [] args){
-		new Deck();
 		System.out.println(notDealtCards.size());
 	}
 	
@@ -86,7 +85,8 @@ public class Deck implements Serializable{
 	}
 	
 	protected void addSwappedCards(Player player){
-		player.getCards().addAll(swappedCards[player.getRole().getCode()-1]);
+		int i = player.getId();
+		swappedCards[i] = player.getSwappedCard();
 	}
 	
 
