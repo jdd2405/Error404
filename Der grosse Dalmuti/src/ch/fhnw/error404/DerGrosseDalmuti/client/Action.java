@@ -20,6 +20,9 @@ public class Action{
 	LoginView loginView;
 	DeskView  deskView;
 
+	/*
+	 * KONSTRUCTOR for Action Class
+	 */
 
 	public Action(LoginView loginView, DeskView deskView) {
 		this.loginView = loginView;
@@ -33,6 +36,10 @@ public class Action{
 		deskView.addCloseGame(new CloseGame());
 		
 	}
+	
+	/*
+	 * INNER CLASSES for Action- and MouseListeners
+	 */
 	
 	// inner class Listener
 	class Listener implements ActionListener {
@@ -100,6 +107,11 @@ public class Action{
 			deskView.closeWindow();		
 		}
 	}
+	
+	
+	/*
+	 * GAME LOGIC 
+	 */
 	
 	// create new player based on the login-variables
 	protected void newPlayer(String name){
