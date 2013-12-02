@@ -27,8 +27,7 @@ public class Action implements ActionListener {
 
 		//... Add listeners to the view.
 		loginView.addLoginListener(new LoginListener());
-		//loginView.addClearOnClick(new ClearOnClick());
-		loginView.username.addMouseListener(new ClearOnClick());
+		loginView.addClearOnClick(new ClearOnClick());
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
