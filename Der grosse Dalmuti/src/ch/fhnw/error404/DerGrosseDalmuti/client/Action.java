@@ -131,8 +131,14 @@ public class Action{
 	// Auswahl spielen Button Aktion
 	class AuswahlSpielen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
-			
+			//sind noch keine Karten in der Mitte darf der Spieler legen was er will
+			if(deck.currentTrick.isEmpty()){
+				
+			}
+			//es ist schon ein Kartenstapel auf dem Tisch vorhanden
+			if (deck.currentTrick.peek().getCardType() && DeskView.AmountCards);
+				
+			}
 		}
 	}
 	

@@ -26,6 +26,7 @@ public class DeskView extends JFrame {
 		private JTextField roleSouth;
 		private JButton passen;
 		private JButton auswahlSpielen;
+		private JTextField AmountCards;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -154,7 +155,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(gDalmi, gridSouth);
 		
-		JTextField AmountCards = new JTextField("A");
+		AmountCards = new JTextField("A");
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 3;
 		gridSouth.gridy = 2;
