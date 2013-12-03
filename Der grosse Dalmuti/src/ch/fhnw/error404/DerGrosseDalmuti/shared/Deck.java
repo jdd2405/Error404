@@ -2,8 +2,6 @@ package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
 import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Card;

@@ -1,6 +1,5 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 import java.awt.event.ActionEvent;
