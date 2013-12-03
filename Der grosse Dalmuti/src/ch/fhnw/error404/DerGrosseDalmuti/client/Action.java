@@ -171,7 +171,7 @@ public class Action{
 		
 		
 		
-		Client_neu.Outputmethod(allPlayers);
+		Client_neu.sendToServer(allPlayers);
 	}
 	
 	

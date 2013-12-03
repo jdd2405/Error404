@@ -48,7 +48,7 @@ public class Client_neu {
 			InputStream is = socket.getInputStream();
 			in = new ObjectInputStream(is);
 			
-			Outputmethod(Action.allPlayers);
+			sendToServer(Action.allPlayers);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,7 +60,7 @@ public class Client_neu {
 	}
 	
 	//OutputMethode zum Server
-	public static void Outputmethod(Object object){
+	public static void sendToServer(Object object){
 		try {
 			out.writeObject(object);
 		} catch (IOException e) {

@@ -49,7 +49,7 @@ public class Server_neu{
 		private Socket client;
 		private int clientPort;
 		private ObjectInputStream input;
-		Object message;
+		Object object;
 
 		public ChatThread(Socket client) {
 			this.client = client;
@@ -62,18 +62,18 @@ public class Server_neu{
 		}
 
 		public void run() {
-			Object message;
+			//Object object; // is not needed.
 
 			try {
-				message = input.readObject();
-				System.out.println(message.toString());
+				object = input.readObject();
+				System.out.println(object.toString());
 				//serverlist = message;
 				//if (message.isEmpty() != true) {
 					//for (int i = 0; i < 4; i++) {
 						//System.out.println(message.get(i));
 						// System.out.println(serverlist[i]);
 					//}
-					sendMessage(message);
+					sendToAllClients(object);
 				//}
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
@@ -83,7 +83,7 @@ public class Server_neu{
 			// out.close();
 		}
 
-		private void sendMessage(Object message2) {
+		private void sendToAllClients(Object message2) {
 			synchronized (clientManager) {
 				for (ObjectOutputStream output : clientManager) {
 					try {
