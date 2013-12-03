@@ -27,6 +27,7 @@ public class DeskView extends JFrame {
 		private JButton passen;
 		private JButton auswahlSpielen;
 		private JTextField AmountCards;
+		private JButton Slot;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -86,6 +87,7 @@ public class DeskView extends JFrame {
 		mainFrame.setSize(1600,900);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
@@ -147,13 +149,13 @@ public class DeskView extends JFrame {
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		JButton gDalmi = new JButton();
+		/*JButton gDalmi = new JButton();
 		gDalmi.setContentAreaFilled(false);
 		gDalmi.setPreferredSize(new Dimension(89,92));
 		gridSouth.gridx = 0;
 		gridSouth.gridy = 1;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(gDalmi, gridSouth);
+		panelSouth.add(gDalmi, gridSouth);*/
 		
 		AmountCards = new JTextField("A");
 		gridSouth.anchor = GridBagConstraints.LINE_START;
@@ -199,6 +201,19 @@ public class DeskView extends JFrame {
 						
 		mainFrame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
 		
+		for(int i = 0; i<12; i++){
+    		Slot = new JButton();
+    	    Image myImage = getToolkit().createImage("C:/Users/Elias/Downloads/photo.jpg");
+    	    ImageIcon myIcon = new ImageIcon(myImage);
+    	    Slot.setIcon(myIcon);//here you set the icon for your button
+    		Slot.setPreferredSize(new Dimension(500,500));
+    		Slot.setContentAreaFilled(false);
+    		gridSouth.gridx = i;
+    		gridSouth.gridy = 1;
+    		gridSouth.insets = new Insets(5,5,5,5);
+    		panelSouth.add(Slot, gridSouth);
+    	}
+		
 	}
 
     //South Methods
@@ -218,6 +233,8 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(spielerSouth, gridSouth);	
     }
+   
+
        
 	
 	
