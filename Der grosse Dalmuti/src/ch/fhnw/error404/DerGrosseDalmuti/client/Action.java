@@ -222,6 +222,16 @@ public class Action{
 		deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
 	}
 	
+	void showCurrentTrick(){
+		ListIterator<Card> iterator = deck.currentTrick.listIterator();
+		int NOfCards = 1; // count number of equal cards. default 1 because you always card with the "same" type.
+		// go through list
+		while((iterator.hasNext()) && (iterator.next().equals(iterator.previous()) || iterator.previous()==null)){
+			NOfCards++; //				
+		}
+		deskView.showCurrentTrick(deck.currentTrick.peek().getCardType(), NOfCards);
+	}
+	
 	
 	void showMyCards(){
 		int[][] myCards = new int[12][2];
