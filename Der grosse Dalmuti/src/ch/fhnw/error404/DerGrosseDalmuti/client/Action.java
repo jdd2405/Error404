@@ -37,6 +37,7 @@ public class Action{
 		deskView.addCloseGame(new CloseGame());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
+		deskView.addButtonKlick(new ButtonKlick());
 		
 	}
 	
@@ -113,12 +114,15 @@ public class Action{
 	//spielzug passen Button Aktion
 	class Passen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			
 			int countPassen=0;
 			for(int i = 0; i<4; i++){
 				if(allPlayers[i].passed == true){
 					countPassen++;}
 			}
+			//nächster Spieler kommt an die Reihe..das muss noch hinzugefügt werden bei der if bedingung
 			if(countPassen <= 1){allPlayers[myId].setPassed(true);}
+			
 			else if (countPassen ==2){
 				allPlayers[myId].setPassed(true);
 				clearTable();
@@ -136,7 +140,17 @@ public class Action{
 				
 			}
 			//es ist schon ein Kartenstapel auf dem Tisch vorhanden
-			if (deck.currentTrick.peek().getCardType() && DeskView.AmountCards);
+			if (!deck.currentTrick.isEmpty()){
+					//deck.currentTrick.peek().getCardType() && deskView.getAmountCards()== DeskView.){
+				
+			}
+		}
+	}
+	
+	//Button identifizieren damit Card_Type ersichtlich
+	class ButtonKlick implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if (e.getSource() == deskView.getSlot()){
 				
 			}
 		}
@@ -156,7 +170,7 @@ public class Action{
 				NOfPlayers++;
 			}
 		}
-		Player player = new Player(name, NOfPlayers+1);
+		Player player = new Player(name, NOfPlayers+1, Role.values()[NOfPlayers]);
 		myId = player.getId();
 		allPlayers[myId-1] = player; // cause IDs start from 1
 		
@@ -178,86 +192,28 @@ public class Action{
 		Client_neu.sendToServer(deck);
 	}
 	
+	public Player getNextPlayerInOrder(Player player){
+		Player nextPlayerInOrder = null;
+		int nextOrdinal = player.getRole().ordinal()+1;
+		if (nextOrdinal > Role.values().length-1){
+			nextOrdinal = 0;
+		}
+		for (int i=0; i<allPlayers.length; i++){
+			// get the Player which has the next Role in Order as the given Player.
+			// more specific: check ordinal-value of the Role and add 1. Check list of all Players which player has the next Role in Order.
+			if(allPlayers[i].getRole().equals(Role.values()[nextOrdinal])){ // what a ingeniously line of code :-)
+				nextPlayerInOrder = allPlayers[i];
+			}
+		}
+		
+		return nextPlayerInOrder;
+	}
 	
 	// show all Players in proper position
 	void showPlayers(){
-		switch (allPlayers[myId].getRole().getCode()){
-		case(1): // e.g. Grosser Dalmuti
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==2){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==4){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==5){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(2): // e.g. Kleiner Dalmuti
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==4){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==5){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(4): // e.g. Kleiner Diener
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==2){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==3){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(5): // e.g. grosser Diener
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==3){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==4){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		default: 
-			switch(myId){
-			case(1):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId+2]);
-				deskView.showInEast(allPlayers[myId+3]);
-			
-			case(2):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId+2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			
-			case(3):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId-2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			
-			case(4):
-				deskView.showInWest(allPlayers[myId-3]);
-				deskView.showInNorth(allPlayers[myId-2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			}
-				
-		}
+		deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
+		deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
+		deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
 	}
 	
 	

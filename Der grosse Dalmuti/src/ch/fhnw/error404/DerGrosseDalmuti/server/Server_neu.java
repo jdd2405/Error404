@@ -17,7 +17,6 @@ public class Server_neu{
 	// speichert die outputstreams der clients / Vector ist ein dynamisches
 	// Array
 	private Vector<ObjectOutputStream> clientManager = new Vector<ObjectOutputStream>();
-	//ArrayList<Player> serverlist = new ArrayList<Player>(4);
 
 	public static void main(String[] args) {
 		Server_neu serverObject = new Server_neu();
@@ -62,16 +61,13 @@ public class Server_neu{
 		}
 
 		public void run() {
-			//Object object; // is not needed.
 
 			try {
 				object = input.readObject();
 				System.out.println(object.toString());
-				//serverlist = message;
-				//if (message.isEmpty() != true) {
+				//if (object.isEmpty() != true) {
 					//for (int i = 0; i < 4; i++) {
-						//System.out.println(message.get(i));
-						// System.out.println(serverlist[i]);
+						//System.out.println(object.get(i));
 					//}
 					sendToAllClients(object);
 				//}

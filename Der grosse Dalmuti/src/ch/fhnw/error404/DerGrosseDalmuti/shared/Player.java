@@ -30,9 +30,9 @@ public class Player implements Serializable{
 	//private boolean passed; // set to false after every trick (engl. "Stich")!
 	
 	// constructor
-	public Player(String name, int id) {
+	public Player(String name, int id, Role role) {
 		this.name = name;
-		this.role = Role.BUERGER;
+		this.role = role;
 		this.id = id;
 		this.setPassed(false);
 	}
@@ -44,8 +44,6 @@ public class Player implements Serializable{
 	
 	public void setId(int id){this.id = id;}
 	public  int getId() {return id;}
-	
-	
 	public void setRole(int i){		
 		switch(i){
 		case(1):
@@ -53,10 +51,8 @@ public class Player implements Serializable{
 		case(2):
 			this.role = Role.KLEINERDALMUTI;
 		case(3):
-			this.role = Role.BUERGER;
-		case(4):
 			this.role = Role.KLEINERDIENER;
-		case(5):
+		case(4):
 			this.role = Role.GROSSERDIENER;
 		}
 	}

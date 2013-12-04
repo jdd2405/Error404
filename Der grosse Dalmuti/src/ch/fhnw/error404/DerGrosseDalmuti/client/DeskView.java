@@ -171,12 +171,12 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(gDalmi, gridSouth);*/
 		
-		AmountCards = new JTextField("A");
+		setAmountCards(new JTextField("A"));
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 3;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(AmountCards, gridSouth);
+		panelSouth.add(getAmountCards(), gridSouth);
 		
 		JLabel Anzahl = new JLabel("Number of chosen cards:");
 		gridSouth.gridwidth = 2;
@@ -251,6 +251,7 @@ public class DeskView extends JFrame {
     	}
     	
     }
+    
    
 
        
@@ -365,6 +366,15 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	auswahlSpielen.addActionListener(listener);
     }
+	public JTextField getAmountCards() {return AmountCards;}
+	public void setAmountCards(JTextField amountCards) {AmountCards = amountCards;}
+	
+	
+	void addButtonKlick (ActionListener listener){
+		getSlot().addActionListener(listener);
+	}
+	public JButton getSlot() {return Slot;}
+	public void setSlot(JButton slot) {Slot = slot;}
 
 }
 
