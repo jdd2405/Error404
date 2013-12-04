@@ -23,7 +23,7 @@ public class Player implements Serializable{
 	private int id; // unique identifier
 	private boolean active; // Is it my turn?
 	private Role role; // Wanna be King!
-	private int rank; // oh, I have not finished first?
+	private int rank = 0; // oh, I have not finished first?
 	private ArrayList<Card> cards;
 	private Card swappedCard;
 	public boolean passed; // set to false after every trick (engl. "Stich")!

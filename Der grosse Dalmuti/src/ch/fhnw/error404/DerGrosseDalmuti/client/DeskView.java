@@ -359,12 +359,6 @@ public class DeskView extends JFrame {
 	public JTextField getAmountCards() {return AmountCards;}
 	public void setAmountCards(JTextField amountCards) {AmountCards = amountCards;}
 	
-	
-	void addButtonKlick (ActionListener listener){
-		getSlot().addActionListener(listener);
-	}
-	public JButton getSlot() {return slot;}
-	public void setSlot(JButton slot) {slot = slot;}
 
 }
 

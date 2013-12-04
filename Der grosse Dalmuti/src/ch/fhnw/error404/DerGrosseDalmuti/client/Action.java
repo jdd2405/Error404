@@ -37,7 +37,6 @@ public class Action{
 		deskView.addCloseGame(new CloseGame());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
-		deskView.addButtonKlick(new ButtonKlick());
 		
 	}
 	
@@ -159,32 +158,53 @@ public class Action{
 	// Auswahl spielen Button Aktion
 	class AuswahlSpielen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			//sind noch keine Karten in der Mitte darf der Spieler legen was er will
-			if(deck.currentTrick.isEmpty()){
-				
+			int anzahlKarten = get."Textfeld + parse.to int";
+			ListIterator<Card> listIterator = allPlayers[myId].getCards().listIterator();
+			while(listIterator.hasNext()){
+				Card cardtype = listIterator.next();
+				if(cardtype.getCardType().equals("vom AnzeigeKartentyp get Kartentyp")){
+					for(int i =0; i<anzahlKarten;i++){
+						//add it to currentTrick [not sure if this works object von ]
+						deck.currentTrick.push(cardtype);
+						//remove it from the playercards arraylist
+						listIterator.remove();
+					}
+				}
 			}
-			//es ist schon ein Kartenstapel auf dem Tisch vorhanden
-			if (!deck.currentTrick.isEmpty()){
-					//deck.currentTrick.peek().getCardType() && deskView.getAmountCards()== DeskView.){
-				
+			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
+			
+			
+			
+			//alle Spieler auf inaktiv setzen
+			for(int i = 0; i<allPlayers.length;i++){
+				allPlayers[i].setActive(false);
 			}
+			
+			//hat Spieler keine Karten mehr, wird Rang zugewiesen
+			if(allPlayers[myId].getCards().isEmpty()){
+				int anzahlRankVergaben = 1;
+				for(int i = 0; i<allPlayers.length;i++){
+					if(allPlayers[i].getRank() != 0){
+						anzahlRankVergaben++;
+					}
+				}
+				if (anzahlRankVergaben<2){
+					allPlayers[myId].setRank(anzahlRankVergaben);
+				}
+				else{
+					allPlayers[myId].setRank(anzahlRankVergaben);
+					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben);
+					roundFinish();
+				}
+			}
+			
 		}
+
+		
 	}
 	
 	
-	
-	//Button identifizieren damit Card_Type ersichtlich
-	class ButtonKlick implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			if (e.getSource() == deskView.getSlot()){
-				
-			}
-		}
-	}
-	
-	
-	
-	
+
 	
 	
 	
@@ -363,7 +383,10 @@ public class Action{
 			deck.notDealtCards.add(deck.currentTrick.pop());
 		}
 	}
-	
+	//Runde ist fertig, alle Rank's wurden verteilt
+	private void roundFinish() {
+		
+	}
 
 	public int getMyId() {
 		return myId;
