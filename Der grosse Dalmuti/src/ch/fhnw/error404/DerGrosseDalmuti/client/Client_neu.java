@@ -17,7 +17,7 @@ public class Client_neu {
 	static ObjectInputStream in;
 	static ObjectOutputStream out;
 	Deck deck = new Deck();
-
+	static Action action;
 
 
 
@@ -25,7 +25,7 @@ public class Client_neu {
 		Client_neu client = new Client_neu();
 		LoginView loginView = new LoginView();
 		DeskView deskView = new DeskView();
-		new Action(loginView, deskView);
+		action = new Action(loginView, deskView);
 		client.clientSocket();
 		
 
@@ -79,6 +79,7 @@ public class Client_neu {
 					//input ist Arrayliste mit den Playerobjekten
 					if (message instanceof Player[]) {
 						Action.allPlayers = (Player[]) message;
+						action.showPlayers();
 							for (int i = 0; i < 4; i++) {
 								System.out.println(Action.allPlayers[i]);
 							}
