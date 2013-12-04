@@ -54,7 +54,6 @@ public class DeskView extends JFrame {
 		private JTextField numberOfCardsCenter;
 		
 		
-		
 		private JTextField username;
 		private JButton closeGame;
 		
@@ -79,7 +78,7 @@ public class DeskView extends JFrame {
 	
 	public DeskView() {
 		
-		ImageIcon icon = new ImageIcon("../../../../../../../card.png"); // for test reasons
+		ImageIcon icon = new ImageIcon("karte1.jpg"); // for test reasons
 		
 		
 		mainFrame = new JFrame();
@@ -149,7 +148,7 @@ public class DeskView extends JFrame {
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		/*JButton gDalmi = new JButton();
+		/*JButton gDalmi = new JButton(icon);
 		gDalmi.setContentAreaFilled(false);
 		gDalmi.setPreferredSize(new Dimension(89,92));
 		gridSouth.gridx = 0;
