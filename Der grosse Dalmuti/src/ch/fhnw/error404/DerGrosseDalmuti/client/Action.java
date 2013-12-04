@@ -120,14 +120,19 @@ public class Action{
 				if(allPlayers[i].passed == true){
 					countPassen++;}
 			}
-			//nächster Spieler kommt an die Reihe..das muss noch hinzugefügt werden bei der if bedingung
-			if(countPassen <= 1){allPlayers[myId].setPassed(true);}
+
+			if(countPassen <= 1){
+				allPlayers[myId].setPassed(true);
+				allPlayers[myId].setActive(false);
+				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+			}
 			
 			else if (countPassen ==2){
-				allPlayers[myId].setPassed(true);
 				clearTable();
 				for(int i = 0; i<4; i++){
 					allPlayers[i].passed = false;}
+				allPlayers[myId].setActive(false);
+				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 			}
 		}
 	}
@@ -154,6 +159,7 @@ public class Action{
 				
 			}
 		}
+	}
 	
 	
 	
