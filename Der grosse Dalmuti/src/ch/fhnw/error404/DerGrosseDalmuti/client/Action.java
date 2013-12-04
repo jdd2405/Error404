@@ -170,7 +170,7 @@ public class Action{
 				NOfPlayers++;
 			}
 		}
-		Player player = new Player(name, NOfPlayers+1);
+		Player player = new Player(name, NOfPlayers+1, Role.values()[NOfPlayers]);
 		myId = player.getId();
 		allPlayers[myId-1] = player; // cause IDs start from 1
 		
@@ -192,10 +192,26 @@ public class Action{
 		Client_neu.sendToServer(deck);
 	}
 	
+	public Player getNextPlayerInOrder(Player player){
+		Player nextPlayerInOrder = null;
+		int nextOrdinal = player.getRole().ordinal()+1;
+		if (nextOrdinal > Role.values().length-1){
+			nextOrdinal = 0;
+		}
+		for (int i=0; i<allPlayers.length; i++){
+			// get the Player which has the next Role in Order as the given Player.
+			// more specific: check ordinal-value of the Role and add 1. Check list of all Players which player has the next Role in Order.
+			if(allPlayers[i].getRole().equals(Role.values()[nextOrdinal])){ // what a ingeniously line of code :-)
+				nextPlayerInOrder = allPlayers[i];
+			}
+		}
+		
+		return nextPlayerInOrder;
+	}
 	
 	// show all Players in proper position
 	void showPlayers(){
-		switch (allPlayers[myId].getRole().getCode()){
+		switch (allPlayers[myId].getRole().ordinal()){
 		case(1): // e.g. Grosser Dalmuti
 			for(int i = 0; i<allPlayers.length; i++){
 				if(allPlayers[i].getRole().getCode()==2){
@@ -211,7 +227,7 @@ public class Action{
 			}
 		case(2): // e.g. Kleiner Dalmuti
 			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==4){
+				if(allPlayers[i].getRole().ordinal()==4){
 					deskView.showInWest(allPlayers[i]);
 				}
 				else if(allPlayers[i].getRole().getCode()==5){
