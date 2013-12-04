@@ -27,8 +27,8 @@ public class DeskView extends JFrame {
 		private JButton passen;
 		private JButton auswahlSpielen;
 		private JTextField AmountCards;
-		private JButton Slot;
-		private JTextField amountOfDisplayedCards;
+		private JButton[] slot = new JButton[12];
+		private JLabel amountOfCards;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -58,29 +58,23 @@ public class DeskView extends JFrame {
 		private JTextField username;
 		private JButton closeGame;
 		
-		//ImageIcon gDalmuti = new ImageIcon(ImageIcon.class.getResource("\\Error404\\Karten\\karte1.jpg"));
+		ImageIcon icon = new ImageIcon("Bilder/karte2.jpg");
+		ImageIcon[] myIcon = new ImageIcon[12];
 
-
-		
-		/*void DisplayCard(int NOfCard, Card card, ActionListener listener){
-			for (int i = 0; i < numberCards; i++){ // creates the button with all the cards
-				cards[i] = new testclass(icon, i);
-				cards[i].setContentAreaFilled(false);
-				cards[i].setPreferredSize(new Dimension(89,92));
-				cards[i].addActionListener(DisplayCards);
-				GridSouth.gridx = i;
-				GridSouth.gridy = 1;
-				GridSouth.insets = new Insets(5,5,5,5);
-				PanelSouth.add(cards[i], GridSouth);
-			}
-		}*/
-
-		
-	
 	public DeskView() {
 		
-		ImageIcon icon = new ImageIcon("karte1.jpg"); // for test reasons
-		
+		myIcon[0] = new ImageIcon("Bilder/karte1.jpg");
+		myIcon[1] = new ImageIcon("Bilder/karte2.jpg");
+		myIcon[2] = new ImageIcon("Bilder/karte3.jpg");
+		myIcon[3] = new ImageIcon("Bilder/karte4.jpg");
+		myIcon[4] = new ImageIcon("Bilder/karte5.jpg");
+		myIcon[5] = new ImageIcon("Bilder/karte6.jpg");
+		myIcon[6] = new ImageIcon("Bilder/karte7.jpg");
+		myIcon[7] = new ImageIcon("Bilder/karte8.jpg");
+		myIcon[8] = new ImageIcon("Bilder/karte9.jpg");
+		myIcon[9] = new ImageIcon("Bilder/karte10.jpg");
+		myIcon[10] = new ImageIcon("Bilder/karte11.jpg");
+		myIcon[11] = new ImageIcon("Bilder/karte12.jpg");
 		
 		mainFrame = new JFrame();
 		mainFrame.setTitle("Der Grosse Dalmuti");
@@ -149,18 +143,15 @@ public class DeskView extends JFrame {
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		//Image myImage = getToolkit().createImage("C:/Users/Glaimby/pictures/card.png");
-		ImageIcon myIcon = new ImageIcon("C:/Users/Glaimby/pictures/card.png");
-		
 		for(int i = 0; i<12; i++){
-    		Slot = new JButton();
-    	    Slot.setIcon(myIcon);//here you set the icon for your button
-    		Slot.setPreferredSize(new Dimension(89,92));
-    		Slot.setContentAreaFilled(false);
+    		slot[i] = new JButton();
+    	    slot[i].setIcon(myIcon[i]);//here you set the icon for your button
+    		slot[i].setPreferredSize(new Dimension(89,92));
+    		slot[i].setContentAreaFilled(false);
     		gridSouth.gridx = i;
     		gridSouth.gridy = 1;
     		gridSouth.insets = new Insets(5,5,5,5);
-    		panelSouth.add(Slot, gridSouth);
+    		panelSouth.add(slot[i], gridSouth);
     	}
 		
 		/*JButton gDalmi = new JButton(icon);
@@ -238,24 +229,23 @@ public class DeskView extends JFrame {
     void showMyCards(int[][] cards){
     	
     	for(int i = 0; i < 12; i++){
-    		amountOfDisplayedCards = new JTextField(Integer.toString(cards[i][0]));
-    		gridSouth.gridx = i;
+    		slot[i].setLayout(new BorderLayout());
+    		slot[i].add(amountOfCards = new JLabel(Integer.toString(cards[i][0])),BorderLayout.WEST);
+    		amountOfCards.setFont(new Font("Arial", Font.BOLD, 35));
+    		amountOfCards.setForeground(Color.red);
+    		/*gridSouth.gridx = i;
     		gridSouth.gridy = 1;
     		gridSouth.insets = new Insets(5,5,5,5);
-    		panelSouth.add(amountOfDisplayedCards, gridSouth);
+    		panelSouth.add(amountOfDisplayedCards, gridSouth);*/
     		
-    		// for greying out cards
+    		// for greying out cards for(int i = 0; i < 12; i++){
     		if(cards[i][1] == 0){
-    			Slot.setEnabled(false);
+    			slot[i].setEnabled(false);
     		}
     	}
     	
     }
     
-   
-
-       
-	
 	
     //West Methods
 	void showInWest(Player player){
@@ -373,8 +363,8 @@ public class DeskView extends JFrame {
 	void addButtonKlick (ActionListener listener){
 		getSlot().addActionListener(listener);
 	}
-	public JButton getSlot() {return Slot;}
-	public void setSlot(JButton slot) {Slot = slot;}
+	public JButton getSlot() {return slot;}
+	public void setSlot(JButton slot) {slot = slot;}
 
 }
 

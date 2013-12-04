@@ -28,17 +28,34 @@ public class Client {
 		test[0][1]= 0;
 		test[0][0]= 5;
 		test[1][0]= 3;
-		test[1][1]= 0;
+		test[1][1]= 1;
+		test[2][1]= 1;
+		test[2][0]= 5;
+		test[3][0]= 3;
+		test[3][1]= 1;
+		test[4][1]= 1;
+		test[4][0]= 5;
+		test[5][0]= 3;
+		test[5][1]= 0;
+		test[6][1]= 1;
+		test[6][0]= 5;
+		test[7][0]= 3;
+		test[7][1]= 1;
+		test[8][1]= 1;
+		test[8][0]= 5;
+		test[9][0]= 3;
+		test[9][1]= 1;
+		test[10][1]= 1;
+		test[10][0]= 5;
+		test[11][0]= 3;
+		test[11][1]= 1;
+		
 		LoginView loginView = new LoginView();
 		DeskView deskView = new DeskView();
 		deskView.showMyCards(test);
 		new Action(loginView, deskView);
 		
 		
-				
-
-
-
 	}
 
 	
