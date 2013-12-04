@@ -28,7 +28,8 @@ public class DeskView extends JFrame {
 		private JButton auswahlSpielen;
 		private JTextField AmountCards;
 		private JButton[] slot = new JButton[12];
-		private JLabel amountOfCards;
+		private JLabel[] amountOfCards = new JLabel[12];
+		private String a;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -162,7 +163,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(gDalmi, gridSouth);*/
 		
-		setAmountCards(new JTextField("A"));
+		setAmountCards(new JTextField(a));
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 3;
 		gridSouth.gridy = 2;
@@ -230,9 +231,9 @@ public class DeskView extends JFrame {
     	
     	for(int i = 0; i < 12; i++){
     		slot[i].setLayout(new BorderLayout());
-    		slot[i].add(amountOfCards = new JLabel(Integer.toString(cards[i][0])),BorderLayout.WEST);
-    		amountOfCards.setFont(new Font("Arial", Font.BOLD, 35));
-    		amountOfCards.setForeground(Color.red);
+    		slot[i].add(amountOfCards[i] = new JLabel(Integer.toString(cards[i][0])),BorderLayout.WEST);
+    		amountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
+    		amountOfCards[i].setForeground(Color.red);
     		/*gridSouth.gridx = i;
     		gridSouth.gridy = 1;
     		gridSouth.insets = new Insets(5,5,5,5);
@@ -340,6 +341,19 @@ public class DeskView extends JFrame {
     }
 	
 	//Other Methods
+    
+    void getTextOfLabel(){
+    		//a = amountOfCards.getText();
+    		System.out.println();
+    		
+    	}
+    
+    
+    void addDisplayNumber(ActionListener listener){
+    	for (int i=0;i<12;i++){
+    		slot[i].addActionListener(listener);
+    	}
+    }
 	
     void addCloseGame(ActionListener listener) {
         closeGame.addActionListener(listener);

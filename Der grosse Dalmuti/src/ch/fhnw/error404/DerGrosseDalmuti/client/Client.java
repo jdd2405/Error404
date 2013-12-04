@@ -47,7 +47,7 @@ public class Client {
 		test[9][1]= 1;
 		test[10][1]= 1;
 		test[10][0]= 5;
-		test[11][0]= 3;
+		test[11][0]= 5;
 		test[11][1]= 1;
 		
 		LoginView loginView = new LoginView();

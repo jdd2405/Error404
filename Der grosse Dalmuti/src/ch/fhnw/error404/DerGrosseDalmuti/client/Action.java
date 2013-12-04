@@ -37,6 +37,10 @@ public class Action{
 		deskView.addCloseGame(new CloseGame());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
+
+		//deskView.addButtonKlick(new ButtonKlick());
+		deskView.addDisplayNumber(new DisplayNumber());
+
 		
 	}
 	
@@ -125,7 +129,15 @@ public class Action{
 		}
 	}
 	
-	
+
+	class DisplayNumber implements ActionListener{
+		String b;
+		public void actionPerformed(ActionEvent e){
+			b = e.getActionCommand();
+			System.out.println(b);
+			//deskView.getTextOfLabel();	
+		}
+	}
 	
 	//spielzug passen Button Aktion
 	class Passen implements ActionListener{
