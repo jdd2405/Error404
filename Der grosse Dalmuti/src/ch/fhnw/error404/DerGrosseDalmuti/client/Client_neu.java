@@ -74,14 +74,10 @@ public class Client_neu {
 				while (true) {
 					object = in.readObject();
 					//input ist Arrayliste mit den Playerobjekten
-<<<<<<< HEAD
+
 					if (object instanceof Player[]) {
 						action.allPlayers = (Player[]) object;
-=======
-					if (message instanceof Player[]) {
-						Action.allPlayers = (Player[]) message;
 						action.showPlayers();
->>>>>>> branch 'master' of https://github.com/jdd2405/Error404.git
 							for (int i = 0; i < 4; i++) {
 								System.out.println(action.allPlayers[i]);
 							}
