@@ -76,7 +76,7 @@ public class DeskView extends JFrame {
 	
 	public DeskView() {
 		
-		ImageIcon icon = new ImageIcon("../../../../../../../card.png"); // for test reasons
+		ImageIcon icon = new ImageIcon("karte1.jpg"); // for test reasons
 		
 		
 		deskView = new JFrame();
@@ -84,7 +84,7 @@ public class DeskView extends JFrame {
 		deskView.setSize(1600,900);
 		deskView.setLocationRelativeTo(null);
 		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		deskView.setVisible(false);
+		deskView.setVisible(true);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
@@ -146,7 +146,7 @@ public class DeskView extends JFrame {
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		JButton gDalmi = new JButton();
+		JButton gDalmi = new JButton(icon);
 		gDalmi.setContentAreaFilled(false);
 		gDalmi.setPreferredSize(new Dimension(89,92));
 		gridSouth.gridx = 0;
