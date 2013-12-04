@@ -157,12 +157,12 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(gDalmi, gridSouth);*/
 		
-		AmountCards = new JTextField("A");
+		setAmountCards(new JTextField("A"));
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 3;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(AmountCards, gridSouth);
+		panelSouth.add(getAmountCards(), gridSouth);
 		
 		JLabel Anzahl = new JLabel("Number of chosen cards:");
 		gridSouth.gridwidth = 2;
@@ -202,16 +202,16 @@ public class DeskView extends JFrame {
 		mainFrame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
 		
 		for(int i = 0; i<12; i++){
-    		Slot = new JButton();
+    		Slot = (new JButton());
     	    Image myImage = getToolkit().createImage("C:/Users/Elias/Downloads/photo.jpg");
     	    ImageIcon myIcon = new ImageIcon(myImage);
-    	    Slot.setIcon(myIcon);//here you set the icon for your button
-    		Slot.setPreferredSize(new Dimension(500,500));
-    		Slot.setContentAreaFilled(false);
+    	    getSlot().setIcon(myIcon);//here you set the icon for your button
+    		getSlot().setPreferredSize(new Dimension(500,500));
+    		getSlot().setContentAreaFilled(false);
     		gridSouth.gridx = i;
     		gridSouth.gridy = 1;
     		gridSouth.insets = new Insets(5,5,5,5);
-    		panelSouth.add(Slot, gridSouth);
+    		panelSouth.add(getSlot(), gridSouth);
     	}
 		
 	}
@@ -233,6 +233,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(spielerSouth, gridSouth);	
     }
+    
    
 
        
@@ -347,6 +348,15 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	auswahlSpielen.addActionListener(listener);
     }
+	public JTextField getAmountCards() {return AmountCards;}
+	public void setAmountCards(JTextField amountCards) {AmountCards = amountCards;}
+	
+	
+	void addButtonKlick (ActionListener listener){
+		getSlot().addActionListener(listener);
+	}
+	public JButton getSlot() {return Slot;}
+	public void setSlot(JButton slot) {Slot = slot;}
 
 }
 

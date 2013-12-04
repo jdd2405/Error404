@@ -37,6 +37,7 @@ public class Action{
 		deskView.addCloseGame(new CloseGame());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
+		deskView.addButtonKlick(new ButtonKlick());
 		
 	}
 	
@@ -113,12 +114,15 @@ public class Action{
 	//spielzug passen Button Aktion
 	class Passen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			
 			int countPassen=0;
 			for(int i = 0; i<4; i++){
 				if(allPlayers[i].passed == true){
 					countPassen++;}
 			}
+			//nächster Spieler kommt an die Reihe..das muss noch hinzugefügt werden bei der if bedingung
 			if(countPassen <= 1){allPlayers[myId].setPassed(true);}
+			
 			else if (countPassen ==2){
 				allPlayers[myId].setPassed(true);
 				clearTable();
@@ -136,7 +140,17 @@ public class Action{
 				
 			}
 			//es ist schon ein Kartenstapel auf dem Tisch vorhanden
-			if (deck.currentTrick.peek().getCardType() && DeskView.AmountCards);
+			if (!deck.currentTrick.isEmpty()){
+					//deck.currentTrick.peek().getCardType() && deskView.getAmountCards()== DeskView.){
+				
+			}
+		}
+	}
+	
+	//Button identifizieren damit Card_Type ersichtlich
+	class ButtonKlick implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			if (e.getSource() == deskView.getSlot()){
 				
 			}
 		}
