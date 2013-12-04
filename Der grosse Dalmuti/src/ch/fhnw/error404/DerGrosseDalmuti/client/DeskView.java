@@ -54,7 +54,6 @@ public class DeskView extends JFrame {
 		private JTextField numberOfCardsCenter;
 		
 		
-		
 		private JTextField username;
 		private JButton closeGame;
 		
@@ -82,12 +81,12 @@ public class DeskView extends JFrame {
 		ImageIcon icon = new ImageIcon("karte1.jpg"); // for test reasons
 		
 		
-		deskView = new JFrame();
-		deskView.setTitle("Der Grosse Dalmuti");
-		deskView.setSize(1600,900);
-		deskView.setLocationRelativeTo(null);
-		deskView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		deskView.setVisible(true);
+		mainFrame = new JFrame();
+		mainFrame.setTitle("Der Grosse Dalmuti");
+		mainFrame.setSize(1600,900);
+		mainFrame.setLocationRelativeTo(null);
+		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrame.setVisible(true);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
