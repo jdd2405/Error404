@@ -159,7 +159,7 @@ public class Action{
 				
 			}
 		}
-	}
+	
 	
 	
 	/*
@@ -216,83 +216,9 @@ public class Action{
 	
 	// show all Players in proper position
 	void showPlayers(){
-		switch (allPlayers[myId].getRole().ordinal()){
-		case(1): // e.g. Grosser Dalmuti
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==2){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==4){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==5){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(2): // e.g. Kleiner Dalmuti
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().ordinal()==4){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==5){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(4): // e.g. Kleiner Diener
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==2){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==3){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		case(5): // e.g. grosser Diener
-			for(int i = 0; i<allPlayers.length; i++){
-				if(allPlayers[i].getRole().getCode()==3){
-					deskView.showInWest(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==4){
-					deskView.showInNorth(allPlayers[i]);
-				}
-				else if(allPlayers[i].getRole().getCode()==1){
-					deskView.showInEast(allPlayers[i]);
-				}
-					
-			}
-		default: 
-			switch(myId){
-			case(1):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId+2]);
-				deskView.showInEast(allPlayers[myId+3]);
-			
-			case(2):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId+2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			
-			case(3):
-				deskView.showInWest(allPlayers[myId+1]);
-				deskView.showInNorth(allPlayers[myId-2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			
-			case(4):
-				deskView.showInWest(allPlayers[myId-3]);
-				deskView.showInNorth(allPlayers[myId-2]);
-				deskView.showInEast(allPlayers[myId-1]);
-			}
-				
-		}
+		deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
+		deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
+		deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
 	}
 	
 	
