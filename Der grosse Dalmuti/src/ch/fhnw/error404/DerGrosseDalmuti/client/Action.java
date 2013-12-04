@@ -15,9 +15,9 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
  */
 public class Action{
 	
-	static protected int myId;
+	protected int myId;
 	Player[] allPlayers = new Player[4];
-	static Deck deck;
+	Deck deck;
 	LoginView loginView;
 	DeskView  deskView;
 
@@ -41,9 +41,17 @@ public class Action{
 		
 	}
 	
+	
+	
+	
+	
 	/*
 	 * INNER CLASSES for Action- and MouseListeners
 	 */
+	
+	
+	
+	
 	
 	// inner class Listener
 	class Listener implements ActionListener {
@@ -78,6 +86,8 @@ public class Action{
 		}
 	}
 	
+	
+	
 	// Clear Loginfield on click
 	class ClearOnClick implements MouseListener{
 		
@@ -98,6 +108,8 @@ public class Action{
 		}
 	}	
 	
+	
+	
 	// Counts cards of the player on click
 	class DisplayAmountOfCardsToPlay implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -105,12 +117,17 @@ public class Action{
 		}
 	}
 	
+	
+	
 	// Close Game
 	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
 			deskView.closeWindow();		
 		}
 	}
+	
+	
+	
 	//spielzug passen Button Aktion
 	class Passen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -137,6 +154,8 @@ public class Action{
 		}
 	}
 	
+	
+	
 	// Auswahl spielen Button Aktion
 	class AuswahlSpielen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -152,6 +171,8 @@ public class Action{
 		}
 	}
 	
+	
+	
 	//Button identifizieren damit Card_Type ersichtlich
 	class ButtonKlick implements ActionListener{
 		public void actionPerformed(ActionEvent e){
@@ -163,9 +184,17 @@ public class Action{
 	
 	
 	
+	
+	
+	
+	
 	/*
 	 * GAME LOGIC - Methods for running the Game properly
 	 */
+	
+	
+	
+	
 	
 	// create new player based on the login-variables
 	// if there are 4 players deal cards
@@ -192,12 +221,18 @@ public class Action{
 					}
 				}
 			}
+			
+			Client_neu.sendToServer(deck);
 		}
 		
 		Client_neu.sendToServer(allPlayers);
-		Client_neu.sendToServer(deck);
+		
 	}
 	
+	
+	
+	
+	// get next Player in Order -> relative to Role of given Player
 	public Player getNextPlayerInOrder(Player player){
 		Player nextPlayerInOrder = null;
 		int nextOrdinal = player.getRole().ordinal()+1;
@@ -215,6 +250,8 @@ public class Action{
 		return nextPlayerInOrder;
 	}
 	
+	
+	
 	// show all Players in proper position
 	void showPlayers(){
 		deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
@@ -222,6 +259,9 @@ public class Action{
 		deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
 	}
 	
+	
+	
+	// show Cards in the center of deskView
 	void showCurrentTrick(){
 		ListIterator<Card> iterator = deck.currentTrick.listIterator();
 		int NOfCards = 1; // count number of equal cards. default 1 because you always card with the "same" type.
@@ -233,6 +273,8 @@ public class Action{
 	}
 	
 	
+	
+	// show my Cards in South. Check if they are playable. 
 	void showMyCards(){
 		int[][] myCards = new int[12][2];
 		ListIterator<Card> iterator = allPlayers[myId].getCards().listIterator();
@@ -314,13 +356,42 @@ public class Action{
 	}	
 	
 	
+	
 	// clear table nachdem 3 Player gepasst haben
 	protected void clearTable(){
 		while(!deck.currentTrick.isEmpty()){ // not empty
 			deck.notDealtCards.add(deck.currentTrick.pop());
 		}
 	}
+	
 
+	public int getMyId() {
+		return myId;
+	}
+
+	public void setMyId(int myId) {
+		this.myId = myId;
+	}
+
+	public Player[] getAllPlayers() {
+		return allPlayers;
+	}
+
+	public void setAllPlayers(Player[] allPlayers) {
+		this.allPlayers = allPlayers;
+		showPlayers();
+		showMyCards();
+	}
+
+	public Deck getDeck() {
+		return deck;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+		showCurrentTrick();
+	}
+	
 	
 }
 

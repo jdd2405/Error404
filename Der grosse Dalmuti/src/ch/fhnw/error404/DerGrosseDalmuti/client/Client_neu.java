@@ -76,17 +76,18 @@ public class Client_neu {
 					//input ist Arrayliste mit den Playerobjekten
 
 					if (object instanceof Player[]) {
-						action.allPlayers = (Player[]) object;
-						action.showPlayers();
+						action.setAllPlayers((Player[]) object);
+						System.out.println("Folgende Spieler wurden übermittelt: ");
 							for (int i = 0; i < 4; i++) {
-								System.out.println(action.allPlayers[i]);
+								System.out.println(action.allPlayers[i].getName());
 							}
 						
 					}
 					//input für die 3 Variablen im Deck
 					if (object instanceof Deck) {
-						Action.deck = (Deck) object;
-						System.out.println("Deck übermittelt");
+						action.setDeck((Deck) object);
+						System.out.println("Deck übermittelt.");
+						
 					}
 					/*
 					if (message instanceof ArrayList) {
