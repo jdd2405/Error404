@@ -3,13 +3,10 @@ package ch.fhnw.error404.DerGrosseDalmuti.server;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Vector;
 
-import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 public class Server_neu{
@@ -17,6 +14,8 @@ public class Server_neu{
 	// speichert die outputstreams der clients / Vector ist ein dynamisches
 	// Array
 	private Vector<ObjectOutputStream> clientManager = new Vector<ObjectOutputStream>();
+	static Deck deck = new Deck();
+	static Player[] allPlayers;
 
 	public static void main(String[] args) {
 		Server_neu serverObject = new Server_neu();
@@ -33,7 +32,8 @@ public class Server_neu{
 				ObjectOutputStream output = new ObjectOutputStream(
 						client.getOutputStream());
 				clientManager.add(output);
-				output.writeObject(Action.allPlayers);
+				output.writeObject(deck);
+				output.writeObject(allPlayers);
 				output.flush();
 				Thread t = new Thread(new ChatThread(client));
 				t.start();
@@ -69,8 +69,18 @@ public class Server_neu{
 					//for (int i = 0; i < 4; i++) {
 						//System.out.println(object.get(i));
 					//}
+					
+					if (object instanceof Player[]) {
+						allPlayers = (Player[]) object;
+					}
+					if (object instanceof Deck) {
+						deck = (Deck) object;
+					}
+					
 					sendToAllClients(object);
+					
 				//}
+					
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
 			}
