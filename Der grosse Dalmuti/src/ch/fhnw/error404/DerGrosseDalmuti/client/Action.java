@@ -1,6 +1,6 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ListIterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +17,7 @@ public class Action{
 	
 	static protected int myId;
 	public static Player[] allPlayers = new Player[4];
+	public static Deck deck;
 	LoginView loginView;
 	DeskView  deskView;
 
@@ -34,6 +35,8 @@ public class Action{
 		
 		//deskView.addDisplayAmountOfCardsToPlay(new DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
+		deskView.addPassen(new Passen());
+		deskView.addAuswahlSpielen(new AuswahlSpielen());
 		
 	}
 	
@@ -104,8 +107,38 @@ public class Action{
 	// Close Game
 	class CloseGame implements ActionListener{
 		public void actionPerformed(ActionEvent e){
-			
 			deskView.closeWindow();		
+		}
+	}
+	//spielzug passen Button Aktion
+	class Passen implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			int countPassen=0;
+			for(int i = 0; i<4; i++){
+				if(allPlayers[i].passed == true){
+					countPassen++;}
+			}
+			if(countPassen <= 1){allPlayers[myId].setPassed(true);}
+			else if (countPassen ==2){
+				allPlayers[myId].setPassed(true);
+				clearTable();
+				for(int i = 0; i<4; i++){
+					allPlayers[i].passed = false;}
+			}
+		}
+	}
+	
+	// Auswahl spielen Button Aktion
+	class AuswahlSpielen implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			//sind noch keine Karten in der Mitte darf der Spieler legen was er will
+			if(deck.currentTrick.isEmpty()){
+				
+			}
+			//es ist schon ein Kartenstapel auf dem Tisch vorhanden
+			if (deck.currentTrick.peek().getCardType() && DeskView.AmountCards);
+				
+			}
 		}
 	}
 	
@@ -115,24 +148,144 @@ public class Action{
 	 */
 	
 	// create new player based on the login-variables
+	// if there are 4 players deal cards
 	protected void newPlayer(String name){
-		Player player = new Player(name, getAllPlayers().length+1);
+		int NOfPlayers = 0;
+		for (int i = 0; i < allPlayers.length; i++){
+			if(allPlayers[i]!=null){
+				NOfPlayers++;
+			}
+		}
+		Player player = new Player(name, NOfPlayers+1);
 		myId = player.getId();
-		allPlayers[myId] = player;
+		allPlayers[myId-1] = player; // cause IDs start from 1
+		
+		if(myId==4){
+			// shuffle notDealtCards
+			Collections.shuffle(deck.notDealtCards);
+			// create Iterator to get trough the LinkedList
+			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+			while (iterator.hasNext()){
+				for(int i=0; i<=allPlayers.length; i++){
+					for(int j=0; j<=deck.notDealtCards.size(); j++){
+						allPlayers[i].addCard(deck.notDealtCards.remove(j));
+					}
+				}
+			}
+		}
+		
+		Client_neu.sendToServer(allPlayers);
+		Client_neu.sendToServer(deck);
 	}
 	
 	
-	// show all Players in proper position (e
+	// show all Players in proper position
 	void showPlayers(){
-		switch (allPlayers[myId].getRole()){
-		case(GROSSERDALMUTI):
+		switch (allPlayers[myId].getRole().getCode()){
+		case(1): // e.g. Grosser Dalmuti
 			for(int i = 0; i<allPlayers.length; i++){
+				if(allPlayers[i].getRole().getCode()==2){
+					deskView.showInWest(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==4){
+					deskView.showInNorth(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==5){
+					deskView.showInEast(allPlayers[i]);
+				}
+					
+			}
+		case(2): // e.g. Kleiner Dalmuti
+			for(int i = 0; i<allPlayers.length; i++){
+				if(allPlayers[i].getRole().getCode()==4){
+					deskView.showInWest(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==5){
+					deskView.showInNorth(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==1){
+					deskView.showInEast(allPlayers[i]);
+				}
+					
+			}
+		case(4): // e.g. Kleiner Diener
+			for(int i = 0; i<allPlayers.length; i++){
+				if(allPlayers[i].getRole().getCode()==1){
+					deskView.showInWest(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==2){
+					deskView.showInNorth(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==3){
+					deskView.showInEast(allPlayers[i]);
+				}
+					
+			}
+		case(5): // e.g. grosser Diener
+			for(int i = 0; i<allPlayers.length; i++){
+				if(allPlayers[i].getRole().getCode()==3){
+					deskView.showInWest(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==4){
+					deskView.showInNorth(allPlayers[i]);
+				}
+				else if(allPlayers[i].getRole().getCode()==1){
+					deskView.showInEast(allPlayers[i]);
+				}
+					
+			}
+		default: 
+			switch(myId){
+			case(1):
+				deskView.showInWest(allPlayers[myId+1]);
+				deskView.showInNorth(allPlayers[myId+2]);
+				deskView.showInEast(allPlayers[myId+3]);
+			
+			case(2):
+				deskView.showInWest(allPlayers[myId+1]);
+				deskView.showInNorth(allPlayers[myId+2]);
+				deskView.showInEast(allPlayers[myId-1]);
+			
+			case(3):
+				deskView.showInWest(allPlayers[myId+1]);
+				deskView.showInNorth(allPlayers[myId-2]);
+				deskView.showInEast(allPlayers[myId-1]);
+			
+			case(4):
+				deskView.showInWest(allPlayers[myId-3]);
+				deskView.showInNorth(allPlayers[myId-2]);
+				deskView.showInEast(allPlayers[myId-1]);
+			}
 				
-				deskView.showInWest(allPlayers[i]);
 		}
-		default:
-			break;
+	}
+	
+	
+	void showMyCards(){
+		int[][] myCards = new int[12][2];
+		ListIterator<Card> iterator = allPlayers[myId].getCards().listIterator();
+		while(iterator.hasNext()){
+			myCards[iterator.next().getCardType().getValue()][1]++;
 		}
+		
+		iterator = deck.currentTrick.listIterator();
+		int i = 1; // count number of equal cards. default 1 because you always card with the "same" type.
+		// go through list
+		while(iterator.hasNext()){
+			// check if the cards are the same type
+			if(iterator.next().equals(iterator.previous())){
+				i++; //
+				// do you have enough cards to play?
+				if(i==myCards[iterator.next().getCardType().getValue()][1]){
+					myCards[iterator.next().getCardType().getValue()][2]=1;
+				}
+				
+			}
+			else {i=1;} // set back to 0 if the cards are no longer the same type
+		}
+		
+		deskView.showMyCards(myCards);
+		
 	}
 	
 	
@@ -150,11 +303,11 @@ public class Action{
 	
 	
 	
-	// returns a List of swappable Cards for a specific Player
-	public ArrayList<Card> getSwappableCards(Player player){
+	// returns an Array of swappable Cards-Types for a specific Player
+	public Card.CARD_TYPE[] getSwappableCards(Player player){
 
 		// initialize List of Cards
-		ArrayList<Card> swappableCards = new ArrayList<Card>();
+		Card.CARD_TYPE[] swappableCards = new Card.CARD_TYPE[2];
 
 		if(player.getRole().hasToBeHighest() == true) {
 
@@ -164,10 +317,22 @@ public class Action{
 				ListIterator<Card> listIterator = player.getCards().listIterator();
 
 				while(listIterator.hasNext()){
+					if(swappableCards[1].getValue() > listIterator.next().getCardType().getValue()){
+						if(swappableCards[2].getValue() > listIterator.next().getCardType().getValue()){
+							swappableCards[2]=listIterator.next().getCardType();
+						}
+						else {
+							swappableCards[1]=listIterator.next().getCardType();
+						}
+					}
+					
 
-					// <========= DO YOUR WORK! CONTINUE HERE!
-
-				}	
+				}
+				// if two equal card types in array set one to null
+				// -> if there is only one card type you have at least to of them.
+				if(swappableCards[1].equals(swappableCards[2])){
+					swappableCards[2] = null;
+				}
 			}
 
 		}
@@ -176,6 +341,13 @@ public class Action{
 		return swappableCards;
 	}	
 	
+	
+	// clear table nachdem 3 Player gepasst haben
+	protected void clearTable(){
+		while(!deck.currentTrick.isEmpty()){ // not empty
+			deck.notDealtCards.add(deck.currentTrick.pop());
+		}
+	}
 
 	
 }

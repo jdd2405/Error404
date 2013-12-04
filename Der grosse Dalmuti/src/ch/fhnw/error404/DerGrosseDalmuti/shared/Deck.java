@@ -2,8 +2,6 @@ package ch.fhnw.error404.DerGrosseDalmuti.shared;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.ListIterator;
 import java.util.Stack;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.Card;
@@ -64,21 +62,6 @@ public class Deck implements Serializable{
 	}
 
 
-	public void dealCards(ArrayList<Player> allPlayers){
-		// shuffle notDealtCards
-		Collections.shuffle(notDealtCards);
-		// create Iterator to get trough the LinkedList
-		ListIterator<Card> iterator = notDealtCards.listIterator();
-		while (iterator.hasNext()){
-			// TODO: give Cards to Players
-			for(int p=0; p<=allPlayers.size(); p++){
-				Player player = allPlayers.get(p);
-				for(int c=0; c<=notDealtCards.size(); c++){
-					player.addCard(notDealtCards.remove(c));
-				}
-			}
-		}
-	}
 	
 	protected void addSwappedCards(Player player){
 		int i = player.getId();
@@ -108,12 +91,12 @@ public class Deck implements Serializable{
 	}
 
 
-	public ArrayList<Card>[] getSwappedCards() {
+	public Card[] getSwappedCards() {
 		return swappedCards;
 	}
 
 
-	public void setSwappedCards(ArrayList<Card>[] swappedCards) {
+	public void setSwappedCards(Card[] swappedCards) {
 		this.swappedCards = swappedCards;
 	}
 	

@@ -18,13 +18,16 @@ import javax.swing.*;
 
 public class DeskView extends JFrame {
 	
-		private JFrame deskView;
+		private JFrame mainFrame;
 		
 		private JPanel panelSouth;
 		private GridBagConstraints gridSouth;
 		private JTextField spielerSouth;
 		private JTextField roleSouth;
-		private JButton Button2;
+		private JButton passen;
+		private JButton auswahlSpielen;
+		private JTextField AmountCards;
+		private JButton Slot;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
@@ -99,7 +102,7 @@ public class DeskView extends JFrame {
 		
 		panelNorth.setBackground(Color.BLUE);
 		
-		deskView.getContentPane().add(panelNorth, BorderLayout.NORTH);
+		mainFrame.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		
 		//EAST Panel
 		panelEast = new JPanel(new GridBagLayout());
@@ -115,7 +118,7 @@ public class DeskView extends JFrame {
 		
 		panelEast.setBackground(Color.GREEN);
 		
-		deskView.getContentPane().add(panelEast, BorderLayout.EAST);
+		mainFrame.getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		
 		//WEST Panel
@@ -132,7 +135,7 @@ public class DeskView extends JFrame {
 		
 		panelWest.setBackground(Color.RED);
 				
-		deskView.getContentPane().add(panelWest, BorderLayout.WEST);
+		mainFrame.getContentPane().add(panelWest, BorderLayout.WEST);
 		
 		//CENTER Panel
 		panelCenter = new JPanel(new GridBagLayout());
@@ -140,21 +143,21 @@ public class DeskView extends JFrame {
 										
 		panelCenter.setBackground(Color.YELLOW);
 						
-		deskView.getContentPane().add(panelCenter, BorderLayout.CENTER);
+		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
 		
-		JButton gDalmi = new JButton(icon);
+		/*JButton gDalmi = new JButton(icon);
 		gDalmi.setContentAreaFilled(false);
 		gDalmi.setPreferredSize(new Dimension(89,92));
 		gridSouth.gridx = 0;
 		gridSouth.gridy = 1;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(gDalmi, gridSouth);
+		panelSouth.add(gDalmi, gridSouth);*/
 		
-		JTextField AmountCards = new JTextField("A");
+		AmountCards = new JTextField("A");
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 3;
 		gridSouth.gridy = 2;
@@ -170,21 +173,21 @@ public class DeskView extends JFrame {
 		panelSouth.add(Anzahl, gridSouth);
 		
 		
-		JButton Button1 = new JButton("Auswahl spielen");
-		Button1.setPreferredSize(new Dimension(170,30));
+		auswahlSpielen= new JButton("Auswahl spielen");
+		auswahlSpielen.setPreferredSize(new Dimension(170,30));
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 4;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(Button1, gridSouth);
+		panelSouth.add(auswahlSpielen, gridSouth);
 		
-		Button2 = new JButton("Passen");
-		Button2.setPreferredSize(new Dimension(170,30));	
+		passen = new JButton("Passen");
+		passen.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 6;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(Button2, gridSouth);
+		panelSouth.add(passen, gridSouth);
 		
 		closeGame = new JButton("Spiel beenden"); // closes game
 		closeGame.setPreferredSize(new Dimension(170,30));	
@@ -196,7 +199,20 @@ public class DeskView extends JFrame {
 		
 		panelSouth.setBackground(Color.PINK);
 						
-		deskView.getContentPane().add(panelSouth, BorderLayout.SOUTH);
+		mainFrame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
+		
+		for(int i = 0; i<12; i++){
+    		Slot = new JButton();
+    	    Image myImage = getToolkit().createImage("C:/Users/Elias/Downloads/photo.jpg");
+    	    ImageIcon myIcon = new ImageIcon(myImage);
+    	    Slot.setIcon(myIcon);//here you set the icon for your button
+    		Slot.setPreferredSize(new Dimension(500,500));
+    		Slot.setContentAreaFilled(false);
+    		gridSouth.gridx = i;
+    		gridSouth.gridy = 1;
+    		gridSouth.insets = new Insets(5,5,5,5);
+    		panelSouth.add(Slot, gridSouth);
+    	}
 		
 	}
 
@@ -217,9 +233,9 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(spielerSouth, gridSouth);	
     }
-    public JButton getButton2() {return Button2;}
-	public void setButton2(JButton button2) {Button2 = button2;}
-    
+   
+
+       
 	
 	
     //West Methods
@@ -320,10 +336,17 @@ public class DeskView extends JFrame {
         closeGame.addActionListener(listener);
     }
     void closeWindow(){
-        deskView.dispose();
-        deskView.setVisible(false);
+        mainFrame.dispose();
+        mainFrame.setVisible(false);
     }
     
+    void addPassen(ActionListener listener){
+    	passen.addActionListener(listener);
+    }
+    
+    void addAuswahlSpielen(ActionListener listener){
+    	auswahlSpielen.addActionListener(listener);
+    }
 
 }
 
