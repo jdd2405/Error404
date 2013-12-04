@@ -58,6 +58,8 @@ public class DeskView extends JFrame {
 		private JTextField username;
 		private JButton closeGame;
 		
+		private ImageIcon myIcon = new ImageIcon(getClass().getResource("Bilder/karte1.jpg"));
+		
 		//ImageIcon gDalmuti = new ImageIcon(ImageIcon.class.getResource("\\Error404\\Karten\\karte1.jpg"));
 
 
@@ -148,9 +150,6 @@ public class DeskView extends JFrame {
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
-		
-		//Image myImage = getToolkit().createImage("C:/Users/Glaimby/pictures/card.png");
-		ImageIcon myIcon = new ImageIcon("C:/Users/Glaimby/pictures/card.png");
 		
 		for(int i = 0; i<12; i++){
     		Slot = new JButton();

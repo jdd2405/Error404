@@ -35,10 +35,6 @@ public class Client {
 		new Action(loginView, deskView);
 		
 		
-				
-
-
-
 	}
 
 	
