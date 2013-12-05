@@ -139,29 +139,35 @@ public class Action{
 	}
 	
 	//spielzug passen Button Aktion
-	class Passen implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			
-			int countPassen=0;
-			for(int i = 0; i<4; i++){
-				if(allPlayers[i].passed == true){
-					countPassen++;}
-			}
+	class Passen implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (actionsEnabled() == true) {
+				int countPassen = 0;
+				for (int i = 0; i < 4; i++) {
+					if (allPlayers[i].passed == true) {
+						countPassen++;
+					}
+				}
 
-			if(countPassen <= 1){
-				allPlayers[myId].setPassed(true);
-				allPlayers[myId].setActive(false);
-				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
-			}
+				if (countPassen <= 1) {
+					allPlayers[myId].setPassed(true);
+					allPlayers[myId].setActive(false);
+					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+				}
+
+				else if (countPassen == 2) {
+					clearTable();
+					for (int i = 0; i < 4; i++) {
+						allPlayers[i].passed = false;
+					}
+					allPlayers[myId].setActive(false);
 			
-			else if (countPassen ==2){
-				clearTable();
-				for(int i = 0; i<4; i++){
-					allPlayers[i].passed = false;}
-				allPlayers[myId].setActive(false);
-				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+					//set next player active
+					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+				}
+				Client_neu.sendToServer(allPlayers);
+			} else {
 			}
-			Client_neu.sendToServer(allPlayers);
 		}
 	}
 	
@@ -170,13 +176,14 @@ public class Action{
 	// Auswahl spielen Button Aktion
 	class AuswahlSpielen implements ActionListener{
 		public void actionPerformed(ActionEvent e){
+			if (actionsEnabled() == true){
 			int anzahlKarten = get."Textfeld + parse.to int";
 			ListIterator<Card> listIterator = allPlayers[myId].getCards().listIterator();
 			while(listIterator.hasNext()){
 				Card cardtype = listIterator.next();
 				if(cardtype.getCardType().equals("vom AnzeigeKartentyp get Kartentyp")){
 					for(int i =0; i<anzahlKarten;i++){
-						//add it to currentTrick [not sure if this works object von ]
+						//add it to currentTrick
 						deck.currentTrick.push(cardtype);
 						//remove it from the playercards arraylist
 						listIterator.remove();
@@ -187,9 +194,9 @@ public class Action{
 			
 			
 			
-			//alle Spieler auf inaktiv setzen
+			//alle Spieler das "passen" zurücksetzen
 			for(int i = 0; i<allPlayers.length;i++){
-				allPlayers[i].setActive(false);
+				allPlayers[i].setPassed(false);
 			}
 			
 			//hat Spieler keine Karten mehr, wird Rang zugewiesen
@@ -200,7 +207,7 @@ public class Action{
 						anzahlRankVergaben++;
 					}
 				}
-				if (anzahlRankVergaben<2){
+				if (anzahlRankVergaben<=2){
 					allPlayers[myId].setRank(anzahlRankVergaben);
 				}
 				else{
@@ -208,10 +215,17 @@ public class Action{
 					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben);
 					roundFinish();
 				}
+				
+			}
+			//hat Spieler noch Karten, wird nächster Player aktiv gesetzt resp. aktueller deaktiv
+			else{
+				allPlayers[myId].setActive(false);
+				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 			}
 			Client_neu.sendToServer(deck);
 			Client_neu.sendToServer(allPlayers);
-			
+			}
+			else{}
 		}
 
 		
