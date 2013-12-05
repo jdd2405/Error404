@@ -151,8 +151,7 @@ public class Action{
 
 				if (countPassen <= 1) {
 					allPlayers[myId].setPassed(true);
-					allPlayers[myId].setActive(false);
-					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+					setNextPlayerActive();
 				}
 
 				else if (countPassen == 2) {
@@ -160,10 +159,7 @@ public class Action{
 					for (int i = 0; i < 4; i++) {
 						allPlayers[i].passed = false;
 					}
-					allPlayers[myId].setActive(false);
-			
-					//set next player active
-					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+					setNextPlayerActive();
 				}
 				Client_neu.sendToServer(allPlayers);
 			} else {
@@ -299,6 +295,15 @@ public class Action{
 	}
 	
 	
+	void setNextPlayerActive(){
+		allPlayers[myId].setActive(false);
+		
+		//set next player active
+		getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+		actionsEnabled(); // to disable Buttons
+	}
+	
+	
 	
 	// show all Players in proper position
 	void showPlayers(){
@@ -357,7 +362,12 @@ public class Action{
 		boolean actionsEnabled = false;
 		if(allPlayers[myId].isActive() == true){
 			actionsEnabled = true;
-			//deskView.auswahlSpielen.setEnabled(true);
+			deskView.auswahlSpielen.setEnabled(true);
+			deskView.passen.setEnabled(true);
+		}
+		else {
+			deskView.auswahlSpielen.setEnabled(false);
+			deskView.passen.setEnabled(false);
 		}
 		return actionsEnabled;
 	}

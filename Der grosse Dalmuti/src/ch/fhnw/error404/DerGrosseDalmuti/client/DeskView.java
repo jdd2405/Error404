@@ -24,8 +24,8 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridSouth;
 		private JTextField spielerSouth;
 		private JTextField roleSouth;
-		private JButton passen;
-		private JButton auswahlSpielen;
+		JButton passen = new JButton();
+		JButton auswahlSpielen = new JButton();
 		private JTextField AmountCards;
 		private JButton[] slot = new JButton[12];
 		private JLabel[] amountOfCards = new JLabel[12];
@@ -179,16 +179,18 @@ public class DeskView extends JFrame {
 		panelSouth.add(Anzahl, gridSouth);
 		
 		
-		auswahlSpielen= new JButton("Auswahl spielen");
+		auswahlSpielen.setText("Auswahl spielen");
 		auswahlSpielen.setPreferredSize(new Dimension(170,30));
+		auswahlSpielen.setEnabled(false);
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 4;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(auswahlSpielen, gridSouth);
 		
-		passen = new JButton("Passen");
+		passen.setText("Passen");
 		passen.setPreferredSize(new Dimension(170,30));	
+		passen.setEnabled(false);
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 6;
 		gridSouth.gridy = 2;
@@ -372,6 +374,7 @@ public class DeskView extends JFrame {
     }
 	public JTextField getAmountCards() {return AmountCards;}
 	public void setAmountCards(JTextField amountCards) {AmountCards = amountCards;}
+
 	
 
 }
