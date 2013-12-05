@@ -38,7 +38,6 @@ public class Action{
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
 
-		//deskView.addButtonKlick(new ButtonKlick());
 		deskView.addDisplayNumber(new DisplayNumber());
 
 		
@@ -162,6 +161,7 @@ public class Action{
 				allPlayers[myId].setActive(false);
 				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 			}
+			Client_neu.sendToServer(allPlayers);
 		}
 	}
 	
@@ -209,6 +209,8 @@ public class Action{
 					roundFinish();
 				}
 			}
+			Client_neu.sendToServer(deck);
+			Client_neu.sendToServer(allPlayers);
 			
 		}
 
