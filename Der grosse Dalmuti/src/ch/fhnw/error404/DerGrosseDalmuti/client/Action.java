@@ -342,8 +342,9 @@ public class Action{
 	protected boolean actionsEnabled(){
 		boolean actionsEnabled = false;
 		if(allPlayers[myId].isActive() == true){
-				actionsEnabled = true;
-			}
+			actionsEnabled = true;
+			//deskView.auswahlSpielen.setEnabled(true);
+		}
 		return actionsEnabled;
 	}
 	
