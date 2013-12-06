@@ -329,7 +329,8 @@ public class Action {
 				shuffleCards();
 				Client_neu.sendToServer(deck);
 			}
-
+			
+			deskView.showInSouth(player);
 			Client_neu.sendToServer(allPlayers);
 
 		}
