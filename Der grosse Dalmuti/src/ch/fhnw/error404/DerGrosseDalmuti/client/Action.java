@@ -211,7 +211,7 @@ public class Action {
 				else{
 					allPlayers[myId].setRank(anzahlRankVergaben);
 					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben+1);
-					roundFinish();
+					finishRound();
 				}
 				
 			}
@@ -423,7 +423,7 @@ public class Action {
 		}
 
 		// Runde ist fertig, alle Rank's wurden verteilt
-		private void roundFinish() {
+		private void finishRound() {
 			for (int i = 0; i < allPlayers.length; i++) {
 				allPlayers[i].setRole(allPlayers[i].getRank());
 				allPlayers[i].setFinished(false);
