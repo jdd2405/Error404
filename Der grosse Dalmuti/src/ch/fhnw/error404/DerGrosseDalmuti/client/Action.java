@@ -410,6 +410,7 @@ public class Action {
 
 		// show my Cards in South. Check if they are playable.
 		void showMyCards() {
+			if(allPlayers[3]!=null){
 			int[][] myCards = new int[12][2];
 			ListIterator<Card> iterator = allPlayers[myId].getCards()
 					.listIterator();
@@ -436,6 +437,8 @@ public class Action {
 			}
 
 			deskView.showMyCards(myCards);
+			}
+			
 
 		}
 
@@ -529,7 +532,7 @@ public class Action {
 		public void setAllPlayers(Player[] allPlayers) {
 			this.allPlayers = allPlayers;
 			showPlayers();
-			if(allPlayers[myId].getCards()!=null){showMyCards();}
+			showMyCards();
 		}
 
 		public Deck getDeck() {
