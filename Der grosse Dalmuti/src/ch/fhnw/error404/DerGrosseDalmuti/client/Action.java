@@ -275,23 +275,22 @@ public class Action {
 		public Player getNextPlayerInOrder(Player player) {
 			Player nextPlayerInOrder = null;
 			int nextOrdinal = player.getRole().ordinal() + 1;
-			if (nextOrdinal > Role.values().length - 1) {
-				nextOrdinal = 0;
-			}
+			
 			for (int i = 0; i < allPlayers.length; i++) {
+				if (nextOrdinal > Role.values().length - 1) {
+					nextOrdinal = 0;
+				}
 				// get the Player which has the next Role in Order as the given
 				// Player.
 				// more specific: check ordinal-value of the Role and add 1.
 				// Check list of all Players which player has the next Role in
 				// Order.
-				if (allPlayers[i].getRole().equals(Role.values()[nextOrdinal])) { // what
-																					// a
-																					// ingeniously
-																					// line
-																					// of
-																					// code
-																					// :-)
-					nextPlayerInOrder = allPlayers[i];
+				if (allPlayers[i].getRole().equals(Role.values()[nextOrdinal])) { 
+					if(allPlayers[i].isFinished()==false){
+						nextPlayerInOrder = allPlayers[i];
+					} else{
+						nextOrdinal++;
+					}
 				}
 			}
 
