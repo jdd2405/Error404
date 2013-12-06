@@ -85,7 +85,7 @@ public class Client_neu {
 					if (object instanceof Deck) {
 						action.setDeck((Deck) object);
 						System.out.println("Deck übermittelt.");
-						System.out.println(action.getDeck().notDealtCards.get(1).getCardType().getLabel());
+						System.out.println("Die erste Karte auf dem Stapel ist: "+action.getDeck().notDealtCards.get(1).getCardType().getLabel());
 						
 					}
 					/*
