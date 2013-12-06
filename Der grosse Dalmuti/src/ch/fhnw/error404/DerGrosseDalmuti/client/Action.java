@@ -127,6 +127,13 @@ public class Action {
 		String b;
 
 		public void actionPerformed(ActionEvent e) {
+			/*
+			for(int i = 0; i < deskView.slot.length; i++){
+				if(deskView.slot[i].equals(e.getSource())){
+					deskView.typeCards.setText(Card.CARD_TYPE.values().length+i);
+				}
+			}
+			*/
 			if (deskView.slot[0].equals(e.getSource())){
 				deskView.typeCards.setText("Dalmuti");		
 				}
@@ -527,7 +534,9 @@ public class Action {
 
 		public void setDeck(Deck deck) {
 			this.deck = deck;
-			showCurrentTrick();
+			if(!(deck.currentTrick==null)){
+				showCurrentTrick();
+			}
 		}
 
 	}
