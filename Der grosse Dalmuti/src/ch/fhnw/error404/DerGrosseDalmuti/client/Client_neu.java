@@ -45,8 +45,6 @@ public class Client_neu {
 			InputStream is = socket.getInputStream();
 			in = new ObjectInputStream(is);
 			
-			sendToServer(action.allPlayers);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -79,7 +77,7 @@ public class Client_neu {
 						action.setAllPlayers((Player[]) object);
 						System.out.println("Folgende Spieler wurden übermittelt: ");
 							for (int i = 0; i < 4; i++) {
-								System.out.println(action.allPlayers[i].getName());
+								//System.out.println(action.allPlayers[i].getName());
 							}
 						
 					}

@@ -32,8 +32,9 @@ public class Server_neu{
 				ObjectOutputStream output = new ObjectOutputStream(
 						client.getOutputStream());
 				clientManager.add(output);
-				output.writeObject(deck);
 				output.writeObject(allPlayers);
+				output.writeObject(deck);
+				
 				output.flush();
 				Thread t = new Thread(new ChatThread(client));
 				t.start();
@@ -72,6 +73,7 @@ public class Server_neu{
 					
 					if (object instanceof Player[]) {
 						allPlayers = (Player[]) object;
+						System.out.println("allPlayers-Array erhalten von Client");
 					}
 					if (object instanceof Deck) {
 						deck = (Deck) object;

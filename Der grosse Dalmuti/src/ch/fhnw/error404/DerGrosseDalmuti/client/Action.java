@@ -77,7 +77,7 @@ public class Action {
 														// name at the login
 				loginView.closeWindow();
 				System.out.println(allPlayers[0].getName()); // for test reasons
-				deskView.setVisible(true);
+				deskView.mainFrame.setVisible(true);
 			} else {
 				new LoginError();
 			}

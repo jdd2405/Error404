@@ -18,7 +18,7 @@ import javax.swing.*;
 
 public class DeskView extends JFrame {
 	
-		private JFrame mainFrame;
+		JFrame mainFrame;
 		
 		private JPanel panelSouth;
 		private GridBagConstraints gridSouth;
