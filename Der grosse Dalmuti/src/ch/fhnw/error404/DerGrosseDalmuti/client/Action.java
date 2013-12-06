@@ -273,7 +273,7 @@ public class Action {
 				//es sind noch mindestens 2 Spieler im Spiel
 				if (anzahlRankVergaben<=2){
 					allPlayers[myId].setRank(anzahlRankVergaben);
-					allPlayers[myId].setDeactive(true);
+					allPlayers[myId].setFinished(true);
 					allPlayers[myId].setActive(false);
 					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 				}
@@ -281,7 +281,7 @@ public class Action {
 				else{
 					allPlayers[myId].setRank(anzahlRankVergaben);
 					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben+1);
-					roundFinish();
+					finishRound();
 				}
 				
 			}
@@ -345,23 +345,22 @@ public class Action {
 		public Player getNextPlayerInOrder(Player player) {
 			Player nextPlayerInOrder = null;
 			int nextOrdinal = player.getRole().ordinal() + 1;
-			if (nextOrdinal > Role.values().length - 1) {
-				nextOrdinal = 0;
-			}
+			
 			for (int i = 0; i < allPlayers.length; i++) {
+				if (nextOrdinal > Role.values().length - 1) {
+					nextOrdinal = 0;
+				}
 				// get the Player which has the next Role in Order as the given
 				// Player.
 				// more specific: check ordinal-value of the Role and add 1.
 				// Check list of all Players which player has the next Role in
 				// Order.
-				if (allPlayers[i].getRole().equals(Role.values()[nextOrdinal])) { // what
-																					// a
-																					// ingeniously
-																					// line
-																					// of
-																					// code
-																					// :-)
-					nextPlayerInOrder = allPlayers[i];
+				if (allPlayers[i].getRole().equals(Role.values()[nextOrdinal])) { 
+					if(allPlayers[i].isFinished()==false){
+						nextPlayerInOrder = allPlayers[i];
+					} else{
+						nextOrdinal++;
+					}
 				}
 			}
 
@@ -493,10 +492,10 @@ public class Action {
 		}
 
 		// Runde ist fertig, alle Rank's wurden verteilt
-		private void roundFinish() {
+		private void finishRound() {
 			for (int i = 0; i < allPlayers.length; i++) {
 				allPlayers[i].setRole(allPlayers[i].getRank());
-				allPlayers[i].setDeactive(false);
+				allPlayers[i].setFinished(false);
 				if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)) {
 					allPlayers[i].setActive(true);
 				}
