@@ -25,7 +25,7 @@ public class Client {
 	public static void main(String[] args) {
 
 		int[][] test = new int[12] [2];		
-		test[0][1]= 0;
+		test[0][1]= 1;
 		test[0][0]= 5;
 		test[1][0]= 3;
 		test[1][1]= 1;
@@ -36,7 +36,7 @@ public class Client {
 		test[4][1]= 1;
 		test[4][0]= 5;
 		test[5][0]= 3;
-		test[5][1]= 0;
+		test[5][1]= 1;
 		test[6][1]= 1;
 		test[6][0]= 5;
 		test[7][0]= 3;

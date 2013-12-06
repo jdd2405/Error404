@@ -127,9 +127,79 @@ public class Action {
 		String b;
 
 		public void actionPerformed(ActionEvent e) {
-			b = e.getActionCommand();
-			System.out.println(b);
-			// deskView.getTextOfLabel();
+			if (deskView.slot[0].equals(e.getSource())){
+				deskView.typeCards.setText("Dalmuti");		
+				}
+				else if (deskView.slot[1].equals(e.getSource())){
+				deskView.typeCards.setText("Erzbischof");
+				}
+				else if (deskView.slot[2].equals(e.getSource())){
+				deskView.typeCards.setText("Hofmarschall");
+				}
+				else if (deskView.slot[3].equals(e.getSource())){
+				deskView.typeCards.setText("Baronin");
+				}
+				else if (deskView.slot[4].equals(e.getSource())){
+				deskView.typeCards.setText("Äbtissin");
+				}
+				else if (deskView.slot[5].equals(e.getSource())){
+				deskView.typeCards.setText("Ritter");
+				}
+				else if (deskView.slot[6].equals(e.getSource())){
+				deskView.typeCards.setText("Näherin");
+				}
+				else if (deskView.slot[7].equals(e.getSource())){
+				deskView.typeCards.setText("Steinmetz");
+				}
+				else if (deskView.slot[8].equals(e.getSource())){
+				deskView.typeCards.setText("Köchin");
+				}
+				else if (deskView.slot[9].equals(e.getSource())){
+				deskView.typeCards.setText("Schafhirtin");
+				}
+				else if (deskView.slot[10].equals(e.getSource())){
+				deskView.typeCards.setText("Bergmann");
+				}
+				else if (deskView.slot[11].equals(e.getSource())){
+				deskView.typeCards.setText("Tagelöhner");
+				}
+			
+			if (deskView.slot[0].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[0].getText()));		
+				}
+				else if (deskView.slot[1].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[1].getText()));
+				}
+				else if (deskView.slot[2].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[2].getText()));
+				}
+				else if (deskView.slot[3].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[3].getText()));
+				}
+				else if (deskView.slot[4].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[4].getText()));
+				}
+				else if (deskView.slot[5].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[5].getText()));
+				}
+				else if (deskView.slot[6].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[6].getText()));
+				}
+				else if (deskView.slot[7].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[7].getText()));
+				}
+				else if (deskView.slot[8].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[8].getText()));
+				}
+				else if (deskView.slot[9].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[9].getText()));
+				}
+				else if (deskView.slot[10].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[10].getText()));
+				}
+				else if (deskView.slot[11].equals(e.getSource())){
+				deskView.amountCards.setText((deskView.amountOfCards[11].getText()));
+				}			
 		}
 	}
 
