@@ -83,7 +83,7 @@ public class DeskView extends JFrame {
 		mainFrame.setSize(1600,900);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrame.setVisible(true);
+		mainFrame.setVisible(false);
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
@@ -164,7 +164,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(typeCards, gridSouth);
 		
-		amountCards = new JTextField("dick");
+		amountCards = new JTextField(3);
 		gridSouth.gridwidth = 1;
 		gridSouth.anchor = GridBagConstraints.LINE_END;
 		gridSouth.gridx = 2;
