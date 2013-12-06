@@ -411,32 +411,32 @@ public class Action {
 		// show my Cards in South. Check if they are playable.
 		void showMyCards() {
 			if(allPlayers[3]!=null){
-			int[][] myCards = new int[12][2];
-			ListIterator<Card> iterator = allPlayers[myId].getCards()
-					.listIterator();
-			while (iterator.hasNext()) {
-				myCards[iterator.next().getCardType().getValue()][1]++;
-			}
-
-			iterator = deck.currentTrick.listIterator();
-			int i = 1; // count number of equal cards. default 1 because you
-						// always card with the "same" type.
-			// go through list
-			while (iterator.hasNext()) {
-				// check if the cards are the same type
-				if (iterator.next().equals(iterator.previous())) {
-					i++; //
-					// do you have enough cards to play?
-					if (i == myCards[iterator.next().getCardType().getValue()][1]) {
-						myCards[iterator.next().getCardType().getValue()][2] = 1;
-					}
-
-				} else {
-					i = 1;
-				} // set back to 0 if the cards are no longer the same type
-			}
-
-			deskView.showMyCards(myCards);
+				int[][] myCards = new int[12][2];
+				ListIterator<Card> iterator = allPlayers[myId].getCards()
+						.listIterator();
+				while (iterator.hasNext()) {
+					myCards[iterator.next().getCardType().getValue()][1]++;
+				}
+	
+				iterator = deck.currentTrick.listIterator();
+				int i = 1; // count number of equal cards. default 1 because you
+							// always card with the "same" type.
+				// go through list
+				while (iterator.hasNext()) {
+					// check if the cards are the same type
+					if (iterator.next().equals(iterator.previous())) {
+						i++; //
+						// do you have enough cards to play?
+						if (i == myCards[iterator.next().getCardType().getValue()][1]) {
+							myCards[iterator.next().getCardType().getValue()][2] = 1;
+						}
+	
+					} else {
+						i = 1;
+					} // set back to 0 if the cards are no longer the same type
+				}
+	
+				deskView.showMyCards(myCards);
 			}
 			
 
