@@ -529,7 +529,7 @@ public class Action {
 		public void setAllPlayers(Player[] allPlayers) {
 			this.allPlayers = allPlayers;
 			showPlayers();
-			showMyCards();
+			if(allPlayers[myId].getCards()!=null){showMyCards();}
 		}
 
 		public Deck getDeck() {
