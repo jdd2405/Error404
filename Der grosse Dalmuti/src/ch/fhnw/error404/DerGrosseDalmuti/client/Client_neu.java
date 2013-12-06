@@ -45,7 +45,6 @@ public class Client_neu {
 			InputStream is = socket.getInputStream();
 			in = new ObjectInputStream(is);
 			
-			sendToServer(action.allPlayers);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,6 +106,7 @@ public class Client_neu {
 				}
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
+				System.out.println("hier liget der Fehler");
 			}
 		}
 
