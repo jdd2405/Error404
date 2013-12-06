@@ -426,7 +426,7 @@ public class Action {
 		private void roundFinish() {
 			for (int i = 0; i < allPlayers.length; i++) {
 				allPlayers[i].setRole(allPlayers[i].getRank());
-				allPlayers[i].setDeactive(false);
+				allPlayers[i].setFinished(false);
 				if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)) {
 					allPlayers[i].setActive(true);
 				}
