@@ -388,9 +388,9 @@ public class Action {
 
 		// show all Players in proper position
 		void showPlayers() {
-			if(allPlayers.length==2){deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));}
-			if(allPlayers.length==3){deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));}
-			if(allPlayers.length==4){deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));}
+			if(allPlayers[1]!=null){deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));}
+			if(allPlayers[2]!=null){deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));}
+			if(allPlayers[3]!=null){deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));}
 		}
 
 		// show Cards in the center of deskView
