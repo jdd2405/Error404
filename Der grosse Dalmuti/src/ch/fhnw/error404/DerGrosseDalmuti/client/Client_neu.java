@@ -76,15 +76,16 @@ public class Client_neu {
 					if (object instanceof Player[]) {
 						action.setAllPlayers((Player[]) object);
 						System.out.println("Folgende Spieler vom Server erhalten: ");
-							for (int i = 0; i < 4; i++) {
-								if(action.allPlayers[i]!=null){System.out.println(action.allPlayers[i].getName());}
-							}
+						for (int i = 0; i < 4; i++) {
+							if(action.allPlayers[i]!=null){System.out.println(action.allPlayers[i].getName());}
+						}
 						
 					}
 					//input für die 3 Variablen im Deck
 					if (object instanceof Deck) {
 						action.setDeck((Deck) object);
 						System.out.println("Deck übermittelt.");
+						System.out.println(action.getDeck().notDealtCards.get(1).getCardType().getLabel());
 						
 					}
 					/*

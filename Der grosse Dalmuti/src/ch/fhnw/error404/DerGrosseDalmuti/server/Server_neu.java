@@ -26,6 +26,7 @@ public class Server_neu{
 		try {
 			ServerSocket server = new ServerSocket(5000);
 			System.out.println("Server ist gestartet");
+			System.out.println(deck.notDealtCards.get(1).getCardType().getLabel());
 
 			while (true) {
 				Socket client = server.accept();

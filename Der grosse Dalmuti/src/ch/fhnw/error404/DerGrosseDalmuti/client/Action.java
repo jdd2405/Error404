@@ -343,13 +343,12 @@ public class Action {
 			Collections.shuffle(deck.notDealtCards);
 			// create Iterator to get trough the LinkedList
 			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+			int i = 0;
 			while (iterator.hasNext()) {
-				for (int i = 0; i <= allPlayers.length; i++) {
-					for (int j = 0; j <= deck.notDealtCards.size(); j++) {
-						allPlayers[i].addCard(deck.notDealtCards.remove(j));
-					}
-				}
+				allPlayers[i].addCard(iterator.next());	
+				i = (i+1)%allPlayers.length;  //alle Player durch -> von Vorne beginnen
 			}
+			deck.notDealtCards.clear();
 		}
 
 		// get next Player in Order -> relative to Role of given Player
@@ -388,9 +387,11 @@ public class Action {
 
 		// show all Players in proper position
 		void showPlayers() {
-			if(allPlayers[1]!=null){deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));}
-			if(allPlayers[2]!=null){deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));}
-			if(allPlayers[3]!=null){deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));}
+			if(allPlayers[3]!=null){
+				deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
+				deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
+				deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
+			}
 		}
 
 		// show Cards in the center of deskView
