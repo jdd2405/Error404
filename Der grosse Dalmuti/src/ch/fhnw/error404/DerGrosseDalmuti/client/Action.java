@@ -203,7 +203,7 @@ public class Action {
 				//es sind noch mindestens 2 Spieler im Spiel
 				if (anzahlRankVergaben<=2){
 					allPlayers[myId].setRank(anzahlRankVergaben);
-					allPlayers[myId].setDeactive(true);
+					allPlayers[myId].setFinished(true);
 					allPlayers[myId].setActive(false);
 					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 				}
