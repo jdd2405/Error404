@@ -81,7 +81,7 @@ public class Player implements Serializable{
 
 
 	public boolean isFinished() {return finished;}
-	public void setFinished(boolean deactive) {this.finished = deactive;}
+	public void setFinished(boolean finished) {this.finished = finished;}
 
 	
 	/*
