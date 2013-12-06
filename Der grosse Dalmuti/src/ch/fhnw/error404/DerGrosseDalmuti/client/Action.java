@@ -166,6 +166,7 @@ public class Action{
 					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 				}
 				Client_neu.sendToServer(allPlayers);
+				Client_neu.sendToServer(deck);
 			} else {
 			}
 		}
@@ -207,12 +208,17 @@ public class Action{
 						anzahlRankVergaben++;
 					}
 				}
+				//es sind noch mindestens 2 Spieler im Spiel
 				if (anzahlRankVergaben<=2){
 					allPlayers[myId].setRank(anzahlRankVergaben);
+					allPlayers[myId].setDeactive(true);
+					allPlayers[myId].setActive(false);
+					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
 				}
+				//beendet das ganze Spiel, da der 3. Spieler keine Karten mehr hat
 				else{
 					allPlayers[myId].setRank(anzahlRankVergaben);
-					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben);
+					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben+1);
 					roundFinish();
 				}
 				
@@ -258,25 +264,27 @@ public class Action{
 		allPlayers[myId-1] = player; // cause IDs start from 1
 		
 		if(myId==4){
-			// shuffle notDealtCards
-			Collections.shuffle(deck.notDealtCards);
-			// create Iterator to get trough the LinkedList
-			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
-			while (iterator.hasNext()){
-				for(int i=0; i<=allPlayers.length; i++){
-					for(int j=0; j<=deck.notDealtCards.size(); j++){
-						allPlayers[i].addCard(deck.notDealtCards.remove(j));
-					}
-				}
-			}
-			
+			shuffleCards();
 			Client_neu.sendToServer(deck);
 		}
 		
 		Client_neu.sendToServer(allPlayers);
 		
 	}
-	
+	// Karten mischen und auf Player verteilen
+	void shuffleCards() {
+		// shuffle notDealtCards
+		Collections.shuffle(deck.notDealtCards);
+		// create Iterator to get trough the LinkedList
+		ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+		while (iterator.hasNext()) {
+			for (int i = 0; i <= allPlayers.length; i++) {
+				for (int j = 0; j <= deck.notDealtCards.size(); j++) {
+					allPlayers[i].addCard(deck.notDealtCards.remove(j));
+				}
+			}
+		}
+	}
 	
 	
 	
@@ -413,7 +421,14 @@ public class Action{
 	}
 	//Runde ist fertig, alle Rank's wurden verteilt
 	private void roundFinish() {
-		
+		for(int i =0; i < allPlayers.length; i++){
+			allPlayers[i].setRole(allPlayers[i].getRank());
+			allPlayers[i].setDeactive(false);
+			if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)){
+				allPlayers[i].setActive(true);
+			}
+		}
+		shuffleCards();		
 	}
 
 	public int getMyId() {

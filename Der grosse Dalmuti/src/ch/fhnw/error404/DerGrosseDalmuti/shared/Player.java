@@ -21,7 +21,8 @@ public class Player implements Serializable{
 	private static final long serialVersionUID = 790667502899497604L;
 	private String name; 
 	private int id; // unique identifier
-	private boolean active; // Is it my turn?
+	private boolean active;// Is it my turn?
+	private boolean deactive; //set to true - wenn Spieler keine Karten mehr hat
 	private Role role; // Wanna be King!
 	private int rank = 0; // oh, I have not finished first?
 	private ArrayList<Card> cards;
@@ -77,6 +78,10 @@ public class Player implements Serializable{
 
 	public Card getSwappedCard() {return swappedCard;}
 	public void setSwappedCard(Card swappedCard) {this.swappedCard = swappedCard;}
+
+
+	public boolean isDeactive() {return deactive;}
+	public void setDeactive(boolean deactive) {this.deactive = deactive;}
 
 	
 	/*
