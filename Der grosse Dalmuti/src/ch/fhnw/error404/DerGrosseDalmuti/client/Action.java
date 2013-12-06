@@ -246,11 +246,11 @@ public class Action {
 		public void actionPerformed(ActionEvent e){
 
 			if (actionsEnabled() == true){
-			int anzahlKarten = get."Textfeld + parse.to int";
+			int anzahlKarten = Integer.parseInt (deskView.amountCards.getText());
 			ListIterator<Card> listIterator = allPlayers[myId].getCards().listIterator();
 			while(listIterator.hasNext()){
 				Card cardtype = listIterator.next();
-				if(cardtype.getCardType().equals("vom AnzeigeKartentyp get Kartentyp")){
+				if((cardtype.getCardType().getLabel()).equals(deskView.typeCards.getText())){
 					for(int i =0; i<anzahlKarten;i++){
 						//add it to currentTrick
 						deck.currentTrick.push(cardtype);
@@ -260,7 +260,8 @@ public class Action {
 				}
 
 			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
-			
+				deskView.amountCards.setText("");
+				deskView.typeCards.setText("");
 			
 			
 			//alle Spieler das "passen" zurücksetzen
