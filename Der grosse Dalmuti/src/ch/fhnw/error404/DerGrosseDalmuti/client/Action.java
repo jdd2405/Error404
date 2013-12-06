@@ -76,7 +76,7 @@ public class Action {
 														// class using the typed
 														// name at the login
 				loginView.closeWindow();
-				System.out.println(allPlayers[0].getName()); // for test reasons
+				System.out.println("Dieser Spieler ist im Array auf Position 0: "+allPlayers[0].getName()); // for test reasons
 				deskView.setVisible(true);
 			} else {
 				new LoginError();
@@ -320,8 +320,7 @@ public class Action {
 					NOfPlayers++;
 				}
 			}
-			Player player = new Player(name, NOfPlayers + 1,
-					Role.values()[NOfPlayers]);
+			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
 			myId = player.getId();
 			allPlayers[myId - 1] = player; // cause IDs start from 1
 
@@ -386,9 +385,9 @@ public class Action {
 
 		// show all Players in proper position
 		void showPlayers() {
-			deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
-			deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
-			deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
+			if(allPlayers.length==2){deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));}
+			if(allPlayers.length==3){deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));}
+			if(allPlayers.length==4){deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));}
 		}
 
 		// show Cards in the center of deskView
