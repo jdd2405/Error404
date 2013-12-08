@@ -276,7 +276,7 @@ public class Action {
 			System.out.println("Anzahl Spieler: "+NOfPlayers);
 			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
 			myId = player.getId();
-			System.out.println("ID des Spielers: "+player.getId());
+			System.out.println("ID meines Spielers: "+player.getId());
 			allPlayers[myId - 1] = player; // cause IDs start from 1
 			System.out.println("Name meines Spielers: "+allPlayers[myId - 1].getName());
 
@@ -285,9 +285,9 @@ public class Action {
 				Client_neu.sendToServer(deck);
 			}
 			
-			deskView.showInSouth(player);
+			
 			Client_neu.sendToServer(allPlayers);
-
+			deskView.showInSouth(player);
 		}
 
 		// Karten mischen und auf Player verteilen

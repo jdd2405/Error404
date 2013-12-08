@@ -85,7 +85,6 @@ public class Client_neu {
 					if (object instanceof Deck) {
 						action.setDeck((Deck) object);
 						System.out.println("Deck übermittelt.");
-						System.out.println("Die erste Karte auf dem Stapel ist: "+action.getDeck().notDealtCards.get(1).getCardType().getLabel());
 						
 					}
 					/*
@@ -106,7 +105,6 @@ public class Client_neu {
 				}
 			} catch (ClassNotFoundException | IOException e) {
 				e.printStackTrace();
-				System.out.println("hier liget der Fehler");
 			}
 		}
 
