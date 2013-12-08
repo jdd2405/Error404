@@ -297,27 +297,17 @@ public class Action {
 			
 			ListIterator<Card> iterator = deck.notDealtCards.listIterator(); // creates Iterator to get trough the LinkedList
 			
-			System.out.println("Die erste Karte im Iterator ist: "+iterator.next().getCardType().getLabel()); // debug
-			
 			int i = 0;
 			while (iterator.hasNext()) {
 				
 				System.out.println("Zahl i ist "+i+"; Iterator is "+iterator.nextIndex()); //debug
 				
-				for(int j = 0; j<allPlayers.length; j++){
-					System.out.println("Alle Spieler:");
-					System.out.println(allPlayers[j].getName()+", "+allPlayers[j].getId());
-				} // debug
-				
-				// IS HANGING FROM HERE ON!!! WHY?!
-				System.out.print("allPlayers["+i+"] ist "+allPlayers[i].getName()); // debug
-				
+				// THROWS EXCEPTION. WHY?!
 				allPlayers[i].addCard(iterator.next());	
 				
 				System.out.println("Spieler "+allPlayers[i].getName()+" hat folgende Karte erhalten "+iterator.next().getCardType().getLabel()); // debug
 				
 				i = (i+1)%(allPlayers.length);  //alle Player durch -> von Vorne beginnen
-				System.out.println("Zahl i ist: "+i);
 				
 			}
 			
