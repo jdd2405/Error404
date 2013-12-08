@@ -158,7 +158,7 @@ public class Action {
 			}
 			
 			for(int i=0; i<12; i++){
-				if (deskView.slot[i].equals(e.getSource())){
+				if (deskView.slot[i].equals(e.getSource()!=null) && deskView.slot[i].equals(e.getSource())){
 					deskView.amountCards.setText((deskView.amountOfCards[i].getText()));		
 				}
 			}
@@ -270,14 +270,15 @@ public class Action {
 		// if there are 4 players deal cards
 		protected void newPlayer(String name) {
 			int NOfPlayers = 0;
-			for (int i = 0; i < allPlayers.length; i++) {
-				if (allPlayers[i] != null) {
-					NOfPlayers++;
-				}
+			for (int i = 0; allPlayers[i]!=null; i++) {
+				NOfPlayers++;
 			}
+			System.out.println("Anzahl Spieler: "+NOfPlayers);
 			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
 			myId = player.getId();
+			System.out.println("ID des Spielers: "+player.getId());
 			allPlayers[myId - 1] = player; // cause IDs start from 1
+			System.out.println("Name meines Spielers: "+allPlayers[myId - 1].getName());
 
 			if (myId == 4) {
 				shuffleCards();
@@ -291,15 +292,35 @@ public class Action {
 
 		// Karten mischen und auf Player verteilen
 		void shuffleCards() {
-			// shuffle notDealtCards
-			Collections.shuffle(deck.notDealtCards);
-			// create Iterator to get trough the LinkedList
-			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+			
+			Collections.shuffle(deck.notDealtCards); // shuffle notDealtCards
+			
+			ListIterator<Card> iterator = deck.notDealtCards.listIterator(); // creates Iterator to get trough the LinkedList
+			
+			System.out.println("Die erste Karte im Iterator ist: "+iterator.next().getCardType().getLabel()); // debug
+			
 			int i = 0;
 			while (iterator.hasNext()) {
+				
+				System.out.println("Zahl i ist "+i+"; Iterator is "+iterator.nextIndex()); //debug
+				
+				for(int j = 0; j<allPlayers.length; j++){
+					System.out.println("Alle Spieler:");
+					System.out.println(allPlayers[j].getName()+", "+allPlayers[j].getId());
+				} // debug
+				
+				// IS HANGING FROM HERE ON!!! WHY?!
+				System.out.print("allPlayers["+i+"] ist "+allPlayers[i].getName()); // debug
+				
 				allPlayers[i].addCard(iterator.next());	
-				i = (i+1)%allPlayers.length;  //alle Player durch -> von Vorne beginnen
+				
+				System.out.println("Spieler "+allPlayers[i].getName()+" hat folgende Karte erhalten "+iterator.next().getCardType().getLabel()); // debug
+				
+				i = (i+1)%(allPlayers.length);  //alle Player durch -> von Vorne beginnen
+				System.out.println("Zahl i ist: "+i);
+				
 			}
+			
 			deck.notDealtCards.clear();
 		}
 

@@ -330,8 +330,7 @@ public class DeskView extends JFrame {
 	//Other Methods
     
     void getTextOfLabel(){
-    		//a = amountOfCards.getText();
-    		System.out.println();
+    		// a = amountOfCards.getText();
     		
     	}
     
