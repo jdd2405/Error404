@@ -121,15 +121,7 @@ public class DeskView extends JFrame {
 		panelCenter = new JPanel(new GridBagLayout());
 		panelCenter.setMaximumSize(new Dimension(200,200));
 		gridCenter = new GridBagConstraints();
-	
-		panelCenter.setSize(new Dimension(100,100));
-		
-	
-		
-		
-		
 		panelCenter.setBackground(Color.YELLOW);
-		//panelCenter.setSize(new Dimension(300,300));
 		panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
 		
 						
@@ -138,6 +130,8 @@ public class DeskView extends JFrame {
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
+		//panelWest.setPreferredSize(new Dimension(1600,200));
+		
 		
 		for(int i = 0; i<12; i++){
     		btnSlot[i] = new JButton();
