@@ -123,16 +123,9 @@ public class DeskView extends JFrame {
 		gridCenter = new GridBagConstraints();
 	
 		panelCenter.setSize(new Dimension(100,100));
-		
-	
-		
-		
-		
 		panelCenter.setBackground(Color.YELLOW);
-		//panelCenter.setSize(new Dimension(300,300));
 		panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
-		
-						
+			
 		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
 		//SOUTH Panel
