@@ -79,6 +79,7 @@ public class Action {
 				loginView.closeWindow();
 
 				// System.out.println("Dieser Spieler ist im Array auf Position 0: "+allPlayers[0].getName()); // for test reasons
+
 				deskView.mainFrame.setVisible(true);
 
 
@@ -271,8 +272,10 @@ public class Action {
 		// if there are 4 players deal cards
 		protected void newPlayer(String name) {
 			int NOfPlayers = 0;
+
 			for (int i = 0; allPlayers[i]!=null; i++) {
 				NOfPlayers++;
+
 			}
 			System.out.println("Anzahl Spieler: "+NOfPlayers);
 			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
