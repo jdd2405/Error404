@@ -291,34 +291,31 @@ public class Action {
 			if (myId == 4) {
 				shuffleCards();
 				allPlayers[0].setActive(true);
-				Client_neu.sendToServer(deck);
+				
 			}
 			
-			Client_neu.sendToServer(allPlayers);
+			// TODO: make it work!!!
+			Client_neu.sendToServer(allPlayers); // does not send!
 		}
 
 		// Karten mischen und auf Player verteilen
 		void shuffleCards() {
 			
-			Collections.shuffle(deck.notDealtCards); // shuffle notDealtCards
-			
+			Collections.shuffle(deck.notDealtCards); // shuffle notDealtCards	
 			ListIterator<Card> iterator = deck.notDealtCards.listIterator(); // creates Iterator to get trough the LinkedList
 			
 			int i = 0;
+			int j = 0;
+			
 			while (iterator.hasNext()) {
-				
-				System.out.println("Zahl i ist "+i+"; Iterator is "+iterator.nextIndex()); //debug
-				
-				// THROWS EXCEPTION. WHY?!
-				allPlayers[i].addCard(iterator.next());	
-				
-				System.out.println("Spieler "+allPlayers[i].getName()+" hat folgende Karte erhalten "+iterator.next().getCardType().getLabel()); // debug
-				
+				allPlayers[i].addCard(iterator.next());
+				j++;
+				System.out.println("Spieler "+allPlayers[i].getName()+" hat eine Karte erhalten. Ausgeteilt:" + j +" von 78"); // debug
 				i = (i+1)%(allPlayers.length);  //alle Player durch -> von Vorne beginnen
-				
 			}
 			
 			deck.notDealtCards.clear();
+			Client_neu.sendToServer(deck);
 		}
 
 		// get next Player in Order -> relative to Role of given Player
@@ -366,17 +363,16 @@ public class Action {
 
 		// show Cards in the center of deskView
 		void showCurrentTrick() {
-			ListIterator<Card> iterator = deck.currentTrick.listIterator();
-			int NOfCards = 1; // count number of equal cards. default 1 because
-								// you always card with the "same" type.
-			// go through list
-			while ((iterator.hasNext())
-					&& (iterator.next().equals(iterator.previous()) || iterator
-							.previous() == null)) {
-				NOfCards++; //
+			if(!deck.currentTrick.isEmpty()){
+				ListIterator<Card> iterator = deck.currentTrick.listIterator();
+				int NOfCards = 1; // count number of equal cards. default 1 because
+									// you always card with the "same" type.
+				// go through list
+				while ((iterator.hasNext())	&& (iterator.next().equals(iterator.previous()) || iterator.previous() == null)) {
+					NOfCards++; //
+				}
+				deskView.showCurrentTrick(deck.currentTrick.peek().getCardType(), NOfCards);
 			}
-			deskView.showCurrentTrick(deck.currentTrick.peek().getCardType(),
-					NOfCards);
 		}
 
 		// show my Cards in South. Check if they are playable.
@@ -388,7 +384,7 @@ public class Action {
 					myCards[iterator.next().getCardType().getValue()-1][0]++;
 				}
 				
-				if(deck.currentTrick!=null){
+				if(!deck.currentTrick.isEmpty()){
 					iterator = deck.currentTrick.listIterator();
 					int i = 1; // count number of equal cards. default 1 because you
 								// always have a card with the "same" type.
@@ -398,11 +394,12 @@ public class Action {
 						if (iterator.next().equals(iterator.previous())) {
 							i++; //
 							// do you have enough cards to play?
-							if (i == myCards[iterator.next().getCardType().getValue()][1]) {
-								myCards[iterator.next().getCardType().getValue()][1] = 1;
+							Card card = iterator.next();
+							if (i == myCards[card.getCardType().getValue()][1]) {
+								myCards[card.getCardType().getValue()][1] = 1;
 							}
 							else {
-								myCards[iterator.next().getCardType().getValue()][1] = 0;
+								myCards[card.getCardType().getValue()][1] = 0;
 							}
 		
 						} else {
@@ -413,6 +410,7 @@ public class Action {
 				
 				else {
 					// when currentTrick is empty every card is playable
+					iterator = deck.currentTrick.listIterator();
 					while (iterator.hasNext()) {
 						myCards[iterator.next().getCardType().getValue()-1][1]=1; // set playable to 1
 					}
@@ -524,12 +522,7 @@ public class Action {
 
 		public void setDeck(Deck deck) {
 			this.deck = deck;
-			if(deck.currentTrick!=null){
-				showCurrentTrick();
-			}
-			if(allPlayers[3]!=null){
-				showMyCards();
-			}
+			showCurrentTrick();
 		}
 
 	}
