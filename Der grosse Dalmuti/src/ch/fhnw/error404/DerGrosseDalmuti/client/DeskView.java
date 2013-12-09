@@ -79,6 +79,7 @@ public class DeskView extends JFrame {
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
 		gridNorth = new GridBagConstraints();
+		panelNorth.setPreferredSize(new Dimension(1600,200));
 		
 		labelNorth = new JLabel(icon);
 		labelNorth.setPreferredSize(new Dimension(89,92));
@@ -94,6 +95,7 @@ public class DeskView extends JFrame {
 		//EAST Panel
 		panelEast = new JPanel(new GridBagLayout());
 		gridEast = new GridBagConstraints();
+		panelEast.setPreferredSize(new Dimension(300,900));
 		
 		JLabel Label2 = new JLabel(icon);
 		Label2.setPreferredSize(new Dimension(89,92));
@@ -111,6 +113,7 @@ public class DeskView extends JFrame {
 		//WEST Panel
 		panelWest = new JPanel(new GridBagLayout());
 		gridWest = new GridBagConstraints();
+		panelWest.setPreferredSize(new Dimension(300,900));
 				
 		JLabel Label3 = new JLabel(icon);
 		Label3.setPreferredSize(new Dimension(89,92));
@@ -127,7 +130,13 @@ public class DeskView extends JFrame {
 		//CENTER Panel
 		panelCenter = new JPanel(new GridBagLayout());
 		gridCenter = new GridBagConstraints();
-										
+	
+		panelCenter.setSize(new Dimension(100,100));
+		
+	
+		
+		
+		
 		panelCenter.setBackground(Color.YELLOW);
 						
 		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
