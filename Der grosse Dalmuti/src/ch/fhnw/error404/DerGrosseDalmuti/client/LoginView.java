@@ -18,10 +18,10 @@ import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 public class LoginView extends JFrame {
 	
 	private JFrame loginView;
-	private JPanel panel;
-	private JButton login;
-	private JLabel label;
-	private JTextField username;
+	private JPanel panelLogin;
+	private JButton btnLogin;
+	private JLabel lblLogin;
+	private JTextField txtUsername;
 	
 	public LoginView(){
 		
@@ -36,26 +36,26 @@ public class LoginView extends JFrame {
 		loginView.setLocationRelativeTo(null);
 		loginView.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		panel = new JPanel();
-		panel.setBorder(new EmptyBorder(200,300,200,300));
-		panel.setLayout(new GridLayout(3,1));
+		panelLogin = new JPanel();
+		panelLogin.setBorder(new EmptyBorder(200,300,200,300));
+		panelLogin.setLayout(new GridLayout(3,1));
 		
-		label = new JLabel();
-		label.setText("Der Grosse Dalmuti");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Arial", Font.BOLD, 48));	
+		lblLogin = new JLabel();
+		lblLogin.setText("Der Grosse Dalmuti");
+		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		lblLogin.setFont(new Font("Arial", Font.BOLD, 48));	
 	
-		login = new JButton("Login");
+		btnLogin = new JButton("Login");
 		
-		loginView.getRootPane().setDefaultButton(login); // when enter key pressed -> login button is activatd
+		loginView.getRootPane().setDefaultButton(btnLogin); // when enter key pressed -> login button is activatd
 		
-		username = new JTextField("Username", 10);
+		txtUsername = new JTextField("Username", 10);
 			
-		panel.add(username);
-		panel.add(login);
+		panelLogin.add(txtUsername);
+		panelLogin.add(btnLogin);
 			
-		loginView.add(panel);
-		loginView.add(label, BorderLayout.NORTH);
+		loginView.add(panelLogin);
+		loginView.add(lblLogin, BorderLayout.NORTH);
 		loginView.setVisible(true);
 		
 	}
@@ -65,15 +65,15 @@ public class LoginView extends JFrame {
     }
     
     String getUserInput() {
-        return username.getText();
+        return txtUsername.getText();
     }
     
     void setUserInput(String string){
-    	username.setText(string);
+    	txtUsername.setText(string);
     }
     
     void addLoginListener(ActionListener listener) {
-        login.addActionListener(listener);
+        btnLogin.addActionListener(listener);
     }
     
     
@@ -87,6 +87,6 @@ public class LoginView extends JFrame {
     }
     
     void addClearOnClick(MouseListener listener){
-    	username.addMouseListener(listener);
+    	txtUsername.addMouseListener(listener);
     }
 }

@@ -154,14 +154,14 @@ public class Action {
 			kartname[11] = "Tagelöhner";
 			
 			for(int i=0; i<12; i++){
-				if (deskView.slot[i].equals(e.getSource())){
-					deskView.typeCards.setText(kartname[i]);		
+				if (deskView.btnSlot[i].equals(e.getSource())){
+					deskView.txtTypeCards.setText(kartname[i]);		
 				}
 			}
 			
 			for(int i=0; i<12; i++){
-				if (deskView.slot[i].equals(e.getSource()!=null) && deskView.slot[i].equals(e.getSource())){
-					deskView.amountCards.setText((deskView.amountOfCards[i].getText()));		
+				if (deskView.btnSlot[i].equals(e.getSource()!=null) && deskView.btnSlot[i].equals(e.getSource())){
+					deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));		
 				}
 			}
 		}
@@ -203,11 +203,11 @@ public class Action {
 		public void actionPerformed(ActionEvent e){
 
 			if (actionsEnabled() == true){
-			int anzahlKarten = Integer.parseInt (deskView.amountCards.getText());
+			int anzahlKarten = Integer.parseInt (deskView.txtAmountCards.getText());
 			ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
 			while(listIterator.hasNext()){
 				Card cardtype = listIterator.next();
-				if((cardtype.getCardType().getLabel()).equals(deskView.typeCards.getText())){
+				if((cardtype.getCardType().getLabel()).equals(deskView.txtTypeCards.getText())){
 					for(int i =0; i<anzahlKarten;i++){
 						//add it to currentTrick
 						deck.currentTrick.push(cardtype);
@@ -217,8 +217,8 @@ public class Action {
 				}
 
 			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
-				deskView.amountCards.setText("");
-				deskView.typeCards.setText("");
+				deskView.txtAmountCards.setText("");
+				deskView.txtTypeCards.setText("");
 			
 			
 			//alle Spieler das "passen" zurücksetzen
@@ -428,11 +428,11 @@ public class Action {
 			boolean actionsEnabled = false;
 			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
-				deskView.auswahlSpielen.setEnabled(true);
-				deskView.passen.setEnabled(true);
+				deskView.btnAuswahlSpielen.setEnabled(true);
+				deskView.btnPassen.setEnabled(true);
 			} else {
-				deskView.auswahlSpielen.setEnabled(false);
-				deskView.passen.setEnabled(false);
+				deskView.btnAuswahlSpielen.setEnabled(false);
+				deskView.btnPassen.setEnabled(false);
 			}
 			return actionsEnabled;
 		}
