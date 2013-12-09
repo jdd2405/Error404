@@ -160,6 +160,7 @@ public class DeskView extends JFrame {
 		
 		
 		btnAuswahlSpielen.setText("Auswahl spielen");
+		btnAuswahlSpielen.setBackground(Color.GREEN);
 		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
 		btnAuswahlSpielen.setEnabled(false);
 		gridSouth.gridwidth = 2;
@@ -169,6 +170,7 @@ public class DeskView extends JFrame {
 		panelSouth.add(btnAuswahlSpielen, gridSouth);
 		
 		btnPassen.setText("Passen");
+		btnPassen.setBackground(Color.GREEN);
 		btnPassen.setPreferredSize(new Dimension(170,30));	
 		btnPassen.setEnabled(false);
 		gridSouth.gridwidth = 2;
@@ -183,6 +185,7 @@ public class DeskView extends JFrame {
 		gridSouth.gridx = 10;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
+		btnCloseGame.setBackground(Color.RED);
 		panelSouth.add(btnCloseGame, gridSouth);
 						
 		mainFrame.getContentPane().add(panelSouth, BorderLayout.SOUTH);
