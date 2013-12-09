@@ -75,7 +75,7 @@ public class Client_neu {
 
 					if (object instanceof Player[]) {
 						action.setAllPlayers((Player[]) object);
-						System.out.println("Folgende Spieler vom Server erhalten: ");
+						System.out.print("Folgende Spieler vom Server erhalten: ");
 							for (int i = 0; i < 4; i++) {
 								if(action.allPlayers[i]!=null){System.out.println(action.allPlayers[i].getName());}
 							}
