@@ -16,6 +16,7 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 public class Action {
 
 	protected int myId;
+	protected int myPos;
 	Player[] allPlayers = new Player[4];
 	Deck deck;
 	LoginView loginView;
@@ -77,7 +78,7 @@ public class Action {
 														// name at the login
 				loginView.closeWindow();
 
-				System.out.println("Dieser Spieler ist im Array auf Position 0: "+allPlayers[0].getName()); // for test reasons
+				// System.out.println("Dieser Spieler ist im Array auf Position 0: "+allPlayers[0].getName()); // for test reasons
 				deskView.mainFrame.setVisible(true);
 
 
@@ -177,7 +178,7 @@ public class Action {
 				}
 
 				if (countPassen <= 1) {
-					allPlayers[myId].setPassed(true);
+					allPlayers[myPos].setPassed(true);
 					setNextPlayerActive();
 				}
 
@@ -202,7 +203,7 @@ public class Action {
 
 			if (actionsEnabled() == true){
 			int anzahlKarten = Integer.parseInt (deskView.amountCards.getText());
-			ListIterator<Card> listIterator = allPlayers[myId].getCards().listIterator();
+			ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
 			while(listIterator.hasNext()){
 				Card cardtype = listIterator.next();
 				if((cardtype.getCardType().getLabel()).equals(deskView.typeCards.getText())){
@@ -226,7 +227,7 @@ public class Action {
 
 			
 			//hat Spieler keine Karten mehr, wird Rang zugewiesen
-			if(allPlayers[myId].getCards().isEmpty()){
+			if(allPlayers[myPos].getCards().isEmpty()){
 				int anzahlRankVergaben = 1;
 				for(int i = 0; i<allPlayers.length;i++){
 					if(allPlayers[i].getRank() != 0){
@@ -235,23 +236,23 @@ public class Action {
 				}
 				//es sind noch mindestens 2 Spieler im Spiel
 				if (anzahlRankVergaben<=2){
-					allPlayers[myId].setRank(anzahlRankVergaben);
-					allPlayers[myId].setFinished(true);
-					allPlayers[myId].setActive(false);
-					getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+					allPlayers[myPos].setRank(anzahlRankVergaben);
+					allPlayers[myPos].setFinished(true);
+					allPlayers[myPos].setActive(false);
+					getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
 				}
 				//beendet das ganze Spiel, da der 3. Spieler keine Karten mehr hat
 				else{
-					allPlayers[myId].setRank(anzahlRankVergaben);
-					getNextPlayerInOrder(allPlayers[myId]).setRank(anzahlRankVergaben+1);
+					allPlayers[myPos].setRank(anzahlRankVergaben);
+					getNextPlayerInOrder(allPlayers[myPos]).setRank(anzahlRankVergaben+1);
 					finishRound();
 				}
 				
 			}
 			//hat Spieler noch Karten, wird nächster Player aktiv gesetzt resp. aktueller deaktiv
 			else{
-				allPlayers[myId].setActive(false);
-				getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+				allPlayers[myPos].setActive(false);
+				getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
 			}
 			Client_neu.sendToServer(deck);
 			Client_neu.sendToServer(allPlayers);
@@ -276,18 +277,21 @@ public class Action {
 			System.out.println("Anzahl Spieler: "+NOfPlayers);
 			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
 			myId = player.getId();
+			myPos = myId-1;
 			System.out.println("ID meines Spielers: "+player.getId());
-			allPlayers[myId - 1] = player; // cause IDs start from 1
-			System.out.println("Name meines Spielers: "+allPlayers[myId - 1].getName());
+			allPlayers[myPos] = player; // cause IDs start from 1
+			System.out.println("Name meines Spielers: "+allPlayers[myPos].getName());
 
+			
+			deskView.showInSouth(player);
+			
 			if (myId == 4) {
 				shuffleCards();
+				allPlayers[0].setActive(true);
 				Client_neu.sendToServer(deck);
 			}
 			
-			
 			Client_neu.sendToServer(allPlayers);
-			deskView.showInSouth(player);
 		}
 
 		// Karten mischen und auf Player verteilen
@@ -341,19 +345,19 @@ public class Action {
 		}
 
 		void setNextPlayerActive() {
-			allPlayers[myId].setActive(false);
+			allPlayers[myPos].setActive(false);
 
 			// set next player active
-			getNextPlayerInOrder(allPlayers[myId]).setActive(true);
+			getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
 			actionsEnabled(); // to disable Buttons
 		}
 
 		// show all Players in proper position
 		void showPlayers() {
 			if(allPlayers[3]!=null){
-				deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
-				deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
-				deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
+				deskView.showInWest(getNextPlayerInOrder(allPlayers[myPos]));
+				deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos])));
+				deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos]))));
 			}
 		}
 
@@ -376,31 +380,43 @@ public class Action {
 		void showMyCards() {
 			if(allPlayers[3]!=null){
 				int[][] myCards = new int[12][2];
-				ListIterator<Card> iterator = allPlayers[myId].getCards()
-						.listIterator();
+				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
 				while (iterator.hasNext()) {
-					myCards[iterator.next().getCardType().getValue()][1]++;
+					myCards[iterator.next().getCardType().getValue()-1][0]++;
 				}
-	
-				iterator = deck.currentTrick.listIterator();
-				int i = 1; // count number of equal cards. default 1 because you
-							// always card with the "same" type.
-				// go through list
-				while (iterator.hasNext()) {
-					// check if the cards are the same type
-					if (iterator.next().equals(iterator.previous())) {
-						i++; //
-						// do you have enough cards to play?
-						if (i == myCards[iterator.next().getCardType().getValue()][1]) {
-							myCards[iterator.next().getCardType().getValue()][2] = 1;
-						}
-	
-					} else {
-						i = 1;
-					} // set back to 0 if the cards are no longer the same type
+				
+				if(deck.currentTrick!=null){
+					iterator = deck.currentTrick.listIterator();
+					int i = 1; // count number of equal cards. default 1 because you
+								// always have a card with the "same" type.
+					// go through list
+					while (iterator.hasNext()) {
+						// check if the cards are the same type
+						if (iterator.next().equals(iterator.previous())) {
+							i++; //
+							// do you have enough cards to play?
+							if (i == myCards[iterator.next().getCardType().getValue()][1]) {
+								myCards[iterator.next().getCardType().getValue()][1] = 1;
+							}
+							else {
+								myCards[iterator.next().getCardType().getValue()][1] = 0;
+							}
+		
+						} else {
+							i = 1;
+						} // set back to 0 if the cards are no longer the same type
+					}
 				}
-	
+				
+				else {
+					// when currentTrick is empty every card is playable
+					while (iterator.hasNext()) {
+						myCards[iterator.next().getCardType().getValue()-1][1]=1; // set playable to 1
+					}
+				}
+				
 				deskView.showMyCards(myCards);
+				
 			}
 			
 
@@ -409,7 +425,7 @@ public class Action {
 		// check if it is the turn of my Player to enable Actions
 		protected boolean actionsEnabled() {
 			boolean actionsEnabled = false;
-			if (allPlayers[myId].isActive() == true) {
+			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
 				deskView.auswahlSpielen.setEnabled(true);
 				deskView.passen.setEnabled(true);
@@ -505,8 +521,11 @@ public class Action {
 
 		public void setDeck(Deck deck) {
 			this.deck = deck;
-			if(!(deck.currentTrick==null)){
+			if(deck.currentTrick!=null){
 				showCurrentTrick();
+			}
+			if(allPlayers[3]!=null){
+				showMyCards();
 			}
 		}
 

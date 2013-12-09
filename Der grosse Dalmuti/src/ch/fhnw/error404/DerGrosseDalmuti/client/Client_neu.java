@@ -84,7 +84,7 @@ public class Client_neu {
 					//input für die 3 Variablen im Deck
 					if (object instanceof Deck) {
 						action.setDeck((Deck) object);
-						System.out.println("Deck übermittelt.");
+						System.out.println("Deck vom Server erhalten.");
 						
 					}
 					/*
