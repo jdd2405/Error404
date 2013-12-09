@@ -89,7 +89,7 @@ public class DeskView extends JFrame {
 		//EAST Panel
 		panelEast = new JPanel(new GridBagLayout());
 		gridEast = new GridBagConstraints();
-		panelEast.setPreferredSize(new Dimension(300,900));
+		panelEast.setPreferredSize(new Dimension(500,900));
 		
 		JLabel Label2 = new JLabel(icon);
 		Label2.setPreferredSize(new Dimension(89,92));
@@ -104,7 +104,7 @@ public class DeskView extends JFrame {
 		//WEST Panel
 		panelWest = new JPanel(new GridBagLayout());
 		gridWest = new GridBagConstraints();
-		panelWest.setPreferredSize(new Dimension(300,900));
+		panelWest.setPreferredSize(new Dimension(500,900));
 				
 		JLabel Label3 = new JLabel(icon);
 		Label3.setPreferredSize(new Dimension(89,92));
@@ -120,8 +120,7 @@ public class DeskView extends JFrame {
 		panelCenter = new JPanel(new GridBagLayout());
 		panelCenter.setMaximumSize(new Dimension(200,200));
 		gridCenter = new GridBagConstraints();
-		panelCenter.setBackground(Color.YELLOW);
-		panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK,10));
+		panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
 			
 		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
@@ -142,7 +141,7 @@ public class DeskView extends JFrame {
     		panelSouth.add(btnSlot[i], gridSouth);
     	}
 		
-		txtTypeCards = new JTextField(20);
+		txtTypeCards = new JTextField(12);
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 0;
@@ -152,7 +151,7 @@ public class DeskView extends JFrame {
 		
 		txtAmountCards = new JTextField(3);
 		gridSouth.gridwidth = 1;
-		gridSouth.anchor = GridBagConstraints.LINE_END;
+		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 2;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
@@ -164,7 +163,7 @@ public class DeskView extends JFrame {
 		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
 		btnAuswahlSpielen.setEnabled(false);
 		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 5;
+		gridSouth.gridx = 4;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(btnAuswahlSpielen, gridSouth);
@@ -174,7 +173,7 @@ public class DeskView extends JFrame {
 		btnPassen.setPreferredSize(new Dimension(170,30));	
 		btnPassen.setEnabled(false);
 		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 7;
+		gridSouth.gridx = 6;
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(btnPassen, gridSouth);
@@ -196,18 +195,18 @@ public class DeskView extends JFrame {
     
     void showInSouth(Player player){
     	txtSpielerSouth = new JTextField(player.getName());
-    	gridSouth.gridwidth = 2;
-		gridSouth.gridx = 0;
+    	gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 5;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField((player.getRole()).getLabel());
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 5;
+		gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 6;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(txtSpielerSouth, gridSouth);
+		panelSouth.add(txtRoleSouth, gridSouth);
     }
     
     void showMyCards(int[][] cards){
