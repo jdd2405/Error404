@@ -120,7 +120,7 @@ public class DeskView extends JFrame {
 		panelCenter = new JPanel(new GridBagLayout());
 		panelCenter.setMaximumSize(new Dimension(200,200));
 		gridCenter = new GridBagConstraints();
-		panelCenter.setBorder(BorderFactory.createLineBorder(Color.BLACK,5));
+		panelCenter.setBorder(BorderFactory.createLineBorder(Color.GRAY,3));
 			
 		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
