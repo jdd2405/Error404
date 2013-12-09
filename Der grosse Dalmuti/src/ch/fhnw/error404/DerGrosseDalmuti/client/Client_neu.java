@@ -59,6 +59,7 @@ public class Client_neu {
 		try {
 			out.writeObject(object);
 			out.flush();
+			System.out.println("Objekt an Server gesendet.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -106,7 +107,9 @@ public class Client_neu {
 					*/
 					
 				}
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

@@ -295,7 +295,9 @@ public class Action {
 			}
 			
 			// TODO: make it work!!!
+			System.out.println("Spielerliste an Server senden...");
 			Client_neu.sendToServer(allPlayers); // does not send!
+			
 		}
 
 		// Karten mischen und auf Player verteilen
@@ -315,7 +317,9 @@ public class Action {
 			}
 			
 			deck.notDealtCards.clear();
+			System.out.println("Deck an Server senden...");
 			Client_neu.sendToServer(deck);
+			
 		}
 
 		// get next Player in Order -> relative to Role of given Player
