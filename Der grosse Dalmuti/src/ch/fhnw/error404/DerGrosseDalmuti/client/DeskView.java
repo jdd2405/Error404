@@ -142,6 +142,7 @@ public class DeskView extends JFrame {
     	}
 		
 		txtTypeCards = new JTextField(12);
+		txtTypeCards.setEditable(false);
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 0;
@@ -195,6 +196,7 @@ public class DeskView extends JFrame {
     
     void showInSouth(Player player){
     	txtSpielerSouth = new JTextField(player.getName());
+    	txtSpielerSouth.setEditable(false);
     	gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 5;
 		gridSouth.gridy = 0;
@@ -202,6 +204,7 @@ public class DeskView extends JFrame {
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField((player.getRole()).getLabel());
+		txtRoleSouth.setEditable(false);
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 6;
 		gridSouth.gridy = 0;
