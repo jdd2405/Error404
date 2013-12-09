@@ -45,18 +45,18 @@ public class Deck implements Serializable{
 		// Push cards to LinkedList "nodDealtCards"
 		// The for-loop gets the amount of cards of every card type in this game
 		// For example: there are only 2 cards of the card type "Erzbischof". This is checked by the getValue method.
-		for(int i = 0; i<Card.CARD_TYPE.DALMUTI.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.DALMUTI));}
-		for(int i = 0; i<Card.CARD_TYPE.ERZBISCHOF.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.ERZBISCHOF));}
-		for(int i = 0; i<Card.CARD_TYPE.HOFMARSCHALL.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.HOFMARSCHALL));}
-		for(int i = 0; i<Card.CARD_TYPE.BARONIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BARONIN));}
-		for(int i = 0; i<Card.CARD_TYPE.AEBTISSIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.AEBTISSIN));}
-		for(int i = 0; i<Card.CARD_TYPE.RITTER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.RITTER));}
-		for(int i = 0; i<Card.CARD_TYPE.NAEHERIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.NAEHERIN));}
-		for(int i = 0; i<Card.CARD_TYPE.STEINMETZ.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.STEINMETZ));}
-		for(int i = 0; i<Card.CARD_TYPE.KOECHIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.KOECHIN));}
-		for(int i = 0; i<Card.CARD_TYPE.SCHAFHIRTIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.SCHAFHIRTIN));}
-		for(int i = 0; i<Card.CARD_TYPE.BERGMANN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BERGMANN));}
-		for(int i = 0; i<Card.CARD_TYPE.TAGELOEHNER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.TAGELOEHNER));}
+		for(int i = 0; i<=Card.CARD_TYPE.DALMUTI.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.DALMUTI));}
+		for(int i = 0; i<=Card.CARD_TYPE.ERZBISCHOF.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.ERZBISCHOF));}
+		for(int i = 0; i<=Card.CARD_TYPE.HOFMARSCHALL.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.HOFMARSCHALL));}
+		for(int i = 0; i<=Card.CARD_TYPE.BARONIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BARONIN));}
+		for(int i = 0; i<=Card.CARD_TYPE.AEBTISSIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.AEBTISSIN));}
+		for(int i = 0; i<=Card.CARD_TYPE.RITTER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.RITTER));}
+		for(int i = 0; i<=Card.CARD_TYPE.NAEHERIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.NAEHERIN));}
+		for(int i = 0; i<=Card.CARD_TYPE.STEINMETZ.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.STEINMETZ));}
+		for(int i = 0; i<=Card.CARD_TYPE.KOECHIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.KOECHIN));}
+		for(int i = 0; i<=Card.CARD_TYPE.SCHAFHIRTIN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.SCHAFHIRTIN));}
+		for(int i = 0; i<=Card.CARD_TYPE.BERGMANN.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.BERGMANN));}
+		for(int i = 0; i<=Card.CARD_TYPE.TAGELOEHNER.getValue(); i++){notDealtCards.add(new Card(Card.CARD_TYPE.TAGELOEHNER));}
 		
 		
 	}

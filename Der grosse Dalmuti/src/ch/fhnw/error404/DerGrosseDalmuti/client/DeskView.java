@@ -64,19 +64,10 @@ public class DeskView extends JFrame {
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
-		
-		myIcon[0] = new ImageIcon("Bilder/karte1.jpg");
-		myIcon[1] = new ImageIcon("Bilder/karte2.jpg");
-		myIcon[2] = new ImageIcon("Bilder/karte3.jpg");
-		myIcon[3] = new ImageIcon("Bilder/karte4.jpg");
-		myIcon[4] = new ImageIcon("Bilder/karte5.jpg");
-		myIcon[5] = new ImageIcon("Bilder/karte6.jpg");
-		myIcon[6] = new ImageIcon("Bilder/karte7.jpg");
-		myIcon[7] = new ImageIcon("Bilder/karte8.jpg");
-		myIcon[8] = new ImageIcon("Bilder/karte9.jpg");
-		myIcon[9] = new ImageIcon("Bilder/karte10.jpg");
-		myIcon[10] = new ImageIcon("Bilder/karte11.jpg");
-		myIcon[11] = new ImageIcon("Bilder/karte12.jpg");
+
+		for(int i=0; i<12; i++){
+			myIcon[i]= new ImageIcon("Bilder/karte"+(i+1)+".jpg");
+		}
 		
 		mainFrame = new JFrame();
 		mainFrame.setTitle("Der Grosse Dalmuti");
@@ -339,8 +330,7 @@ public class DeskView extends JFrame {
 	//Other Methods
     
     void getTextOfLabel(){
-    		//a = amountOfCards.getText();
-    		System.out.println();
+    		// a = amountOfCards.getText();
     		
     	}
     

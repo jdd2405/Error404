@@ -25,7 +25,7 @@ public class Player implements Serializable{
 	private boolean finished; //set to true - wenn Spieler keine Karten mehr hat
 	private Role role; // Wanna be King!
 	private int rank = 0; // oh, I have not finished first?
-	private ArrayList<Card> cards;
+	private ArrayList<Card> cards = new ArrayList<Card>();
 	private Card swappedCard;
 	public boolean passed; // set to false after every trick (engl. "Stich")!
 	//private boolean passed; // set to false after every trick (engl. "Stich")!

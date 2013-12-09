@@ -137,79 +137,31 @@ public class Action {
 				}
 			}
 			*/
-			if (deskView.slot[0].equals(e.getSource())){
-				deskView.typeCards.setText("Dalmuti");		
-				}
-				else if (deskView.slot[1].equals(e.getSource())){
-				deskView.typeCards.setText("Erzbischof");
-				}
-				else if (deskView.slot[2].equals(e.getSource())){
-				deskView.typeCards.setText("Hofmarschall");
-				}
-				else if (deskView.slot[3].equals(e.getSource())){
-				deskView.typeCards.setText("Baronin");
-				}
-				else if (deskView.slot[4].equals(e.getSource())){
-				deskView.typeCards.setText("Äbtissin");
-				}
-				else if (deskView.slot[5].equals(e.getSource())){
-				deskView.typeCards.setText("Ritter");
-				}
-				else if (deskView.slot[6].equals(e.getSource())){
-				deskView.typeCards.setText("Näherin");
-				}
-				else if (deskView.slot[7].equals(e.getSource())){
-				deskView.typeCards.setText("Steinmetz");
-				}
-				else if (deskView.slot[8].equals(e.getSource())){
-				deskView.typeCards.setText("Köchin");
-				}
-				else if (deskView.slot[9].equals(e.getSource())){
-				deskView.typeCards.setText("Schafhirtin");
-				}
-				else if (deskView.slot[10].equals(e.getSource())){
-				deskView.typeCards.setText("Bergmann");
-				}
-				else if (deskView.slot[11].equals(e.getSource())){
-				deskView.typeCards.setText("Tagelöhner");
-				}
+			String[] kartname = new String[12];
+			kartname[0] = "Dalmuti";
+			kartname[1] = "Erzbischof";
+			kartname[2] = "Hofmarschall";
+			kartname[3] = "Baronin";
+			kartname[4] = "Äbtissin";
+			kartname[5] = "Ritter";
+			kartname[6] = "Näherin";
+			kartname[7] = "Steinmetz";
+			kartname[8] = "Köchin";
+			kartname[9] = "Schafhirtin";
+			kartname[10] = "Bergmann";
+			kartname[11] = "Tagelöhner";
 			
-			if (deskView.slot[0].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[0].getText()));		
+			for(int i=0; i<12; i++){
+				if (deskView.slot[i].equals(e.getSource())){
+					deskView.typeCards.setText(kartname[i]);		
 				}
-				else if (deskView.slot[1].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[1].getText()));
+			}
+			
+			for(int i=0; i<12; i++){
+				if (deskView.slot[i].equals(e.getSource()!=null) && deskView.slot[i].equals(e.getSource())){
+					deskView.amountCards.setText((deskView.amountOfCards[i].getText()));		
 				}
-				else if (deskView.slot[2].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[2].getText()));
-				}
-				else if (deskView.slot[3].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[3].getText()));
-				}
-				else if (deskView.slot[4].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[4].getText()));
-				}
-				else if (deskView.slot[5].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[5].getText()));
-				}
-				else if (deskView.slot[6].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[6].getText()));
-				}
-				else if (deskView.slot[7].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[7].getText()));
-				}
-				else if (deskView.slot[8].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[8].getText()));
-				}
-				else if (deskView.slot[9].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[9].getText()));
-				}
-				else if (deskView.slot[10].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[10].getText()));
-				}
-				else if (deskView.slot[11].equals(e.getSource())){
-				deskView.amountCards.setText((deskView.amountOfCards[11].getText()));
-				}			
+			}
 		}
 	}
 
@@ -318,39 +270,50 @@ public class Action {
 		// if there are 4 players deal cards
 		protected void newPlayer(String name) {
 			int NOfPlayers = 0;
-			for (int i = 0; i < allPlayers.length; i++) {
-				if (allPlayers[i] != null) {
-					NOfPlayers++;
-				}
-				else{break;}
+
+			for (int i = 0; allPlayers[i]!=null; i++) {
+				NOfPlayers++;
+
 			}
+			System.out.println("Anzahl Spieler: "+NOfPlayers);
 			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
 			myId = player.getId();
+			System.out.println("ID meines Spielers: "+player.getId());
 			allPlayers[myId - 1] = player; // cause IDs start from 1
+			System.out.println("Name meines Spielers: "+allPlayers[myId - 1].getName());
 
 			if (myId == 4) {
 				shuffleCards();
 				Client_neu.sendToServer(deck);
 			}
 			
-			deskView.showInSouth(player);
+			
 			Client_neu.sendToServer(allPlayers);
-
+			deskView.showInSouth(player);
 		}
 
 		// Karten mischen und auf Player verteilen
 		void shuffleCards() {
-			// shuffle notDealtCards
-			Collections.shuffle(deck.notDealtCards);
-			// create Iterator to get trough the LinkedList
-			ListIterator<Card> iterator = deck.notDealtCards.listIterator();
+			
+			Collections.shuffle(deck.notDealtCards); // shuffle notDealtCards
+			
+			ListIterator<Card> iterator = deck.notDealtCards.listIterator(); // creates Iterator to get trough the LinkedList
+			
+			int i = 0;
 			while (iterator.hasNext()) {
-				for (int i = 0; i <= allPlayers.length; i++) {
-					for (int j = 0; j <= deck.notDealtCards.size(); j++) {
-						allPlayers[i].addCard(deck.notDealtCards.remove(j));
-					}
-				}
+				
+				System.out.println("Zahl i ist "+i+"; Iterator is "+iterator.nextIndex()); //debug
+				
+				// THROWS EXCEPTION. WHY?!
+				allPlayers[i].addCard(iterator.next());	
+				
+				System.out.println("Spieler "+allPlayers[i].getName()+" hat folgende Karte erhalten "+iterator.next().getCardType().getLabel()); // debug
+				
+				i = (i+1)%(allPlayers.length);  //alle Player durch -> von Vorne beginnen
+				
 			}
+			
+			deck.notDealtCards.clear();
 		}
 
 		// get next Player in Order -> relative to Role of given Player
@@ -389,9 +352,11 @@ public class Action {
 
 		// show all Players in proper position
 		void showPlayers() {
-			if(allPlayers[1]!=null){deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));}
-			if(allPlayers[2]!=null){deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));}
-			if(allPlayers[3]!=null){deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));}
+			if(allPlayers[3]!=null){
+				deskView.showInWest(getNextPlayerInOrder(allPlayers[myId]));
+				deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId])));
+				deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myId]))));
+			}
 		}
 
 		// show Cards in the center of deskView
