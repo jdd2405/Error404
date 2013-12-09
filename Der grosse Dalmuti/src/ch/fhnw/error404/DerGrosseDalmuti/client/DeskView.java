@@ -56,7 +56,7 @@ public class DeskView extends JFrame {
 		private JLabel lblCardsCenter;
 		private JTextField txtNumberOfCardsCenter;
 		
-		ImageIcon icon = new ImageIcon("Bilder/karte2.jpg");
+		ImageIcon icon = new ImageIcon("Bilder/cardohne.png");
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
@@ -101,7 +101,6 @@ public class DeskView extends JFrame {
 		
 		mainFrame.getContentPane().add(panelEast, BorderLayout.EAST);
 		
-		
 		//WEST Panel
 		panelWest = new JPanel(new GridBagLayout());
 		gridWest = new GridBagConstraints();
@@ -129,7 +128,7 @@ public class DeskView extends JFrame {
 		//SOUTH Panel
 		panelSouth = new JPanel(new GridBagLayout());
 		gridSouth = new GridBagConstraints();
-		//panelWest.setPreferredSize(new Dimension(1600,200));
+		panelSouth.setPreferredSize(new Dimension(1600,200));
 		
 		
 		for(int i = 0; i<12; i++){
@@ -195,14 +194,14 @@ public class DeskView extends JFrame {
     void showInSouth(Player player){
     	txtSpielerSouth = new JTextField(player.getName());
     	gridSouth.gridwidth = 2;
-		gridSouth.gridx = 5;
+		gridSouth.gridx = 0;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField((player.getRole()).getLabel());
 		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 7;
+		gridSouth.gridx = 5;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtSpielerSouth, gridSouth);
@@ -234,7 +233,6 @@ public class DeskView extends JFrame {
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(txtSpielerWest, gridWest);
 		
-
 		txtRoleWest = new JTextField((player.getRole()).getLabel());	
     	gridWest.gridx = 1;
 		gridWest.gridy = 0;
