@@ -291,12 +291,12 @@ public class Action {
 			if (myId == 4) {
 				shuffleCards();
 				allPlayers[0].setActive(true);
-				
 			}
 			
 			// TODO: make it work!!!
 			System.out.println("Spielerliste an Server senden...");
 			Client_neu.sendToServer(allPlayers); // does not send!
+			
 			
 		}
 
@@ -381,42 +381,48 @@ public class Action {
 
 		// show my Cards in South. Check if they are playable.
 		void showMyCards() {
+			System.out.println("vor der If-Schlaufe");
 			if(allPlayers[3]!=null){
+				System.out.println("in der If-Schlaufe");
 				int[][] myCards = new int[12][2];
 				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
 				while (iterator.hasNext()) {
 					myCards[iterator.next().getCardType().getValue()-1][0]++;
 				}
 				
-				if(!deck.currentTrick.isEmpty()){
-					iterator = deck.currentTrick.listIterator();
+				if(deck.currentTrick.isEmpty()){
+					System.out.println("currentTrick isEmpty? "+ deck.currentTrick.isEmpty());
+					// when currentTrick is empty every card is playable
+					ListIterator<Card> iterator2 = allPlayers[myPos].getCards().listIterator();
+					while (iterator2.hasNext()) {
+						myCards[iterator2.next().getCardType().getValue()-1][1]=1; // set playable to 1
+						System.out.println("Is enabled: yes");
+					}							
+				}
+				
+				else {
+					ListIterator<Card> iterator3 = deck.currentTrick.listIterator();
 					int i = 1; // count number of equal cards. default 1 because you
 								// always have a card with the "same" type.
 					// go through list
-					while (iterator.hasNext()) {
+					while (iterator3.hasNext()) {
 						// check if the cards are the same type
-						if (iterator.next().equals(iterator.previous())) {
+						if (iterator3.next().equals(iterator3.previous())) {
 							i++; //
 							// do you have enough cards to play?
-							Card card = iterator.next();
-							if (i == myCards[card.getCardType().getValue()][1]) {
-								myCards[card.getCardType().getValue()][1] = 1;
+							Card card = iterator3.next();
+							if (i == myCards[card.getCardType().getValue()-1][1]) {
+								myCards[card.getCardType().getValue()-1][1] = 1;
 							}
 							else {
-								myCards[card.getCardType().getValue()][1] = 0;
+								myCards[card.getCardType().getValue()-1][1] = 0;
+								System.out.println("is enabled: no");
 							}
 		
 						} else {
 							i = 1;
+							System.out.println("ich bin hier!");
 						} // set back to 0 if the cards are no longer the same type
-					}
-				}
-				
-				else {
-					// when currentTrick is empty every card is playable
-					iterator = deck.currentTrick.listIterator();
-					while (iterator.hasNext()) {
-						myCards[iterator.next().getCardType().getValue()-1][1]=1; // set playable to 1
 					}
 				}
 				
@@ -518,6 +524,7 @@ public class Action {
 			this.allPlayers = allPlayers;
 			showPlayers();
 			showMyCards();
+			actionsEnabled();
 		}
 
 		public Deck getDeck() {

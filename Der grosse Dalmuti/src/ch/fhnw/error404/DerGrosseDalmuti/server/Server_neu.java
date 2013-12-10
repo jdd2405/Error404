@@ -73,25 +73,28 @@ public class Server_neu{
 		public void run() {
 
 			try {
-				object = input.readObject();
-				System.out.println(object.toString());
-				//if (object.isEmpty() != true) {
-					//for (int i = 0; i < 4; i++) {
-						//System.out.println(object.get(i));
+				while(true){
+					object = input.readObject();
+					System.out.println(object.toString());
+					//if (object.isEmpty() != true) {
+						//for (int i = 0; i < 4; i++) {
+							//System.out.println(object.get(i));
+						//}
+						
+						if (object instanceof Player[]) {
+							allPlayers = (Player[]) object;
+							
+							System.out.println("allPlayers-Array erhalten von Client");
+						}
+						if (object instanceof Deck) {
+							deck = (Deck) object;
+							System.out.println("Deck von Client erhalten");
+						}
+						
+						sendToAllClients(object);
+						
 					//}
-					
-					if (object instanceof Player[]) {
-						allPlayers = (Player[]) object;
-						System.out.println("allPlayers-Array erhalten von Client");
-					}
-					if (object instanceof Deck) {
-						deck = (Deck) object;
-						System.out.println("Deck von Client erhalten");
-					}
-					
-					sendToAllClients(object);
-					
-				//}
+				}
 					
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

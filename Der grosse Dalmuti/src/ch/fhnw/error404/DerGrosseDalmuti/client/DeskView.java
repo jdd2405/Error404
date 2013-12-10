@@ -224,6 +224,9 @@ public class DeskView extends JFrame {
     		if(cards[i][1] == 0){
     			btnSlot[i].setEnabled(false);
     		}
+    		else{
+    			btnSlot[i].setEnabled(true);
+    		}
     	}
     	
     }
