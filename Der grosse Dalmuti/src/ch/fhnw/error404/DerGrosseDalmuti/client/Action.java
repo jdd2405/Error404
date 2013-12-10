@@ -210,6 +210,7 @@ public class Action {
 					Card card = listIterator.next();
 					if(card.getCardType().getLabel().equals(deskView.txtTypeCards.getText())){
 						deck.currentTrick.push(card);
+						System.out.println(card.getCardType().getLabel() +" auf den Tisch gelegt");
 						i++;
 						listIterator.remove();
 					}
@@ -240,8 +241,7 @@ public class Action {
 				if (anzahlRankVergaben<=2){
 					allPlayers[myPos].setRank(anzahlRankVergaben);
 					allPlayers[myPos].setFinished(true);
-					allPlayers[myPos].setActive(false);
-					getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
+					setNextPlayerActive();
 				}
 				//beendet das ganze Spiel, da der 3. Spieler keine Karten mehr hat
 				else{
@@ -253,8 +253,7 @@ public class Action {
 			}
 			//hat Spieler noch Karten, wird nächster Player aktiv gesetzt resp. aktueller deaktiv
 			else{
-				allPlayers[myPos].setActive(false);
-				getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
+				setNextPlayerActive();
 			}
 			
 			Client_neu.sendToServer(deck);
@@ -438,6 +437,7 @@ public class Action {
 				deskView.btnAuswahlSpielen.setEnabled(false);
 				deskView.btnPassen.setEnabled(false);
 			}
+			System.out.println("Ich bin dran: "+actionsEnabled);
 			return actionsEnabled;
 		}
 
@@ -516,9 +516,9 @@ public class Action {
 
 		public void setAllPlayers(Player[] allPlayers) {
 			this.allPlayers = allPlayers;
-			showPlayers();
-			showMyCards();
-			actionsEnabled();
+			showPlayers(); System.out.println("Zeige alle Spieler");
+			showMyCards(); System.out.println("Zeige meine Karten");
+			actionsEnabled(); 
 		}
 
 		public Deck getDeck() {
