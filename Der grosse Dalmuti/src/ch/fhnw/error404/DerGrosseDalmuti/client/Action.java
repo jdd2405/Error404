@@ -160,7 +160,7 @@ public class Action {
 			}
 			
 			for(int i=0; i<12; i++){
-				if (deskView.btnSlot[i].equals(e.getSource()!=null) && deskView.btnSlot[i].equals(e.getSource())){
+				if (e.getSource()!=null && deskView.btnSlot[i].equals(e.getSource())){
 					deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));		
 				}
 			}
