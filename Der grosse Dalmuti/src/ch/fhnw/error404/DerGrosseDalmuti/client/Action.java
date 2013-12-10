@@ -205,20 +205,21 @@ public class Action {
 			if (actionsEnabled() == true){
 			int anzahlKarten = Integer.parseInt (deskView.txtAmountCards.getText());
 			ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
-			while(listIterator.hasNext()){
-				Card cardtype = listIterator.next();
-				if((cardtype.getCardType().getLabel()).equals(deskView.txtTypeCards.getText())){
-					for(int i =0; i<anzahlKarten;i++){
-						//add it to currentTrick
-						deck.currentTrick.push(cardtype);
-						//remove it from the playercards arraylist
+			int i = 0;
+				while(listIterator.hasNext() && i<anzahlKarten){
+					Card card = listIterator.next();
+					if(card.getCardType().getLabel().equals(deskView.txtTypeCards.getText())){
+						deck.currentTrick.push(card);
+						i++;
 						listIterator.remove();
 					}
 				}
+			}
+				
 
 			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
-				deskView.txtAmountCards.setText("");
-				deskView.txtTypeCards.setText("");
+			deskView.txtAmountCards.setText("");
+			deskView.txtTypeCards.setText("");
 			
 			
 			//alle Spieler das "passen" zurücksetzen
@@ -255,11 +256,9 @@ public class Action {
 				allPlayers[myPos].setActive(false);
 				getNextPlayerInOrder(allPlayers[myPos]).setActive(true);
 			}
+			
 			Client_neu.sendToServer(deck);
 			Client_neu.sendToServer(allPlayers);
-			}
-		}
-			else{}
 		}
 	}
 
@@ -381,9 +380,7 @@ public class Action {
 
 		// show my Cards in South. Check if they are playable.
 		void showMyCards() {
-			System.out.println("vor der If-Schlaufe");
 			if(allPlayers[3]!=null){
-				System.out.println("in der If-Schlaufe");
 				int[][] myCards = new int[12][2];
 				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
 				while (iterator.hasNext()) {
@@ -396,7 +393,6 @@ public class Action {
 					ListIterator<Card> iterator2 = allPlayers[myPos].getCards().listIterator();
 					while (iterator2.hasNext()) {
 						myCards[iterator2.next().getCardType().getValue()-1][1]=1; // set playable to 1
-						System.out.println("Is enabled: yes");
 					}							
 				}
 				
@@ -416,12 +412,10 @@ public class Action {
 							}
 							else {
 								myCards[card.getCardType().getValue()-1][1] = 0;
-								System.out.println("is enabled: no");
 							}
 		
 						} else {
 							i = 1;
-							System.out.println("ich bin hier!");
 						} // set back to 0 if the cards are no longer the same type
 					}
 				}
