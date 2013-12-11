@@ -1,6 +1,7 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.ListIterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -201,12 +202,12 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 
 			if (actionsEnabled() == true) {
-				int anzahlKarten = Integer.parseInt(deskView.txtAmountCards
+				int nOfCards = Integer.parseInt(deskView.txtAmountCards
 						.getText());
 				ListIterator<Card> listIterator = allPlayers[myPos].getCards()
 						.listIterator();
 				int i = 0;
-				while (listIterator.hasNext() && i < anzahlKarten) {
+				while (listIterator.hasNext() && i < nOfCards) {
 					Card card = listIterator.next();
 					if (card.getCardType().getLabel()
 							.equals(deskView.txtTypeCards.getText())) {
@@ -368,14 +369,16 @@ public class Action {
 		// show Cards in the center of deskView
 		void showCurrentTrick() {
 			if(!deck.currentTrick.isEmpty()){
+				int nOfCards = 0;
+				Card cardOnTop = deck.currentTrick.peek();
 				ListIterator<Card> iterator = deck.currentTrick.listIterator();
-				int NOfCards = 1; // count number of equal cards. default 1 because
-									// you always card with the "same" type.
-				// go through list
-				while ((iterator.hasNext())	&& (iterator.next().equals(iterator.previous()) || iterator.previous() == null)) {
-					NOfCards++; //
+				while(iterator.hasNext()){
+					if(cardOnTop.equals(iterator.next())){
+						nOfCards++;
+					}
 				}
-				deskView.showCurrentTrick(deck.currentTrick.peek().getCardType(), NOfCards);
+				System.out.println("Auf dem Tisch: "+nOfCards);
+				deskView.showCurrentTrick(cardOnTop.getCardType(), nOfCards);
 			}
 		}
 
@@ -383,6 +386,7 @@ public class Action {
 		void showMyCards() {
 			if(allPlayers[3]!=null){
 				int[][] myCards = new int[12][2];
+				
 				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
 				while (iterator.hasNext()) {
 					myCards[iterator.next().getCardType().getValue()-1][0]++;
@@ -398,26 +402,29 @@ public class Action {
 				}
 				
 				else {
-					ListIterator<Card> iterator3 = deck.currentTrick.listIterator();
-					int i = 1; // count number of equal cards. default 1 because you
-								// always have a card with the "same" type.
+					Card cardOnTop = deck.currentTrick.peek();
+					int nOfCards = 0;
+					ListIterator<Card> iterator3 = deck.currentTrick.listIterator();	
 					// go through list
 					while (iterator3.hasNext()) {
 						// check if the cards are the same type
-						if (iterator3.next().equals(iterator3.previous())) {
-							i++; //
-							// do you have enough cards to play?
-							Card card = iterator3.next();
-							if (i == myCards[card.getCardType().getValue()-1][1]) {
-								myCards[card.getCardType().getValue()-1][1] = 1;
+						if (cardOnTop.equals(iterator3.next())) {
+							nOfCards++; //count number of equal cards. 
+						}
+					}
+					// do you have enough cards to play?
+					for(int i = 0; i<12; i++){
+						if (nOfCards == myCards[i][0]) {
+							if(i<=cardOnTop.getCardType().getValue()){
+								myCards[i][1] = 1;
 							}
 							else {
-								myCards[card.getCardType().getValue()-1][1] = 0;
+								myCards[i][1] = 0;
 							}
-		
-						} else {
-							i = 1;
-						} // set back to 0 if the cards are no longer the same type
+						}
+						else {
+							myCards[i][1] = 0;
+						}
 					}
 				}
 				
@@ -517,9 +524,9 @@ public class Action {
 		}
 
 		public void setAllPlayers(Player[] allPlayers) {
-			this.allPlayers = allPlayers;
-			showPlayers(); System.out.println("Zeige alle Spieler");
-			showMyCards(); System.out.println("Zeige meine Karten");
+			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
+			showPlayers(); System.out.println("Zeige alle Spieler.");
+			showMyCards(); System.out.println("Zeige meine Karten.");
 			actionsEnabled(); 
 		}
 
@@ -528,9 +535,9 @@ public class Action {
 		}
 
 		public void setDeck(Deck deck) {
-			this.deck = deck;
-			showCurrentTrick();
-			showMyCards(); System.out.println("Zeige meine Karten");
+			this.deck = deck; System.out.println("Deck vom Server erhalten. "+ new Date());
+			showCurrentTrick(); System.out.println("Zeige gelegte Karten.");
+			showMyCards(); System.out.println("Zeige meine Karten.");
 		}
 
 	}

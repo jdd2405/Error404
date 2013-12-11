@@ -78,9 +78,6 @@ public class Client_neu {
 
 					if (object instanceof Player[]) {
 						action.setAllPlayers((Player[]) object);
-
-						System.out.println("Spielerliste vom Server erhalten. "+ new Date());
-						
 					}
 					//input für die 3 Variablen im Deck
 					else if (object instanceof Deck) {
