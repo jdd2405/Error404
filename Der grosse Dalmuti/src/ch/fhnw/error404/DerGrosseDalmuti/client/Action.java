@@ -77,7 +77,6 @@ public class Action {
 														// name at the login
 				loginView.closeWindow();
 
-				System.out.println("Dieser Spieler ist im Array auf Position 1: "+allPlayers[1].getName()); // for test reasons
 				deskView.mainFrame.setVisible(true);
 
 
