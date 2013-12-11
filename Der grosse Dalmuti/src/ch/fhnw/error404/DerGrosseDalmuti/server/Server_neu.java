@@ -76,10 +76,6 @@ public class Server_neu{
 				while(true){
 					object = input.readObject();
 					System.out.println(object.toString());
-					//if (object.isEmpty() != true) {
-						//for (int i = 0; i < 4; i++) {
-							//System.out.println(object.get(i));
-						//}
 						
 						if (object instanceof Player[]) {
 							allPlayers = (Player[]) object;
@@ -93,7 +89,6 @@ public class Server_neu{
 						
 						sendToAllClients(object);
 						
-					//}
 				}
 					
 			} catch (ClassNotFoundException e) {
