@@ -189,7 +189,7 @@ public class Action {
 					setNextPlayerActive();
 				}
 				Client_neu.sendToServer(allPlayers);
-				Client_neu.sendToServer(deck);
+				// Client_neu.sendToServer(deck);
 			} else {
 			}
 		}
@@ -214,7 +214,6 @@ public class Action {
 					}
 				}
 			}
-			else{}
 				
 
 			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
@@ -293,7 +292,7 @@ public class Action {
 			}
 			
 			System.out.println("Spielerliste an Server senden...");
-			Client_neu.sendToServer(allPlayers); // does not send!
+			Client_neu.sendToServer(allPlayers);
 			
 			
 		}

@@ -324,6 +324,8 @@ public class DeskView extends JFrame {
 		panelCenter.add(lblCardsCenter, gridCenter);
 		
 		txtNumberOfCardsCenter = new JTextField(numberOfCards);
+		System.out.print(("this is the center number:" + numberOfCards));
+		System.out.print("Methode wird aufgerufen");
 		txtNumberOfCardsCenter.setEditable(false);
 		gridCenter.gridx = 0;
 		gridCenter.gridy = 1;
