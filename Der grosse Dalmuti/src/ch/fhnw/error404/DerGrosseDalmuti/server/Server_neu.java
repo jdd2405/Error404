@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.ListIterator;
 import java.util.Vector;
@@ -84,11 +85,11 @@ public class Server_neu{
 						if (object instanceof Player[]) {
 							allPlayers = (Player[]) object;
 							
-							System.out.println("allPlayers-Array erhalten von Client");
+							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
 						}
-						if (object instanceof Deck) {
+						else if (object instanceof Deck) {
 							deck = (Deck) object;
-							System.out.println("Deck von Client erhalten");
+							System.out.println("Deck von Client erhalten. "+ new Date());
 						}
 						
 						sendToAllClients(object);
@@ -113,7 +114,7 @@ public class Server_neu{
 					try {
 						output.writeObject(message2);
 						output.flush();
-						System.out.println("Objekt an Clients gesendet.");
+						System.out.println("Objekt an Clients gesendet. "+ new Date());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}

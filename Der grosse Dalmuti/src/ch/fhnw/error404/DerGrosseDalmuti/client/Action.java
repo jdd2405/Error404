@@ -216,6 +216,7 @@ public class Action {
 					}
 				}
 			}
+			else{}
 				
 
 			//löschen der Inhalte von anzahl gespielten karten und Kartentyp
@@ -256,8 +257,10 @@ public class Action {
 				setNextPlayerActive();
 			}
 			
-			Client_neu.sendToServer(deck);
 			Client_neu.sendToServer(allPlayers);
+			Client_neu.sendToServer(deck);
+			
+			
 		}
 	}
 
@@ -291,7 +294,6 @@ public class Action {
 				allPlayers[0].setActive(true);
 			}
 			
-			// TODO: make it work!!!
 			System.out.println("Spielerliste an Server senden...");
 			Client_neu.sendToServer(allPlayers); // does not send!
 			
@@ -528,6 +530,7 @@ public class Action {
 		public void setDeck(Deck deck) {
 			this.deck = deck;
 			showCurrentTrick();
+			showMyCards(); System.out.println("Zeige meine Karten");
 		}
 
 	}
