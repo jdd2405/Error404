@@ -183,14 +183,14 @@ public class Action {
 				}
 
 				else if (countPassen == 2) {
-					clearTable();
+					clearTable(); System.out.println("Karten vom Tisch genommen.");
 					for (int i = 0; i < 4; i++) {
 						allPlayers[i].passed = false;
 					}
 					setNextPlayerActive();
 				}
 				Client_neu.sendToServer(allPlayers);
-				// Client_neu.sendToServer(deck);
+				Client_neu.sendToServer(deck);
 			} else {
 			}
 		}
@@ -218,6 +218,7 @@ public class Action {
 						listIterator.remove();
 					}
 				}
+				System.out.println("Anzahl gelegter Karten: "+i);
 			}
 
 			// löschen der Inhalte von anzahl gespielten karten und
@@ -242,7 +243,7 @@ public class Action {
 				if (anzahlRankVergaben <= 2) {
 					allPlayers[myPos].setRank(anzahlRankVergaben);
 					allPlayers[myPos].setFinished(true);
-					setNextPlayerActive();
+					setNextPlayerActive(); // <-- Does not happen here!!! Check why.
 				}
 				// beendet das ganze Spiel, da der 3. Spieler keine Karten
 				// mehr hat
@@ -373,7 +374,7 @@ public class Action {
 				Card cardOnTop = deck.currentTrick.peek();
 				ListIterator<Card> iterator = deck.currentTrick.listIterator();
 				while(iterator.hasNext()){
-					if(cardOnTop.equals(iterator.next())){
+					if(cardOnTop.getCardType().equals(iterator.next().getCardType())){
 						nOfCards++;
 					}
 				}
@@ -389,7 +390,7 @@ public class Action {
 				
 				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
 				while (iterator.hasNext()) {
-					myCards[iterator.next().getCardType().getValue()-1][0]++;
+					myCards[iterator.next().getCardType().ordinal()][0]++;
 				}
 				
 				if(deck.currentTrick.isEmpty()){
@@ -397,7 +398,7 @@ public class Action {
 					// when currentTrick is empty every card is playable
 					ListIterator<Card> iterator2 = allPlayers[myPos].getCards().listIterator();
 					while (iterator2.hasNext()) {
-						myCards[iterator2.next().getCardType().getValue()-1][1]=1; // set playable to 1
+						myCards[iterator2.next().getCardType().ordinal()][1]=1; // set playable to 1
 					}							
 				}
 				
@@ -408,14 +409,14 @@ public class Action {
 					// go through list
 					while (iterator3.hasNext()) {
 						// check if the cards are the same type
-						if (cardOnTop.equals(iterator3.next())) {
+						if (cardOnTop.getCardType().equals(iterator3.next().getCardType())) {
 							nOfCards++; //count number of equal cards. 
 						}
 					}
 					// do you have enough cards to play?
 					for(int i = 0; i<12; i++){
-						if (nOfCards == myCards[i][0]) {
-							if(i<=cardOnTop.getCardType().getValue()){
+						if (nOfCards <= myCards[i][0]) {
+							if(i<cardOnTop.getCardType().ordinal()){
 								myCards[i][1] = 1;
 							}
 							else {
@@ -496,6 +497,7 @@ public class Action {
 		protected void clearTable() {
 			while (!deck.currentTrick.isEmpty()) { // not empty
 				deck.notDealtCards.add(deck.currentTrick.pop());
+				System.out.println("Eine Karte vom Tisch weggenommen.");
 			}
 		}
 
