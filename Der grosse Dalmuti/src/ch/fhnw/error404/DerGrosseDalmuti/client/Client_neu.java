@@ -87,23 +87,9 @@ public class Client_neu {
 						action.setDeck((Deck) object);
 						System.out.println("Deck vom Server erhalten. "+ new Date());
 						
-					}
-					/*
-					if (message instanceof ArrayList) {
-						deck.notDealtCards = (ArrayList<Card>) message;
-						System.out.println(deck.notDealtCards.size());
-					}
-					if (message instanceof Card[]) {
-						deck.swappedCards = (Card[]) message;
-						System.out.println(deck.notDealtCards.size());
-					}
-					
-					else {
-						System.out.println("keine Player bisher");
-					}
-					*/
-					
+					}					
 				}
+				
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
