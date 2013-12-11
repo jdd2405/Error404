@@ -58,6 +58,8 @@ public class Client_neu {
 	public static void sendToServer(Object object){
 		try {
 			out.writeObject(object);
+			out.flush();
+			System.out.println("Objekt an Server gesendet.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +78,7 @@ public class Client_neu {
 					if (object instanceof Player[]) {
 						action.setAllPlayers((Player[]) object);
 
-						System.out.print("Folgende Spieler vom Server erhalten: ");
+						System.out.println("Folgende Spieler vom Server erhalten:");
 							for (int i = 0; i < 4; i++) {
 								if(action.allPlayers[i]!=null){System.out.println(action.allPlayers[i].getName());}
 							}
@@ -86,7 +88,7 @@ public class Client_neu {
 					//input für die 3 Variablen im Deck
 					if (object instanceof Deck) {
 						action.setDeck((Deck) object);
-						System.out.println("Deck übermittelt.");
+						System.out.println("Deck vom Server erhalten.");
 						
 					}
 					/*
@@ -105,7 +107,9 @@ public class Client_neu {
 					*/
 					
 				}
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}

@@ -5,6 +5,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Vector;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
@@ -20,13 +22,20 @@ public class Server_neu{
 	public static void main(String[] args) {
 		Server_neu serverObject = new Server_neu();
 		serverObject.startServer();
+		
 	}
 
 	public void startServer() {
 		try {
 			ServerSocket server = new ServerSocket(5000);
 			System.out.println("Server ist gestartet");
-
+			
+			Iterator<Card> iterator = deck.notDealtCards.iterator();
+			System.out.println("Folgende Karten wurden notDealtCards hinzugefügt:");
+			while(iterator.hasNext()){
+				System.out.println(iterator.next().getCardType().getLabel());
+			}
+			
 			while (true) {
 				Socket client = server.accept();
 				ObjectOutputStream output = new ObjectOutputStream(
@@ -64,26 +73,33 @@ public class Server_neu{
 		public void run() {
 
 			try {
-				object = input.readObject();
-				System.out.println(object.toString());
-				//if (object.isEmpty() != true) {
-					//for (int i = 0; i < 4; i++) {
-						//System.out.println(object.get(i));
+				while(true){
+					object = input.readObject();
+					System.out.println(object.toString());
+					//if (object.isEmpty() != true) {
+						//for (int i = 0; i < 4; i++) {
+							//System.out.println(object.get(i));
+						//}
+						
+						if (object instanceof Player[]) {
+							allPlayers = (Player[]) object;
+							
+							System.out.println("allPlayers-Array erhalten von Client");
+						}
+						if (object instanceof Deck) {
+							deck = (Deck) object;
+							System.out.println("Deck von Client erhalten");
+						}
+						
+						sendToAllClients(object);
+						
 					//}
+				}
 					
-					if (object instanceof Player[]) {
-						allPlayers = (Player[]) object;
-						System.out.println("allPlayers-Array erhalten von Client");
-					}
-					if (object instanceof Deck) {
-						deck = (Deck) object;
-					}
-					
-					sendToAllClients(object);
-					
-				//}
-					
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (IOException e){
 				e.printStackTrace();
 			}
 
@@ -97,6 +113,7 @@ public class Server_neu{
 					try {
 						output.writeObject(message2);
 						output.flush();
+						System.out.println("Objekt an Clients gesendet.");
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
