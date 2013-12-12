@@ -181,7 +181,7 @@ public class Action {
 					}
 				}
 
-				if (countActivePlayer-2 == countPassen) {
+				if (countActivePlayer-2 >= countPassen) {
 					allPlayers[myPos].setPassed(true);
 					setNextPlayerActive();
 				}
