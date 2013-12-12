@@ -206,10 +206,8 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 
 			if (actionsEnabled() == true) {
-				int nOfCards = Integer.parseInt(deskView.txtAmountCards
-						.getText());
-				ListIterator<Card> listIterator = allPlayers[myPos].getCards()
-						.listIterator();
+				int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+				ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
 				int i = 0;
 				while (listIterator.hasNext() && i < nOfCards) {
 					Card card = listIterator.next();
@@ -252,10 +250,10 @@ public class Action {
 					// mehr hat
 					else {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
-						getNextPlayerInOrder(allPlayers[myPos]).setRank(
-								anzahlRankVergaben + 1);
+						getNextPlayerInOrder(allPlayers[myPos]).setRank(anzahlRankVergaben + 1);
 						allPlayers[myPos].setFinished(true);
 						getNextPlayerInOrder(allPlayers[myPos]).setFinished(true);
+						allPlayers[myPos].setActive(false);
 						finishRound();
 					}
 				}
@@ -516,6 +514,7 @@ public class Action {
 					allPlayers[i].setActive(true);
 				}
 			}
+			clearTable();
 			shuffleCards();
 		}
 
