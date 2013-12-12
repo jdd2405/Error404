@@ -22,39 +22,39 @@ public class DeskView extends JFrame {
 		
 		private JPanel panelSouth;
 		private GridBagConstraints gridSouth;
-		private JTextField txtSpielerSouth;
-		private JTextField txtRoleSouth;
+		JTextField txtSpielerSouth;
+		JTextField txtRoleSouth;
 		JButton btnPassen = new JButton();
 		JButton btnAuswahlSpielen = new JButton();
 		JTextField txtAmountCards;
 		JTextField txtTypeCards;
 		JButton[] btnSlot = new JButton[12];
 		JLabel[] lblAmountOfCards = new JLabel[12];
-		private JButton btnCloseGame;
+		JButton btnCloseGame;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
-		private JTextField txtSpielerWest;
-		private JTextField txtRoleWest;
-		private JTextField txtCardsInHandWest;
+		JTextField txtSpielerWest;
+		JTextField txtRoleWest;
+		JTextField txtCardsInHandWest;
 		
 		private JPanel panelNorth;
 		private GridBagConstraints gridNorth;
-		private JTextField txtSpielerNorth;
-		private JTextField txtRoleNorth;
-		private JLabel lblNorth;
-		private JTextField txtCardsInHandNorth;
+		JTextField txtSpielerNorth;
+		JTextField txtRoleNorth;
+		JLabel lblNorth;
+		JTextField txtCardsInHandNorth;
 		
 		private JPanel panelEast;
 		private GridBagConstraints gridEast;
-		private JTextField txtSpielerEast;
-		private JTextField txtRoleEast;
-		private JTextField txtCardsInHandEast;
+		JTextField txtSpielerEast;
+		JTextField txtRoleEast;
+		JTextField txtCardsInHandEast;
 		
 		private JPanel panelCenter;
 		private GridBagConstraints gridCenter;
-		private JLabel lblCardsCenter;
-		private JLabel lblNumberOfCardsCenter;
+		JLabel lblCardsCenter;
+		JLabel lblNumberOfCardsCenter;
 		
 		ImageIcon icon = new ImageIcon("Bilder/cardohne.png");
 		ImageIcon[] myIcon = new ImageIcon[12];
