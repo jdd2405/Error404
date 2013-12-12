@@ -123,6 +123,7 @@ public class Action {
 	// Close Game
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			allPlayers[myPos]=null; // delete Player from Player list
 			deskView.closeWindow();
 		}
 	}
@@ -206,10 +207,8 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 
 			if (actionsEnabled() == true) {
-				int nOfCards = Integer.parseInt(deskView.txtAmountCards
-						.getText());
-				ListIterator<Card> listIterator = allPlayers[myPos].getCards()
-						.listIterator();
+				int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+				ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
 				int i = 0;
 				while (listIterator.hasNext() && i < nOfCards) {
 					Card card = listIterator.next();
@@ -252,10 +251,10 @@ public class Action {
 					// mehr hat
 					else {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
-						getNextPlayerInOrder(allPlayers[myPos]).setRank(
-								anzahlRankVergaben + 1);
+						getNextPlayerInOrder(allPlayers[myPos]).setRank(anzahlRankVergaben + 1);
 						allPlayers[myPos].setFinished(true);
 						getNextPlayerInOrder(allPlayers[myPos]).setFinished(true);
+						allPlayers[myPos].setActive(false);
 						finishRound();
 					}
 				}
@@ -306,6 +305,18 @@ public class Action {
 			Client_neu.sendToServer(allPlayers);
 			
 			
+		}
+		
+		
+		// counts number of Players in allPlayers-Array
+		int countPlayers(){
+			int nOfPlayers = 0;
+			for(int i=0; i<allPlayers.length;i++){
+				if(allPlayers[i]!=null){
+					nOfPlayers++;
+				}
+			}
+			return nOfPlayers;
 		}
 
 		// Karten mischen und auf Player verteilen
@@ -516,6 +527,7 @@ public class Action {
 					allPlayers[i].setActive(true);
 				}
 			}
+			clearTable();
 			shuffleCards();
 		}
 
