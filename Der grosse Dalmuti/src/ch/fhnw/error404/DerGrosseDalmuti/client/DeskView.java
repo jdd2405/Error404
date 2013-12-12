@@ -203,6 +203,12 @@ public class DeskView extends JFrame {
     		panelSouth.add(btnSlot[i], gridSouth);
     	}
 		
+		for(int i = 0; i < 12; i++){
+			lblAmountOfCards[i] = new JLabel();
+			lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
+    		lblAmountOfCards[i].setForeground(Color.red);
+		}
+		
 		txtTypeCards = new JTextField(12);
 		txtTypeCards.setEditable(false);
 		gridSouth.anchor = GridBagConstraints.LINE_START;
@@ -278,9 +284,8 @@ public class DeskView extends JFrame {
     	
     	for(int i = 0; i < 12; i++){
     		btnSlot[i].setLayout(new BorderLayout());
-    		btnSlot[i].add(lblAmountOfCards[i] = new JLabel(Integer.toString(cards[i][0])),BorderLayout.WEST);
-    		lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
-    		lblAmountOfCards[i].setForeground(Color.red);
+    		btnSlot[i].add(lblAmountOfCards[i],BorderLayout.WEST);
+    		lblAmountOfCards[i].setText(Integer.toString(cards[i][0]));
     		
     		// for greying out cards for(int i = 0; i < 12; i++){
     		if(cards[i][1] == 0){
