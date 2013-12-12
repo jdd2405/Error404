@@ -22,39 +22,39 @@ public class DeskView extends JFrame {
 		
 		private JPanel panelSouth;
 		private GridBagConstraints gridSouth;
-		private JTextField txtSpielerSouth;
-		private JTextField txtRoleSouth;
+		JTextField txtSpielerSouth;
+		JTextField txtRoleSouth;
 		JButton btnPassen = new JButton();
 		JButton btnAuswahlSpielen = new JButton();
 		JTextField txtAmountCards;
 		JTextField txtTypeCards;
 		JButton[] btnSlot = new JButton[12];
 		JLabel[] lblAmountOfCards = new JLabel[12];
-		private JButton btnCloseGame;
+		JButton btnCloseGame;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
-		private JTextField txtSpielerWest;
-		private JTextField txtRoleWest;
-		private JTextField txtCardsInHandWest;
+		JTextField txtSpielerWest;
+		JTextField txtRoleWest;
+		JTextField txtCardsInHandWest;
 		
 		private JPanel panelNorth;
 		private GridBagConstraints gridNorth;
-		private JTextField txtSpielerNorth;
-		private JTextField txtRoleNorth;
-		private JLabel lblNorth;
-		private JTextField txtCardsInHandNorth;
+		JTextField txtSpielerNorth;
+		JTextField txtRoleNorth;
+		JLabel lblNorth;
+		JTextField txtCardsInHandNorth;
 		
 		private JPanel panelEast;
 		private GridBagConstraints gridEast;
-		private JTextField txtSpielerEast;
-		private JTextField txtRoleEast;
-		private JTextField txtCardsInHandEast;
+		JTextField txtSpielerEast;
+		JTextField txtRoleEast;
+		JTextField txtCardsInHandEast;
 		
 		private JPanel panelCenter;
 		private GridBagConstraints gridCenter;
-		private JLabel lblCardsCenter;
-		private JTextField txtNumberOfCardsCenter;
+		JLabel lblCardsCenter;
+		JLabel lblNumberOfCardsCenter;
 		
 		ImageIcon icon = new ImageIcon("Bilder/cardohne.png");
 		ImageIcon[] myIcon = new ImageIcon[12];
@@ -183,6 +183,20 @@ public class DeskView extends JFrame {
 		panelCenter.setMaximumSize(new Dimension(200,200));
 		gridCenter = new GridBagConstraints();
 		panelCenter.setBorder(BorderFactory.createLineBorder(Color.GRAY,3));
+		
+    	lblCardsCenter = new JLabel();
+    	lblCardsCenter.setPreferredSize(new Dimension(89,92));
+    	lblCardsCenter.setLayout(new BorderLayout());
+		gridCenter.gridx = 0;
+		gridCenter.gridy = 0;
+		gridCenter.insets = new Insets(5,5,5,5);
+		
+		lblNumberOfCardsCenter = new JLabel();
+		lblNumberOfCardsCenter.setFont(new Font("Arial", Font.BOLD, 35));
+		lblNumberOfCardsCenter.setForeground(Color.red);
+		lblCardsCenter.add(lblNumberOfCardsCenter, BorderLayout.WEST);
+		
+		panelCenter.add(lblCardsCenter, gridCenter);
 			
 		mainFrame.getContentPane().add(panelCenter, BorderLayout.CENTER);
 		
@@ -303,12 +317,9 @@ public class DeskView extends JFrame {
 	void showInWest(Player player){
 		
     	txtSpielerWest.setText(player.getName());
-		
 		txtRoleWest.setText(player.getRole().getLabel());	
-		
 		txtCardsInHandWest.setText(Integer.toString(player.getCards().size()));
 		
-	
 	}
 	
 	//North Methods
@@ -316,12 +327,9 @@ public class DeskView extends JFrame {
     void showInNorth(Player player){
     	
     	txtSpielerNorth.setText(player.getName());
-		
-		txtRoleNorth.setText(player.getRole().getLabel());	
-		
+		txtRoleNorth.setText(player.getRole().getLabel());			
 		txtCardsInHandNorth.setText(Integer.toString(player.getCards().size()));
-		   
-    	
+		   	
     }
     
     //East Methods
@@ -329,35 +337,26 @@ public class DeskView extends JFrame {
 	void showInEast(Player player){
 		
     	txtSpielerEast.setText(player.getName());
-		
-		txtRoleEast.setText(player.getRole().getLabel());	
-		
+		txtRoleEast.setText(player.getRole().getLabel());			
 		txtCardsInHandEast.setText(Integer.toString(player.getCards().size()));
 
 	}
 	
 	//Center Methods
 	
-    void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
+	void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
     	
-    	lblCardsCenter = new JLabel(cardtype.getLabel());
-    	lblCardsCenter.setPreferredSize(new Dimension(89,92));		
-		gridCenter.gridx = 0;
-		gridCenter.gridy = 0;
-		gridCenter.insets = new Insets(5,5,5,5);
-		panelCenter.add(lblCardsCenter, gridCenter);
-		
-		txtNumberOfCardsCenter = new JTextField(numberOfCards);
-		// System.out.println(("this is the center number:" + numberOfCards));
-		// System.out.println("Methode wird aufgerufen");
-		txtNumberOfCardsCenter.setEditable(false);
-		gridCenter.gridx = 0;
-		gridCenter.gridy = 1;
-		gridCenter.insets = new Insets(5,5,5,5);
-		panelCenter.add(lblCardsCenter, gridCenter);
-		
+    	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+".jpg"));		
+		lblNumberOfCardsCenter.setText(Integer.toString(numberOfCards));
 		
     }
+
+	void showCurrentTrick(){
+		
+		lblCardsCenter.setIcon(new ImageIcon(""));		
+		lblNumberOfCardsCenter.setText("");
+		
+	}
 	
 	//Other Methods
     
