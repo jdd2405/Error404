@@ -170,19 +170,23 @@ public class Action {
 	class Passen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (actionsEnabled() == true) {
+				int countActivePlayer =0;
 				int countPassen = 0;
-				for (int i = 0; i < 4; i++) {
-					if (allPlayers[i].passed == true) {
-						countPassen++;
+				for (int l = 0; l <4; l++){
+					if (allPlayers[l].isFinished() != true){
+						countActivePlayer++;
+						if (allPlayers[l].passed == true) {
+							countPassen++;
+						}
 					}
 				}
 
-				if (countPassen <= 1) {
+				if (countActivePlayer-2 == countPassen) {
 					allPlayers[myPos].setPassed(true);
 					setNextPlayerActive();
 				}
 
-				else if (countPassen == 2) {
+				else if (countActivePlayer-1 == countPassen) {
 					clearTable(); System.out.println("Karten vom Tisch genommen.");
 					for (int i = 0; i < 4; i++) {
 						allPlayers[i].passed = false;
@@ -218,48 +222,49 @@ public class Action {
 						listIterator.remove();
 					}
 				}
-				System.out.println("Anzahl gelegter Karten: "+i);
-			}
+				System.out.println("Anzahl gelegter Karten: " + i);
 
-			// löschen der Inhalte von anzahl gespielten karten und
-			// Kartentyp
-			deskView.txtAmountCards.setText("");
-			deskView.txtTypeCards.setText("");
+				// löschen der Inhalte von anzahl gespielten karten und
+				// Kartentyp
+				deskView.txtAmountCards.setText("");
+				deskView.txtTypeCards.setText("");
 
-			// alle Spieler das "passen" zurücksetzen
-			for (int j = 0; j < allPlayers.length; j++) {
-				allPlayers[j].setPassed(false);
-			}
+				// alle Spieler das "passen" zurücksetzen
+				for (int j = 0; j < allPlayers.length; j++) {
+					allPlayers[j].setPassed(false);
+				}
 
-			// hat Spieler keine Karten mehr, wird Rang zugewiesen
-			if (allPlayers[myPos].getCards().isEmpty()) {
-				int anzahlRankVergaben = 1;
-				for (int k = 0; k < allPlayers.length; k++) {
-					if (allPlayers[k].getRank() != 0) {
-						anzahlRankVergaben++;
+				// hat Spieler keine Karten mehr, wird Rang zugewiesen
+				if (allPlayers[myPos].getCards().isEmpty()) {
+					int anzahlRankVergaben = 1;
+					for (int k = 0; k < allPlayers.length; k++) {
+						if (allPlayers[k].getRank() != 0) {
+							anzahlRankVergaben++;
+						}
+					}
+					// es sind noch mindestens 2 Spieler im Spiel
+					if (anzahlRankVergaben <= 2) {
+						allPlayers[myPos].setRank(anzahlRankVergaben);
+						allPlayers[myPos].setFinished(true);
+						setNextPlayerActive(); // <-- Does not happen here!!!
+												// Check why.
+					}
+					// beendet das ganze Spiel, da der 3. Spieler keine Karten
+					// mehr hat
+					else {
+						allPlayers[myPos].setRank(anzahlRankVergaben);
+						getNextPlayerInOrder(allPlayers[myPos]).setRank(
+								anzahlRankVergaben + 1);
+						finishRound();
 					}
 				}
-				// es sind noch mindestens 2 Spieler im Spiel
-				if (anzahlRankVergaben <= 2) {
-					allPlayers[myPos].setRank(anzahlRankVergaben);
-					allPlayers[myPos].setFinished(true);
-					setNextPlayerActive(); // <-- Does not happen here!!! Check why.
-				}
-				// beendet das ganze Spiel, da der 3. Spieler keine Karten
-				// mehr hat
-				else {
-					allPlayers[myPos].setRank(anzahlRankVergaben);
-					getNextPlayerInOrder(allPlayers[myPos]).setRank(
-							anzahlRankVergaben + 1);
-					finishRound();
-				}
-			}
-			// hat Spieler noch Karten, wird nächster Player aktiv
-			// gesetzt
-			// resp. aktueller deaktiv
+				// hat Spieler noch Karten, wird nächster Player aktiv
+				// gesetzt
+				// resp. aktueller deaktiv
 
-			else {
-				setNextPlayerActive();
+				else {
+					setNextPlayerActive();
+				}
 			}
 
 			Client_neu.sendToServer(allPlayers);
