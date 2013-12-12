@@ -84,6 +84,27 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(lblNorth, gridNorth);
 		
+    	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setEditable(false);
+    	gridNorth.gridx = 0;
+		gridNorth.gridy = 1;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(txtSpielerNorth, gridNorth);
+		
+		txtRoleNorth = new JTextField();	
+		txtRoleNorth.setEditable(false);
+    	gridNorth.gridx = 1;
+		gridNorth.gridy = 0;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(txtRoleNorth, gridNorth);
+		
+		txtCardsInHandNorth = new JTextField();
+		txtCardsInHandNorth.setEditable(false);
+		gridNorth.gridx = 0;
+		gridNorth.gridy = 0;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(txtCardsInHandNorth, gridNorth);
+		
 		mainFrame.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		
 		//EAST Panel
@@ -99,6 +120,27 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		panelEast.add(Label2, gridEast);
 		
+		txtSpielerEast = new JTextField();
+		txtSpielerEast.setEditable(false);
+		gridEast.gridx = 0;
+		gridEast.gridy = 1;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(txtSpielerEast, gridEast);
+		
+		txtRoleEast = new JTextField();
+		txtRoleEast.setEditable(false);
+		gridEast.gridx = 1;
+		gridEast.gridy = 0;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(txtRoleEast, gridEast);
+		
+		txtCardsInHandEast = new JTextField();
+		txtCardsInHandEast.setEditable(false);
+		gridEast.gridx = 0;
+		gridEast.gridy = 0;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(txtCardsInHandEast, gridEast);
+		
 		mainFrame.getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		//WEST Panel
@@ -107,12 +149,32 @@ public class DeskView extends JFrame {
 		panelWest.setPreferredSize(new Dimension(500,900));
 				
 		JLabel Label3 = new JLabel(icon);
-		Label3.setPreferredSize(new Dimension(89,92));
-				
+		Label3.setPreferredSize(new Dimension(89,92));		
 		gridWest.gridx = 0;
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(Label3, gridWest);
+		
+	   	txtSpielerWest = new JTextField();
+    	txtSpielerWest.setEditable(false);
+    	gridWest.gridx = 0;
+		gridWest.gridy = 1;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(txtSpielerWest, gridWest);
+		
+		txtRoleWest = new JTextField();	
+		txtRoleWest.setEditable(false);
+    	gridWest.gridx = 1;
+		gridWest.gridy = 0;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(txtRoleWest, gridWest);
+		
+		txtCardsInHandWest = new JTextField();
+		txtCardsInHandWest.setEditable(false);
+		gridWest.gridx = 0;
+		gridWest.gridy = 0;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(txtCardsInHandWest, gridWest);
 	
 		mainFrame.getContentPane().add(panelWest, BorderLayout.WEST);
 		
@@ -140,6 +202,12 @@ public class DeskView extends JFrame {
     		gridSouth.insets = new Insets(5,5,5,5);
     		panelSouth.add(btnSlot[i], gridSouth);
     	}
+		
+		for(int i = 0; i < 12; i++){
+			lblAmountOfCards[i] = new JLabel();
+			lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
+    		lblAmountOfCards[i].setForeground(Color.red);
+		}
 		
 		txtTypeCards = new JTextField(12);
 		txtTypeCards.setEditable(false);
@@ -216,9 +284,8 @@ public class DeskView extends JFrame {
     	
     	for(int i = 0; i < 12; i++){
     		btnSlot[i].setLayout(new BorderLayout());
-    		btnSlot[i].add(lblAmountOfCards[i] = new JLabel(Integer.toString(cards[i][0])),BorderLayout.WEST);
-    		lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
-    		lblAmountOfCards[i].setForeground(Color.red);
+    		btnSlot[i].add(lblAmountOfCards[i],BorderLayout.WEST);
+    		lblAmountOfCards[i].setText(Integer.toString(cards[i][0]));
     		
     		// for greying out cards for(int i = 0; i < 12; i++){
     		if(cards[i][1] == 0){
@@ -235,26 +302,12 @@ public class DeskView extends JFrame {
     //West Methods
 	void showInWest(Player player){
 		
-    	txtSpielerWest = new JTextField(player.getName());
-    	txtSpielerWest.setEditable(false);
-    	gridWest.gridx = 0;
-		gridWest.gridy = 1;
-		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(txtSpielerWest, gridWest);
+    	txtSpielerWest.setText(player.getName());
 		
-		txtRoleWest = new JTextField((player.getRole()).getLabel());	
-		txtRoleWest.setEditable(false);
-    	gridWest.gridx = 1;
-		gridWest.gridy = 0;
-		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(txtRoleWest, gridWest);
+		txtRoleWest.setText(player.getRole().getLabel());	
 		
-		txtCardsInHandWest = new JTextField((player.getCards()).size());
-		txtCardsInHandWest.setEditable(false);
-		gridWest.gridx = 0;
-		gridWest.gridy = 0;
-		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(txtCardsInHandWest, gridWest);
+		txtCardsInHandWest.setText(Integer.toString(player.getCards().size()));
+		
 	
 	}
 	
@@ -262,26 +315,11 @@ public class DeskView extends JFrame {
 	
     void showInNorth(Player player){
     	
-    	txtSpielerNorth = new JTextField(player.getName());
-    	txtSpielerNorth.setEditable(false);
-    	gridNorth.gridx = 0;
-		gridNorth.gridy = 1;
-		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(txtSpielerNorth, gridNorth);
+    	txtSpielerNorth.setText(player.getName());
 		
-		txtRoleNorth = new JTextField((player.getRole()).getLabel());	
-		txtRoleNorth.setEditable(false);
-    	gridNorth.gridx = 1;
-		gridNorth.gridy = 0;
-		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(txtRoleNorth, gridNorth);
+		txtRoleNorth.setText(player.getRole().getLabel());	
 		
-		txtCardsInHandNorth = new JTextField((player.getCards()).size());
-		txtCardsInHandNorth.setEditable(false);
-		gridNorth.gridx = 0;
-		gridNorth.gridy = 0;
-		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(txtCardsInHandNorth, gridNorth);
+		txtCardsInHandNorth.setText(Integer.toString(player.getCards().size()));
 		   
     	
     }
@@ -290,26 +328,12 @@ public class DeskView extends JFrame {
     
 	void showInEast(Player player){
 		
-		txtSpielerEast = new JTextField(player.getName());
-		txtSpielerEast.setEditable(false);
-		gridEast.gridx = 0;
-		gridEast.gridy = 1;
-		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(txtSpielerEast, gridEast);
+    	txtSpielerEast.setText(player.getName());
 		
-		txtRoleEast = new JTextField((player.getRole()).getLabel());
-		txtRoleEast.setEditable(false);
-		gridEast.gridx = 1;
-		gridEast.gridy = 0;
-		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(txtRoleEast, gridEast);
+		txtRoleEast.setText(player.getRole().getLabel());	
 		
-		txtCardsInHandEast = new JTextField((player.getCards()).size());
-		txtCardsInHandEast.setEditable(false);
-		gridEast.gridx = 0;
-		gridEast.gridy = 0;
-		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(txtCardsInHandEast, gridEast);
+		txtCardsInHandEast.setText(Integer.toString(player.getCards().size()));
+
 	}
 	
 	//Center Methods
