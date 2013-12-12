@@ -246,8 +246,7 @@ public class Action {
 					if (anzahlRankVergaben <= 2) {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
 						allPlayers[myPos].setFinished(true);
-						setNextPlayerActive(); // <-- Does not happen here!!!
-												// Check why.
+						setNextPlayerActive(); 
 					}
 					// beendet das ganze Spiel, da der 3. Spieler keine Karten
 					// mehr hat
@@ -255,6 +254,8 @@ public class Action {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
 						getNextPlayerInOrder(allPlayers[myPos]).setRank(
 								anzahlRankVergaben + 1);
+						allPlayers[myPos].setFinished(true);
+						getNextPlayerInOrder(allPlayers[myPos]).setFinished(true);
 						finishRound();
 					}
 				}
