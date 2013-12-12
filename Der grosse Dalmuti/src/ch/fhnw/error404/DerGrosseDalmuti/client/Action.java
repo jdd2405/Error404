@@ -181,12 +181,12 @@ public class Action {
 					}
 				}
 
-				if (countActivePlayer-2 >= countPassen) {
+				if (countActivePlayer-2 > countPassen) {
 					allPlayers[myPos].setPassed(true);
 					setNextPlayerActive();
 				}
 
-				else if (countActivePlayer-1 == countPassen) {
+				else if (countActivePlayer-1 > countPassen) {
 					clearTable(); System.out.println("Karten vom Tisch genommen.");
 					for (int i = 0; i < 4; i++) {
 						allPlayers[i].passed = false;
