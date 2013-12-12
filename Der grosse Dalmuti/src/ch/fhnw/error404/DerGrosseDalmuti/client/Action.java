@@ -123,6 +123,7 @@ public class Action {
 	// Close Game
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			allPlayers[myPos]=null; // delete Player from Player list
 			deskView.closeWindow();
 		}
 	}
@@ -306,6 +307,18 @@ public class Action {
 			Client_neu.sendToServer(allPlayers);
 			
 			
+		}
+		
+		
+		// counts number of Players in allPlayers-Array
+		int countPlayers(){
+			int nOfPlayers = 0;
+			for(int i=0; i<allPlayers.length;i++){
+				if(allPlayers[i]!=null){
+					nOfPlayers++;
+				}
+			}
+			return nOfPlayers;
 		}
 
 		// Karten mischen und auf Player verteilen
