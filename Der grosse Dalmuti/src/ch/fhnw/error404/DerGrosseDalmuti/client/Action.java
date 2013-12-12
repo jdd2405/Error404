@@ -161,7 +161,17 @@ public class Action {
 			
 			for(int i=0; i<12; i++){
 				if (e.getSource()!=null && deskView.btnSlot[i].equals(e.getSource())){
-					deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));		
+					if(deskView.lblNumberOfCardsCenter.getText()!=null && deskView.lblNumberOfCardsCenter.getText()!=""){
+						if(Integer.parseInt(deskView.lblAmountOfCards[i].getText())>=Integer.parseInt(deskView.lblNumberOfCardsCenter.getText())){
+							deskView.txtAmountCards.setText((deskView.lblNumberOfCardsCenter.getText()));
+						}
+						else{
+							System.out.println("Beim Drücken der Karte ist ein Fehler aufgetreten: Ungültige Anzahl Karten.");
+						}
+					}
+					else{
+						deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
+					}
 				}
 			}
 		}
@@ -207,8 +217,24 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 
 			if (actionsEnabled() == true) {
-				int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
-				ListIterator<Card> listIterator = allPlayers[myPos].getCards().listIterator();
+				// int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+				int nOfCards = 0;
+				
+				if(deskView.lblNumberOfCardsCenter.getText()!=null && deskView.lblNumberOfCardsCenter.getText()!=""){
+					if(Integer.parseInt(deskView.txtAmountCards.getText())>=Integer.parseInt(deskView.lblNumberOfCardsCenter.getText())){
+						nOfCards = Integer.parseInt(deskView.lblNumberOfCardsCenter.getText());
+					}
+					else{
+						System.out.println("Ungültige Anzahl Karten.");
+					}
+				}
+				else{
+					nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+				}
+				
+				
+				ListIterator<Card> listIterator = allPlayers[myPos].getCards()
+						.listIterator();
 				int i = 0;
 				while (listIterator.hasNext() && i < nOfCards) {
 					Card card = listIterator.next();
@@ -251,10 +277,10 @@ public class Action {
 					// mehr hat
 					else {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
-						getNextPlayerInOrder(allPlayers[myPos]).setRank(anzahlRankVergaben + 1);
+						getNextPlayerInOrder(allPlayers[myPos]).setRank(
+								anzahlRankVergaben + 1);
 						allPlayers[myPos].setFinished(true);
 						getNextPlayerInOrder(allPlayers[myPos]).setFinished(true);
-						allPlayers[myPos].setActive(false);
 						finishRound();
 					}
 				}
@@ -279,14 +305,9 @@ public class Action {
 		// create new player based on the login-variables
 		// if there are 4 players deal cards
 		protected void newPlayer(String name) {
-			int NOfPlayers = 0;
 
-			for (int i = 0; allPlayers[i]!=null; i++) {
-				NOfPlayers++;
-
-			}
-			System.out.println("Anzahl Spieler: "+NOfPlayers);
-			Player player = new Player(name, NOfPlayers + 1, Role.values()[NOfPlayers]);
+			System.out.println("Anzahl Spieler: "+countPlayers());
+			Player player = new Player(name, countPlayers() + 1, Role.values()[countPlayers()]);
 			myId = player.getId();
 			myPos = myId-1;
 			System.out.println("ID meines Spielers: "+player.getId());
@@ -296,7 +317,7 @@ public class Action {
 			
 			deskView.showInSouth(player);
 			
-			if (myId == 4) {
+			if (countPlayers() == 4) {
 				shuffleCards();
 				allPlayers[0].setActive(true);
 			}
@@ -306,6 +327,7 @@ public class Action {
 			
 			
 		}
+		
 		
 		
 		// counts number of Players in allPlayers-Array
@@ -318,6 +340,8 @@ public class Action {
 			}
 			return nOfPlayers;
 		}
+		
+		
 
 		// Karten mischen und auf Player verteilen
 		void shuffleCards() {
@@ -398,11 +422,15 @@ public class Action {
 				System.out.println("Auf dem Tisch: "+nOfCards);
 				deskView.showCurrentTrick(cardOnTop.getCardType(), nOfCards);
 			}
+			else {
+				deskView.showCurrentTrick();
+			}
+			
 		}
 
 		// show my Cards in South. Check if they are playable.
 		void showMyCards() {
-			if(allPlayers[3]!=null){
+			if(countPlayers()==4){
 				int[][] myCards = new int[12][2];
 				
 				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
@@ -527,7 +555,6 @@ public class Action {
 					allPlayers[i].setActive(true);
 				}
 			}
-			clearTable();
 			shuffleCards();
 		}
 
