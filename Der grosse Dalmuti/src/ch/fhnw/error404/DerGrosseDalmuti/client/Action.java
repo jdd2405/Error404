@@ -523,6 +523,7 @@ public class Action {
 			for (int i = 0; i < allPlayers.length; i++) {
 				allPlayers[i].setRole(allPlayers[i].getRank());
 				allPlayers[i].setFinished(false);
+				allPlayers[i].setRank(0);
 				if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)) {
 					allPlayers[i].setActive(true);
 				}
