@@ -344,12 +344,19 @@ public class DeskView extends JFrame {
 	
 	//Center Methods
 	
-    void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
+	void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
     	
     	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+".jpg"));		
 		lblNumberOfCardsCenter.setText(Integer.toString(numberOfCards));
 		
     }
+
+	void showCurrentTrick(){
+		
+		lblCardsCenter.setIcon(new ImageIcon(""));		
+		lblNumberOfCardsCenter.setText("");
+		
+	}
 	
 	//Other Methods
     
