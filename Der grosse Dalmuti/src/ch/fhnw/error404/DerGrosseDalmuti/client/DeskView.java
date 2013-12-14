@@ -31,12 +31,14 @@ public class DeskView extends JFrame {
 		JButton[] btnSlot = new JButton[12];
 		JLabel[] lblAmountOfCards = new JLabel[12];
 		JButton btnCloseGame;
+		JTextField txtRankSouth;
 		
 		private JPanel panelWest;
 		private GridBagConstraints gridWest;
 		JTextField txtSpielerWest;
 		JTextField txtRoleWest;
 		JTextField txtCardsInHandWest;
+		JTextField txtRankWest;
 		
 		private JPanel panelNorth;
 		private GridBagConstraints gridNorth;
@@ -44,12 +46,14 @@ public class DeskView extends JFrame {
 		JTextField txtRoleNorth;
 		JLabel lblNorth;
 		JTextField txtCardsInHandNorth;
+		JTextField txtRankNorth;
 		
 		private JPanel panelEast;
 		private GridBagConstraints gridEast;
 		JTextField txtSpielerEast;
 		JTextField txtRoleEast;
 		JTextField txtCardsInHandEast;
+		JTextField txtRankEast;
 		
 		private JPanel panelCenter;
 		private GridBagConstraints gridCenter;
@@ -105,6 +109,15 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(txtCardsInHandNorth, gridNorth);
 		
+		txtRankNorth = new JTextField();	
+		txtRankNorth.setEditable(false);
+    	gridNorth.gridx = 1;
+		gridNorth.gridy = 1;
+		gridNorth.insets = new Insets(5,5,5,5);
+		panelNorth.add(txtRankNorth, gridNorth);
+		
+		
+		
 		mainFrame.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		
 		//EAST Panel
@@ -141,6 +154,13 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		panelEast.add(txtCardsInHandEast, gridEast);
 		
+		txtRankEast = new JTextField();	
+		txtRankEast.setEditable(false);
+    	gridEast.gridx = 1;
+		gridEast.gridy = 1;
+		gridEast.insets = new Insets(5,5,5,5);
+		panelEast.add(txtRankEast, gridEast);
+		
 		mainFrame.getContentPane().add(panelEast, BorderLayout.EAST);
 		
 		//WEST Panel
@@ -175,6 +195,13 @@ public class DeskView extends JFrame {
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(txtCardsInHandWest, gridWest);
+		
+		txtRankWest = new JTextField();	
+		txtRankWest.setEditable(false);
+    	gridWest.gridx = 1;
+		gridWest.gridy = 1;
+		gridWest.insets = new Insets(5,5,5,5);
+		panelWest.add(txtRankWest, gridWest);
 	
 		mainFrame.getContentPane().add(panelWest, BorderLayout.WEST);
 		
@@ -292,6 +319,13 @@ public class DeskView extends JFrame {
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtRoleSouth, gridSouth);
+		
+		txtRankSouth = new JTextField("Rang: "+player.getRank());	
+		txtRankSouth.setEditable(false);
+    	gridSouth.gridx = 7;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(txtRankSouth, gridSouth);
     }
     
     void showMyCards(int[][] cards){
@@ -301,7 +335,7 @@ public class DeskView extends JFrame {
     		btnSlot[i].add(lblAmountOfCards[i],BorderLayout.WEST);
     		lblAmountOfCards[i].setText(Integer.toString(cards[i][0]));
     		
-    		// for greying out cards for(int i = 0; i < 12; i++){
+    		// for greying out cards
     		if(cards[i][1] == 0){
     			btnSlot[i].setEnabled(false);
     		}
@@ -319,6 +353,7 @@ public class DeskView extends JFrame {
     	txtSpielerWest.setText(player.getName());
 		txtRoleWest.setText(player.getRole().getLabel());	
 		txtCardsInHandWest.setText(Integer.toString(player.getCards().size()));
+		txtRankWest.setText("Rang: "+player.getRank());	
 		
 	}
 	
@@ -329,6 +364,7 @@ public class DeskView extends JFrame {
     	txtSpielerNorth.setText(player.getName());
 		txtRoleNorth.setText(player.getRole().getLabel());			
 		txtCardsInHandNorth.setText(Integer.toString(player.getCards().size()));
+		txtRankNorth.setText("Rang: "+player.getRank());	
 		   	
     }
     
@@ -339,6 +375,7 @@ public class DeskView extends JFrame {
     	txtSpielerEast.setText(player.getName());
 		txtRoleEast.setText(player.getRole().getLabel());			
 		txtCardsInHandEast.setText(Integer.toString(player.getCards().size()));
+		txtRankEast.setText("Rang: "+player.getRank());	
 
 	}
 	
