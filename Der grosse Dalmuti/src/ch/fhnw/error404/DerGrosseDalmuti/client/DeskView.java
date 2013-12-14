@@ -327,6 +327,19 @@ public class DeskView extends JFrame {
     	txtSpielerSouth.setText(player.getName());
 		txtRoleSouth.setText(player.getRole().getLabel());	
 		txtRankSouth.setText("Rang: "+player.getRank());
+		
+		if(player.getRank()==1){
+			txtRankSouth.setText("YOU HAVE WON");			
+		}
+		if(player.getRank()==2){
+			txtRankSouth.setText("YOU HAVE PLACED 2nd");
+		}
+		if(player.getRank()==3){
+			txtRankSouth.setText("YOU HAVE PLACED 3rd");
+		}
+		if(player.getRank()==4){
+			txtRankSouth.setText("YOU HAVE LOST");
+		}
     	
     }
     
@@ -377,15 +390,15 @@ public class DeskView extends JFrame {
     	txtSpielerEast.setText(player.getName());
 		txtRoleEast.setText(player.getRole().getLabel());			
 		txtCardsInHandEast.setText(Integer.toString(player.getCards().size()));
-		txtRankEast.setText("Rang: "+player.getRank());	
-
+		txtRankEast.setText("Rang: "+player.getRank());
+		
 	}
 	
 	//Center Methods
 	
 	void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
     	
-    	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+" (2)"+".jpg"));		
+    	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+" (2).jpg"));		
 		lblNumberOfCardsCenter.setText(Integer.toString(numberOfCards));
 		
     }
