@@ -64,10 +64,6 @@ public class DeskView extends JFrame {
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
-
-		for(int i=0; i<12; i++){
-			myIcon[i]= new ImageIcon("Bilder/karte"+(i+1)+".jpg");
-		}
 		
 		mainFrame = new JFrame();
 		mainFrame.setTitle("Der Grosse Dalmuti");
@@ -115,8 +111,6 @@ public class DeskView extends JFrame {
 		gridNorth.gridy = 1;
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(txtRankNorth, gridNorth);
-		
-		
 		
 		mainFrame.getContentPane().add(panelNorth, BorderLayout.NORTH);
 		
@@ -212,7 +206,7 @@ public class DeskView extends JFrame {
 		panelCenter.setBorder(BorderFactory.createLineBorder(Color.GRAY,3));
 		
     	lblCardsCenter = new JLabel();
-    	lblCardsCenter.setPreferredSize(new Dimension(89,92));
+    	lblCardsCenter.setPreferredSize(new Dimension(161,250));
     	lblCardsCenter.setLayout(new BorderLayout());
 		gridCenter.gridx = 0;
 		gridCenter.gridy = 0;
@@ -232,6 +226,32 @@ public class DeskView extends JFrame {
 		gridSouth = new GridBagConstraints();
 		panelSouth.setPreferredSize(new Dimension(1600,200));
 		
+		txtSpielerSouth = new JTextField();
+    	txtSpielerSouth.setEditable(false);
+    	gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 5;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(txtSpielerSouth, gridSouth);
+		
+		txtRoleSouth = new JTextField();
+		txtRoleSouth.setEditable(false);
+		gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 6;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(txtRoleSouth, gridSouth);
+		
+		txtRankSouth = new JTextField();	
+		txtRankSouth.setEditable(false);
+    	gridSouth.gridx = 7;
+		gridSouth.gridy = 0;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(txtRankSouth, gridSouth);
+		
+		for(int i=0; i<12; i++){
+			myIcon[i]= new ImageIcon("Bilder/karte"+(i+1)+".jpg");
+		}
 		
 		for(int i = 0; i<12; i++){
     		btnSlot[i] = new JButton();
@@ -266,7 +286,6 @@ public class DeskView extends JFrame {
 		gridSouth.gridy = 2;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtAmountCards, gridSouth);
-		
 		
 		btnAuswahlSpielen.setText("Auswahl spielen");
 		btnAuswahlSpielen.setBackground(Color.GREEN);
@@ -304,28 +323,11 @@ public class DeskView extends JFrame {
     //South Methods
     
     void showInSouth(Player player){
-    	txtSpielerSouth = new JTextField(player.getName());
-    	txtSpielerSouth.setEditable(false);
-    	gridSouth.anchor = GridBagConstraints.LINE_START;
-		gridSouth.gridx = 5;
-		gridSouth.gridy = 0;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(txtSpielerSouth, gridSouth);
-		
-		txtRoleSouth = new JTextField((player.getRole()).getLabel());
-		txtRoleSouth.setEditable(false);
-		gridSouth.anchor = GridBagConstraints.LINE_START;
-		gridSouth.gridx = 6;
-		gridSouth.gridy = 0;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(txtRoleSouth, gridSouth);
-		
-		txtRankSouth = new JTextField("Rang: "+player.getRank());	
-		txtRankSouth.setEditable(false);
-    	gridSouth.gridx = 7;
-		gridSouth.gridy = 0;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(txtRankSouth, gridSouth);
+    	
+    	txtSpielerSouth.setText(player.getName());
+		txtRoleSouth.setText(player.getRole().getLabel());	
+		txtRankSouth.setText("Rang: "+player.getRank());
+    	
     }
     
     void showMyCards(int[][] cards){
@@ -353,7 +355,7 @@ public class DeskView extends JFrame {
     	txtSpielerWest.setText(player.getName());
 		txtRoleWest.setText(player.getRole().getLabel());	
 		txtCardsInHandWest.setText(Integer.toString(player.getCards().size()));
-		txtRankWest.setText("Rang: "+player.getRank());	
+		txtRankWest.setText("Rang: "+player.getRank());
 		
 	}
 	
@@ -383,7 +385,7 @@ public class DeskView extends JFrame {
 	
 	void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
     	
-    	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+".jpg"));		
+    	lblCardsCenter.setIcon(new ImageIcon("Bilder/karte"+cardtype.getValue()+" (2)"+".jpg"));		
 		lblNumberOfCardsCenter.setText(Integer.toString(numberOfCards));
 		
     }
