@@ -204,8 +204,8 @@ public class Action {
 					}
 					setNextPlayerActive();
 				}
-				Client_neu.sendToServer(allPlayers);
-				Client_neu.sendToServer(deck);
+				Client.sendToServer(allPlayers);
+				Client.sendToServer(deck);
 			} else {
 			}
 		}
@@ -305,8 +305,8 @@ public class Action {
 				}
 			}
 
-			Client_neu.sendToServer(allPlayers);
-			Client_neu.sendToServer(deck);
+			Client.sendToServer(allPlayers);
+			Client.sendToServer(deck);
 		}
 	}
 
@@ -335,7 +335,7 @@ public class Action {
 			}
 			
 			System.out.println("Spielerliste an Server senden...");
-			Client_neu.sendToServer(allPlayers);
+			Client.sendToServer(allPlayers);
 			
 			
 		}
@@ -373,7 +373,7 @@ public class Action {
 			
 			deck.notDealtCards.clear();
 			System.out.println("Deck an Server senden...");
-			Client_neu.sendToServer(deck);
+			Client.sendToServer(deck);
 			
 		}
 

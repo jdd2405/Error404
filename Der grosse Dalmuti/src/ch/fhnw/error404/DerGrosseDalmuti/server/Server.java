@@ -1,107 +1,121 @@
 package ch.fhnw.error404.DerGrosseDalmuti.server;
 
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.ListIterator;
+import java.util.Vector;
 
-import ch.fhnw.error404.DerGrosseDalmuti.client.Action;
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-/* TO DO's
- * - Thread for checking for updates.
- * - Check Model Type with typeOf() (od so...)
- * - Update (replace) Model Object
- */
+public class Server{
 
-public class Server implements Runnable{
-	
-	Object objFromClient = new Object();
-	Object objFromServer = new Object();
-	
-	Game game;
-	
-	
-	
-	public static void main(String[] args){
-		Server server = new Server();
+	// speichert die outputstreams der clients / Vector ist ein dynamisches
+	// Array
+	private Vector<ObjectOutputStream> clientManager = new Vector<ObjectOutputStream>();
+	static Deck deck = new Deck();
+	static Player[] allPlayers;
+
+	public static void main(String[] args) {
+		Server serverObject = new Server();
+		serverObject.startServer();
 		
-		Thread serverThread = new Thread(server, "Listener");
-		serverThread.start();
 	}
-	
-	
-	// Constructor
-	public Server() {
-		game = new Game();
-	}
-	
-	
-	@Override
-	public void run() {
-		ServerSocket socketServer = null;
+
+	public void startServer() {
 		try {
-	    	  
-	    	  // create ServerSocket-listener with port 404
-			socketServer = new ServerSocket(5000, 10, null);
-			System.out.println("Server started");
-	    	  
-	    	  while(true){
-	    		  
-	    		  	// Wait for and accept an incoming request
-	    		  	Socket socket = socketServer.accept();
-	    		  	
-
-	  				// create inputStream for objects
-	  				InputStream is = socket.getInputStream();
-	  				ObjectInputStream ois = new ObjectInputStream( is );
-	  			
-	  				// read object from inputStream
-	  				objFromClient = ois.readObject();
-	  				
-	  				// check type of Object
-	  				if (objFromClient instanceof Player){
-	  					// Do something with Player Object
-						Player player = (Player)objFromClient;
-	  					player.setRank(2);  // only for testing reasons
-	  					objFromServer = player;
-	  				}
-	  				if (objFromClient instanceof Deck){
-	  					// Do something with Player Object for example:
-	  					// Deck deck = (Deck)objFromClient; 				
-	  				}
-	  				
-	  				
-	  				// create outputStream for objects
-	  				OutputStream os = socket.getOutputStream();
-	  				ObjectOutputStream oos = new ObjectOutputStream( os );
-	  				
-	  				// write object to outputStream	  				
-	  				oos.writeObject( objFromServer );
-	  				oos.flush();
-	  				
-	  				
-	  				// clean up
-	  				ois.close();
-	  				oos.close();
-	  			
-
-	    	 }
-	    	
-	         
-
-
-	      } 
-		catch (Exception e) {
-	         e.printStackTrace();
+			ServerSocket server = new ServerSocket(5000);
+			System.out.println("Server ist gestartet");
+			
+			Iterator<Card> iterator = deck.notDealtCards.iterator();
+			System.out.println("Folgende Karten wurden notDealtCards hinzugefügt:");
+			while(iterator.hasNext()){
+				System.out.println(iterator.next().getCardType().getLabel());
+			}
+			
+			while (true) {
+				Socket client = server.accept();
+				ObjectOutputStream output = new ObjectOutputStream(
+						client.getOutputStream());
+				clientManager.add(output);
+				output.writeObject(allPlayers);
+				output.writeObject(deck);
+				
+				output.flush();
+				Thread t = new Thread(new ChatThread(client));
+				t.start();
+				System.out.println("habe eine Verbindung");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		
-		
+	}
+
+	public class ChatThread implements Runnable {
+		private Socket client;
+		private int clientPort;
+		private ObjectInputStream input;
+		Object object;
+
+		public ChatThread(Socket client) {
+			this.client = client;
+			clientPort = client.getPort();
+			try {
+				input = new ObjectInputStream(client.getInputStream());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		public void run() {
+
+			try {
+				while(true){
+					object = input.readObject();
+					System.out.println(object.toString());
+						
+						if (object instanceof Player[]) {
+							allPlayers = (Player[]) object;
+							
+							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
+						}
+						else if (object instanceof Deck) {
+							deck = (Deck) object;
+							System.out.println("Deck von Client erhalten. "+ new Date());
+						}
+						
+						sendToAllClients(object);
+						
+				}
+					
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			catch (IOException e){
+				e.printStackTrace();
+			}
+
+			// in.close();
+			// out.close();
+		}
+
+		private void sendToAllClients(Object message2) {
+			synchronized (clientManager) {
+				for (ObjectOutputStream output : clientManager) {
+					try {
+						output.writeObject(message2);
+						output.flush();
+						System.out.println("Objekt an Clients gesendet. "+ new Date());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 }
