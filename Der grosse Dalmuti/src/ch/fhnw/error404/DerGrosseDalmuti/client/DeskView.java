@@ -455,15 +455,13 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	btnAuswahlSpielen.addActionListener(listener);
     }	
-}	
 
-class swapCardsPopup extends DeskView{
 	
-	JLabel lblSwap;
-	
-	private JFrame Frame1;
-	
-	public void swapCards(String titel, String text){
+	public void popUp(String titel, String text){
+		
+		JLabel lblSwap;
+		
+		JFrame Frame1;
 	
 	Frame1 = new JFrame();
 	Frame1.setTitle(titel);
