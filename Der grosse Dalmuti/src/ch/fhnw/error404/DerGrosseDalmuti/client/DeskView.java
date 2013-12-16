@@ -305,6 +305,10 @@ public class DeskView extends JFrame {
     
 	void showButtons(boolean hasSwappedCards){
 		
+		panelSouth.remove(btnAuswahlSpielen);
+		panelSouth.remove(btnPassen);
+		panelSouth.remove(btnSwapCards);
+		
 		if (hasSwappedCards = true){
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
