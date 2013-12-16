@@ -36,8 +36,8 @@ public class Server{
 			while(iterator.hasNext()){
 				System.out.println(iterator.next().getCardType().getLabel());
 			}
-			
-			while (true) {
+			int anzahlAktivePlayer =0;
+			while (anzahlAktivePlayer <4) {
 				Socket client = server.accept();
 				ObjectOutputStream output = new ObjectOutputStream(
 						client.getOutputStream());
@@ -46,10 +46,12 @@ public class Server{
 						clientManager[i] = output;
 					}
 				}
+				anzahlAktivePlayer++;
+				
 				output.writeObject(allPlayers);
 				output.writeObject(deck);
-				
 				output.flush();
+				
 				Thread t = new Thread(new ChatThread(client));
 				t.start();
 				System.out.println("habe eine Verbindung");
