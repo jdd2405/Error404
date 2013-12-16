@@ -45,18 +45,7 @@ public class Player implements Serializable{
 	
 	public void setId(int id){this.id = id;}
 	public  int getId() {return id;}
-	public void setRole(int i){		
-		switch(i){
-		case(1):
-			this.role = Role.GROSSERDALMUTI;
-		case(2):
-			this.role = Role.KLEINERDALMUTI;
-		case(3):
-			this.role = Role.KLEINERDIENER;
-		case(4):
-			this.role = Role.GROSSERDIENER;
-		}
-	}
+	public void setRole(Role role){this.role = role;}
 	public Role getRole(){return role;}
 
 	
@@ -80,7 +69,7 @@ public class Player implements Serializable{
 	public void setSwappedCard(Card swappedCard) {this.swappedCard = swappedCard;}
 
 
-	public boolean isFinished() {return finished;}
+	public boolean hasFinished() {return finished;}
 	public void setFinished(boolean finished) {this.finished = finished;}
 
 	

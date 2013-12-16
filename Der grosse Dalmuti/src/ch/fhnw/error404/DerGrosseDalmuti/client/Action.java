@@ -184,7 +184,7 @@ public class Action {
 				int countActivePlayer =0;
 				int countPassen = 0;
 				for (int l = 0; l <4; l++){
-					if (allPlayers[l].isFinished() != true){
+					if (allPlayers[l].hasFinished() != true){
 						countActivePlayer++;
 						if (allPlayers[l].passed == true) {
 							countPassen++;
@@ -267,20 +267,32 @@ public class Action {
 							anzahlRankVergaben++;
 						}
 					}
+					System.out.println("anzahlRankVergaben: "+anzahlRankVergaben);
 					// es sind noch mindestens 2 Spieler im Spiel
 					if (anzahlRankVergaben <= 2) {
 						allPlayers[myPos].setRank(anzahlRankVergaben);
 						allPlayers[myPos].setFinished(true);
+						System.out.println("Habe fertig!");
 						setNextPlayerActive(); 
 					}
 					// beendet das ganze Spiel, da der 3. Spieler keine Karten
 					// mehr hat
 					else {
-						allPlayers[myPos].setRank(anzahlRankVergaben);
-						getNextPlayerInOrder(allPlayers[myPos]).setRank(
-								anzahlRankVergaben + 1);
-						allPlayers[myPos].setFinished(true);
-						getNextPlayerInOrder(allPlayers[myPos]).setFinished(true);
+						allPlayers[myPos].setRank(anzahlRankVergaben);	
+						Player player = getNextPlayerInOrder(allPlayers[myPos]);
+						
+						while(!allPlayers[myPos].hasFinished()){
+							if(player.hasFinished()){
+								player = getNextPlayerInOrder(player);
+							}
+							else {
+								player.setRank(anzahlRankVergaben + 1);
+								player.setFinished(true);
+								allPlayers[myPos].setFinished(true);
+								System.out.println("Habe fertig und das Spiel ist aus.");
+							}
+						}
+							
 						finishRound();
 					}
 				}
@@ -384,7 +396,7 @@ public class Action {
 		void setNextPlayerActive() {
 			Player player = getNextPlayerInOrder(allPlayers[myPos]);
 			while(allPlayers[myPos].isActive()==true){
-				if(player.isFinished()){
+				if(player.hasFinished()){
 					player = getNextPlayerInOrder(player);
 				}
 				else{
@@ -398,10 +410,11 @@ public class Action {
 
 		// show all Players in proper position
 		void showPlayers() {
-			if(allPlayers[3]!=null){
-				deskView.showInWest(getNextPlayerInOrder(allPlayers[myPos]));
-				deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos])));
-				deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos]))));
+			if(countPlayers()==4){
+				deskView.showInSouth(allPlayers[myPos]);
+				System.out.println("Im Westen: "+getNextPlayerInOrder(allPlayers[myPos]).getName());deskView.showInWest(getNextPlayerInOrder(allPlayers[myPos]));
+				System.out.println("Im Norden: "+getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos])).getName());deskView.showInNorth(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos])));
+				System.out.println("Im Osten: "+getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos]))).getName());deskView.showInEast(getNextPlayerInOrder(getNextPlayerInOrder(getNextPlayerInOrder(allPlayers[myPos]))));
 			}
 		}
 
@@ -545,8 +558,17 @@ public class Action {
 
 		// Runde ist fertig, alle Rank's wurden verteilt
 		private void finishRound() {
+			clearTable();
 			for (int i = 0; i < allPlayers.length; i++) {
-				allPlayers[i].setRole(allPlayers[i].getRank());
+				// Lege alle noch nicht gespielte Karten auf den Stapel.
+				if(allPlayers[i].getCards()!=null){
+					ListIterator<Card> iterator = allPlayers[i].getCards().listIterator();
+					while(iterator.hasNext()){
+						deck.notDealtCards.add(iterator.next());
+					}
+				}
+				allPlayers[i].setRole(Role.values()[allPlayers[i].getRank()-1]);
+				System.out.println(allPlayers[i].getName()+" hat die Rolle "+allPlayers[i].getRole().getLabel()+" erhalten.");
 				allPlayers[i].setFinished(false);
 				allPlayers[i].setRank(0);
 				if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)) {
