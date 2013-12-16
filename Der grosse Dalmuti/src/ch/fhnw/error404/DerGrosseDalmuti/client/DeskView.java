@@ -86,6 +86,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(lblNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setOpaque(false);
     	txtSpielerNorth.setEditable(false);
     	gridNorth.gridx = 0;
 		gridNorth.gridy = 1;
@@ -305,7 +306,11 @@ public class DeskView extends JFrame {
     
 	void showButtons(boolean hasSwappedCards){
 		
-		if (hasSwappedCards = true){
+		panelSouth.remove(btnAuswahlSpielen);
+		panelSouth.remove(btnPassen);
+		panelSouth.remove(btnSwapCards);
+		
+		if (hasSwappedCards == true){
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
 			btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
