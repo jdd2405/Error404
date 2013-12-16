@@ -67,8 +67,8 @@ public class Player implements Serializable{
 	public void setActive(boolean active) {this.active = active;}
 
 
-	public Card getSwappedCard() {return swappedCard;}
-	public void setSwappedCard(Card swappedCard) {this.swappedCard = swappedCard;}
+	public boolean hasSwappedCards() {return hasSwappedCards;}
+	public void setHasSwappedCards(boolean hasSwappedCards) {this.hasSwappedCards = hasSwappedCards;}
 
 
 	public boolean hasFinished() {return finished;}
