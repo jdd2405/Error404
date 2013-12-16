@@ -16,7 +16,7 @@ public class Server{
 
 	// speichert die outputstreams der clients / Vector ist ein dynamisches
 	// Array
-	private Vector<ObjectOutputStream> clientManager = new Vector<ObjectOutputStream>();
+	private ObjectOutputStream [] clientManager = new ObjectOutputStream[4];
 	static Deck deck = new Deck();
 	static Player[] allPlayers;
 
@@ -36,16 +36,22 @@ public class Server{
 			while(iterator.hasNext()){
 				System.out.println(iterator.next().getCardType().getLabel());
 			}
-			
-			while (true) {
+			int anzahlAktivePlayer =0;
+			while (anzahlAktivePlayer <4) {
 				Socket client = server.accept();
 				ObjectOutputStream output = new ObjectOutputStream(
 						client.getOutputStream());
-				clientManager.add(output);
+				for(int i = 0; i< 4; i++){
+					if (clientManager[i] == null){
+						clientManager[i] = output;
+					}
+				}
+				anzahlAktivePlayer++;
+				
 				output.writeObject(allPlayers);
 				output.writeObject(deck);
-				
 				output.flush();
+				
 				Thread t = new Thread(new ChatThread(client));
 				t.start();
 				System.out.println("habe eine Verbindung");
@@ -80,8 +86,12 @@ public class Server{
 						
 						if (object instanceof Player[]) {
 							allPlayers = (Player[]) object;
-							
 							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
+							for(int i = 0; i<allPlayers.length; i++){
+								if(allPlayers[i] == null){
+									clientManager[i].close();
+								}
+							}
 						}
 						else if (object instanceof Deck) {
 							deck = (Deck) object;
