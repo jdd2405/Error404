@@ -173,8 +173,8 @@ public class Action {
 						}
 					}
 					else{
-						if(allPlayers[myPos].hasSwappedCards() && Integer.parseInt(deskView.lblAmountOfCards[i].getText())>allPlayers[myPos].getRole().getNOfSwappableCards()){
-							deskView.txtAmountCards.setText(""+allPlayers[myPos].getRole().getNOfSwappableCards());
+						if(!allPlayers[myPos].hasSwappedCards() && Integer.parseInt(deskView.lblAmountOfCards[i].getText())>allPlayers[myPos].getRole().getNOfSwappableCards()){
+							deskView.txtAmountCards.setText(Integer.toString(allPlayers[myPos].getRole().getNOfSwappableCards()));
 						} else {
 							deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
 						}
@@ -187,7 +187,88 @@ public class Action {
 	class SwapCards implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
+			
 			Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
+			System.out.println("Karten mit diesem Spieler tauschen: "+playerToSwapCards.getName());
+			
+			int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+			
+			// wenn die höchsten Karten gelegt werden müssen
+			if(allPlayers[myPos].getRole().hasToBeHighest()){
+				System.out.println("Muss die höchste Karte sein.");
+				Card.CARD_TYPE[] hightestCardTypes = hightestCardTypes(allPlayers[myPos]);
+				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
+				if(deck.swappedCards[playerToSwapCards.getId()-1].length==1){
+					if(deskView.txtTypeCards.equals(hightestCardTypes[1].getLabel())){
+						while(iterator.hasNext() && nOfCards!=0){
+							Card card = iterator.next();
+							if(card.getCardType().getLabel().equals(deskView.txtTypeCards)){
+								deck.swappedCards[playerToSwapCards.getId()-1][0]=card;
+								iterator.remove();
+								nOfCards--;
+							}
+						}
+						setNextPlayerActive();
+					}
+				}
+				else {
+					if(deskView.txtTypeCards.equals(hightestCardTypes[1].getLabel()) || deskView.txtTypeCards.equals(hightestCardTypes[2].getLabel())){
+						while(iterator.hasNext() && nOfCards!=0){
+							Card card = iterator.next();
+							if(card.getCardType().getLabel().equals(deskView.txtTypeCards)){
+								if(deck.swappedCards[playerToSwapCards.getId()-1][0]==null){
+									deck.swappedCards[playerToSwapCards.getId()-1][0]=card;
+									iterator.remove();
+									nOfCards--;
+								}
+								else if (deck.swappedCards[playerToSwapCards.getId()-1][1]==null){
+									deck.swappedCards[playerToSwapCards.getId()-1][1]=card;
+									iterator.remove();
+									nOfCards--;
+									setNextPlayerActive();
+									break;
+								}
+								else {
+									nOfCards = 0;
+									setNextPlayerActive();
+									break;
+								}
+								
+							}	
+						}
+					}
+				}					
+			}
+			else {
+				System.out.println("Muss nicht die höchte Karte sein.");
+				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator();
+				while(iterator.hasNext() && nOfCards!=0){
+					Card card = iterator.next();
+					if(card.getCardType().getLabel().equals(deskView.txtTypeCards)){
+						if(deck.swappedCards[playerToSwapCards.getId()-1][0]==null){
+							deck.swappedCards[playerToSwapCards.getId()-1][0]=card;
+							iterator.remove();
+							nOfCards--;
+						}
+						if(deck.swappedCards[playerToSwapCards.getId()-1].length==2){
+							if (deck.swappedCards[playerToSwapCards.getId()-1][1]==null){
+								deck.swappedCards[playerToSwapCards.getId()-1][1]=card;
+								iterator.remove();
+								nOfCards--;
+								setNextPlayerActive();
+								break;
+							}
+						}
+						else {
+							nOfCards = 0;
+						}
+						
+					}	
+				}
+			}
+			
+			
+			
 			if(deck.swappedCards[playerToSwapCards.getId()-1][nOfSwappableCards-1]!=null){
 				allPlayers[myPos].setHasSwappedCards(true);
 				if(countHasSwapped()==allPlayers.length){
@@ -211,6 +292,59 @@ public class Action {
 		}
 		
 		
+		// returns an Array of swappable Cards-Types for a specific Player
+		public Card.CARD_TYPE[] hightestCardTypes(Player player) {
+
+			// initialize List of Cards
+			Card.CARD_TYPE[] swappableCards = new Card.CARD_TYPE[player.getRole().getNOfSwappableCards()];
+
+
+			for (int i = 0; i <= player.getRole().getNOfSwappableCards(); i++) {
+
+				// initialize listIterator
+				ListIterator<Card> listIterator = player.getCards()
+						.listIterator();
+				
+				if(player.getRole().getNOfSwappableCards()==2){
+					while (listIterator.hasNext()) {
+						if (swappableCards[0].getValue() > listIterator.next()
+								.getCardType().getValue()) {
+							if (swappableCards[1].getValue() > listIterator
+									.next().getCardType().getValue()) {
+								swappableCards[1] = listIterator.next()
+										.getCardType();
+							} else {
+								swappableCards[0] = listIterator.next()
+										.getCardType();
+							}
+						}
+	
+					}
+					System.out.println("Die höchsten Karten sind: "+swappableCards[0].getLabel()+" und "+swappableCards[1].getLabel());
+				}
+				else {
+					while (listIterator.hasNext()) {
+						if (swappableCards[0].getValue() > listIterator.next().getCardType().getValue()) {
+							swappableCards[0] = listIterator.next().getCardType();
+						}
+	
+					}
+					System.out.println("Die höchste Karte ist: "+swappableCards[0].getLabel());
+				}
+				// if two equal card types in array set one to null
+				// -> if there is only one card type you have at least to of
+				// them.
+				if (swappableCards[1].equals(swappableCards[2])) {
+					swappableCards[2] = null;
+				}
+			}
+
+
+			// return List of swappable Cards
+			return swappableCards;
+		}
+		
+		
 		int countHasSwapped(){
 			int nOfHasSwapped = 0;
 			for(int i=0; i<allPlayers.length; i++){
@@ -226,8 +360,10 @@ public class Action {
 			for(int i =0; i<deck.swappedCards.length; i++){
 				for(int j = 0; j<deck.swappedCards[i].length; j++){
 					allPlayers[i].addCard(deck.swappedCards[i][j]);
+					deck.swappedCards[i][j]=null;
 				}
 			}
+			
 		}
 	}
 
@@ -574,47 +710,7 @@ public class Action {
 			return actionsEnabled;
 		}
 
-		// returns an Array of swappable Cards-Types for a specific Player
-		public Card.CARD_TYPE[] getSwappableCards(Player player) {
-
-			// initialize List of Cards
-			Card.CARD_TYPE[] swappableCards = new Card.CARD_TYPE[2];
-
-			if (player.getRole().hasToBeHighest() == true) {
-
-				for (int i = 0; i <= player.getRole().getNOfSwappableCards(); i++) {
-
-					// initialize listIterator
-					ListIterator<Card> listIterator = player.getCards()
-							.listIterator();
-
-					while (listIterator.hasNext()) {
-						if (swappableCards[1].getValue() > listIterator.next()
-								.getCardType().getValue()) {
-							if (swappableCards[2].getValue() > listIterator
-									.next().getCardType().getValue()) {
-								swappableCards[2] = listIterator.next()
-										.getCardType();
-							} else {
-								swappableCards[1] = listIterator.next()
-										.getCardType();
-							}
-						}
-
-					}
-					// if two equal card types in array set one to null
-					// -> if there is only one card type you have at least to of
-					// them.
-					if (swappableCards[1].equals(swappableCards[2])) {
-						swappableCards[2] = null;
-					}
-				}
-
-			}
-
-			// return List of swappable Cards
-			return swappableCards;
-		}
+		
 
 		// clear table nachdem 3 Player gepasst haben
 		protected void clearTable() {
