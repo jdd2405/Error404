@@ -125,6 +125,7 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 			allPlayers[myPos]=null; // delete Player from Player list
 			deskView.closeWindow();
+			Client.sendToServer(allPlayers);
 		}
 	}
 
