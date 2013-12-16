@@ -84,8 +84,14 @@ public class Server{
 							allPlayers = (Player[]) object;
 							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
 							for(int i = 0; i<allPlayers.length; i++){
+								
 								if(allPlayers[i] != null && allPlayers[i].getLeftGame() == true){
-									clientManager.remove(allPlayers[i]);
+									int id = allPlayers[i].getId();
+									client.close();
+										//clientManager.get(id-1).close();
+										clientManager.remove(id-1);
+										//input.close();
+									System.out.println("client ist aus dem Spiel");
 								}
 							}
 						}

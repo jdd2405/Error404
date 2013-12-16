@@ -4,10 +4,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -65,13 +68,22 @@ public class DeskView extends JFrame {
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
-		
 		mainFrame = new JFrame();
+		/*Find a Solution to get this Image in the background a get a free beer from thomas
+		 * 
+		 * try {
+			mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Bilder/test_bg.jpg")))));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		mainFrame.pack();
 		mainFrame.setTitle("Der Grosse Dalmuti");
 		mainFrame.setSize(1600,900);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(false);
+		
 		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
