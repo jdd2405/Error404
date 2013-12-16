@@ -88,7 +88,7 @@ public class Server{
 							allPlayers = (Player[]) object;
 							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
 							for(int i = 0; i<allPlayers.length; i++){
-								if(allPlayers[i] == null){
+								if(allPlayers[i] == null && clientManager[i]!=null){
 									clientManager[i].close();
 								}
 							}
