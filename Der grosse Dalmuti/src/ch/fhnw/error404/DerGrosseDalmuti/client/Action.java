@@ -173,7 +173,11 @@ public class Action {
 						}
 					}
 					else{
-						deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
+						if(allPlayers[myPos].hasSwappedCards() && Integer.parseInt(deskView.lblAmountOfCards[i].getText())>allPlayers[myPos].getRole().getNOfSwappableCards()){
+							deskView.txtAmountCards.setText(""+allPlayers[myPos].getRole().getNOfSwappableCards());
+						} else {
+							deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
+						}
 					}
 				}
 			}
@@ -182,16 +186,55 @@ public class Action {
 	
 	class SwapCards implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
+			Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
+			if(deck.swappedCards[playerToSwapCards.getId()-1][nOfSwappableCards-1]!=null){
+				allPlayers[myPos].setHasSwappedCards(true);
+				if(countHasSwapped()==allPlayers.length){
+					swapCards();
+				}
+			}
 			
+		}
+		
+		
+		public Player getPlayerToSwapCards(Player player){
+			Player playerToSwapCards = null;
+			int ordinal = 3-player.getRole().ordinal(); // ordinal of your player plus odrinal of player to swap cards with is always 3!
 			
-			
+			for(int i = 0; i <allPlayers.length; i++){
+				if(allPlayers[i].getRole().ordinal()==ordinal){
+					playerToSwapCards = allPlayers[i];
+				}
+			}
+			return playerToSwapCards;
+		}
+		
+		
+		int countHasSwapped(){
+			int nOfHasSwapped = 0;
+			for(int i=0; i<allPlayers.length; i++){
+				if(allPlayers[i].hasSwappedCards()){
+					nOfHasSwapped++;
+				}
+			}
+			return nOfHasSwapped;
+		}
+		
+		
+		void swapCards(){
+			for(int i =0; i<deck.swappedCards.length; i++){
+				for(int j = 0; j<deck.swappedCards[i].length; j++){
+					allPlayers[i].addCard(deck.swappedCards[i][j]);
+				}
+			}
 		}
 	}
 
 	// spielzug passen Button Aktion
 	class Passen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (actionsEnabled() == true) {
+			if (enableActions() == true) {
 				int countActivePlayer =0;
 				int countPassen = 0;
 				for (int l = 0; l <4; l++){
@@ -227,7 +270,7 @@ public class Action {
 	class AuswahlSpielen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if (actionsEnabled() == true) {
+			if (enableActions() == true) {
 				// int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
 				int nOfCards = 0;
 				
@@ -403,6 +446,8 @@ public class Action {
 
 			return nextPlayerInOrder;
 		}
+		
+
 
 		void setNextPlayerActive() {
 			Player player = getNextPlayerInOrder(allPlayers[myPos]);
@@ -416,7 +461,7 @@ public class Action {
 				}
 			}
 				
-			actionsEnabled(); // to disable Buttons
+			enableActions(); // to disable Buttons
 		}
 
 		// show all Players in proper position
@@ -503,16 +548,28 @@ public class Action {
 		}
 
 		// check if it is the turn of my Player to enable Actions
-		protected boolean actionsEnabled() {
+		protected boolean enableActions() {
+			
 			boolean actionsEnabled = false;
 			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
-				deskView.btnAuswahlSpielen.setEnabled(true);
-				deskView.btnPassen.setEnabled(true);
+				if(allPlayers[myPos].hasSwappedCards()!=true){
+					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+					deskView.btnSwapCards.setEnabled(true);
+				}
+				else{
+					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+					deskView.btnSwapCards.setEnabled(false);
+					deskView.btnAuswahlSpielen.setEnabled(true);
+					deskView.btnPassen.setEnabled(true);
+				}
 			} else {
+				deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+				deskView.btnSwapCards.setEnabled(false);
 				deskView.btnAuswahlSpielen.setEnabled(false);
 				deskView.btnPassen.setEnabled(false);
 			}
+			
 			System.out.println("Ich bin dran: "+actionsEnabled);
 			return actionsEnabled;
 		}
@@ -605,7 +662,7 @@ public class Action {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			actionsEnabled(); 
+			enableActions(); 
 		}
 
 		public Deck getDeck() {

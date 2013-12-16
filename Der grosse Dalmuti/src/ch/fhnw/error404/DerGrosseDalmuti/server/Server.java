@@ -28,7 +28,7 @@ public class Server{
 
 	public void startServer() {
 		try {
-			ServerSocket server = new ServerSocket(5000);
+			ServerSocket server = new ServerSocket(4000);
 			System.out.println("Server ist gestartet");
 			
 			Iterator<Card> iterator = deck.notDealtCards.iterator();

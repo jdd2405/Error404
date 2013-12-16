@@ -86,6 +86,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(lblNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setOpaque(false);
     	txtSpielerNorth.setEditable(false);
     	gridNorth.gridx = 0;
 		gridNorth.gridy = 1;
@@ -288,36 +289,6 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtAmountCards, gridSouth);
 		
-		btnAuswahlSpielen.setText("Auswahl spielen");
-		btnAuswahlSpielen.setBackground(Color.GREEN);
-		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
-		btnAuswahlSpielen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 4;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnAuswahlSpielen, gridSouth);
-		
-		btnSwapCards.setText("swap cards");
-		btnSwapCards.setBackground(Color.GREEN);
-		btnSwapCards.setPreferredSize(new Dimension(170,30));	
-		btnSwapCards.setEnabled(false);
-		gridSouth.gridwidth = 1;
-		gridSouth.gridx = 8;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnSwapCards, gridSouth);
-		
-		btnPassen.setText("Passen");
-		btnPassen.setBackground(Color.GREEN);
-		btnPassen.setPreferredSize(new Dimension(170,30));	
-		btnPassen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 6;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnPassen, gridSouth);
-		
 		btnCloseGame = new JButton("Spiel beenden"); // closes game
 		btnCloseGame.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
@@ -333,6 +304,46 @@ public class DeskView extends JFrame {
 
     //South Methods
     
+	void showButtons(boolean hasSwappedCards){
+		
+		panelSouth.remove(btnAuswahlSpielen);
+		panelSouth.remove(btnPassen);
+		panelSouth.remove(btnSwapCards);
+		
+		if (hasSwappedCards == true){
+			btnAuswahlSpielen.setText("Auswahl spielen");
+			btnAuswahlSpielen.setBackground(Color.GREEN);
+			btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
+			btnAuswahlSpielen.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 4;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnAuswahlSpielen, gridSouth);
+			
+			btnPassen.setText("Passen");
+			btnPassen.setBackground(Color.GREEN);
+			btnPassen.setPreferredSize(new Dimension(170,30));	
+			btnPassen.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 6;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnPassen, gridSouth);
+		
+		} else{
+			btnSwapCards.setText("swap cards");
+			btnSwapCards.setBackground(Color.GREEN);
+			btnSwapCards.setPreferredSize(new Dimension(170,30));	
+			btnSwapCards.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 4;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnSwapCards, gridSouth);
+		}
+	}
+	
     void showInSouth(Player player){
     	
     	txtSpielerSouth.setText(player.getName());
