@@ -173,7 +173,11 @@ public class Action {
 						}
 					}
 					else{
-						deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
+						if(allPlayers[myPos].hasSwappedCards() && Integer.parseInt(deskView.lblAmountOfCards[i].getText())>allPlayers[myPos].getRole().getNOfSwappableCards()){
+							deskView.txtAmountCards.setText(""+allPlayers[myPos].getRole().getNOfSwappableCards());
+						} else {
+							deskView.txtAmountCards.setText((deskView.lblAmountOfCards[i].getText()));
+						}
 					}
 				}
 			}
@@ -184,10 +188,46 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 			int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
 			Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
-			//if(deck.swappedCards){
-				
-			//}
+			if(deck.swappedCards[playerToSwapCards.getId()-1][nOfSwappableCards-1]!=null){
+				allPlayers[myPos].setHasSwappedCards(true);
+				if(countHasSwapped()==allPlayers.length){
+					swapCards();
+				}
+			}
 			
+		}
+		
+		
+		public Player getPlayerToSwapCards(Player player){
+			Player playerToSwapCards = null;
+			int ordinal = 3-player.getRole().ordinal(); // ordinal of your player plus odrinal of player to swap cards with is always 3!
+			
+			for(int i = 0; i <allPlayers.length; i++){
+				if(allPlayers[i].getRole().ordinal()==ordinal){
+					playerToSwapCards = allPlayers[i];
+				}
+			}
+			return playerToSwapCards;
+		}
+		
+		
+		int countHasSwapped(){
+			int nOfHasSwapped = 0;
+			for(int i=0; i<allPlayers.length; i++){
+				if(allPlayers[i].hasSwappedCards()){
+					nOfHasSwapped++;
+				}
+			}
+			return nOfHasSwapped;
+		}
+		
+		
+		void swapCards(){
+			for(int i =0; i<deck.swappedCards.length; i++){
+				for(int j = 0; j<deck.swappedCards[i].length; j++){
+					allPlayers[i].addCard(deck.swappedCards[i][j]);
+				}
+			}
 		}
 	}
 
@@ -407,19 +447,7 @@ public class Action {
 			return nextPlayerInOrder;
 		}
 		
-		
-		public Player getPlayerToSwapCards(Player player){
-			Player playerToSwapCards = null;
-			int ordinal = 3-player.getRole().ordinal(); // ordinal of your player plus odrinal of player to swap cards with is always 3!
-			for(int i = 0; i <allPlayers.length; i++){
-				if(allPlayers[i].getRole().ordinal()==ordinal){
-					playerToSwapCards = allPlayers[i];
-				}
-			}
-			
-			
-			return playerToSwapCards;
-		}
+
 
 		void setNextPlayerActive() {
 			Player player = getNextPlayerInOrder(allPlayers[myPos]);
@@ -521,18 +549,27 @@ public class Action {
 
 		// check if it is the turn of my Player to enable Actions
 		protected boolean enableActions() {
-			if(allPlayers[myPos].hasSwappedCards()!=true){
-				deskView.showButtons(allPlayers[myPos].hasSwappedCards());
-			}
+			
 			boolean actionsEnabled = false;
 			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
-				deskView.btnAuswahlSpielen.setEnabled(true);
-				deskView.btnPassen.setEnabled(true);
+				if(allPlayers[myPos].hasSwappedCards()!=true){
+					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+					deskView.btnSwapCards.setEnabled(true);
+				}
+				else{
+					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+					deskView.btnSwapCards.setEnabled(false);
+					deskView.btnAuswahlSpielen.setEnabled(true);
+					deskView.btnPassen.setEnabled(true);
+				}
 			} else {
+				deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+				deskView.btnSwapCards.setEnabled(false);
 				deskView.btnAuswahlSpielen.setEnabled(false);
 				deskView.btnPassen.setEnabled(false);
 			}
+			
 			System.out.println("Ich bin dran: "+actionsEnabled);
 			return actionsEnabled;
 		}
