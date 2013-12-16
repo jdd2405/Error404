@@ -181,8 +181,11 @@ public class Action {
 	
 	class SwapCards implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
-			
+			int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
+			Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
+			//if(deck.swappedCards){
+				
+			//}
 			
 		}
 	}
@@ -190,7 +193,7 @@ public class Action {
 	// spielzug passen Button Aktion
 	class Passen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (actionsEnabled() == true) {
+			if (enableActions() == true) {
 				int countActivePlayer =0;
 				int countPassen = 0;
 				for (int l = 0; l <4; l++){
@@ -226,7 +229,7 @@ public class Action {
 	class AuswahlSpielen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if (actionsEnabled() == true) {
+			if (enableActions() == true) {
 				// int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
 				int nOfCards = 0;
 				
@@ -402,6 +405,20 @@ public class Action {
 
 			return nextPlayerInOrder;
 		}
+		
+		
+		public Player getPlayerToSwapCards(Player player){
+			Player playerToSwapCards = null;
+			int ordinal = 3-player.getRole().ordinal(); // ordinal of your player plus odrinal of player to swap cards with is always 3!
+			for(int i = 0; i <allPlayers.length; i++){
+				if(allPlayers[i].getRole().ordinal()==ordinal){
+					playerToSwapCards = allPlayers[i];
+				}
+			}
+			
+			
+			return playerToSwapCards;
+		}
 
 		void setNextPlayerActive() {
 			Player player = getNextPlayerInOrder(allPlayers[myPos]);
@@ -415,7 +432,7 @@ public class Action {
 				}
 			}
 				
-			actionsEnabled(); // to disable Buttons
+			enableActions(); // to disable Buttons
 		}
 
 		// show all Players in proper position
@@ -502,7 +519,10 @@ public class Action {
 		}
 
 		// check if it is the turn of my Player to enable Actions
-		protected boolean actionsEnabled() {
+		protected boolean enableActions() {
+			if(allPlayers[myPos].hasSwappedCards()!=true){
+				deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+			}
 			boolean actionsEnabled = false;
 			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
@@ -604,7 +624,7 @@ public class Action {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			actionsEnabled(); 
+			enableActions(); 
 		}
 
 		public Deck getDeck() {
