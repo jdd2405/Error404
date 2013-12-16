@@ -157,7 +157,8 @@ public class Action {
 			
 			for(int i=0; i<12; i++){
 				if (deskView.btnSlot[i].equals(e.getSource())){
-					deskView.txtTypeCards.setText(kartname[i]);		
+					deskView.txtTypeCards.setText(kartname[i]);	
+					
 				}
 			}
 			

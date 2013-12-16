@@ -444,5 +444,29 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	btnAuswahlSpielen.addActionListener(listener);
     }	
+}	
+
+class swapCardsPopup extends DeskView{
+	
+	JLabel lblSwap;
+	
+	private JFrame Frame1;
+	
+	public void swapCards(){
+	
+	Frame1 = new JFrame();
+	Frame1.setTitle("Swap cards Error");
+	Frame1.setSize(400,200);
+	Frame1.setLocationRelativeTo(null);
+	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	lblSwap = new JLabel("The cards : " + txtTypeCards.getText() + "are not valid to swap!");
+	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+	
+	Frame1.add(lblSwap);
+	Frame1.setVisible(true);
+	
+	}
 }
 
