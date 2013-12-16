@@ -124,7 +124,7 @@ public class Action {
 	// Close Game
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			allPlayers[myPos]= null; // delete Player from Player list
+			allPlayers[myPos].setLeftGame(true); // delete Player from Player list
 			deskView.closeWindow();
 			Client.sendToServer(allPlayers);
 		}
