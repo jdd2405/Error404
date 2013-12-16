@@ -306,37 +306,36 @@ public class DeskView extends JFrame {
 	void showButtons(boolean hasSwappedCards){
 		
 		if (hasSwappedCards = true){
-		btnAuswahlSpielen.setText("Auswahl spielen");
-		btnAuswahlSpielen.setBackground(Color.GREEN);
-		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
-		btnAuswahlSpielen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 4;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnAuswahlSpielen, gridSouth);
-		}
+			btnAuswahlSpielen.setText("Auswahl spielen");
+			btnAuswahlSpielen.setBackground(Color.GREEN);
+			btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
+			btnAuswahlSpielen.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 4;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnAuswahlSpielen, gridSouth);
+			
+			btnPassen.setText("Passen");
+			btnPassen.setBackground(Color.GREEN);
+			btnPassen.setPreferredSize(new Dimension(170,30));	
+			btnPassen.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 6;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnPassen, gridSouth);
 		
-		else{
-		btnPassen.setText("Passen");
-		btnPassen.setBackground(Color.GREEN);
-		btnPassen.setPreferredSize(new Dimension(170,30));	
-		btnPassen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 6;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnPassen, gridSouth);
-	
-		btnSwapCards.setText("swap cards");
-		btnSwapCards.setBackground(Color.GREEN);
-		btnSwapCards.setPreferredSize(new Dimension(170,30));	
-		btnSwapCards.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 4;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnSwapCards, gridSouth);
+		} else{
+			btnSwapCards.setText("swap cards");
+			btnSwapCards.setBackground(Color.GREEN);
+			btnSwapCards.setPreferredSize(new Dimension(170,30));	
+			btnSwapCards.setEnabled(false);
+			gridSouth.gridwidth = 2;
+			gridSouth.gridx = 4;
+			gridSouth.gridy = 2;
+			gridSouth.insets = new Insets(5,5,5,5);
+			panelSouth.add(btnSwapCards, gridSouth);
 		}
 	}
 	
