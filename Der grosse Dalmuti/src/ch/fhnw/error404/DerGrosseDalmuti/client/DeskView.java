@@ -24,6 +24,7 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridSouth;
 		JTextField txtSpielerSouth;
 		JTextField txtRoleSouth;
+		JButton btnSwapCards = new JButton();
 		JButton btnPassen = new JButton();
 		JButton btnAuswahlSpielen = new JButton();
 		JTextField txtAmountCards;
@@ -431,6 +432,10 @@ public class DeskView extends JFrame {
         mainFrame.dispose();
         mainFrame.setVisible(false);
     }
+    
+    void addSwapCards(ActionListener listener){
+    	btnSwapCards.addActionListener(listener);
+    }	
     
     void addPassen(ActionListener listener){
     	btnPassen.addActionListener(listener);

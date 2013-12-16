@@ -38,6 +38,7 @@ public class Action {
 		// deskView.addDisplayAmountOfCardsToPlay(new
 		// DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
+		deskView.addSwapCards(new SwapCards());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
 		// deskView.addButtonKlick(new ButtonKlick());
@@ -175,6 +176,14 @@ public class Action {
 					}
 				}
 			}
+		}
+	}
+	
+	class SwapCards implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			
+			
+			
 		}
 	}
 
@@ -562,7 +571,7 @@ public class Action {
 			clearTable();
 			for (int i = 0; i < allPlayers.length; i++) {
 				// Lege alle noch nicht gespielte Karten auf den Stapel.
-				if(allPlayers[i].getCards()!=null){
+				if(!allPlayers[i].getCards().isEmpty()){
 					ListIterator<Card> iterator = allPlayers[i].getCards().listIterator();
 					while(iterator.hasNext()){
 						deck.notDealtCards.add(iterator.next());

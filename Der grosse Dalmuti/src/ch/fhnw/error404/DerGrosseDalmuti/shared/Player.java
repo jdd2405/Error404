@@ -26,7 +26,7 @@ public class Player implements Serializable{
 	private Role role; // Wanna be King!
 	private int rank = 0; // oh, I have not finished first?
 	private ArrayList<Card> cards = new ArrayList<Card>();
-	private Card swappedCard;
+	private boolean hasSwappedCards;
 	public boolean passed; // set to false after every trick (engl. "Stich")!
 	//private boolean passed; // set to false after every trick (engl. "Stich")!
 	
@@ -36,6 +36,7 @@ public class Player implements Serializable{
 		this.role = role;
 		this.id = id;
 		this.setPassed(false);
+		this.hasSwappedCards=false;
 	}
 	
 	
