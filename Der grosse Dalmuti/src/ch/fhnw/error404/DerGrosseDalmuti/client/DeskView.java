@@ -298,6 +298,17 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(btnAuswahlSpielen, gridSouth);
 		
+		btnSwapCards.setText("swap cards");
+		btnSwapCards.setBackground(Color.GREEN);
+		btnSwapCards.setPreferredSize(new Dimension(170,30));	
+		btnSwapCards.setEnabled(false);
+		gridSouth.gridwidth = 1;
+		gridSouth.gridx = 8;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(btnSwapCards, gridSouth);
+		
+		
 		btnPassen.setText("Passen");
 		btnPassen.setBackground(Color.GREEN);
 		btnPassen.setPreferredSize(new Dimension(170,30));	
@@ -452,15 +463,15 @@ class swapCardsPopup extends DeskView{
 	
 	private JFrame Frame1;
 	
-	public void swapCards(){
+	public void swapCards(String titel, String text){
 	
 	Frame1 = new JFrame();
-	Frame1.setTitle("Swap cards Error");
+	Frame1.setTitle(titel);
 	Frame1.setSize(400,200);
 	Frame1.setLocationRelativeTo(null);
 	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-	lblSwap = new JLabel("The cards : " + txtTypeCards.getText() + "are not valid to swap!");
+	lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
 	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
 	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
 	
