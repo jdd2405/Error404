@@ -124,7 +124,7 @@ public class Action {
 	// Close Game
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			allPlayers[myPos]= null; // delete Player from Player list
+			allPlayers[myPos].setLeftGame(true); // delete Player from Player list
 			deskView.closeWindow();
 			Client.sendToServer(allPlayers);
 		}
@@ -157,7 +157,8 @@ public class Action {
 			
 			for(int i=0; i<12; i++){
 				if (deskView.btnSlot[i].equals(e.getSource())){
-					deskView.txtTypeCards.setText(kartname[i]);		
+					deskView.txtTypeCards.setText(kartname[i]);	
+					
 				}
 			}
 			

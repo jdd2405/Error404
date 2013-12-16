@@ -36,7 +36,7 @@ public class Client {
 		try {
 
 			// create socket
-			socket = new Socket("127.0.0.1", 5000);
+			socket = new Socket("127.0.0.1", 4000);
 			System.out.println("Zum Server verbunden: " + socket.isConnected());
 			// create outputStream for objects
 			OutputStream os = socket.getOutputStream();

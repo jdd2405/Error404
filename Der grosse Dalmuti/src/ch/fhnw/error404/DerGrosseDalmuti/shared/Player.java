@@ -29,6 +29,7 @@ public class Player implements Serializable{
 	private boolean hasSwappedCards;
 	public boolean passed; // set to false after every trick (engl. "Stich")!
 	//private boolean passed; // set to false after every trick (engl. "Stich")!
+	private boolean leftGame = false;
 	
 	// constructor
 	public Player(String name, int id, Role role) {
@@ -72,6 +73,10 @@ public class Player implements Serializable{
 
 	public boolean hasFinished() {return finished;}
 	public void setFinished(boolean finished) {this.finished = finished;}
+
+
+	public boolean getLeftGame() {return leftGame;}
+	public void setLeftGame(boolean leftGame) {this.leftGame = leftGame;}
 
 	
 	/*

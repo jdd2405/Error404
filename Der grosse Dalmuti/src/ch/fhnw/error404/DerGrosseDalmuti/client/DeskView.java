@@ -288,26 +288,6 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtAmountCards, gridSouth);
 		
-		btnAuswahlSpielen.setText("Auswahl spielen");
-		btnAuswahlSpielen.setBackground(Color.GREEN);
-		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
-		btnAuswahlSpielen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 4;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnAuswahlSpielen, gridSouth);
-		
-		btnPassen.setText("Passen");
-		btnPassen.setBackground(Color.GREEN);
-		btnPassen.setPreferredSize(new Dimension(170,30));	
-		btnPassen.setEnabled(false);
-		gridSouth.gridwidth = 2;
-		gridSouth.gridx = 6;
-		gridSouth.gridy = 2;
-		gridSouth.insets = new Insets(5,5,5,5);
-		panelSouth.add(btnPassen, gridSouth);
-		
 		btnCloseGame = new JButton("Spiel beenden"); // closes game
 		btnCloseGame.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
@@ -323,6 +303,43 @@ public class DeskView extends JFrame {
 
     //South Methods
     
+	void showButtons(boolean hasSwappedCards){
+		
+		if (hasSwappedCards = true){
+		btnAuswahlSpielen.setText("Auswahl spielen");
+		btnAuswahlSpielen.setBackground(Color.GREEN);
+		btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
+		btnAuswahlSpielen.setEnabled(false);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 4;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(btnAuswahlSpielen, gridSouth);
+		}
+		
+		else{
+		btnPassen.setText("Passen");
+		btnPassen.setBackground(Color.GREEN);
+		btnPassen.setPreferredSize(new Dimension(170,30));	
+		btnPassen.setEnabled(false);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 6;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(btnPassen, gridSouth);
+	
+		btnSwapCards.setText("swap cards");
+		btnSwapCards.setBackground(Color.GREEN);
+		btnSwapCards.setPreferredSize(new Dimension(170,30));	
+		btnSwapCards.setEnabled(false);
+		gridSouth.gridwidth = 2;
+		gridSouth.gridx = 4;
+		gridSouth.gridy = 2;
+		gridSouth.insets = new Insets(5,5,5,5);
+		panelSouth.add(btnSwapCards, gridSouth);
+		}
+	}
+	
     void showInSouth(Player player){
     	
     	txtSpielerSouth.setText(player.getName());
@@ -444,5 +461,28 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	btnAuswahlSpielen.addActionListener(listener);
     }	
+
+
+	
+	public void popUp(String titel, String text){
+		
+		JLabel lblSwap;
+		
+		JFrame Frame1;
+	
+	Frame1 = new JFrame();
+	Frame1.setTitle(titel);
+	Frame1.setSize(400,200);
+	Frame1.setLocationRelativeTo(null);
+	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
+	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+	
+	Frame1.add(lblSwap);
+	Frame1.setVisible(true);
+	
+	}
 }
 
