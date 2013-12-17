@@ -70,8 +70,7 @@ public class DeskView extends JFrame {
 	public DeskView() {
 		mainFrame = new JFrame();
 		/*Find a Solution to get this Image in the background a get a free beer from thomas
-		 * 
-		 * try {
+		  try {
 			mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Bilder/test_bg.jpg")))));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -98,6 +97,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(lblNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setBorder(null);
     	txtSpielerNorth.setOpaque(false);
     	txtSpielerNorth.setEditable(false);
     	gridNorth.gridx = 0;
@@ -105,7 +105,9 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(txtSpielerNorth, gridNorth);
 		
-		txtRoleNorth = new JTextField();	
+		txtRoleNorth = new JTextField();
+		txtRoleNorth.setBorder(null);
+		txtRoleNorth.setOpaque(false);
 		txtRoleNorth.setEditable(false);
     	gridNorth.gridx = 1;
 		gridNorth.gridy = 0;
@@ -113,6 +115,8 @@ public class DeskView extends JFrame {
 		panelNorth.add(txtRoleNorth, gridNorth);
 		
 		txtCardsInHandNorth = new JTextField();
+		txtCardsInHandNorth.setBorder(null);
+		txtSpielerNorth.setOpaque(false);
 		txtCardsInHandNorth.setEditable(false);
 		gridNorth.gridx = 0;
 		gridNorth.gridy = 0;
@@ -120,6 +124,8 @@ public class DeskView extends JFrame {
 		panelNorth.add(txtCardsInHandNorth, gridNorth);
 		
 		txtRankNorth = new JTextField();	
+		txtRankNorth.setBorder(null);
+		txtRankNorth.setOpaque(false);
 		txtRankNorth.setEditable(false);
     	gridNorth.gridx = 1;
 		gridNorth.gridy = 1;
@@ -142,6 +148,8 @@ public class DeskView extends JFrame {
 		panelEast.add(Label2, gridEast);
 		
 		txtSpielerEast = new JTextField();
+		txtSpielerEast.setBorder(null);
+		txtSpielerEast.setOpaque(false);
 		txtSpielerEast.setEditable(false);
 		gridEast.gridx = 0;
 		gridEast.gridy = 1;
@@ -149,6 +157,8 @@ public class DeskView extends JFrame {
 		panelEast.add(txtSpielerEast, gridEast);
 		
 		txtRoleEast = new JTextField();
+		txtRoleEast.setBorder(null);
+		txtRoleEast.setOpaque(false);
 		txtRoleEast.setEditable(false);
 		gridEast.gridx = 1;
 		gridEast.gridy = 0;
@@ -156,6 +166,8 @@ public class DeskView extends JFrame {
 		panelEast.add(txtRoleEast, gridEast);
 		
 		txtCardsInHandEast = new JTextField();
+		txtCardsInHandEast.setBorder(null);
+		txtCardsInHandEast.setOpaque(false);
 		txtCardsInHandEast.setEditable(false);
 		gridEast.gridx = 0;
 		gridEast.gridy = 0;
@@ -163,6 +175,8 @@ public class DeskView extends JFrame {
 		panelEast.add(txtCardsInHandEast, gridEast);
 		
 		txtRankEast = new JTextField();	
+		txtRankEast.setBorder(null);
+		txtRankEast.setOpaque(false);
 		txtRankEast.setEditable(false);
     	gridEast.gridx = 1;
 		gridEast.gridy = 1;
@@ -184,13 +198,17 @@ public class DeskView extends JFrame {
 		panelWest.add(Label3, gridWest);
 		
 	   	txtSpielerWest = new JTextField();
-    	txtSpielerWest.setEditable(false);
+		txtSpielerWest.setBorder(null);
+		txtSpielerWest.setOpaque(false);
+		txtSpielerWest.setEditable(false);
     	gridWest.gridx = 0;
 		gridWest.gridy = 1;
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(txtSpielerWest, gridWest);
 		
 		txtRoleWest = new JTextField();	
+		txtRoleWest.setBorder(null);
+		txtRoleWest.setOpaque(false);
 		txtRoleWest.setEditable(false);
     	gridWest.gridx = 1;
 		gridWest.gridy = 0;
@@ -198,6 +216,8 @@ public class DeskView extends JFrame {
 		panelWest.add(txtRoleWest, gridWest);
 		
 		txtCardsInHandWest = new JTextField();
+		txtCardsInHandWest.setBorder(null);
+		txtCardsInHandWest.setOpaque(false);
 		txtCardsInHandWest.setEditable(false);
 		gridWest.gridx = 0;
 		gridWest.gridy = 0;
@@ -205,6 +225,8 @@ public class DeskView extends JFrame {
 		panelWest.add(txtCardsInHandWest, gridWest);
 		
 		txtRankWest = new JTextField();	
+		txtRankWest.setBorder(null);
+		txtRankWest.setOpaque(false);
 		txtRankWest.setEditable(false);
     	gridWest.gridx = 1;
 		gridWest.gridy = 1;
@@ -241,7 +263,9 @@ public class DeskView extends JFrame {
 		panelSouth.setPreferredSize(new Dimension(1600,200));
 		
 		txtSpielerSouth = new JTextField();
-    	txtSpielerSouth.setEditable(false);
+		txtSpielerSouth.setBorder(null);
+		txtSpielerSouth.setOpaque(false);
+		txtSpielerSouth.setEditable(false);
     	gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 5;
 		gridSouth.gridy = 0;
@@ -249,6 +273,8 @@ public class DeskView extends JFrame {
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField();
+		txtRoleSouth.setBorder(null);
+		txtRoleSouth.setOpaque(false);
 		txtRoleSouth.setEditable(false);
 		gridSouth.anchor = GridBagConstraints.LINE_START;
 		gridSouth.gridx = 6;
@@ -257,6 +283,8 @@ public class DeskView extends JFrame {
 		panelSouth.add(txtRoleSouth, gridSouth);
 		
 		txtRankSouth = new JTextField();	
+		txtRankSouth.setBorder(null);
+		txtRankSouth.setOpaque(false);
 		txtRankSouth.setEditable(false);
     	gridSouth.gridx = 7;
 		gridSouth.gridy = 0;
@@ -271,6 +299,8 @@ public class DeskView extends JFrame {
     		btnSlot[i] = new JButton();
     	    btnSlot[i].setIcon(myIcon[i]);//here you set the icon for your button
     		btnSlot[i].setPreferredSize(new Dimension(89,92));
+    		btnSlot[i].setOpaque(false);
+    		btnSlot[i].setBorderPainted(false);
     		btnSlot[i].setContentAreaFilled(false);
     		gridSouth.gridx = i;
     		gridSouth.gridy = 1;
@@ -494,7 +524,6 @@ public class DeskView extends JFrame {
 	public void popUp(String titel, String text){
 		
 		JLabel lblSwap;
-		
 		JFrame Frame1;
 	
 	Frame1 = new JFrame();
