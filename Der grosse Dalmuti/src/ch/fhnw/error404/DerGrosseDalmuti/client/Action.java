@@ -661,21 +661,20 @@ public class Action {
 		// check if it is the turn of my Player to enable Actions
 		protected boolean enableActions() {
 			
+			deskView.showButtons(allPlayers[myPos].hasSwappedCards());
+			
 			boolean actionsEnabled = false;
 			if (allPlayers[myPos].isActive() == true) {
 				actionsEnabled = true;
 				if(allPlayers[myPos].hasSwappedCards()!=true){
-					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
 					deskView.btnSwapCards.setEnabled(true);
 				}
 				else{
-					deskView.showButtons(allPlayers[myPos].hasSwappedCards());
 					deskView.btnSwapCards.setEnabled(false);
 					deskView.btnAuswahlSpielen.setEnabled(true);
 					deskView.btnPassen.setEnabled(true);
 				}
 			} else {
-				deskView.showButtons(allPlayers[myPos].hasSwappedCards());
 				deskView.btnSwapCards.setEnabled(false);
 				deskView.btnAuswahlSpielen.setEnabled(false);
 				deskView.btnPassen.setEnabled(false);
@@ -734,7 +733,8 @@ public class Action {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			enableActions(); 
+			enableActions(); System.out.println("Zeige meine Buttons.");
+			deskView.repaint();
 		}
 
 		public Deck getDeck() {
@@ -745,6 +745,7 @@ public class Action {
 			this.deck = deck; System.out.println("Deck vom Server erhalten. "+ new Date());
 			showCurrentTrick(); System.out.println("Zeige gelegte Karten.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
+			deskView.repaint();
 		}
 
 	}
