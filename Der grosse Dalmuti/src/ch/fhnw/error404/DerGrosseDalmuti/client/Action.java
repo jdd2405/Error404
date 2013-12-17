@@ -187,40 +187,66 @@ public class Action {
 	class SwapCards implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
-			System.out.println("Anzahl Karten zum Tauschen: "+allPlayers[myPos].getRole().getNOfSwappableCards());
+			// Aktion nur ausführen, wenn eine Karte ausgewählt ist.
+			if(deskView.txtTypeCards.getText()!="" && deskView.txtAmountCards.getText()!=""){
 			
-			Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
-			System.out.println("Karten mit diesem Spieler tauschen: "+playerToSwapCards.getName());
-			
-			int nOfSwappedCards = 0; // Anzahl bereits getauschter KArten
-			for (int i = 0; i<deck.getSwappedCards()[playerToSwapCards.getRole().ordinal()].length; i++){
-				if(deck.getSwappedCards()[playerToSwapCards.getRole().ordinal()][i]!=null){
-					nOfSwappedCards++;
-				}
-			}
-			System.out.println("Anzahl bereits getauschter Karten: "+nOfSwappedCards);
-
-			
-			int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
-			if(nOfCards > nOfSwappedCards){
-				nOfCards = nOfSwappableCards-nOfSwappedCards;
-			}
-			System.out.println("Anzahl Karten ausgewählt: "+deskView.txtAmountCards.getText());
-			
-			// check if card has to be the highest
-			if (allPlayers[myPos].getRole().hasToBeHighest()) {
-				System.out.println("Muss die höchte Karte sein. "+highestCard(allPlayers[myPos]).getLabel());
+				int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
+				System.out.println("Anzahl Karten zum Tauschen: "+allPlayers[myPos].getRole().getNOfSwappableCards());
 				
-				// check if chosen card is highest
-				if(deskView.txtTypeCards.getText().equals(highestCard(allPlayers[myPos]).getLabel())){
+				Player playerToSwapCards = getPlayerToSwapCards(allPlayers[myPos]);
+				System.out.println("Karten mit diesem Spieler tauschen: "+playerToSwapCards.getName());
+				
+				int nOfSwappedCards = 0; // Anzahl bereits getauschter KArten
+				for (int i = 0; i<deck.getSwappedCards()[playerToSwapCards.getRole().ordinal()].length; i++){
+					if(deck.getSwappedCards()[playerToSwapCards.getRole().ordinal()][i]!=null){
+						nOfSwappedCards++;
+					}
+				}
+				System.out.println("Anzahl bereits getauschter Karten: "+nOfSwappedCards);
+	
+				
+				int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
+				if(nOfCards > nOfSwappedCards){
+					nOfCards = nOfSwappableCards-nOfSwappedCards;
+				}
+				System.out.println("Anzahl Karten ausgewählt: "+deskView.txtAmountCards.getText());
+				
+				// check if card has to be the highest
+				if (allPlayers[myPos].getRole().hasToBeHighest()) {
+					System.out.println("Muss die höchte Karte sein. "+highestCard(allPlayers[myPos]).getLabel());
 					
-					// go through list
+					// check if chosen card is highest
+					if(deskView.txtTypeCards.getText().equals(highestCard(allPlayers[myPos]).getLabel())){
+						
+						// go through list
+						ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator(); 
+						while(iterator.hasNext() && nOfCards!=0){
+							System.out.println("In schlaufe....");
+							Card card = iterator.next();
+							// card found?
+							if(card.getCardType().getLabel().equals(deskView.txtTypeCards.getText())){
+								System.out.println("Treffer ;-)");
+								deck.swappedCards[playerToSwapCards.getRole().ordinal()][nOfSwappedCards]=card;
+								iterator.remove();
+								nOfCards--;	
+								nOfSwappedCards++;
+							}
+							if(nOfSwappedCards==nOfSwappableCards){
+								System.out.println("Anzahl erreicht.");
+								allPlayers[myPos].setHasSwappedCards(true);
+								setNextPlayerActive();
+							}
+						}
+					} else {
+						System.out.println("Bitte wählen Sie die höchste Karte!");
+					}
+					
+				} else {
+					System.out.println("Muss nicht die höchte Karte sein.");
 					ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator(); 
 					while(iterator.hasNext() && nOfCards!=0){
 						System.out.println("In schlaufe....");
 						Card card = iterator.next();
-						// card found?
 						if(card.getCardType().getLabel().equals(deskView.txtTypeCards.getText())){
 							System.out.println("Treffer ;-)");
 							deck.swappedCards[playerToSwapCards.getRole().ordinal()][nOfSwappedCards]=card;
@@ -234,39 +260,21 @@ public class Action {
 							setNextPlayerActive();
 						}
 					}
-				} else {
-					System.out.println("Bitte wählen Sie die höchste Karte!");
 				}
 				
-			} else {
-				System.out.println("Muss nicht die höchte Karte sein.");
-				ListIterator<Card> iterator = allPlayers[myPos].getCards().listIterator(); 
-				while(iterator.hasNext() && nOfCards!=0){
-					System.out.println("In schlaufe....");
-					Card card = iterator.next();
-					if(card.getCardType().getLabel().equals(deskView.txtTypeCards.getText())){
-						System.out.println("Treffer ;-)");
-						deck.swappedCards[playerToSwapCards.getRole().ordinal()][nOfSwappedCards]=card;
-						iterator.remove();
-						nOfCards--;	
-						nOfSwappedCards++;
-					}
-					if(nOfSwappedCards==nOfSwappableCards){
-						System.out.println("Anzahl erreicht.");
-						allPlayers[myPos].setHasSwappedCards(true);
-						setNextPlayerActive();
-					}
+				if(countHasSwapped()==allPlayers.length){
+					swapCards();
 				}
+	
+				
+				Client.sendToServer(allPlayers);
+				Client.sendToServer(deck);
 			}
 			
-			if(countHasSwapped()==allPlayers.length){
-				swapCards();
+			else {
+				deskView.popUp("Ungültige Karte", "Bitte wählen Sie eine Karte aus.");
 			}
-
-			
-			Client.sendToServer(allPlayers);
-			Client.sendToServer(deck);
-			
+				
 		}
 		
 		

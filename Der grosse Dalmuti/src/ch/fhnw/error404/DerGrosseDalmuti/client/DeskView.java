@@ -323,10 +323,13 @@ public class DeskView extends JFrame {
 		panelSouth.remove(btnSwapCards);
 		
 		if (hasSwappedCards == true){
+			btnSwapCards.setVisible(false);
+			
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
 			btnAuswahlSpielen.setPreferredSize(new Dimension(170,30));
 			btnAuswahlSpielen.setEnabled(false);
+			btnAuswahlSpielen.setVisible(true);
 			gridSouth.gridwidth = 2;
 			gridSouth.gridx = 4;
 			gridSouth.gridy = 2;
@@ -337,6 +340,7 @@ public class DeskView extends JFrame {
 			btnPassen.setBackground(Color.GREEN);
 			btnPassen.setPreferredSize(new Dimension(170,30));	
 			btnPassen.setEnabled(false);
+			btnPassen.setVisible(true);
 			gridSouth.gridwidth = 2;
 			gridSouth.gridx = 6;
 			gridSouth.gridy = 2;
@@ -344,15 +348,22 @@ public class DeskView extends JFrame {
 			panelSouth.add(btnPassen, gridSouth);
 		
 		} else{
-			btnSwapCards.setText("swap cards");
-			btnSwapCards.setBackground(Color.GREEN);
+			
+			btnPassen.setVisible(false);
+			btnAuswahlSpielen.setVisible(false);
+			
+			btnSwapCards.setText("Karten tauschen");
+			btnSwapCards.setBackground(Color.YELLOW);
 			btnSwapCards.setPreferredSize(new Dimension(170,30));	
 			btnSwapCards.setEnabled(false);
+			btnSwapCards.setVisible(true);
 			gridSouth.gridwidth = 2;
 			gridSouth.gridx = 4;
 			gridSouth.gridy = 2;
 			gridSouth.insets = new Insets(5,5,5,5);
 			panelSouth.add(btnSwapCards, gridSouth);
+			
+			
 		}
 	}
 	
