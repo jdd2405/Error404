@@ -734,7 +734,6 @@ public class Action {
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
 			enableActions(); System.out.println("Zeige meine Buttons.");
-			deskView.repaint();
 		}
 
 		public Deck getDeck() {
@@ -745,7 +744,6 @@ public class Action {
 			this.deck = deck; System.out.println("Deck vom Server erhalten. "+ new Date());
 			showCurrentTrick(); System.out.println("Zeige gelegte Karten.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			deskView.repaint();
 		}
 
 	}
