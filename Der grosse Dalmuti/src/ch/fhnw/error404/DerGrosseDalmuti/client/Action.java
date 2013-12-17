@@ -203,10 +203,10 @@ public class Action {
 
 			
 			int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
-			System.out.println("Anzahl Karten ausgewählt: "+deskView.txtAmountCards.getText());
 			if(nOfCards > nOfSwappedCards){
 				nOfCards = nOfSwappableCards-nOfSwappedCards;
 			}
+			System.out.println("Anzahl Karten ausgewählt: "+deskView.txtAmountCards.getText());
 			
 			// check if card has to be the highest
 			if (allPlayers[myPos].getRole().hasToBeHighest()) {
@@ -313,11 +313,21 @@ public class Action {
 		
 		
 		void swapCards(){
-			for(int i =0; i<deck.swappedCards.length; i++){
-				for(int j = 0; j<deck.swappedCards[i].length; j++){
-					allPlayers[i].addCard(deck.swappedCards[i][j]);
-					System.out.println(deck.swappedCards[i][j].getCardType().getLabel()+" "+allPlayers[i].getName()+" gegeben.");
-					deck.swappedCards[i][j]=null;
+			for (int i = 0; i < deck.swappedCards.length; i++){
+				for(int j = 0; j < deck.swappedCards[i].length; j++){
+					if(deck.swappedCards[i][j]!=null){
+						System.out.println(deck.swappedCards[i][j].getCardType().getLabel());
+					}
+				}
+			}
+			
+			for(int i = 0; i < allPlayers.length; i++){
+				for(int j = 0; j < deck.swappedCards[allPlayers[i].getRole().ordinal()].length; j++){
+					if(deck.swappedCards[allPlayers[i].getRole().ordinal()][j]!=null){
+						allPlayers[i].addCard(deck.swappedCards[allPlayers[i].getRole().ordinal()][j]);
+						System.out.println(deck.swappedCards[allPlayers[i].getRole().ordinal()][j].getCardType().getLabel()+" "+allPlayers[i].getName()+" gegeben.");
+						deck.swappedCards[allPlayers[i].getRole().ordinal()][j]=null;
+					}
 				}
 			}
 			
