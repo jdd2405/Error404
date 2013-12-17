@@ -353,7 +353,7 @@ public class DeskView extends JFrame {
 		panelSouth.remove(btnSwapCards);
 		
 		if (hasSwappedCards == true){
-			btnSwapCards.setVisible(false);
+			//btnSwapCards.setVisible(false);
 			
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
@@ -379,8 +379,8 @@ public class DeskView extends JFrame {
 		
 		} else{
 			
-			btnPassen.setVisible(false);
-			btnAuswahlSpielen.setVisible(false);
+			//btnPassen.setVisible(false);
+			//btnAuswahlSpielen.setVisible(false);
 			
 			btnSwapCards.setText("Karten tauschen");
 			btnSwapCards.setBackground(Color.YELLOW);
