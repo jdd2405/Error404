@@ -691,6 +691,7 @@ public class Action {
 				allPlayers[i].setRole(Role.values()[allPlayers[i].getRank()-1]);
 				System.out.println(allPlayers[i].getName()+" hat die Rolle "+allPlayers[i].getRole().getLabel()+" erhalten.");
 				allPlayers[i].setFinished(false);
+				allPlayers[i].setHasSwappedCards(false);
 				allPlayers[i].setRank(0);
 				if (allPlayers[i].getRole().equals(Role.GROSSERDALMUTI)) {
 					allPlayers[i].setActive(true);
