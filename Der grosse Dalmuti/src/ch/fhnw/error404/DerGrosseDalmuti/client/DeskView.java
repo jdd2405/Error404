@@ -243,15 +243,15 @@ public class DeskView extends JFrame {
 		txtSpielerSouth = new JTextField();
     	txtSpielerSouth.setEditable(false);
     	gridSouth.anchor = GridBagConstraints.LINE_START;
-		gridSouth.gridx = 5;
+		gridSouth.gridx = 4;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField();
 		txtRoleSouth.setEditable(false);
-		gridSouth.anchor = GridBagConstraints.LINE_START;
-		gridSouth.gridx = 6;
+		//gridSouth.anchor = GridBagConstraints.LINE_START;
+		gridSouth.gridx = 5;
 		gridSouth.gridy = 0;
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtRoleSouth, gridSouth);
@@ -270,11 +270,12 @@ public class DeskView extends JFrame {
 		for(int i = 0; i<12; i++){
     		btnSlot[i] = new JButton();
     	    btnSlot[i].setIcon(myIcon[i]);//here you set the icon for your button
-    		btnSlot[i].setPreferredSize(new Dimension(89,92));
+    		btnSlot[i].setPreferredSize(new Dimension(60,92));
+    		btnSlot[i].setOpaque(true);
     		btnSlot[i].setContentAreaFilled(false);
     		gridSouth.gridx = i;
     		gridSouth.gridy = 1;
-    		gridSouth.insets = new Insets(5,5,5,5);
+    		gridSouth.insets = new Insets(5,25,5,5);
     		panelSouth.add(btnSlot[i], gridSouth);
     	}
 		
