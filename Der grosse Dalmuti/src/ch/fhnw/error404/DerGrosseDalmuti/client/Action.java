@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
@@ -125,8 +126,9 @@ public class Action {
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			allPlayers[myPos].setLeftGame(true);
-			deskView.closeWindow();
 			Client.sendToServer(allPlayers);
+			
+			
 		}
 	}
 
@@ -717,6 +719,26 @@ public class Action {
 			}
 			shuffleCards();
 		}
+		
+		
+		//hat ein Spieler das Spiel verlassen?
+		public void leftGame(){
+			for(int i =0; i<4;i++){
+				if(allPlayers[i] != null && allPlayers[i].getLeftGame() == true){
+					deskView.popUpForExit("Spiel beendet", "Spiel wurde von einem der Spieler verlassen.,"
+							+ "Spiel ist beendet. Für einen Neustart des Spiels bitte Client starten.");
+					deskView.closeWindow();
+					Client.sendToServer(allPlayers);
+					try {
+						Client.in.close();
+						Client.out.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		}
 
 		public int getMyId() {
 			return myId;
@@ -734,7 +756,8 @@ public class Action {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			enableActions(); 
+			enableActions();
+			leftGame();
 		}
 
 		public Deck getDeck() {

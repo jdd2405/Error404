@@ -540,5 +540,26 @@ public class DeskView extends JFrame {
 	Frame1.setVisible(true);
 	
 	}
+	
+public void popUpForExit(String titel, String text){
+		
+		JLabel lblSwap;
+		JFrame Frame1;
+	
+	Frame1 = new JFrame();
+	Frame1.setTitle(titel);
+	Frame1.setSize(400,200);
+	Frame1.setLocationRelativeTo(null);
+	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	lblSwap = new JLabel(text);
+	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+	
+	Frame1.add(lblSwap);
+	Frame1.setVisible(true);
+	
+	}
+
 }
 
