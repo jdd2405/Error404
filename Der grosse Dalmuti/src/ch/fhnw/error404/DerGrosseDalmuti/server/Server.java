@@ -7,7 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.Vector;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
@@ -28,6 +27,7 @@ public class Server{
 
 	public void startServer() {
 		try {
+			@SuppressWarnings("resource")
 			ServerSocket server = new ServerSocket(4000);
 			System.out.println("Server ist gestartet");
 			
@@ -58,7 +58,9 @@ public class Server{
 	}
 
 	public class ChatThread implements Runnable {
+		@SuppressWarnings("unused")
 		private Socket client;
+		@SuppressWarnings("unused")
 		private int clientPort;
 		private ObjectInputStream input;
 		Object object;

@@ -1,16 +1,10 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -19,6 +13,7 @@ import javax.swing.*;
  * JLabels, JTextField or JButtons are created and Located in the Grid
  */
 
+@SuppressWarnings("serial")
 public class DeskView extends JFrame {
 	
 		JFrame mainFrame;
@@ -107,6 +102,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(lblCardsNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setFont(new Font("Arial", Font.BOLD, 25));
     	txtSpielerNorth.setBorder(null);
     	txtSpielerNorth.setOpaque(false);
     	txtSpielerNorth.setEditable(false);
@@ -116,6 +112,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(txtSpielerNorth, gridNorth);
 		
 		txtRoleNorth = new JTextField();
+		txtRoleNorth.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleNorth.setBorder(null);
 		txtRoleNorth.setOpaque(false);
 		txtRoleNorth.setEditable(false);
@@ -155,6 +152,7 @@ public class DeskView extends JFrame {
 		panelEast.add(lblCardsEast, gridEast);
 		
 		txtSpielerEast = new JTextField();
+		txtSpielerEast.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerEast.setBorder(null);
 		txtSpielerEast.setOpaque(false);
 		txtSpielerEast.setEditable(false);
@@ -164,6 +162,7 @@ public class DeskView extends JFrame {
 		panelEast.add(txtSpielerEast, gridEast);
 		
 		txtRoleEast = new JTextField();
+		txtRoleEast.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleEast.setBorder(null);
 		txtRoleEast.setOpaque(false);
 		txtRoleEast.setEditable(false);
@@ -203,6 +202,7 @@ public class DeskView extends JFrame {
 		panelWest.add(lblCardsWest, gridWest);
 		
 	   	txtSpielerWest = new JTextField();
+	   	txtSpielerWest.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerWest.setBorder(null);
 		txtSpielerWest.setOpaque(false);
 		txtSpielerWest.setEditable(false);
@@ -212,6 +212,7 @@ public class DeskView extends JFrame {
 		panelWest.add(txtSpielerWest, gridWest);
 		
 		txtRoleWest = new JTextField();	
+		txtRoleWest.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleWest.setBorder(null);
 		txtRoleWest.setOpaque(false);
 		txtRoleWest.setEditable(false);
@@ -260,6 +261,7 @@ public class DeskView extends JFrame {
 		panelSouth.setPreferredSize(new Dimension(1600,200));
 		
 		txtSpielerSouth = new JTextField();
+		txtSpielerSouth.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerSouth.setBorder(null);
 		txtSpielerSouth.setOpaque(false);
 		txtSpielerSouth.setEditable(false);
@@ -270,6 +272,7 @@ public class DeskView extends JFrame {
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField();
+		txtRoleSouth.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleSouth.setBorder(null);
 		txtRoleSouth.setOpaque(false);
 		txtRoleSouth.setEditable(false);
