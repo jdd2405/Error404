@@ -347,6 +347,9 @@ public class DeskView extends JFrame {
     
 	void showButtons(boolean hasSwappedCards){
 		
+		btnPassen.repaint();
+		btnAuswahlSpielen.repaint();
+		btnSwapCards.repaint();
 		panelSouth.remove(btnAuswahlSpielen);
 		panelSouth.remove(btnPassen);
 		panelSouth.remove(btnSwapCards);
