@@ -723,7 +723,7 @@ public class Action {
 		
 		
 		//hat ein Spieler das Spiel verlassen?
-	public void leftGame() {
+	public void leftGame(){
 		if (allPlayers[0].getLeftGame() == true) {
 			deskView.popUpForExit("Spiel beendet.",
 					"Spiel wurde von einem der Spieler verlassen.");
@@ -732,6 +732,8 @@ public class Action {
 			try {
 				Client.in.close();
 				Client.out.close();
+				Client.socket.close();
+				System.out.println("Client verbindung ist beendet");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -84,8 +84,7 @@ public class Server{
 
 					if (object instanceof Player[]) {
 						allPlayers = (Player[]) object;
-						System.out.println("Spielerliste vom Client erhalten. "
-								+ new Date());
+						System.out.println("Spielerliste vom Client erhalten. "+ new Date());
 						
 
 							if (allPlayers[0].getLeftGame()==true) {
@@ -95,9 +94,9 @@ public class Server{
 									sendToAllClients(object);
 									Iterator<ObjectOutputStream> iterator = clientManager.iterator();
 									while (iterator.hasNext()) {
-										input.close();
 										iterator.next().close();
 										whileSchlaufe = false;
+										System.exit(0);
 									}
 
 								}
@@ -106,7 +105,7 @@ public class Server{
 						if(anzahlIfAufruf ==0) {
 								sendToAllClients(object);
 						}
-
+					
 					
 					} else if (object instanceof Deck) {
 						deck = (Deck) object;
@@ -116,6 +115,7 @@ public class Server{
 					}
 
 				}
+				
 					
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
