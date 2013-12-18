@@ -717,6 +717,8 @@ public class Action {
 				}
 			}
 			shuffleCards();
+			showButtons();
+			
 		}
 		
 		
