@@ -78,7 +78,9 @@ public class DeskView extends JFrame {
 		}*/
 		mainFrame.pack();
 		mainFrame.setTitle("Der Grosse Dalmuti");
-		mainFrame.setSize(1600,900);
+		int w = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int h = Toolkit.getDefaultToolkit().getScreenSize().height;
+		mainFrame.setSize(w,h);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(false);
