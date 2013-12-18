@@ -456,13 +456,11 @@ public class Action {
 								player.setRank(anzahlRankVergaben + 1);
 								player.setFinished(true);
 								allPlayers[myPos].setFinished(true);
-								allPlayers[myPos].setActive(false);
 								System.out.println("Habe fertig und das Spiel ist aus.");
 							}
 						}
 							
 						finishRound();
-						showButtons();
 					}
 				}
 				// hat Spieler noch Karten, wird nächster Player aktiv
@@ -720,6 +718,7 @@ public class Action {
 			}
 			shuffleCards();
 			showButtons();
+			
 		}
 		
 		
