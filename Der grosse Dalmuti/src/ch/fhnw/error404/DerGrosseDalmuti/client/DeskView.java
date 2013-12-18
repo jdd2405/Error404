@@ -118,7 +118,6 @@ public class DeskView extends JFrame {
 		
 		txtCardsInHandNorth = new JTextField();
 		txtCardsInHandNorth.setBorder(null);
-		txtSpielerNorth.setOpaque(false);
 		txtCardsInHandNorth.setEditable(false);
 		gridNorth.gridx = 0;
 		gridNorth.gridy = 0;
@@ -169,7 +168,6 @@ public class DeskView extends JFrame {
 		
 		txtCardsInHandEast = new JTextField();
 		txtCardsInHandEast.setBorder(null);
-		txtCardsInHandEast.setOpaque(false);
 		txtCardsInHandEast.setEditable(false);
 		gridEast.gridx = 0;
 		gridEast.gridy = 0;
@@ -219,7 +217,6 @@ public class DeskView extends JFrame {
 		
 		txtCardsInHandWest = new JTextField();
 		txtCardsInHandWest.setBorder(null);
-		txtCardsInHandWest.setOpaque(false);
 		txtCardsInHandWest.setEditable(false);
 		gridWest.gridx = 0;
 		gridWest.gridy = 0;
@@ -528,38 +525,38 @@ public class DeskView extends JFrame {
 		JLabel lblSwap;
 		JFrame Frame1;
 	
-	Frame1 = new JFrame();
-	Frame1.setTitle(titel);
-	Frame1.setSize(400,200);
-	Frame1.setLocationRelativeTo(null);
-	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Frame1 = new JFrame();
+		Frame1.setTitle(titel);
+		Frame1.setSize(400,200);
+		Frame1.setLocationRelativeTo(null);
+		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-	lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
-	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
-	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
+		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+		lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
 	
-	Frame1.add(lblSwap);
-	Frame1.setVisible(true);
+		Frame1.add(lblSwap);
+		Frame1.setVisible(true);
 	
 	}
 	
-public void popUpForExit(String titel, String text){
+	public void popUpForExit(String titel, String text){
 		
 		JLabel lblSwap;
 		JFrame Frame1;
 	
-	Frame1 = new JFrame();
-	Frame1.setTitle(titel);
-	Frame1.setSize(400,200);
-	Frame1.setLocationRelativeTo(null);
-	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Frame1 = new JFrame();
+		Frame1.setTitle(titel);
+		Frame1.setSize(400,200);
+		Frame1.setLocationRelativeTo(null);
+		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-	lblSwap = new JLabel(text);
-	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
-	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSwap = new JLabel(text);
+		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+		lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
 	
-	Frame1.add(lblSwap);
-	Frame1.setVisible(true);
+		Frame1.add(lblSwap);
+		Frame1.setVisible(true);
 	
 	}
 
