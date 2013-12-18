@@ -41,22 +41,24 @@ public class DeskView extends JFrame {
 		private GridBagConstraints gridWest;
 		JTextField txtSpielerWest;
 		JTextField txtRoleWest;
-		JTextField txtCardsInHandWest;
+		JLabel lblCardsWest;
+		JLabel lblCardsInHandWest;
 		JTextField txtRankWest;
 		
 		private JPanel panelNorth;
 		private GridBagConstraints gridNorth;
 		JTextField txtSpielerNorth;
 		JTextField txtRoleNorth;
-		JLabel lblNorth;
-		JTextField txtCardsInHandNorth;
+		JLabel lblCardsNorth;
+		JLabel lblCardsInHandNorth;
 		JTextField txtRankNorth;
 		
 		private JPanel panelEast;
 		private GridBagConstraints gridEast;
 		JTextField txtSpielerEast;
 		JTextField txtRoleEast;
-		JTextField txtCardsInHandEast;
+		JLabel lblCardsEast;
+		JLabel lblCardsInHandEast;
 		JTextField txtRankEast;
 		
 		private JPanel panelCenter;
@@ -85,18 +87,24 @@ public class DeskView extends JFrame {
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(false);
 		
-		
 		//NORTH Panel
 		panelNorth = new JPanel(new GridBagLayout());
 		gridNorth = new GridBagConstraints();
 		panelNorth.setPreferredSize(new Dimension(1600,200));
 		
-		lblNorth = new JLabel(icon);
-		lblNorth.setPreferredSize(new Dimension(89,92));
+		lblCardsNorth = new JLabel(icon);
+		lblCardsNorth.setLayout(new BorderLayout());
+		lblCardsNorth.setPreferredSize(new Dimension(89,92));
 		gridNorth.gridx = 0;
 		gridNorth.gridy = 0;
 		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(lblNorth, gridNorth);
+		
+		lblCardsInHandNorth = new JLabel();
+		lblCardsInHandNorth.setBorder(null);
+		lblCardsInHandNorth.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblCardsNorth.add(lblCardsInHandNorth);
+		panelNorth.add(lblCardsNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
     	txtSpielerNorth.setBorder(null);
@@ -116,14 +124,6 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		panelNorth.add(txtRoleNorth, gridNorth);
 		
-		txtCardsInHandNorth = new JTextField();
-		txtCardsInHandNorth.setBorder(null);
-		txtCardsInHandNorth.setEditable(false);
-		gridNorth.gridx = 0;
-		gridNorth.gridy = 0;
-		gridNorth.insets = new Insets(5,5,5,5);
-		panelNorth.add(txtCardsInHandNorth, gridNorth);
-		
 		txtRankNorth = new JTextField();	
 		txtRankNorth.setBorder(null);
 		txtRankNorth.setOpaque(false);
@@ -140,13 +140,19 @@ public class DeskView extends JFrame {
 		gridEast = new GridBagConstraints();
 		panelEast.setPreferredSize(new Dimension(500,900));
 		
-		JLabel Label2 = new JLabel(icon);
-		Label2.setPreferredSize(new Dimension(89,92));
-		
+		lblCardsEast = new JLabel(icon);
+		lblCardsEast.setLayout(new BorderLayout());
+		lblCardsEast.setPreferredSize(new Dimension(89,92));
 		gridEast.gridx = 0;
 		gridEast.gridy = 0;
 		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(Label2, gridEast);
+		
+		lblCardsInHandEast = new JLabel();
+		lblCardsInHandEast.setBorder(null);
+		lblCardsInHandEast.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblCardsEast.add(lblCardsInHandEast);
+		panelEast.add(lblCardsEast, gridEast);
 		
 		txtSpielerEast = new JTextField();
 		txtSpielerEast.setBorder(null);
@@ -166,14 +172,6 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		panelEast.add(txtRoleEast, gridEast);
 		
-		txtCardsInHandEast = new JTextField();
-		txtCardsInHandEast.setBorder(null);
-		txtCardsInHandEast.setEditable(false);
-		gridEast.gridx = 0;
-		gridEast.gridy = 0;
-		gridEast.insets = new Insets(5,5,5,5);
-		panelEast.add(txtCardsInHandEast, gridEast);
-		
 		txtRankEast = new JTextField();	
 		txtRankEast.setBorder(null);
 		txtRankEast.setOpaque(false);
@@ -190,12 +188,19 @@ public class DeskView extends JFrame {
 		gridWest = new GridBagConstraints();
 		panelWest.setPreferredSize(new Dimension(500,900));
 				
-		JLabel Label3 = new JLabel(icon);
-		Label3.setPreferredSize(new Dimension(89,92));		
+		lblCardsWest = new JLabel(icon);
+		lblCardsWest.setLayout(new BorderLayout());
+		lblCardsWest.setPreferredSize(new Dimension(89,92));
 		gridWest.gridx = 0;
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(Label3, gridWest);
+		
+		lblCardsInHandWest = new JLabel();
+		lblCardsInHandWest.setBorder(null);
+		lblCardsInHandWest.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		lblCardsWest.add(lblCardsInHandWest);
+		panelWest.add(lblCardsWest, gridWest);
 		
 	   	txtSpielerWest = new JTextField();
 		txtSpielerWest.setBorder(null);
@@ -214,14 +219,6 @@ public class DeskView extends JFrame {
 		gridWest.gridy = 0;
 		gridWest.insets = new Insets(5,5,5,5);
 		panelWest.add(txtRoleWest, gridWest);
-		
-		txtCardsInHandWest = new JTextField();
-		txtCardsInHandWest.setBorder(null);
-		txtCardsInHandWest.setEditable(false);
-		gridWest.gridx = 0;
-		gridWest.gridy = 0;
-		gridWest.insets = new Insets(5,5,5,5);
-		panelWest.add(txtCardsInHandWest, gridWest);
 		
 		txtRankWest = new JTextField();	
 		txtRankWest.setBorder(null);
@@ -447,7 +444,7 @@ public class DeskView extends JFrame {
 		
     	txtSpielerWest.setText(player.getName());
 		txtRoleWest.setText(player.getRole().getLabel());	
-		txtCardsInHandWest.setText(Integer.toString(player.getCards().size()));
+		lblCardsInHandWest.setText(Integer.toString(player.getCards().size()));
 		txtRankWest.setText("Rang: "+player.getRank());
 		
 	}
@@ -458,7 +455,7 @@ public class DeskView extends JFrame {
     	
     	txtSpielerNorth.setText(player.getName());
 		txtRoleNorth.setText(player.getRole().getLabel());			
-		txtCardsInHandNorth.setText(Integer.toString(player.getCards().size()));
+		lblCardsInHandNorth.setText(Integer.toString(player.getCards().size()));
 		txtRankNorth.setText("Rang: "+player.getRank());	
 		   	
     }
@@ -469,7 +466,7 @@ public class DeskView extends JFrame {
 		
     	txtSpielerEast.setText(player.getName());
 		txtRoleEast.setText(player.getRole().getLabel());			
-		txtCardsInHandEast.setText(Integer.toString(player.getCards().size()));
+		lblCardsInHandEast.setText(Integer.toString(player.getCards().size()));
 		txtRankEast.setText("Rang: "+player.getRank());
 		
 	}
