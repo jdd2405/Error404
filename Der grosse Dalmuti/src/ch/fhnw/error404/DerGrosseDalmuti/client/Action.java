@@ -347,7 +347,7 @@ public class Action {
 	// spielzug passen Button Aktion
 	class Passen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (enableActions() == true) {
+			if (allPlayers[myPos].isActive()) {
 				int countActivePlayer =0;
 				int countPassen = 0;
 				for (int l = 0; l <4; l++){
@@ -383,7 +383,7 @@ public class Action {
 	class AuswahlSpielen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if (enableActions() == true) {
+			if (allPlayers[myPos].isActive()) {
 				// int nOfCards = Integer.parseInt(deskView.txtAmountCards.getText());
 				int nOfCards = 0;
 				
@@ -574,7 +574,7 @@ public class Action {
 				}
 			}
 				
-			enableActions(); // to disable Buttons
+			showButtons(); // to disable Buttons
 		}
 
 		// show all Players in proper position
@@ -661,29 +661,29 @@ public class Action {
 		}
 
 		// check if it is the turn of my Player to enable Actions
-		protected boolean enableActions() {
+		void showButtons() {
 			
 			deskView.showButtons(allPlayers[myPos].hasSwappedCards());
 			
-			boolean actionsEnabled = false;
-			if (allPlayers[myPos].isActive() == true) {
-				actionsEnabled = true;
+			if (allPlayers[myPos].isActive()) {
 				if(allPlayers[myPos].hasSwappedCards()!=true){
 					deskView.btnSwapCards.setEnabled(true);
 				}
 				else{
-					deskView.btnSwapCards.setEnabled(false);
 					deskView.btnAuswahlSpielen.setEnabled(true);
 					deskView.btnPassen.setEnabled(true);
 				}
 			} else {
-				deskView.btnSwapCards.setEnabled(false);
-				deskView.btnAuswahlSpielen.setEnabled(false);
-				deskView.btnPassen.setEnabled(false);
+				if(allPlayers[myPos].hasSwappedCards()!=true){
+					deskView.btnSwapCards.setEnabled(false);
+				}
+				else{
+					deskView.btnAuswahlSpielen.setEnabled(false);
+					deskView.btnPassen.setEnabled(false);
+				}
 			}
 			
-			System.out.println("Ich bin dran: "+actionsEnabled);
-			return actionsEnabled;
+			System.out.println("Ich bin dran: "+allPlayers[myPos].isActive());
 		}
 
 		
@@ -753,9 +753,8 @@ public class Action {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
 			showMyCards(); System.out.println("Zeige meine Karten.");
-			enableActions(); System.out.println("Zeige meine Buttons.");
+			showButtons(); System.out.println("Zeige meine Buttons.");
 			leftGame();
-
 
 		}
 
