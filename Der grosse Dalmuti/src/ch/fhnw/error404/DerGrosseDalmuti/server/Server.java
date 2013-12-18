@@ -63,6 +63,7 @@ public class Server{
 		private ObjectInputStream input;
 		Object object;
 		int anzahlIfAufruf=0;
+		boolean whileSchlaufe = true;
 
 		public ChatThread(Socket client) {
 			this.client = client;
@@ -77,7 +78,7 @@ public class Server{
 		public void run() {
 
 			try {
-				while (true) {
+				while (whileSchlaufe == true) {
 					object = input.readObject();
 					System.out.println(object.toString());
 
@@ -86,22 +87,22 @@ public class Server{
 						System.out.println("Spielerliste vom Client erhalten. "
 								+ new Date());
 						
-						for (int i = 0; i < allPlayers.length; i++) {
-							if (allPlayers[i] != null&& allPlayers[i].getLeftGame() == true) {
+
+							if (allPlayers[0].getLeftGame()==true) {
 								anzahlIfAufruf++;
 								if (anzahlIfAufruf == 1) {
 									System.out.println("client ist aus dem Spiel");
 									sendToAllClients(object);
-								} else {
 									Iterator<ObjectOutputStream> iterator = clientManager.iterator();
 									while (iterator.hasNext()) {
 										input.close();
 										iterator.next().close();
+										whileSchlaufe = false;
 									}
 
 								}
 							}
-						}
+
 						if(anzahlIfAufruf ==0) {
 								sendToAllClients(object);
 						}

@@ -125,10 +125,10 @@ public class Action {
 	// Close Game
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			allPlayers[myPos].setLeftGame(true);
+			for(int i = 0; i <4;i++){
+				allPlayers[i].setLeftGame(true);
+			}
 			Client.sendToServer(allPlayers);
-			
-			
 		}
 	}
 
@@ -724,23 +724,21 @@ public class Action {
 		
 		
 		//hat ein Spieler das Spiel verlassen?
-		public void leftGame(){
-			for(int i =0; i<4;i++){
-				if(allPlayers[i] != null && allPlayers[i].getLeftGame() == true){
-					deskView.popUpForExit("Spiel beendet", "Spiel wurde von einem der Spieler verlassen.,"
-							+ "Spiel ist beendet. Für einen Neustart des Spiels bitte Client starten.");
-					deskView.closeWindow();
-					Client.sendToServer(allPlayers);
-					try {
-						Client.in.close();
-						Client.out.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-					
-				}
+	public void leftGame() {
+		if (allPlayers[0].getLeftGame() == true) {
+			deskView.popUpForExit("Spiel beendet.",
+					"Spiel wurde von einem der Spieler verlassen.");
+			deskView.closeWindow();
+
+			try {
+				Client.in.close();
+				Client.out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
+
+	}
 
 		public int getMyId() {
 			return myId;
@@ -760,6 +758,7 @@ public class Action {
 			showMyCards(); System.out.println("Zeige meine Karten.");
 			showButtons(); System.out.println("Zeige meine Buttons.");
 			leftGame();
+
 		}
 
 		public Deck getDeck() {
