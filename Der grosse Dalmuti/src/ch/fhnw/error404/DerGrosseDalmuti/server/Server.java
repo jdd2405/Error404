@@ -62,6 +62,7 @@ public class Server{
 		private int clientPort;
 		private ObjectInputStream input;
 		Object object;
+		int anzahlIfAufruf=0;
 
 		public ChatThread(Socket client) {
 			this.client = client;
@@ -76,32 +77,43 @@ public class Server{
 		public void run() {
 
 			try {
-				while(true){
+				while (true) {
 					object = input.readObject();
 					System.out.println(object.toString());
+
+					if (object instanceof Player[]) {
+						allPlayers = (Player[]) object;
+						System.out.println("Spielerliste vom Client erhalten. "
+								+ new Date());
 						
-						if (object instanceof Player[]) {
-							allPlayers = (Player[]) object;
-							System.out.println("Spielerliste vom Client erhalten. "+ new Date());
-							for(int i = 0; i<allPlayers.length; i++){
-								
-								if(allPlayers[i] != null && allPlayers[i].getLeftGame() == true){
-									int id = allPlayers[i].getId();
-									client.close();
-										//clientManager.get(id-1).close();
-										clientManager.remove(id-1);
-										//input.close();
+						for (int i = 0; i < allPlayers.length; i++) {
+							if (allPlayers[i] != null&& allPlayers[i].getLeftGame() == true) {
+								anzahlIfAufruf++;
+								if (anzahlIfAufruf == 1) {
 									System.out.println("client ist aus dem Spiel");
+									sendToAllClients(object);
+								} else {
+									Iterator<ObjectOutputStream> iterator = clientManager.iterator();
+									while (iterator.hasNext()) {
+										input.close();
+										iterator.next().close();
+									}
+
 								}
 							}
 						}
-						else if (object instanceof Deck) {
-							deck = (Deck) object;
-							System.out.println("Deck von Client erhalten. "+ new Date());
+						if(anzahlIfAufruf ==0) {
+								sendToAllClients(object);
 						}
-						
+
+					
+					} else if (object instanceof Deck) {
+						deck = (Deck) object;
+						System.out.println("Deck von Client erhalten. "
+								+ new Date());
 						sendToAllClients(object);
-						
+					}
+
 				}
 					
 			} catch (ClassNotFoundException e) {

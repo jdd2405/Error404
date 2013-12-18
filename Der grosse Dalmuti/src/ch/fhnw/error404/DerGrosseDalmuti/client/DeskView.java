@@ -78,7 +78,9 @@ public class DeskView extends JFrame {
 		}*/
 		mainFrame.pack();
 		mainFrame.setTitle("Der Grosse Dalmuti");
-		mainFrame.setSize(1600,900);
+		int w = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int h = Toolkit.getDefaultToolkit().getScreenSize().height;
+		mainFrame.setSize(w,h);
 		mainFrame.setLocationRelativeTo(null);
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrame.setVisible(false);
@@ -540,5 +542,26 @@ public class DeskView extends JFrame {
 	Frame1.setVisible(true);
 	
 	}
+	
+public void popUpForExit(String titel, String text){
+		
+		JLabel lblSwap;
+		JFrame Frame1;
+	
+	Frame1 = new JFrame();
+	Frame1.setTitle(titel);
+	Frame1.setSize(400,200);
+	Frame1.setLocationRelativeTo(null);
+	//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+	lblSwap = new JLabel(text);
+	lblSwap.setVerticalAlignment(SwingConstants.CENTER);
+	lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
+	
+	Frame1.add(lblSwap);
+	Frame1.setVisible(true);
+	
+	}
+
 }
 
