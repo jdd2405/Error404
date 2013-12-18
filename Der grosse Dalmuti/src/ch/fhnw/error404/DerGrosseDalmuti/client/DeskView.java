@@ -247,7 +247,8 @@ public class DeskView extends JFrame {
 		lblNumberOfCardsCenter = new JLabel();
 		lblNumberOfCardsCenter.setFont(new Font("Arial", Font.BOLD, 35));
 		lblNumberOfCardsCenter.setForeground(Color.red);
-		lblCardsCenter.add(lblNumberOfCardsCenter, BorderLayout.WEST);
+		lblNumberOfCardsCenter.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCardsCenter.add(lblNumberOfCardsCenter);
 		
 		panelCenter.add(lblCardsCenter, gridCenter);
 			
@@ -308,6 +309,7 @@ public class DeskView extends JFrame {
 			lblAmountOfCards[i] = new JLabel();
 			lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
     		lblAmountOfCards[i].setForeground(Color.red);
+    		lblAmountOfCards[i].setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		
 		txtTypeCards = new JTextField(12);
@@ -424,7 +426,7 @@ public class DeskView extends JFrame {
     	
     	for(int i = 0; i < 12; i++){
     		btnSlot[i].setLayout(new BorderLayout());
-    		btnSlot[i].add(lblAmountOfCards[i],BorderLayout.WEST);
+    		btnSlot[i].add(lblAmountOfCards[i]);
     		lblAmountOfCards[i].setText(Integer.toString(cards[i][0]));
     		
     		// for greying out cards
