@@ -21,7 +21,7 @@ Installationsanleitung
 Clients auf mehrere Rechnern -
 Falls Sie die Clients auf verschiedenen Rechnern starten wollen, so laden Sie den source-code von github (https://github.com/jdd2405/Error404/) herunter. Öffnen Sie das Programm mit einem Texteditor (vorzugsweise Eclipse). Ändern Sie in der Datei Client.class auf Zeile 41 die IP-Adresse und den Port gemäss Serverstandort.
 
-
+______________
 
 Vielen Dank an
 
