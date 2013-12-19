@@ -15,8 +15,6 @@ public class Client {
 	static ObjectInputStream in;
 	static ObjectOutputStream out;
 	static Action action;
-	static Socket socket = null;
-	static Thread inputThread;
 
 
 
@@ -33,7 +31,7 @@ public class Client {
 
 	private void clientSocket() {
 
-		
+		Socket socket = null;
 
 		try {
 
@@ -52,7 +50,7 @@ public class Client {
 			e.printStackTrace();
 		}
 
-		inputThread = new Thread(new InputMessages());
+		Thread inputThread = new Thread(new InputMessages());
 		inputThread.start();
 
 	}
@@ -71,26 +69,15 @@ public class Client {
 
 	public class InputMessages implements Runnable {
 		Object object;
-		boolean whileSchlaufe = true;
 		
 		public void run() {
 			try {
-				while (whileSchlaufe == true) {
+				while (true) {
 					object = in.readObject();
 					//input ist Arrayliste mit den Playerobjekten
 
 					if (object instanceof Player[]) {
 						action.setAllPlayers((Player[]) object);
-						if (action.allPlayers[0] != null && action.allPlayers[0].getLeftGame()==true) {
-							whileSchlaufe = false;
-							socket.close();
-							try {
-								inputThread.sleep(5000);
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-							}
-							System.exit(0);
-						}
 					}
 					//input für die 3 Variablen im Deck
 					else if (object instanceof Deck) {
@@ -105,8 +92,8 @@ public class Client {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	
 		}
+
 	}
 
 }
