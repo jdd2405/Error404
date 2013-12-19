@@ -15,7 +15,7 @@ import javax.swing.*;
 
 /**
  * @author Thomas and Elias
- * the following GUI is created on the base of Gridlayout
+ * the following GUI is created on the base of GridBagLayout
  * JLabels, JTextField or JButtons are created and Located in the Grid
  */
 
@@ -357,7 +357,6 @@ public class DeskView extends JFrame {
 		panelSouth.remove(btnSwapCards);
 		
 		if (hasSwappedCards == true){
-			//btnSwapCards.setVisible(false);
 			
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
@@ -381,11 +380,9 @@ public class DeskView extends JFrame {
 			gridSouth.insets = new Insets(5,5,5,5);
 			panelSouth.add(btnPassen, gridSouth);
 		
-		} else{
-			
-			//btnPassen.setVisible(false);
-			//btnAuswahlSpielen.setVisible(false);
-			
+		} 
+		else{
+		
 			btnSwapCards.setText("Karten tauschen");
 			btnSwapCards.setBackground(Color.YELLOW);
 			btnSwapCards.setPreferredSize(new Dimension(170,30));	
@@ -396,7 +393,6 @@ public class DeskView extends JFrame {
 			gridSouth.gridy = 2;
 			gridSouth.insets = new Insets(5,5,5,5);
 			panelSouth.add(btnSwapCards, gridSouth);
-			
 			
 		}
 	}
@@ -490,13 +486,7 @@ public class DeskView extends JFrame {
 	}
 	
 	//Other Methods
-    
-    void getTextOfLabel(){
-    		// a = amountOfCards.getText();
-    		
-    	}
-    
-    
+
     void addDisplayNumber(ActionListener listener){
     	for (int i=0;i<12;i++){
     		btnSlot[i].addActionListener(listener);
@@ -523,8 +513,6 @@ public class DeskView extends JFrame {
     	btnAuswahlSpielen.addActionListener(listener);
     }	
 
-
-	
 	public void popUp(String titel, String text){
 		
 		JLabel lblSwap;
@@ -534,7 +522,7 @@ public class DeskView extends JFrame {
 		Frame1.setTitle(titel);
 		Frame1.setSize(400,200);
 		Frame1.setLocationRelativeTo(null);
-		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
 		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
@@ -554,7 +542,7 @@ public class DeskView extends JFrame {
 		Frame1.setTitle(titel);
 		Frame1.setSize(400,200);
 		Frame1.setLocationRelativeTo(null);
-		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		lblSwap = new JLabel(text);
 		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
@@ -564,6 +552,6 @@ public class DeskView extends JFrame {
 		Frame1.setVisible(true);
 	
 	}
-
+	
 }
 
