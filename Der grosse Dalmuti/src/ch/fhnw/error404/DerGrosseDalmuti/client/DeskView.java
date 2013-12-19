@@ -61,7 +61,7 @@ public class DeskView extends JFrame {
 		JLabel lblCardsCenter;
 		JLabel lblNumberOfCardsCenter;
 		
-		ImageIcon icon = new ImageIcon("Bilder/cardohne.png");
+		ImageIcon icon = new ImageIcon("Bilder/cards_s.png");
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
@@ -95,6 +95,7 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandNorth = new JLabel();
+		lblCardsInHandNorth.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandNorth.setBorder(null);
 		lblCardsInHandNorth.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -145,6 +146,7 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandEast = new JLabel();
+		lblCardsInHandEast.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandEast.setBorder(null);
 		lblCardsInHandEast.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -195,6 +197,7 @@ public class DeskView extends JFrame {
 		gridWest.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandWest = new JLabel();
+		lblCardsInHandWest.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandWest.setBorder(null);
 		lblCardsInHandWest.setHorizontalAlignment(SwingConstants.CENTER);
 		
