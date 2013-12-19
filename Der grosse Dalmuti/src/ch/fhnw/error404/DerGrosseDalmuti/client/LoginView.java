@@ -59,10 +59,6 @@ public class LoginView extends JFrame {
 		loginView.setVisible(true);
 		
 	}
-	
-	void reset() {
-        // if needed
-    }
     
     String getUserInput() {
         return txtUsername.getText();
@@ -75,7 +71,6 @@ public class LoginView extends JFrame {
     void addLoginListener(ActionListener listener) {
         btnLogin.addActionListener(listener);
     }
-    
     
     void showError(String string) {
     	new LoginError();
