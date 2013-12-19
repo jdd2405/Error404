@@ -1,16 +1,10 @@
 package ch.fhnw.error404.DerGrosseDalmuti.client;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -19,6 +13,7 @@ import javax.swing.*;
  * JLabels, JTextField or JButtons are created and Located in the Grid
  */
 
+@SuppressWarnings("serial")
 public class DeskView extends JFrame {
 	
 		JFrame mainFrame;
@@ -66,7 +61,7 @@ public class DeskView extends JFrame {
 		JLabel lblCardsCenter;
 		JLabel lblNumberOfCardsCenter;
 		
-		ImageIcon icon = new ImageIcon("Bilder/cardohne.png");
+		ImageIcon icon = new ImageIcon("Bilder/cards_s.png");
 		ImageIcon[] myIcon = new ImageIcon[12];
 
 	public DeskView() {
@@ -100,6 +95,7 @@ public class DeskView extends JFrame {
 		gridNorth.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandNorth = new JLabel();
+		lblCardsInHandNorth.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandNorth.setBorder(null);
 		lblCardsInHandNorth.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -107,6 +103,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(lblCardsNorth, gridNorth);
 		
     	txtSpielerNorth = new JTextField();
+    	txtSpielerNorth.setFont(new Font("Arial", Font.BOLD, 25));
     	txtSpielerNorth.setBorder(null);
     	txtSpielerNorth.setOpaque(false);
     	txtSpielerNorth.setEditable(false);
@@ -116,6 +113,7 @@ public class DeskView extends JFrame {
 		panelNorth.add(txtSpielerNorth, gridNorth);
 		
 		txtRoleNorth = new JTextField();
+		txtRoleNorth.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleNorth.setBorder(null);
 		txtRoleNorth.setOpaque(false);
 		txtRoleNorth.setEditable(false);
@@ -148,6 +146,7 @@ public class DeskView extends JFrame {
 		gridEast.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandEast = new JLabel();
+		lblCardsInHandEast.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandEast.setBorder(null);
 		lblCardsInHandEast.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -155,6 +154,7 @@ public class DeskView extends JFrame {
 		panelEast.add(lblCardsEast, gridEast);
 		
 		txtSpielerEast = new JTextField();
+		txtSpielerEast.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerEast.setBorder(null);
 		txtSpielerEast.setOpaque(false);
 		txtSpielerEast.setEditable(false);
@@ -164,6 +164,7 @@ public class DeskView extends JFrame {
 		panelEast.add(txtSpielerEast, gridEast);
 		
 		txtRoleEast = new JTextField();
+		txtRoleEast.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleEast.setBorder(null);
 		txtRoleEast.setOpaque(false);
 		txtRoleEast.setEditable(false);
@@ -196,6 +197,7 @@ public class DeskView extends JFrame {
 		gridWest.insets = new Insets(5,5,5,5);
 		
 		lblCardsInHandWest = new JLabel();
+		lblCardsInHandWest.setFont(new Font("Arial", Font.ITALIC, 20));
 		lblCardsInHandWest.setBorder(null);
 		lblCardsInHandWest.setHorizontalAlignment(SwingConstants.CENTER);
 		
@@ -203,6 +205,7 @@ public class DeskView extends JFrame {
 		panelWest.add(lblCardsWest, gridWest);
 		
 	   	txtSpielerWest = new JTextField();
+	   	txtSpielerWest.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerWest.setBorder(null);
 		txtSpielerWest.setOpaque(false);
 		txtSpielerWest.setEditable(false);
@@ -212,6 +215,7 @@ public class DeskView extends JFrame {
 		panelWest.add(txtSpielerWest, gridWest);
 		
 		txtRoleWest = new JTextField();	
+		txtRoleWest.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleWest.setBorder(null);
 		txtRoleWest.setOpaque(false);
 		txtRoleWest.setEditable(false);
@@ -247,7 +251,8 @@ public class DeskView extends JFrame {
 		lblNumberOfCardsCenter = new JLabel();
 		lblNumberOfCardsCenter.setFont(new Font("Arial", Font.BOLD, 35));
 		lblNumberOfCardsCenter.setForeground(Color.red);
-		lblCardsCenter.add(lblNumberOfCardsCenter, BorderLayout.WEST);
+		lblNumberOfCardsCenter.setHorizontalAlignment(SwingConstants.CENTER);
+		lblCardsCenter.add(lblNumberOfCardsCenter);
 		
 		panelCenter.add(lblCardsCenter, gridCenter);
 			
@@ -259,6 +264,7 @@ public class DeskView extends JFrame {
 		panelSouth.setPreferredSize(new Dimension(1600,200));
 		
 		txtSpielerSouth = new JTextField();
+		txtSpielerSouth.setFont(new Font("Arial", Font.BOLD, 25));
 		txtSpielerSouth.setBorder(null);
 		txtSpielerSouth.setOpaque(false);
 		txtSpielerSouth.setEditable(false);
@@ -269,6 +275,7 @@ public class DeskView extends JFrame {
 		panelSouth.add(txtSpielerSouth, gridSouth);
 		
 		txtRoleSouth = new JTextField();
+		txtRoleSouth.setFont(new Font("Arial", Font.ITALIC, 15));
 		txtRoleSouth.setBorder(null);
 		txtRoleSouth.setOpaque(false);
 		txtRoleSouth.setEditable(false);
@@ -308,6 +315,7 @@ public class DeskView extends JFrame {
 			lblAmountOfCards[i] = new JLabel();
 			lblAmountOfCards[i].setFont(new Font("Arial", Font.BOLD, 35));
     		lblAmountOfCards[i].setForeground(Color.red);
+    		lblAmountOfCards[i].setHorizontalAlignment(SwingConstants.CENTER);
 		}
 		
 		txtTypeCards = new JTextField(12);
@@ -424,7 +432,7 @@ public class DeskView extends JFrame {
     	
     	for(int i = 0; i < 12; i++){
     		btnSlot[i].setLayout(new BorderLayout());
-    		btnSlot[i].add(lblAmountOfCards[i],BorderLayout.WEST);
+    		btnSlot[i].add(lblAmountOfCards[i]);
     		lblAmountOfCards[i].setText(Integer.toString(cards[i][0]));
     		
     		// for greying out cards
@@ -523,27 +531,8 @@ public class DeskView extends JFrame {
 
 
 	
+	
 	public void popUp(String titel, String text){
-		
-		JLabel lblSwap;
-		JFrame Frame1;
-	
-		Frame1 = new JFrame();
-		Frame1.setTitle(titel);
-		Frame1.setSize(400,200);
-		Frame1.setLocationRelativeTo(null);
-		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
-		lblSwap = new JLabel("The cards : " + text + "are not valid to swap!");
-		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
-		lblSwap.setHorizontalAlignment(SwingConstants.CENTER);
-	
-		Frame1.add(lblSwap);
-		Frame1.setVisible(true);
-	
-	}
-	
-	public void popUpForExit(String titel, String text){
 		
 		JLabel lblSwap;
 		JFrame Frame1;

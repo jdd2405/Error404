@@ -70,6 +70,7 @@ public class Client {
 	public class InputMessages implements Runnable {
 		Object object;
 		
+		@SuppressWarnings("static-access")
 		public void run() {
 			try {
 				while (true) {
