@@ -190,7 +190,7 @@ public class Action {
 		public void actionPerformed(ActionEvent e) {
 			
 			// Aktion nur ausführen, wenn eine Karte ausgewählt ist.
-			if(deskView.txtTypeCards.getText()!="" && deskView.txtAmountCards.getText()!=""){
+			if(deskView.txtTypeCards.getText()!="" && deskView.txtAmountCards.getText()!="" && allPlayers[myPos].isActive()){
 			
 				int nOfSwappableCards = allPlayers[myPos].getRole().getNOfSwappableCards();
 				System.out.println("Anzahl Karten zum Tauschen: "+allPlayers[myPos].getRole().getNOfSwappableCards());
@@ -274,7 +274,7 @@ public class Action {
 			}
 			
 			else {
-				deskView.popUp("Ungültige Karte", "Bitte wählen Sie eine Karte aus.");
+				deskView.popUp("Ungültige Karte.","Bitte wählen Sie die höchste Karte aus.");
 			}
 				
 		}
@@ -456,6 +456,7 @@ public class Action {
 								player.setRank(anzahlRankVergaben + 1);
 								player.setFinished(true);
 								allPlayers[myPos].setFinished(true);
+								allPlayers[myPos].setActive(false);
 								System.out.println("Habe fertig und das Spiel ist aus.");
 							}
 						}
@@ -709,6 +710,7 @@ public class Action {
 				}
 				allPlayers[i].setRole(Role.values()[allPlayers[i].getRank()-1]);
 				System.out.println(allPlayers[i].getName()+" hat die Rolle "+allPlayers[i].getRole().getLabel()+" erhalten.");
+				allPlayers[i].setActive(false);
 				allPlayers[i].setFinished(false);
 				allPlayers[i].setHasSwappedCards(false);
 				allPlayers[i].setRank(0);
@@ -725,15 +727,15 @@ public class Action {
 		//hat ein Spieler das Spiel verlassen?
 	public void leftGame(){
 		if (allPlayers[0].getLeftGame() == true) {
-			deskView.popUpForExit("Spiel beendet.",
-					"Spiel wurde von einem der Spieler verlassen.");
+			deskView.popUp("Spiel beendet.",
+					"Ein Mitspieler hat das Spiel verlassen.");
 			deskView.closeWindow();
 
 			try {
 				Client.in.close();
 				Client.out.close();
 				Client.socket.close();
-				System.out.println("Client verbindung ist beendet");
+				System.out.println("Verbindung zum Server getrennt.");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

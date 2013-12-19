@@ -73,6 +73,7 @@ public class Client {
 		Object object;
 		boolean whileSchlaufe = true;
 		
+		@SuppressWarnings("static-access")
 		public void run() {
 			try {
 				while (whileSchlaufe == true) {
