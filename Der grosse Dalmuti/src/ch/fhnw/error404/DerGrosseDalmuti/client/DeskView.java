@@ -9,7 +9,7 @@ import javax.swing.*;
 
 /**
  * @author Thomas and Elias
- * the following GUI is created on the base of Gridlayout
+ * the following GUI is created on the base of GridBagLayout
  * JLabels, JTextField or JButtons are created and Located in the Grid
  */
 
@@ -66,7 +66,7 @@ public class DeskView extends JFrame {
 
 	public DeskView() {
 		mainFrame = new JFrame();
-		/*Find a Solution to get this Image in the background a get a free beer from thomas
+		/*Find a solution to get this image in the background and get a free beer from Thomas
 		  try {
 			mainFrame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("Bilder/test_bg.jpg")))));
 		} catch (IOException e) {
@@ -300,7 +300,7 @@ public class DeskView extends JFrame {
 		
 		for(int i = 0; i<12; i++){
     		btnSlot[i] = new JButton();
-    	    btnSlot[i].setIcon(myIcon[i]);//here you set the icon for your button
+    	    btnSlot[i].setIcon(myIcon[i]);
     		btnSlot[i].setPreferredSize(new Dimension(89,92));
     		btnSlot[i].setOpaque(false);
     		btnSlot[i].setBorderPainted(false);
@@ -335,7 +335,7 @@ public class DeskView extends JFrame {
 		gridSouth.insets = new Insets(5,5,5,5);
 		panelSouth.add(txtAmountCards, gridSouth);
 		
-		btnCloseGame = new JButton("Spiel beenden"); // closes game
+		btnCloseGame = new JButton("Spiel beenden");
 		btnCloseGame.setPreferredSize(new Dimension(170,30));	
 		gridSouth.gridwidth = 2;
 		gridSouth.gridx = 10;
@@ -348,8 +348,16 @@ public class DeskView extends JFrame {
 		
 	}
 
-    //South Methods
+    /**
+     * South Methods
+     */
     
+	/**
+	 * showButtons
+	 * @param hasSwappedCards
+	 * changes between play, pass and swap buttons
+	 */
+	
 	void showButtons(boolean hasSwappedCards){
 		
 		btnPassen.setVisible(false); 
@@ -363,7 +371,6 @@ public class DeskView extends JFrame {
 		panelSouth.remove(btnSwapCards);
 		
 		if (hasSwappedCards == true){
-			//btnSwapCards.setVisible(false);
 			
 			btnAuswahlSpielen.setText("Auswahl spielen");
 			btnAuswahlSpielen.setBackground(Color.GREEN);
@@ -387,11 +394,9 @@ public class DeskView extends JFrame {
 			gridSouth.insets = new Insets(5,5,5,5);
 			panelSouth.add(btnPassen, gridSouth);
 		
-		} else{
-			
-			//btnPassen.setVisible(false);
-			//btnAuswahlSpielen.setVisible(false);
-			
+		} 
+		else{
+		
 			btnSwapCards.setText("Karten tauschen");
 			btnSwapCards.setBackground(Color.YELLOW);
 			btnSwapCards.setPreferredSize(new Dimension(170,30));	
@@ -403,10 +408,14 @@ public class DeskView extends JFrame {
 			gridSouth.insets = new Insets(5,5,5,5);
 			panelSouth.add(btnSwapCards, gridSouth);
 			
-			
 		}
 	}
 	
+	/**
+	 * showInSouth
+	 * @param player
+	 * shows and updates the south part of the GUI
+	 */
     void showInSouth(Player player){
     	
     	txtSpielerSouth.setText(player.getName());
@@ -428,6 +437,12 @@ public class DeskView extends JFrame {
     	
     }
     
+    /**
+     * showMyCards
+     * @param cards
+     * shows Cards and their Amount in GUI 
+     */
+    
     void showMyCards(int[][] cards){
     	
     	for(int i = 0; i < 12; i++){
@@ -447,7 +462,12 @@ public class DeskView extends JFrame {
     }
     
 	
-    //West Methods
+    /**
+	 * showInWest
+	 * @param player
+	 * shows and updates the west part of the GUI
+	 */
+    
 	void showInWest(Player player){
 		
     	txtSpielerWest.setText(player.getName());
@@ -457,7 +477,11 @@ public class DeskView extends JFrame {
 		
 	}
 	
-	//North Methods
+	/**
+	 * showInNorth
+	 * @param player
+	 * shows and updates the north of the GUI
+	 */
 	
     void showInNorth(Player player){
     	
@@ -468,7 +492,11 @@ public class DeskView extends JFrame {
 		   	
     }
     
-    //East Methods
+    /**
+	 * showInEast
+	 * @param player
+	 * shows and updates the East part of the GUI
+	 */
     
 	void showInEast(Player player){
 		
@@ -479,7 +507,12 @@ public class DeskView extends JFrame {
 		
 	}
 	
-	//Center Methods
+	/**
+	 * showCurrentTrick
+	 * @param cardtype
+	 * @param numberOfCards
+	 * Shows played cards in Center or clears the field
+	 */
 	
 	void showCurrentTrick(Card.CARD_TYPE cardtype, int numberOfCards){
     	
@@ -495,14 +528,12 @@ public class DeskView extends JFrame {
 		
 	}
 	
-	//Other Methods
-    
-    void getTextOfLabel(){
-    		// a = amountOfCards.getText();
-    		
-    	}
-    
-    
+	/**
+	 * addListenerMethods
+	 * @param listener
+	 * adds severals listeners to the deskview
+	 */
+
     void addDisplayNumber(ActionListener listener){
     	for (int i=0;i<12;i++){
     		btnSlot[i].addActionListener(listener);
@@ -528,10 +559,14 @@ public class DeskView extends JFrame {
     void addAuswahlSpielen(ActionListener listener){
     	btnAuswahlSpielen.addActionListener(listener);
     }	
+    
+    /**
+     * popUp
+     * @param titel
+     * @param text
+     * creates a popup if called
+     */
 
-
-	
-	
 	public void popUp(String titel, String text){
 		
 		JLabel lblSwap;
@@ -541,7 +576,7 @@ public class DeskView extends JFrame {
 		Frame1.setTitle(titel);
 		Frame1.setSize(400,200);
 		Frame1.setLocationRelativeTo(null);
-		//Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 		lblSwap = new JLabel(text);
 		lblSwap.setVerticalAlignment(SwingConstants.CENTER);
@@ -551,6 +586,6 @@ public class DeskView extends JFrame {
 		Frame1.setVisible(true);
 	
 	}
-
+	
 }
 

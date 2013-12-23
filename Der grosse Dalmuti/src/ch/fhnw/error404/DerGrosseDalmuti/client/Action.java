@@ -13,7 +13,6 @@ import ch.fhnw.error404.DerGrosseDalmuti.shared.*;
 
 /**
  * @author Jonas, Elias und Thomas
- * 
  */
 public class Action {
 
@@ -24,34 +23,30 @@ public class Action {
 	LoginView loginView;
 	DeskView deskView;
 
-	/*
+	/**
 	 * KONSTRUCTOR for Action Class
+	 * @param loginView the LoginView initialized in Client.class
+	 * @param deskView the DeskView initialized in Client.class
 	 */
-
 	public Action(LoginView loginView, DeskView deskView) {
 		this.loginView = loginView;
 		this.deskView = deskView;
 
-		// ... Add listeners to the view.
+		// Add listeners to the view.
 		loginView.addLoginListener(new LoginListener());
 		loginView.addClearOnClick(new ClearOnClick());
 
-		// deskView.addDisplayAmountOfCardsToPlay(new
-		// DisplayAmountOfCardsToPlay());
 		deskView.addCloseGame(new CloseGame());
 		deskView.addSwapCards(new SwapCards());
 		deskView.addPassen(new Passen());
 		deskView.addAuswahlSpielen(new AuswahlSpielen());
-		// deskView.addButtonKlick(new ButtonKlick());
 		deskView.addDisplayNumber(new DisplayNumber());
 
 	}
 
-	/*
+	/**
 	 * INNER CLASSES for Action- and MouseListeners
 	 */
-
-	// inner class Listener
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			String userInput = "";
@@ -64,10 +59,14 @@ public class Action {
 			}
 
 		}
-	} // end inner class MultiplyListener
+	}
 
-	// ActionListeners of GUI!!!
-	// ActionListener for the Login Button
+	/**
+	 * Defines LoginListener for the LoginView
+	 * 
+	 * @author Elias
+	 * @author Thomas
+	 */
 	class LoginListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if ((loginView.getUserInput()).matches("[a-zA-Z0-9]*") == true) { // checks
@@ -90,7 +89,13 @@ public class Action {
 		}
 	}
 
-	// Clear Loginfield on click
+	/**
+	 * MouseListener to clear input field when clicking on it
+	 * 
+	 * @author Elias
+	 * @author Thomas
+	 *
+	 */
 	class ClearOnClick implements MouseListener {
 
 		public void mouseClicked(MouseEvent e) {
@@ -115,14 +120,14 @@ public class Action {
 		}
 	}
 
-	// Counts cards of the player on click
-	class DisplayAmountOfCardsToPlay implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
 
-		}
-	}
 
-	// Close Game
+	/**
+	 * ActionListener for closeGame-Button to end sockets
+	 * 
+	 * @author Theresa
+	 *
+	 */
 	class CloseGame implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			for(int i = 0; i <4;i++){
@@ -132,6 +137,14 @@ public class Action {
 		}
 	}
 
+	/**
+	 * ActionListener to show number of clicked card to play
+	 * 
+	 * @author Jonas
+	 * @author Elias
+	 * @author Thomas
+	 *
+	 */
 	class DisplayNumber implements ActionListener {
 		String b;
 
@@ -186,7 +199,18 @@ public class Action {
 		}
 	}
 	
+	
+	/**
+	 * ActionListener to check chosen card to swap
+	 * 
+	 * @author Jonas
+	 *
+	 */
 	class SwapCards implements ActionListener {
+		/**
+		 * Checks selected card and number with game rules.
+		 * Sends changed object to server.
+		 */
 		public void actionPerformed(ActionEvent e) {
 			
 			// Aktion nur ausführen, wenn eine Karte ausgewählt ist.
@@ -279,7 +303,12 @@ public class Action {
 				
 		}
 		
-		
+		/**
+		 * Looks for player in allPlayers-Array which given player needs to swap cards with.
+		 * 
+		 * @param player 
+		 * @return Object of player which given player needs to swap his cards with
+		 */
 		public Player getPlayerToSwapCards(Player player){
 			Player playerToSwapCards = null;
 			int ordinal = 3-player.getRole().ordinal(); // ordinal of your player plus odrinal of player to swap cards with is always 3!
@@ -293,7 +322,12 @@ public class Action {
 		}
 		
 		
-		// returns an Array of swappable Cards-Types for a specific Player
+		/**
+		 * Searches the highest card type in the ArrayList<Card> of given player
+		 * 
+		 * @param player
+		 * @return Card.CARD_TYPE returns highest card type from player
+		 */
 		public Card.CARD_TYPE highestCard(Player player) {
 
 			// initialize List of Cards
@@ -321,7 +355,9 @@ public class Action {
 			return nOfHasSwapped;
 		}
 		
-		
+		/**
+		 * Goes through Array of swapped cards in deck object and gives the cards to its new owners
+		 */
 		void swapCards(){
 			for (int i = 0; i < deck.swappedCards.length; i++){
 				for(int j = 0; j < deck.swappedCards[i].length; j++){
@@ -344,8 +380,17 @@ public class Action {
 		}
 	}
 
-	// spielzug passen Button Aktion
+	/**
+	 * ActionListener to btnPassen
+	 * 
+	 * @author Jonas
+	 *
+	 */
 	class Passen implements ActionListener {
+		/**
+		 * counts players who have passed and are not deactivated. Sets player to passed or clears table. 
+		 * Sends changed objects to Server.
+		 */
 		public void actionPerformed(ActionEvent e) {
 			if (allPlayers[myPos].isActive()) {
 				int countActivePlayer =0;
@@ -379,8 +424,16 @@ public class Action {
 
 	}
 
-	// Auswahl spielen Button Aktion
+	/**
+	 * ActionListener to btnAuswahlSpielen
+	 * 
+	 * @author Jonas
+	 *
+	 */
 	class AuswahlSpielen implements ActionListener {
+		/**
+		 * Checks selected card and numbers of cards to play with game rules. Sends changed objects to Server.
+		 */
 		public void actionPerformed(ActionEvent e) {
 
 			if (allPlayers[myPos].isActive()) {
@@ -482,8 +535,11 @@ public class Action {
 		 * GAME LOGIC - Methods for running the Game properly
 		 */
 
-		// create new player based on the login-variables
-		// if there are 4 players deal cards
+		/**
+		 * Creates new player object.
+		 * Checks allPlayers-Array and sets ID, position and role.
+		 * @param name from input form in LoginView.
+		 */
 		protected void newPlayer(String name) {
 
 			System.out.println("Anzahl Spieler: "+countPlayers());
@@ -510,7 +566,10 @@ public class Action {
 		
 		
 		
-		// counts number of Players in allPlayers-Array
+		/**
+		 * Counts Players in allPlayers-Array
+		 * @return number of players in allPlayers-Array
+		 */
 		int countPlayers(){
 			int nOfPlayers = 0;
 			for(int i=0; i<allPlayers.length;i++){
@@ -523,7 +582,11 @@ public class Action {
 		
 		
 
-		// Karten mischen und auf Player verteilen
+		/**
+		 * Shuffles cards in the ArrayList notDealtCards in deck object.
+		 * Deals cards to all players in the allPlayers-Array
+		 * Sends changed objects to server.
+		 */
 		void shuffleCards() {
 			
 			Collections.shuffle(deck.notDealtCards); // shuffle notDealtCards	
@@ -542,10 +605,16 @@ public class Action {
 			deck.notDealtCards.clear();
 			System.out.println("Deck an Server senden...");
 			Client.sendToServer(deck);
+			System.out.println("allPlayers an Server senden...");
+			Client.sendToServer(allPlayers);
 			
 		}
 
-		// get next Player in Order -> relative to Role of given Player
+		/**
+		 * Searches player in allPlayers-Array who is according to game logic the next active player
+		 * @param player
+		 * @return player
+		 */
 		public Player getNextPlayerInOrder(Player player) {
 			Player nextPlayerInOrder = null;
 			int nextOrdinal = (player.getRole().ordinal()+1)%(Role.values().length);
@@ -562,7 +631,9 @@ public class Action {
 		}
 		
 
-
+		/**
+		 * Sets next player relative to local player active
+		 */
 		void setNextPlayerActive() {
 			Player player = getNextPlayerInOrder(allPlayers[myPos]);
 			while(allPlayers[myPos].isActive()==true){
@@ -578,7 +649,9 @@ public class Action {
 			showButtons(); // to disable Buttons
 		}
 
-		// show all Players in proper position
+		/**
+		 * Calls GUI methods to show all players in proper order.
+		 */
 		void showPlayers() {
 			if(countPlayers()==4){
 				deskView.showInSouth(allPlayers[myPos]);
@@ -588,7 +661,9 @@ public class Action {
 			}
 		}
 
-		// show Cards in the center of deskView
+		/**
+		 * Calls GUI method to show Card which is on the table.
+		 */
 		void showCurrentTrick() {
 			if(!deck.currentTrick.isEmpty()){
 				int nOfCards = 0;
@@ -608,7 +683,9 @@ public class Action {
 			
 		}
 
-		// show my Cards in South. Check if they are playable.
+		/**
+		 * Calls GUI method to show cards and its amount of local player.
+		 */
 		void showMyCards() {
 			if(countPlayers()==4){
 				int[][] myCards = new int[12][2];
@@ -661,7 +738,9 @@ public class Action {
 
 		}
 
-		// check if it is the turn of my Player to enable Actions
+		/**
+		 * Calls GUI method to show btnAuswahlSpielen, btnPassen and btnSwapCards and sets them enabled or disabled if local player is not active.
+		 */
 		void showButtons() {
 			
 			deskView.showButtons(allPlayers[myPos].hasSwappedCards());
@@ -689,7 +768,9 @@ public class Action {
 
 		
 
-		// clear table nachdem 3 Player gepasst haben
+		/**
+		 * Removes cards from desk when all players have passed.
+		 */
 		protected void clearTable() {
 			while (!deck.currentTrick.isEmpty()) { // not empty
 				deck.notDealtCards.add(deck.currentTrick.pop());
@@ -697,7 +778,9 @@ public class Action {
 			}
 		}
 
-		// Runde ist fertig, alle Rank's wurden verteilt
+		/**
+		 * Ends round when 2nd last player has finished and starts new round.
+		 */
 		private void finishRound() {
 			clearTable();
 			for (int i = 0; i < allPlayers.length; i++) {
@@ -724,24 +807,26 @@ public class Action {
 		}
 		
 		
-		//hat ein Spieler das Spiel verlassen?
-	public void leftGame(){
-		if (allPlayers[0].getLeftGame() == true) {
-			deskView.popUp("Spiel beendet.",
-					"Ein Mitspieler hat das Spiel verlassen.");
-			deskView.closeWindow();
-
-			try {
-				Client.in.close();
-				Client.out.close();
-				Client.socket.close();
-				System.out.println("Verbindung zum Server getrennt.");
-			} catch (IOException e) {
-				e.printStackTrace();
+		/**
+		 * Ends Socket when local player has left game and ends game.
+		 */
+		public void leftGame(){
+			if (allPlayers[0].getLeftGame() == true) {
+				deskView.popUp("Spiel beendet.",
+						"Ein Mitspieler hat das Spiel verlassen.");
+				deskView.closeWindow();
+	
+				try {
+					Client.in.close();
+					Client.out.close();
+					Client.socket.close();
+					System.out.println("Verbindung zum Server getrennt.");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
+	
 		}
-
-	}
 
 		public int getMyId() {
 			return myId;
@@ -755,6 +840,10 @@ public class Action {
 			return allPlayers;
 		}
 
+		/**
+		 * Calls GUI methods to update View when new object has arrived from server.
+		 * @param allPlayers
+		 */
 		public void setAllPlayers(Player[] allPlayers) {
 			this.allPlayers = allPlayers; System.out.println("Spielerliste vom Server erhalten. "+ new Date());
 			showPlayers(); System.out.println("Zeige alle Spieler.");
@@ -768,6 +857,10 @@ public class Action {
 			return deck;
 		}
 
+		/**
+		 * Calls GUI method to update View when new object has arrived from server.
+		 * @param deck
+		 */
 		public void setDeck(Deck deck) {
 			this.deck = deck; System.out.println("Deck vom Server erhalten. "+ new Date());
 			showCurrentTrick(); System.out.println("Zeige gelegte Karten.");
